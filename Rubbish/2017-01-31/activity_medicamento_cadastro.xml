@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_medicamento_cadastro"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context="com.gmail.thales_silva_nascimento.alarmmed.activity.medicamentoCadastro">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tBCadMedicamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"></android.support.v7.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tBCadMedicamento">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/medicamentoNome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="45dp"
+                android:hint="Nome do Medicamento" />
+
+            <EditText
+                android:id="@+id/medicamentoDos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/medicamentoNome"
+                android:layout_alignStart="@id/medicamentoNome"
+                android:layout_below="@id/medicamentoNome"
+                android:layout_marginTop="20dp"
+                android:layout_toStartOf="@+id/dosSpinner"
+                android:hint="Dosagem"
+                android:layout_toLeftOf="@+id/dosSpinner" />
+
+            <Spinner
+                android:id="@+id/dosSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/medicamentoNome"
+                android:layout_marginLeft="5dp"
+                android:layout_alignTop="@id/medicamentoDos"
+                android:layout_below="@id/medicamentoNome"
+                android:layout_marginTop="10dp"></Spinner>
+
+            <EditText
+                android:id="@+id/periodo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/medicamentoDos"
+                android:layout_below="@id/medicamentoDos"
+                android:layout_marginTop="20dp"
+                android:hint="Período"
+                android:layout_toLeftOf="@+id/tDias"
+                android:layout_toStartOf="@+id/tDias" />
+
+            <TextView
+                android:id="@+id/tDias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/medicamentoNome"
+                android:layout_below="@id/medicamentoDos"
+                android:layout_marginTop="10dp"
+                android:layout_alignTop="@id/periodo"
+                android:text="dias"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tPosologia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/periodo"
+                android:layout_below="@+id/rgRepetcao"
+                android:layout_marginTop="20dp"
+                android:text=" Posologia"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tUsoC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tDias"
+                android:layout_alignBottom="@+id/checkUsoC"
+                android:layout_toEndOf="@+id/checkUsoC"
+                android:layout_toRightOf="@+id/checkUsoC"
+                android:text="Uso Contínuo"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/sintomaObs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tPosologia"
+                android:layout_alignStart="@+id/tPosologia"
+                android:layout_below="@+id/posSpinner"
+                android:layout_marginTop="20dp"
+                android:hint="Sintomas/Observações" />
+
+            <Spinner
+                android:id="@+id/posSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tPosologia"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tPosologia"></Spinner>
+
+            <CheckBox
+                android:id="@+id/checkUsoC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:layout_alignBaseline="@+id/tDias"
+                android:layout_alignBottom="@+id/tDias"
+                android:layout_toRightOf="@+id/tDias"
+                android:layout_toEndOf="@+id/tDias" />
+
+            <TextView
+                android:id="@+id/tRepeticao"
+                android:text="Repetição"
+                android:layout_below="@+id/periodo"
+                android:layout_alignLeft="@+id/periodo"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioGroup
+                android:id="@+id/rgRepetcao"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/tRepeticao"
+                android:layout_alignLeft="@+id/tRepeticao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RadioButton
+                    android:id="@+id/rbTodoDia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Todos os dias"
+                    android:textSize="15sp"/>
+                <RadioButton
+                    android:id="@+id/rbDiaEspec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dias específicos da semana"
+                    android:textSize="15sp" />
+                <RadioButton
+                    android:id="@+id/rbDiaIntervalo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dias de intervalo"
+                    android:textSize="15sp"/>
+            </RadioGroup>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

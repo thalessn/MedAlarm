@@ -1,0 +1,70 @@
+[
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_dormir.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_dormir.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_alarme.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_alarme.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility_off.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\drawable-anydpi-v21\\design_ic_visibility_off.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_receita.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_receita.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_close_white_24px.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_close_white_24px.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_menu_black_24dp.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_menu_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.1.0\\res\\drawable-anydpi-v21\\design_ic_visibility.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_pencil_black_24dp.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_pencil_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_janta.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_janta.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_add_circle_black_24dp.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_add_circle_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_config.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_config.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_inicio.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_inicio.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_compra.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_compra.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_done_white_24px.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_done_white_24px.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_almoco.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_almoco.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_doctor.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_doctor.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_breakfast.xml",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_breakfast.xml"
+    }
+]

@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_endereco.png",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_endereco.png"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_icon_medico.png",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_icon_medico.png"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_testcon.png",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_testcon.png"
+    },
+    {
+        "merged": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_tel.png",
+        "source": "C:\\Users\\Thales\\Documents\\AlarmMed\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_tel.png"
+    }
+]

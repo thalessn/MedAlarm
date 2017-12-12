@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+    <RelativeLayout
+        android:id="@+id/posRl1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imCafe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_breakfast" />
+
+        <CheckBox
+            android:id="@+id/cbCafe"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imCafe"
+            android:text="Café da Manhã"
+            android:textSize="13sp"/>
+
+
+        <ImageView
+            android:id="@+id/imAlmoco"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imCafe"
+            android:src="@drawable/ic_almoco" />
+
+        <CheckBox
+            android:id="@+id/cbAlmoco"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@id/imAlmoco"
+            android:layout_alignTop="@id/imAlmoco"
+            android:layout_height="wrap_content"
+            android:text="Almoço" />
+
+
+        <ImageView
+            android:id="@+id/imJanta"
+            android:layout_below="@id/imAlmoco"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_janta" />
+
+        <CheckBox
+            android:id="@+id/cbJanta"
+            android:layout_toRightOf="@id/imJanta"
+            android:layout_alignTop="@id/imJanta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Janta" />
+
+        <ImageView
+            android:id="@+id/imDormir"
+            android:layout_below="@id/imJanta"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_dormir" />
+
+        <CheckBox
+            android:id="@+id/cbDormir"
+            android:layout_toRightOf="@id/imDormir"
+            android:layout_alignTop="@id/imDormir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dormir" />
+
+        <TextView
+            android:id="@+id/tpCafe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hora(s)"
+            android:layout_alignBaseline="@+id/hpCafe"
+            android:layout_marginLeft="7dp"
+            android:layout_alignTop="@+id/sCafe"
+            android:layout_toRightOf="@+id/hpCafe"
+            android:layout_toEndOf="@+id/hpCafe" />
+
+        <TextView
+            android:id="@+id/hpCafe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00 : 00"
+            android:layout_alignBottom="@+id/imCafe"
+            android:layout_toRightOf="@+id/cbCafe"
+            android:layout_toEndOf="@+id/cbCafe" />
+
+        <Spinner
+            android:id="@+id/sCafe"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/hpCafe"
+            android:layout_toRightOf="@+id/tpCafe"
+            android:layout_toEndOf="@+id/tpCafe" />
+
+        <TextView
+            android:id="@+id/hpAlmoco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00 : 00"
+            android:layout_alignBaseline="@+id/cbAlmoco"
+            android:layout_alignBottom="@+id/cbAlmoco"
+            android:layout_toRightOf="@+id/cbCafe"
+            android:layout_toEndOf="@+id/cbCafe" />
+
+        <TextView
+            android:id="@+id/tAlmoco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hora(s)"
+            android:layout_alignBaseline="@+id/hpAlmoco"
+            android:layout_alignBottom="@+id/hpAlmoco"
+            android:layout_toLeftOf="@+id/sCafe"
+            android:layout_toStartOf="@+id/sCafe" />
+
+        <Spinner
+            android:id="@+id/sAlmoco"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tAlmoco"
+            android:layout_toRightOf="@+id/tAlmoco"
+            android:layout_toEndOf="@+id/tAlmoco" />
+
+        <TextView
+            android:id="@+id/hpDormir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00 : 00"
+            android:layout_alignBaseline="@+id/cbDormir"
+            android:layout_alignBottom="@+id/cbDormir"
+            android:layout_alignLeft="@+id/hpJanta"
+            android:layout_alignStart="@+id/hpJanta" />
+
+        <TextView
+            android:id="@+id/hpJanta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00 : 00"
+            android:layout_alignBaseline="@+id/cbJanta"
+            android:layout_alignBottom="@+id/cbJanta"
+            android:layout_alignLeft="@+id/hpAlmoco"
+            android:layout_alignStart="@+id/hpAlmoco" />
+
+        <TextView
+            android:id="@+id/tJanta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hora(s)"
+            android:layout_alignBaseline="@+id/hpJanta"
+            android:layout_alignBottom="@+id/hpJanta"
+            android:layout_alignLeft="@+id/tAlmoco"
+            android:layout_alignStart="@+id/tAlmoco" />
+
+        <Spinner
+            android:id="@+id/sJanta"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+
+            android:layout_alignTop="@+id/tJanta"
+            android:layout_toRightOf="@+id/tJanta"
+            android:layout_toEndOf="@+id/tJanta" />
+
+        <Spinner
+            android:id="@+id/sDormir"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tDormir"
+            android:layout_toRightOf="@+id/tDormir"
+            android:layout_toEndOf="@+id/tDormir" />
+
+        <TextView
+            android:id="@+id/tDormir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hora(s)"
+            android:layout_alignBaseline="@+id/hpDormir"
+            android:layout_alignBottom="@+id/hpDormir"
+            android:layout_alignLeft="@+id/tJanta"
+            android:layout_alignStart="@+id/tJanta" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_below="@+id/posRl1"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnPosCancelar"
+            android:text="cancelar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btnPosSalvar"
+            android:text="Salvar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

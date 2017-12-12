@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="com.gmail.thales_silva_nascimento.alarmmed.activity.MedicamentoCadastro">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tBCadMedicamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"></android.support.v7.widget.Toolbar>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_below="@id/tBCadMedicamento"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            app:behavior_overlapTop="5dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/card_view_nome"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    layout="@layout/card_nome_medicamento" />
+                <include
+                    android:id="@+id/card_view_dosagem"
+                    android:layout_below="@id/card_view_nome"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    layout="@layout/card_dosagem_medicamento"/>
+
+                <include
+                    android:id="@+id/card_view_horario"
+                    android:layout_below="@id/card_view_dosagem"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    layout="@layout/card_horario_medicamento" />
+
+                <include
+                    android:id="@+id/card_view_agendamento"
+                    android:layout_below="@id/card_view_horario"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    layout="@layout/card_agendamento_medicamento" />
+
+                <include
+                    android:id="@+id/card_view_lembrete"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/card_view_agendamento"
+                    layout="@layout/card_lembrete_medicamento"/>
+
+
+            </RelativeLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fbFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="30dp"
+            app:fabSize="mini"
+            app:layout_anchor="@+id/app_bar"
+            android:src="@drawable/ic_menu_camera"
+            app:layout_anchorGravity="bottom|center_horizontal" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+</RelativeLayout>

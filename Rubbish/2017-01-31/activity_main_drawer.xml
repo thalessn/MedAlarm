@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Utiliza-se dois grupos diferentes para poder obter um separador no android.
+         O grupo precisa obter ids diferentes.
+     -->
+    <group
+        android:id="@+id/menuGrupo1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_inicio"
+            android:icon="@drawable/ic_inicio"
+            android:title="Início" />
+        <item
+            android:id="@+id/nav_receita"
+            android:icon="@drawable/ic_receita"
+            android:title="Receitas" />
+        <item
+            android:id="@+id/nav_compra"
+            android:icon="@drawable/ic_compra"
+            android:title="Compras" />
+        <item
+            android:id="@+id/nav_medico"
+            android:icon="@drawable/ic_doctor"
+            android:title="Médicos" />
+        <item
+            android:id="@+id/nav_alarme"
+            android:icon="@drawable/ic_alarme"
+            android:title="Alarmes" />
+    </group>
+
+    <group
+        android:id="@+id/menuGrupo2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_configuracoes"
+            android:icon="@drawable/ic_config"
+            android:title="Configurações" />
+
+    </group>
+
+</menu>
