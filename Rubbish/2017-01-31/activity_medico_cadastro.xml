@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_medico_cadastro"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:focusableInTouchMode="true"
+    tools:context="com.gmail.thales_silva_nascimento.alarmmed.activity.activity_medicoCadastro">
+
+    <!-- Adiciona a toolbar do médico -->
+    <include layout="@layout/app_bar_medicocadastro"
+             android:id="@+id/tBMedCad">
+    </include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tBMedCad"
+        android:layout_centerHorizontal="true"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:layout_marginTop="45dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/medicoImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:background="@android:color/transparent"
+                android:src="@mipmap/ic_icon_medico"/>
+
+            <EditText
+                android:id="@+id/medicoNome"
+                android:hint="Nome do Médico"
+                android:layout_toRightOf="@id/medicoImage"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/medicoEspSpinner"
+                android:layout_below="@id/medicoNome"
+                android:layout_alignLeft="@id/medicoNome"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#ff0000"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </Spinner>
+
+            <ImageView
+                android:id="@+id/medicoTelImage"
+                android:src="@mipmap/ic_tel"
+                android:layout_below="@id/medicoEspSpinner"
+                android:layout_alignLeft="@id/medicoImage"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/medicoTelefone"
+                android:hint="Telefone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/medicoTelImage"
+                android:layout_alignParentRight="true"
+                android:layout_alignLeft="@id/medicoNome"
+                android:layout_toRightOf="@+id/medicoTelImage"/>
+
+            <ImageView
+                android:id="@+id/medicoEndImage"
+                android:src="@mipmap/ic_endereco"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/medicoTelImage"
+                android:layout_alignLeft="@id/medicoTelImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/medicoEndereco"
+                android:hint="Endereço"
+                android:layout_alignLeft="@id/medicoNome"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/medicoEndImage"
+                android:layout_alignBottom="@id/medicoEndImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/medicoObs"
+                android:hint="Observação"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/medicoEndereco"
+                android:layout_alignLeft="@id/medicoNome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

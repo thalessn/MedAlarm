@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_cria_perfl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context="com.gmail.thales_silva_nascimento.alarmmed.activity.CriaPerfl">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tBCriaPeril"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tBCriaPeril"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/perfilNome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="41dp"
+                android:layout_marginStart="41dp"
+                android:hint="Nome"
+                android:layout_alignRight="@+id/perfilLL1"
+                android:layout_alignEnd="@+id/perfilLL1" />
+
+            <TextView
+                android:id="@+id/horarioEst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/perfilNome"
+                android:layout_below="@id/perfilNome"
+                android:text=" Horários Estimados:"
+                android:textSize="18sp" />
+
+            <RelativeLayout
+                android:id="@+id/perfilLL1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/horarioEst"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/imCafeManha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_breakfast" />
+
+                <TextView
+                    android:id="@+id/tCafeManha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_toRightOf="@id/imCafeManha"
+                    android:text="Café da Manhã"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/hCafeManha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_toRightOf="@id/tCafeManha"
+                    android:text="08:00"
+                    android:textSize="18sp" />
+
+
+                <ImageView
+                    android:id="@+id/imAlmoco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imCafeManha"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_almoco" />
+
+                <TextView
+                    android:id="@+id/tAlmoco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tCafeManha"
+                    android:layout_below="@id/tCafeManha"
+                    android:layout_marginTop="10dp"
+                    android:text="Almoço"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/hAlmoco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/hCafeManha"
+                    android:layout_below="@id/hCafeManha"
+                    android:layout_marginTop="10dp"
+                    android:text="08:00"
+                    android:textSize="18sp" />
+
+
+                <ImageView
+                    android:id="@+id/imJanta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imAlmoco"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_janta" />
+
+                <TextView
+                    android:id="@+id/tJanta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tAlmoco"
+                    android:layout_below="@id/tAlmoco"
+                    android:layout_marginTop="10dp"
+                    android:text="Janta"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/hJanta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/hAlmoco"
+                    android:layout_below="@id/hAlmoco"
+                    android:layout_marginTop="10dp"
+                    android:text="08:00"
+                    android:textSize="18sp" />
+
+
+                <ImageView
+                    android:id="@+id/imDormi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imJanta"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_dormir" />
+
+                <TextView
+                    android:id="@+id/tDormi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tJanta"
+                    android:layout_below="@id/tJanta"
+                    android:layout_marginTop="10dp"
+                    android:text="Dormir"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/hDormi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/hJanta"
+                    android:layout_below="@id/hJanta"
+                    android:layout_marginTop="10dp"
+                    android:text="08:00"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/convenio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/perfilNome"
+                android:layout_below="@id/perfilLL1"
+                android:layout_alignRight="@id/perfilLL1"
+                android:layout_marginTop="20dp"
+                android:hint="Convênio" />
+
+            <TextView
+                android:id="@+id/tpSanguineo"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/perfilNome"
+                android:layout_below="@id/convenio"
+                android:text=" Tipo Sanguíneo"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/tpSanguineoSpinner"
+                android:layout_below="@id/convenio"
+                android:layout_alignTop="@id/tpSanguineo"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tpSanguineo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></Spinner>
+            <EditText
+                android:id="@+id/alergia"
+                android:hint="Alergias"
+                android:layout_alignLeft="@id/tpSanguineo"
+                android:layout_below="@id/tpSanguineo"
+                android:layout_marginTop="10dp"
+                android:layout_alignRight="@+id/perfilLL1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

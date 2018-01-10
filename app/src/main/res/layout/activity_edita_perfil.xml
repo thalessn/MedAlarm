@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_edita_perfil"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context="com.gmail.thales_silva_nascimento.alarmmed.activity.editaPerfil">
+
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tBEditaPeril"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_below="@id/tBEditaPeril"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/view">
+
+        <ScrollView
+            android:id="@+id/scrollView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="45dp"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editaPerfilNome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/editaPerfilLL1"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignRight="@+id/editaPerfilLL1"
+                    android:layout_marginLeft="41dp"
+                    android:layout_marginStart="41dp"
+                    android:hint="Nome" />
+
+                <TextView
+                    android:id="@+id/editaHorarioEst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/editaPerfilNome"
+                    android:layout_below="@id/editaPerfilNome"
+                    android:text=" Horários Estimados:"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:id="@+id/editaPerfilLL1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editaHorarioEst"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp">
+
+                    <ImageView
+                        android:id="@+id/editaImCafeManha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_breakfast" />
+
+                    <TextView
+                        android:id="@+id/editaTCafeManha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@id/editaImCafeManha"
+                        android:text="Café da Manhã"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/editaHCafeManha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:layout_toRightOf="@id/editaTCafeManha"
+                        android:text="08:00"
+                        android:textSize="18sp" />
+
+
+                    <ImageView
+                        android:id="@+id/editaImAlmoco"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/editaImCafeManha"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_almoco" />
+
+                    <TextView
+                        android:id="@+id/editaTAlmoco"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/editaTCafeManha"
+                        android:layout_below="@id/editaTCafeManha"
+                        android:layout_marginTop="10dp"
+                        android:text="Almoço"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/editaHAlmoco"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/editaHCafeManha"
+                        android:layout_below="@id/editaHCafeManha"
+                        android:layout_marginTop="10dp"
+                        android:text="08:00"
+                        android:textSize="18sp" />
+
+
+                    <ImageView
+                        android:id="@+id/editaImJanta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/editaImAlmoco"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_janta" />
+
+                    <TextView
+                        android:id="@+id/editaTJanta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/editaTAlmoco"
+                        android:layout_below="@id/editaTAlmoco"
+                        android:layout_marginTop="10dp"
+                        android:text="Janta"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/editaHJanta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/editaHAlmoco"
+                        android:layout_below="@id/editaHAlmoco"
+                        android:layout_marginTop="10dp"
+                        android:text="08:00"
+                        android:textSize="18sp" />
+
+
+                    <ImageView
+                        android:id="@+id/editaImDormi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/editaImJanta"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_dormir" />
+
+                    <TextView
+                        android:id="@+id/editaTDormi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/editaTJanta"
+                        android:layout_below="@id/editaTJanta"
+                        android:layout_marginTop="10dp"
+                        android:text="Dormir"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/editaHDormi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/editaHJanta"
+                        android:layout_below="@id/editaHJanta"
+                        android:layout_marginTop="10dp"
+                        android:text="08:00"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/editaConvenio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/editaPerfilNome"
+                    android:layout_alignRight="@id/editaPerfilLL1"
+                    android:layout_below="@id/editaPerfilLL1"
+                    android:layout_marginTop="20dp"
+                    android:hint="Convênio" />
+
+                <TextView
+                    android:id="@+id/editaTpSanguineo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/editaPerfilNome"
+                    android:layout_below="@id/editaConvenio"
+                    android:layout_marginTop="10dp"
+                    android:text=" Tipo Sanguíneo"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/editaTpSangSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/editaTpSanguineo"
+                    android:layout_below="@id/editaConvenio"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/editaTpSanguineo"></Spinner>
+
+                <EditText
+                    android:id="@+id/editaAlergia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/editaTpSanguineo"
+                    android:layout_alignRight="@+id/editaPerfilLL1"
+                    android:layout_below="@id/editaTpSanguineo"
+                    android:layout_marginTop="10dp"
+                    android:hint="Alergias" />
+
+            </RelativeLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/btnExcluirPerfil"
+        android:background="#aeaeae"
+        android:id="@+id/view"></View>
+
+    <Button
+        android:id="@+id/btnExcluirPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FAFAFA"
+        android:text="Excluir" />
+
+</RelativeLayout>
