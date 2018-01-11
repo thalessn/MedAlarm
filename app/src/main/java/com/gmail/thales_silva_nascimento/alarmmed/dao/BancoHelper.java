@@ -34,13 +34,13 @@ public class BancoHelper extends SQLiteOpenHelper {
         db.execSQL(EspecialidadeDAO.SCRIPT_CRIACAO_TABELA_ESPECIALIDADE);
         db.execSQL(EspecialidadeDAO.SCRIPT_INSERT_INICIAL_ESPECIALIDADES);
         db.execSQL(MedicoDAO.SCRIPT_CRIACAO_TABELA_MEDICO);
-
         db.execSQL(AlarmeDAO.SCRIPT_CRIACAO_TABELA);
         db.execSQL(MedicamentoDAO.SCRIPT_CRIACAO_TABELA_MEDICAMENTO);
         db.execSQL(AlarmeInfoDAO.SCRIPT_CRIACAO_TABELA);
         db.execSQL(HorarioDAO.SCRIPT_CRIACAO_TABELA);
         db.execSQL(InstanciaAlarmeDAO.SCRIPT_CRIACAO_TABELA);
         db.execSQL(HistoricoDAO.SCRIPT_CRIACAO);
+        db.execSQL(LembreteCompraDAO.SCRIPT_CRIACAO_TABELA);
     }
 
     @Override

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Escolha a hora"
+            android:textSize="18sp"
+            android:textColor="@color/colorAccent"/>
+    </LinearLayout>
+
+    <TimePicker
+        android:id="@+id/pickerHorario"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner"></TimePicker>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+        <Button
+            android:id="@+id/btnOkHorario"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:text="OK"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"/>
+        <Button
+            android:id="@+id/btnCancelarHorario"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_toLeftOf="@+id/btnOkHorario"
+            android:background="@android:color/transparent"
+            android:text="Cancelar"
+            android:textColor="@color/colorAccent"/>
+    </RelativeLayout>
+
+</LinearLayout>

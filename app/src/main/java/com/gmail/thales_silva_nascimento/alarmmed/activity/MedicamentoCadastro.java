@@ -68,6 +68,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.controller.AlarmeController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.diasEspecificos;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.diasIntervalos;
+import com.gmail.thales_silva_nascimento.alarmmed.fragment.escolherHorario;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragNumeroDias;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragQtdLembrete;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Alarme;
@@ -90,7 +91,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MedicamentoCadastro extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener, diasEspecificos.diasEspecificosListener,
                     diasIntervalos.diasIntervalosListerner, fragNumeroDias.numeroDiasListerner,
-                    fragQtdLembrete.lembreteListerner{
+                    fragQtdLembrete.lembreteListerner, escolherHorario.escolherHorarioListener{
 
     //Cards
     private CardView cardNome;
@@ -112,6 +113,7 @@ public class MedicamentoCadastro extends AppCompatActivity
     private int qtdLembreteMed;
     private int qtdMed;
     private TextView textoLembrete;
+    private TextView tvhorarioLembrete;
 
     //Card Horarios
     private Spinner spinnerHorario;
@@ -523,7 +525,8 @@ public class MedicamentoCadastro extends AppCompatActivity
         imgSetaCardHorario = (ImageView) findViewById(R.id.cardSetaHorario);
         imgSetaCardAgend = (ImageView) findViewById(R.id.cardSetaAgend);
 
-        //Card Lembrete
+        /*Card Lembrete*/
+
         //Qtd de remedido para lembrete
         qtdLembreteMed = 10;
         //Switch cardview Lembrete
@@ -555,6 +558,35 @@ public class MedicamentoCadastro extends AppCompatActivity
                     dialog.setArguments(arg);
                     //Mostra o dialogo
                     dialog.show(getSupportFragmentManager(), "qtdLembrete");
+                }
+            }
+        });
+
+        tvhorarioLembrete = (TextView) findViewById(R.id.tvHorarioLembrete);
+
+        tvhorarioLembrete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+                Fragment prev = getSupportFragmentManager().findFragmentByTag("escolherHorario");
+                if (prev != null) {
+                    //Faz-se um cast para obter o DialogFragment onde encontra-se o AlertDialog
+                    DialogFragment a = ((DialogFragment) prev);
+                    //Pega o AlertDialog cotido no DialogFragment
+                    AlertDialog b = (AlertDialog) a.getDialog();
+                    //Mostra o AlertDialog
+                    b.show();
+                } else {
+                    //Contrói um novo dialog fragNumeroDias
+                    DialogFragment dialog = new escolherHorario();
+                    //Envia informação para o dialog
+                    Bundle arg = new Bundle();
+                    String horario = tvhorarioLembrete.getText().toString();
+                    arg.putString("horario", horario);
+                    dialog.setArguments(arg);
+                    //Mostra o dialogo
+                    dialog.show(getSupportFragmentManager(), "escolherHorario");
                 }
             }
         });
@@ -2071,6 +2103,18 @@ public class MedicamentoCadastro extends AppCompatActivity
 
     @Override
     public void onClickListenerLembreteNegativo(DialogFragment dialog) {
+        //Retira o Dialog da pilha do FragmentManager
+        dialog.dismiss();
+    }
+
+    @Override
+    public void onClickListenerPositivoEscolherHorario(DialogFragment dialog, String horario) {
+        tvhorarioLembrete.setText(horario);
+        esconderAlertDialog(dialog);
+    }
+
+    @Override
+    public void onClickListenerNegativoEscolherHorario(DialogFragment dialog) {
         //Retira o Dialog da pilha do FragmentManager
         dialog.dismiss();
     }
