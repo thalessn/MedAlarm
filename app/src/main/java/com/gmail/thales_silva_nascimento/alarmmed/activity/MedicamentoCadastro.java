@@ -18,6 +18,8 @@ import android.support.annotation.IdRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -65,6 +67,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.Utils;
 import com.gmail.thales_silva_nascimento.alarmmed.Weekdays;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.AlarmeController;
+import com.gmail.thales_silva_nascimento.alarmmed.controller.LembreteCompraController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.diasEspecificos;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.diasIntervalos;
@@ -73,6 +76,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragNumeroDias;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragQtdLembrete;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Alarme;
 import com.gmail.thales_silva_nascimento.alarmmed.model.AlarmeInfo;
+import com.gmail.thales_silva_nascimento.alarmmed.model.LembreteCompra;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medicamento;
 
 import java.io.File;
@@ -111,7 +115,7 @@ public class MedicamentoCadastro extends AppCompatActivity
     //Card Lembrete
     private Switch switchLembrete;
     private int qtdLembreteMed;
-    private int qtdMed;
+    private TextInputEditText qtdMedEst;
     private TextView textoLembrete;
     private TextView tvhorarioLembrete;
 
@@ -535,6 +539,8 @@ public class MedicamentoCadastro extends AppCompatActivity
         textoLembrete = (TextView) findViewById(R.id.tvQtdRemedio);
         String texto = "Quando restarem "+ qtdLembreteMed +" remédios";
         textoLembrete.setText(texto);
+        //EditText da quantidade de estoque
+        qtdMedEst = (TextInputEditText) findViewById(R.id.edTextQtdMedEstq);
 
         textoLembrete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -912,8 +918,27 @@ public class MedicamentoCadastro extends AppCompatActivity
         // Metodo que gerencia os itens do menu da Toolbar.
         switch (item.getItemId()) {
             case R.id.iTMedSave:
-                salvarMedicamento();
-                return true;
+                //Verifica se possui lembrete e se sim então a quantidade no estoque não pode ser <1 e nem vazio
+                if(switchLembrete.isChecked())
+                {
+                    if(!qtdMedEst.getText().toString().equals("")){
+                        if(!(Integer.parseInt(qtdMedEst.getText().toString()) < 1)){
+                            salvarMedicamento();
+                            return true;
+                        }else{
+                            qtdMedEst.setText("");
+                            qtdMedEst.setFocusable(true);
+                            qtdMedEst.requestFocus();
+                        }
+                    }else{
+                        qtdMedEst.setFocusable(true);
+                        qtdMedEst.requestFocus();
+                    }
+                }else{
+                    salvarMedicamento();
+                    return true;
+                }
+            return false;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -2120,22 +2145,26 @@ public class MedicamentoCadastro extends AppCompatActivity
     }
 
 
-    private class SalvarMedicamentoAsyncTask extends AsyncTask<Void,Void,Void>{
+    private class SalvarMedicamentoAsyncTask extends AsyncTask<Boolean,Void,Void>{
 
         ProgressDialog dialog;
         Context context;
         Medicamento medicamento;
         Alarme alarme;
+        LembreteCompra lembreteCompra;
         MedicamentoController mc;
         AlarmeController ac;
+        LembreteCompraController lc;
 
-        public SalvarMedicamentoAsyncTask(Context context, Medicamento med, Alarme alarme){
+        public SalvarMedicamentoAsyncTask(Context context, Medicamento med, Alarme alarme, LembreteCompra lembreteCompra){
             this.context = context;
             this.dialog = new ProgressDialog(context);
             this.medicamento = med;
             this.alarme = alarme;
             this.mc = new MedicamentoController(context);
             this.ac = new AlarmeController(context);
+            this.lc = new LembreteCompraController(context);
+            this.lembreteCompra = lembreteCompra;
         }
 
         @Override
@@ -2146,7 +2175,7 @@ public class MedicamentoCadastro extends AppCompatActivity
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(Boolean... params) {
             if(tipoTela == MedicamentoCadastro.TELA_CADASTRAR_MED){
                 //Cadastra o medicamento
                 Log.v("CadastrarMedicamento", "Iniciou");
@@ -2156,11 +2185,26 @@ public class MedicamentoCadastro extends AppCompatActivity
                 Log.v("CadastrarAlarme", "Iniciou");
                 //Ativa  e registra o alarme
                 ac.registrarAlarmeAsync(alarme);
+
+                //Verifica lembrete de compra
+                boolean isSwitchLembreteChecked = params[0];
+                if(isSwitchLembreteChecked){
+                    lembreteCompra.setIdMedicamento(id);
+                    lc.cadastrarLembreteCompra(lembreteCompra);
+                }
                 return null;
             }else{
                 //Tela de editar
                 mc.atualizarMedicamento(medicamento);
                 ac.atualizarAlarme(alarme);
+                boolean isSwitchLembreteChecked = params[0];
+                if(isSwitchLembreteChecked){
+                    lc.atualizarLembreteCompra(lembreteCompra);
+                }else{
+                    //Exclui lembrete pois o usuário não quer mais.
+                    if(lembreteCompra != null)
+                        lc.excluirLembreteCompraPorIdMed(lembreteCompra.getId());
+                }
                 return null;
             }
 
@@ -2240,7 +2284,9 @@ public class MedicamentoCadastro extends AppCompatActivity
     private void salvarMedicamento(){
 
         if(tipoTela != MedicamentoCadastro.TELA_EDITAR_MED){
-            //Medicamento
+            /**
+             * Medicamento
+             */
             String nome = nomeMed.getText().toString();
             //Se não inserir dosagem a dosage será nula = '-1'
             int dosagem = dosagemMed.getText().toString().isEmpty() ? -1 : Integer.parseInt(dosagemMed.getText().toString());
@@ -2256,7 +2302,9 @@ public class MedicamentoCadastro extends AppCompatActivity
 
             final Medicamento medicamento = new Medicamento(nome, dosagem, tipoDosagem, usoContinuo, observacao, foto);
 
-            //Alarme
+            /**
+             * Alarme
+             */
             Calendar dataInicio = Utils.DataDiaMesAnoToCalendar(dataInicialTv.getText().toString());
             Calendar dataFim = Utils.DataDiaMesAnoToCalendar(dataInicialTv.getText().toString());
             int periodo = medicamento.isUso_continuo() ? 1 : numeroDias;
@@ -2303,12 +2351,22 @@ public class MedicamentoCadastro extends AppCompatActivity
             Log.v("alameinfos", alarme.getAlarmeInfo().toString());
 
 
+            //Verifica Lembrete de Compra
+            LembreteCompra lembreteCompra = null;
+            if(switchLembrete.isChecked()){
+                int quantidade = Integer.parseInt(qtdMedEst.getText().toString());
+                medicamento.setQuantidade(quantidade);
+                String horarioAlerta = tvhorarioLembrete.getText().toString();
+                lembreteCompra = new LembreteCompra(0, qtdLembreteMed, horarioAlerta);
+            }
+
+
             /**
              * Salva o alarme no banco de dados e registra o alarme no sistema
              */
 
-            SalvarMedicamentoAsyncTask task = new SalvarMedicamentoAsyncTask(MedicamentoCadastro.this, medicamento, alarme);
-            task.execute();
+            SalvarMedicamentoAsyncTask task = new SalvarMedicamentoAsyncTask(MedicamentoCadastro.this, medicamento, alarme, lembreteCompra);
+            task.execute(switchLembrete.isChecked());
         }else{
             medEdit.setNome(nomeMed.getText().toString());
             //Se não inserir dosagem a dosage será nula = '-1'
@@ -2369,9 +2427,17 @@ public class MedicamentoCadastro extends AppCompatActivity
             alarmeEdit.setFreqHorario(freqHorario);
             alarmeEdit.setFreqDias(freqDias);
 
-            SalvarMedicamentoAsyncTask task = new SalvarMedicamentoAsyncTask(MedicamentoCadastro.this, medEdit, alarmeEdit);
-            task.execute();
+            //Verifica Lembrete de Compra
+            LembreteCompra lc = null;
+            if(switchLembrete.isChecked()){
+                int quantidade = Integer.parseInt(qtdMedEst.getText().toString());
+                medEdit.setQuantidade(quantidade);
+                String horarioAlerta = tvhorarioLembrete.getText().toString();
+                lc = new LembreteCompra(medEdit.getId(), qtdLembreteMed, horarioAlerta);
+            }
 
+            SalvarMedicamentoAsyncTask task = new SalvarMedicamentoAsyncTask(MedicamentoCadastro.this, medEdit, alarmeEdit, lc);
+            task.execute(switchLembrete.isChecked());
         }
 
         //Retorna para a activity pai se ela deve atualizar as suas informações

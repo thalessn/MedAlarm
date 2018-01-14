@@ -22,9 +22,11 @@ import com.bumptech.glide.Glide;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.AlarmeController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
+import com.gmail.thales_silva_nascimento.alarmmed.controller.LembreteCompraController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Alarme;
 import com.gmail.thales_silva_nascimento.alarmmed.model.AlarmeInfo;
+import com.gmail.thales_silva_nascimento.alarmmed.model.LembreteCompra;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medicamento;
 
 import java.io.File;
@@ -44,6 +46,8 @@ public class MedicamentoDetalhe extends AppCompatActivity {
     private LinearLayout llHorariosMed;
     private Alarme alarme;
     private static final int CODIGO_RESULT_ACTIVITY = 1;
+    private LembreteCompra lembreteCompra;
+    private LembreteCompraController lembreteCompraController;
 
 
 
@@ -61,6 +65,7 @@ public class MedicamentoDetalhe extends AppCompatActivity {
         historicoController = new HistoricoController(MedicamentoDetalhe.this);
         alarmeController = new AlarmeController(MedicamentoDetalhe.this);
         medicamentoController = new MedicamentoController(MedicamentoDetalhe.this);
+        lembreteCompraController = new LembreteCompraController(MedicamentoDetalhe.this);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tbMedicamentoDetalhe);

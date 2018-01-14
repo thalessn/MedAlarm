@@ -93,8 +93,9 @@ public class escolherHorario extends DialogFragment {
         timePicker.setIs24HourView(true);
 
         String []hh = horario.split(":");
-        String h = hh[0];
-        String m = hh[1];
+        String h = hh[0].trim();
+        String m = hh[1].trim();
+
         timePicker.setCurrentHour(Integer.parseInt(h));
         timePicker.setCurrentMinute(Integer.parseInt(m));
 
@@ -103,7 +104,7 @@ public class escolherHorario extends DialogFragment {
             public void onClick(View v) {
                 String hora = timePicker.getCurrentHour() < 10? "0"+timePicker.getCurrentHour().toString() : timePicker.getCurrentHour().toString();
                 String minuto = timePicker.getCurrentMinute() <10? "0"+timePicker.getCurrentMinute().toString() : timePicker.getCurrentMinute().toString();
-                String horario = hora +":"+ minuto;
+                String horario = hora +" : "+ minuto;
                interfaceListener.onClickListenerPositivoEscolherHorario(escolherHorario.this, horario);
             }
         });

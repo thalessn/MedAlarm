@@ -2,6 +2,7 @@ package com.gmail.thales_silva_nascimento.alarmmed.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.gmail.thales_silva_nascimento.alarmmed.model.LembreteCompra;
@@ -29,6 +30,15 @@ public class LembreteCompraDAO {
     public static String SCRIPT_CRIACAO_TABELA = "CREATE TABLE " +NOME_TABELA+ " (" +COLUNA_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
             +COLUNA_ID_MEDICAMENTO+ " INTEGER, " +COLUNA_QTD_ALERTA+ " INTEGER, " +COLUNA_HORARIO_ALERTA+ " TEXT, FOREIGN KEY ("+COLUNA_ID_MEDICAMENTO+") "
             +"REFERENCES " +MedicamentoDAO.NOME_TABELA+ " (" +MedicamentoDAO.COLUNA_ID+ "))";
+
+    /**
+     *  Atalhos para evitar de ficar chamando a função cursor.getColumnIndex()
+     *  Manter sincronizado com o banco
+     */
+    private static final int ID_INDEX = 0;
+    private static final int ID_MEDICAMENTO_INDEX = 1;
+    private static final int QTD_ALERTA_INDEX = 2;
+    private static final int HORARIO_ALERTA_INDEX = 3;
 
     private SQLiteDatabase database = null;
     private static LembreteCompraDAO instance = null;
@@ -58,10 +68,42 @@ public class LembreteCompraDAO {
         database.insert(NOME_TABELA,null,contentValues);
     }
 
-    public void deletarLembreteCompraPorIdMed(long idMedicamento){
+    public void excluirLembreteCompraPorIdMed(long idMedicamento){
         String [] whereValues = {String.valueOf(idMedicamento)};
         String where = COLUNA_ID_MEDICAMENTO+ " = ?";
         database.delete(NOME_TABELA,where,whereValues);
+    }
+
+    public LembreteCompra buscarLembreteCompraPorIdMed(long idMedicamento){
+        String IDMedicamento = String.valueOf(idMedicamento);
+        String sql = "Select * from " +NOME_TABELA+ " where " +COLUNA_ID_MEDICAMENTO+ " = " +IDMedicamento;
+        Cursor cursor = database.rawQuery(sql, null);
+
+        if(cursor == null){
+            return null;
+        }
+
+        try{
+            if(cursor.moveToFirst()){
+                long id = cursor.getLong(ID_INDEX);
+                int qtdAlerta = cursor.getInt(QTD_ALERTA_INDEX);
+                String horarioAlerta = cursor.getString(HORARIO_ALERTA_INDEX);
+                LembreteCompra lembrete = new LembreteCompra(id, idMedicamento, qtdAlerta, horarioAlerta);
+
+                return lembrete;
+            }
+        }finally {
+            cursor.close();
+        }
+
+        return null;
+    }
+
+    public void atualizarLembreteCompra (LembreteCompra lembreteCompra){
+        ContentValues contentValues = criarContentValues(lembreteCompra);
+        String where = COLUNA_ID_MEDICAMENTO +" = ?";
+        String []whereValues = {String.valueOf(lembreteCompra.getIdMedicamento())};
+        database.update(NOME_TABELA, contentValues, where, whereValues);
     }
 
 }

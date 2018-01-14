@@ -44,18 +44,19 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/preto"
-                android:text="Informe a quantidade de remédios que você possui no momento para receber um alerta de compra"/>
+                android:layout_marginTop="8dp"
+                android:text="Informe a quantidade de remédios que você possui no momento para receber um alerta de compra"
+                android:textColor="@color/preto" />
 
             <android.support.design.widget.TextInputLayout
-                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent">
+                android:layout_marginTop="8dp">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edTextQtdMedEstq"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Quantidade de remédios"
@@ -65,14 +66,15 @@
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lembrete de compra"
-                    android:textColor="@color/preto"/>
+                    android:textColor="@color/preto" />
 
                 <Switch
                     android:id="@+id/switch1"
@@ -87,26 +89,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tvQtdRemedio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Quando restarem 10 remédios"
-                    android:layout_width="match_parent"
-                    android:textColor="@color/colorAccent"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/colorAccent" />
+
                 <TextView
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/preto"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="Horário do lembrete?"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/preto" />
+
                 <TextView
                     android:id="@+id/tvHorarioLembrete"
-                    android:layout_marginTop="8dp"
-                    android:text="08:00"
-                    android:textColor="@color/colorAccent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="08 : 00"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
 
 

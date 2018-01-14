@@ -25,13 +25,11 @@
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".activity.activity_medicoCadastro" />
         <activity android:name=".activity.activity_medicoDetalhe" />
@@ -40,6 +38,7 @@
         <activity android:name=".activity.receitaCadastro" />
         <activity android:name=".TelaAlarme" />
         <activity android:name=".activity.MedicamentoCadastro">
+
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,7 +54,8 @@
         <!-- Declara que a classe AlarmeReceiver é o tipo de receiver -->
         <receiver android:name=".AlarmeReceiver" />
 
-        <activity android:name=".activity.MedicamentoDetalhe"></activity>
+        <activity android:name=".activity.MedicamentoDetalhe" />
+        <activity android:name=".activity.LembreteCompraRemedio"></activity>
     </application>
 
 </manifest>

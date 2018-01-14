@@ -16,6 +16,13 @@ public class LembreteCompra {
         this.horarioAlerta = horarioAlerta;
     }
 
+    public LembreteCompra(long id, long idMedicamento, int qtd_alerta, String horarioAlerta){
+        this.id = id;
+        this.idMedicamento = idMedicamento;
+        this.qtd_alerta = qtd_alerta;
+        this.horarioAlerta = horarioAlerta;
+    }
+
     public long getId() {
         return id;
     }
@@ -30,5 +37,9 @@ public class LembreteCompra {
 
     public String getHorarioAlerta() {
         return horarioAlerta;
+    }
+
+    public void setIdMedicamento(long idMedicamento) {
+        this.idMedicamento = idMedicamento;
     }
 }
