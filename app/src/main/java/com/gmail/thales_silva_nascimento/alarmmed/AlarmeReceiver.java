@@ -10,12 +10,9 @@ import android.util.Log;
 
 public class AlarmeReceiver extends BroadcastReceiver {
 
-    //PendingIntent - Classe que guarda a intent que será exEcutada quando o Alarm tocar.
-    private PendingIntent alarmIntent;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //Toast.makeText(context,"TOCOU O ALARME", Toast.LENGTH_LONG).show();
         Log.v("ALARME RECEIVER", "Inicio O ALARME");
 
         //Pega a id de horário contido na intent do onReceive e passa na intent abaixo

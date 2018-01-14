@@ -16,8 +16,11 @@ import com.bumptech.glide.Glide;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.AlarmeController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.InstanciaAlarmeController;
+import com.gmail.thales_silva_nascimento.alarmmed.controller.LembreteCompraController;
+import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Alarme;
 import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarme;
+import com.gmail.thales_silva_nascimento.alarmmed.model.LembreteCompra;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medicamento;
 
 import java.io.File;
@@ -36,6 +39,8 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
     private HistoricoController historicoController;
     private InstanciaAlarmeController instanciaAlarmeController;
     private AlarmeController alarmeController;
+    private LembreteCompraController lembreteCompraController;
+    private MedicamentoController medicamentoController;
     private final static String STATUS_TOMADO = "Tomado";
     private final static String STATUS_PULOU = "Pulou";
     private final static String STATUS_ADIOU = "Adiou";
@@ -46,6 +51,8 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
         this.historicoController = new HistoricoController(context);
         this.instanciaAlarmeController = InstanciaAlarmeController.getInstanciaAlarmeController(context);
         this.alarmeController = new AlarmeController(context);
+        this.lembreteCompraController = new LembreteCompraController(context);
+        this.medicamentoController = new MedicamentoController(context);
     }
 
     @Override
@@ -65,7 +72,7 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
 
         //Arquivo que contém o caminho da imagem no armazenamento interno
         File path = context.getFileStreamPath(med.getFoto());
-        //Verifica se o caminho existe. Se existir carrea a imagem, se não carregue a imagem padrão que neste caso é o cachorro.
+        //Verifica se o caminho existe. Se existir carrega a imagem, se não carregue a imagem padrão que neste caso é o remédio.
         if(path.exists()){
             //existe
             Glide.with(context).load(path).into(holder.foto);
@@ -235,6 +242,24 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
                 //Exclui a instancia do banco de dados
                 instanciaAlarmeController.deletarInstanciaPorDataAlarmeHorario(itemAlarme.getDataProgramada(),
                         itemAlarme.getIdAlarme(), itemAlarme.getHorario().getId());
+
+
+
+                //Procura se existe um lembrete de compra no banco de dados
+                LembreteCompra lembreteCompra = lembreteCompraController.buscarLembretePorIDMed(itemAlarme.getMed().getId());
+                if(lembreteCompra != null){
+                    //Atualiza a quantidade de remédios no banco
+                    int qtdMedAnterior = itemAlarme.getMed().getQuantidade();
+                    int qtdMedAtual = qtdMedAnterior -1;
+                    //Validação para não permitir número negativo no estoque
+                    if(qtdMedAtual < 0) qtdMedAtual = 0;
+                    medicamentoController.updateQtdMedicamento(itemAlarme.getMed().getId(), qtdMedAtual);
+
+                    if(qtdMedAtual <= lembreteCompra.getQtd_alerta()){
+                        lembreteCompraController.registrarLembreteCompra(lembreteCompra);
+                    }
+                }
+
                 break;
             case STATUS_PULOU:
                 //Salva na tabela historico

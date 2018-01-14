@@ -1,9 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gmail.thales_silva_nascimento.alarmmed.activity.LembreteCompraRemedio">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tbLembreCompra"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"></android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/tbFakeMedicoDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="185dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="56dp"
+        android:background="?attr/colorPrimary"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgLembreteTela"
+            android:layout_width="135dp"
+            android:layout_height="135dp"
+            android:layout_gravity="center"
+            android:src="@drawable/remedio1"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="1dp"/>
+
+        <TextView
+            android:id="@+id/nomeMedLembreteTela"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Thales Nascimento"
+            android:textColor="#fafafa"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollViewMedDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tbFakeMedicoDetalhe"
+        android:layout_above="@+id/btnAddDose">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tvLembreteTela"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lembrete de Compra"
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tvQtdRemedioEst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Você possui 10 remédios no momento"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_below="@id/tvLembreteTela"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:id="@+id/llGpsLembreteTela"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvQtdRemedioEst"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:src="@drawable/ic_endereco" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_gravity="center">
+                        <TextView
+                            android:id="@+id/tvLembreteTela2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Encontrar a farmácia mais próxima"
+                            android:textSize="18sp"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

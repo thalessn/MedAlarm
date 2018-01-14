@@ -129,7 +129,7 @@ public class fragRemedio extends Fragment implements MedicamentoAdapter.OnItemCl
     public void onClick(View view, int position) {
         Medicamento med = medicamentos.get(position);
         Intent i = new Intent(getContext(), MedicamentoDetalhe.class);
-        i.putExtra("medicamento", med);
+        i.putExtra("idMedicamento", med.getId());
         startActivityForResult(i, CODIGO_RESULT_ACTIVITY);
     }
 }

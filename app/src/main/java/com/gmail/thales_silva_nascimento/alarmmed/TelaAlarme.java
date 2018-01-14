@@ -42,7 +42,6 @@ public class TelaAlarme extends AppCompatActivity {
     private ItemAlarmeAdapter adapter;
 
 
-
     /**
      * BroadcastReceiver utilizado para a cominucação da classe AlarmeService com esta Activity
      * Com ele a TelaAlarme sabe se deve atualizar sua lista de alarme.
@@ -67,9 +66,6 @@ public class TelaAlarme extends AppCompatActivity {
                     Log.v("LocalBroadcast", "Tela Encerrar");
                     finish();
             }
-
-
-
         }
     };
 
@@ -139,20 +135,6 @@ public class TelaAlarme extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(message, intentFilter);
 
 
-
-//        btn = (Button) findViewById(R.id.btnSnooze);
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Toast.makeText(TelaAlarme.this, "Teste do botão", Toast.LENGTH_SHORT).show();
-//                Intent i = new Intent(getApplicationContext(), AlarmeService.class);
-//                stopService(i);
-//                finish();
-//
-//            }
-//        });
-
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                 | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
@@ -162,9 +144,7 @@ public class TelaAlarme extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-
         super.onResume();
-
     }
 
     @Override
@@ -189,24 +169,23 @@ public class TelaAlarme extends AppCompatActivity {
         // Metodo que gerencia os itens do menu da Toolbar.
         switch (item.getItemId()) {
             case R.id.telaAlarmeSnooze:
-                Toast.makeText(TelaAlarme.this, "Apertou o Soneca", Toast.LENGTH_SHORT).show();
+                Log.v("TelaAlarme", "Apertou o Soneca");
                 adapter.adiarTodosMedicamentos();
                 finish();
                 return true;
             case R.id.telaAlarmeTomar:
                 Toast.makeText(TelaAlarme.this, "Apertou o botão tomar todos", Toast.LENGTH_SHORT).show();
+                Log.v("TelaAlarme", "Apertou o botão tomar todos");
                 adapter.tomarTodosMedicamentos();
                 finish();
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
 
     private void atualizaItensAlarme(long idHorario){
-
-        String data = "2017-09-09"; //Utils.CalendarToStringData(Calendar.getInstance());
+        String data = Utils.CalendarToStringData(Calendar.getInstance());
         if(idHorario <=0) {
             Log.v("Tela Alarme - Atualizar", "Horario inválido");
             return;

@@ -58,7 +58,6 @@ public class activity_medicoDetalhe extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Voltar", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

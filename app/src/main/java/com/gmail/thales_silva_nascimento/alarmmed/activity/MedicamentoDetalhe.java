@@ -46,8 +46,10 @@ public class MedicamentoDetalhe extends AppCompatActivity {
     private LinearLayout llHorariosMed;
     private Alarme alarme;
     private static final int CODIGO_RESULT_ACTIVITY = 1;
-    private LembreteCompra lembreteCompra;
     private LembreteCompraController lembreteCompraController;
+    private TextView tvDetalheLembrete;
+    private TextView tvQtdLembrete;
+    private LembreteCompra lembreteCompra;
 
 
 
@@ -91,7 +93,8 @@ public class MedicamentoDetalhe extends AppCompatActivity {
             Intent i = getIntent();
             if(i != null){
                 //Cria um médico que recebe um medico da activity anterior
-                medicamento =  i.getExtras().getParcelable("medicamento");
+                long idMedicamento =  i.getExtras().getLong("idMedicamento");
+                medicamento = medicamentoController.buscarMedicamentoPorId(idMedicamento);
             }
         }else{
             medicamento = savedInstanceState.getParcelable("medicamento");
@@ -114,12 +117,31 @@ public class MedicamentoDetalhe extends AppCompatActivity {
         String freqTexto = "Frequência: " +alarme.getFreqDias()+ ", "+ alarme.getFreqHorario().toLowerCase();
         freqText.setText(freqTexto);
 
+        //Atribui  o texto sobre o lebrete de compra
+        tvDetalheLembrete = (TextView) findViewById(R.id.tvDetalheLembrete);
+        tvQtdLembrete = (TextView) findViewById(R.id.tvDetalheQtdLembrete);
+
+        if((medicamento.getQuantidade() != -1)){
+            //Texto Comprimidos restantes
+            String qtdEstq = String.valueOf(medicamento.getQuantidade());
+            String  texto = null;
+            if(medicamento.getQuantidade() < 2) texto = qtdEstq + " comprimido restante";
+            else texto = qtdEstq + " comprimidos restantes";
+            tvDetalheLembrete.setText(texto);
+        }
+
+        lembreteCompra = lembreteCompraController.buscarLembretePorIDMed(medicamento.getId());
+        if(lembreteCompra != null){
+            String qtdAlerta = String.valueOf(lembreteCompra.getQtd_alerta());
+            String texto2 = "Lembrete de compra: Quando restarem " +qtdAlerta+ " remédios";
+            tvQtdLembrete.setText(texto2);
+        }
     }
 
     private void loadImagem(Medicamento med){
         //Arquivo que contém o caminho da imagem no armazenamento interno
         File path = MedicamentoDetalhe.this.getFileStreamPath(med.getFoto());
-        //Verifica se o caminho existe. Se existir carrega a imagem, se não, carregue a imagem padrão que neste caso é o cachorro.
+        //Verifica se o caminho existe. Se existir carrega a imagem, se não, carregue a imagem padrão.
         if(path.exists()){
             //existe
             Glide.with(MedicamentoDetalhe.this).load(path).into(img);
@@ -191,7 +213,8 @@ public class MedicamentoDetalhe extends AppCompatActivity {
                 //Busca a id do Alarme associado a esse medicamento e deleta o alarme do banco
                 long idAlarme = alarmeController.buscarIdAlarmePorMedID(medicamento.getId());
                 alarmeController.deletarAlarme(idAlarme);
-
+                //Exclui o lembrete de compra associado a esse remédio
+                lembreteCompraController.excluirLembreteCompraPorIdMed(medicamento.getId());
                 //Exclui o medicamento do banco
                 medicamentoController.excluirMedicamento(medicamento, MedicamentoDetalhe.this);
 
@@ -270,6 +293,7 @@ public class MedicamentoDetalhe extends AppCompatActivity {
         i.putExtra("medicamento", medicamento);
         i.putExtra("alarme", alarme);
         i.putExtra("tipoTela", MedicamentoCadastro.TELA_EDITAR_MED);
+        i.putExtra("lembreteCompra", lembreteCompra);
         startActivityForResult(i, CODIGO_RESULT_ACTIVITY);
     }
 
@@ -291,6 +315,25 @@ public class MedicamentoDetalhe extends AppCompatActivity {
         //Atribui o texto da frequencia acima do linear layout
         String freqTexto = "Frequência: " +alarme.getFreqDias()+ ", "+ alarme.getFreqHorario().toLowerCase();
         freqText.setText(freqTexto);
+
+        //Atribui o texto do Lembrete
+        if((medicamento.getQuantidade() != -1)){
+            //Texto Comprimidos restantes
+            String qtdEstq = String.valueOf(medicamento.getQuantidade());
+            String  texto = null;
+            if(medicamento.getQuantidade() < 2) texto = qtdEstq + " comprimido restante";
+            else texto = qtdEstq + " comprimidos restantes";
+            tvDetalheLembrete.setText(texto);
+        }
+
+        lembreteCompra = lembreteCompraController.buscarLembretePorIDMed(medicamento.getId());
+        if(lembreteCompra != null){
+            String qtdAlerta = String.valueOf(lembreteCompra.getQtd_alerta());
+            String texto2 = "Lembrete de compra: Quando restarem " +qtdAlerta+ " remédios";
+            tvQtdLembrete.setText(texto2);
+        }else{
+            tvQtdLembrete.setText("");
+        }
     }
 
     @Override

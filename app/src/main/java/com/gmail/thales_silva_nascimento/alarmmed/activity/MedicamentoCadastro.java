@@ -342,6 +342,27 @@ public class MedicamentoCadastro extends AppCompatActivity
                     //Insere a data do tratamento
                     dataInicialTv.setText(Utils.formataDataBrasil(Utils.CalendarToStringData(alarmeEdit.getDataInicio())));
 
+                    //Configura o card LembreteCompra
+                    if(medEdit.getQuantidade() != -1) {
+                        qtdMedEst.setText(String.valueOf(medEdit.getQuantidade()));
+                    }
+                    LembreteCompra lembrete = intent.getParcelableExtra("lembreteCompra");
+                    if(lembrete != null){
+                        //Marca o switch como marcado
+                        switchLembrete.setChecked(true);
+                        //Deixa o texto visivel
+                        textoLembrete.setVisibility(View.VISIBLE);
+                        String texto = "Quando restarem " +String.valueOf(lembrete.getQtd_alerta())+ " remédios";
+                        textoLembrete.setText(texto);
+                        //Insere o horário
+                        tvhorarioLembrete.setText(lembrete.getHorarioAlerta());
+                    }
+
+
+
+
+
+
                     /**
                      * Colocar em função
                      */
@@ -2198,12 +2219,12 @@ public class MedicamentoCadastro extends AppCompatActivity
                 mc.atualizarMedicamento(medicamento);
                 ac.atualizarAlarme(alarme);
                 boolean isSwitchLembreteChecked = params[0];
+                Log.v("Marcado", String.valueOf(isSwitchLembreteChecked));
                 if(isSwitchLembreteChecked){
-                    lc.atualizarLembreteCompra(lembreteCompra);
+                    lc.cadastrarLembreteCompra(lembreteCompra);
                 }else{
-                    //Exclui lembrete pois o usuário não quer mais.
-                    if(lembreteCompra != null)
-                        lc.excluirLembreteCompraPorIdMed(lembreteCompra.getId());
+                    //Verifica se possuir lembrete no banco para este remédio se posduir então exclui
+                    lc.excluirLembreteCompraPorIdMed(medicamento.getId());
                 }
                 return null;
             }
@@ -2426,6 +2447,8 @@ public class MedicamentoCadastro extends AppCompatActivity
             alarmeEdit.setStatus(status);
             alarmeEdit.setFreqHorario(freqHorario);
             alarmeEdit.setFreqDias(freqDias);
+
+
 
             //Verifica Lembrete de Compra
             LembreteCompra lc = null;

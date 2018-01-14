@@ -232,4 +232,11 @@ public class MedicamentoDAO {
         return medicamentos;
     }
 
+    public void updateQtdMedicamento(long idMedicamento, int qtd){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUNA_QTD, qtd);
+        String where = COLUNA_ID +" = "+ String.valueOf(idMedicamento);
+        database.update(NOME_TABELA,contentValues,where,null);
+    }
+
 }

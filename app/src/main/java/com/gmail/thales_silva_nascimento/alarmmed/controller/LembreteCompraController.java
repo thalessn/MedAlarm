@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
+import com.gmail.thales_silva_nascimento.alarmmed.LembreteCompraReceiver;
 import com.gmail.thales_silva_nascimento.alarmmed.Utils;
 import com.gmail.thales_silva_nascimento.alarmmed.activity.LembreteCompraRemedio;
 import com.gmail.thales_silva_nascimento.alarmmed.dao.LembreteCompraDAO;
@@ -43,8 +44,8 @@ public class LembreteCompraController {
         /**
          * Intent a ser chamada para o horário programado.
          */
-        Intent intent = new Intent(context, LembreteCompraRemedio.class);
-        intent.putExtra("idMedicamento", lembreteCompra.getHorarioAlerta());
+        Intent intent = new Intent(context, LembreteCompraReceiver.class);
+        intent.putExtra("idMedicamento", lembreteCompra.getIdMedicamento());
         /**
          * O valor do resquestCode da pendingIntent será o valor 'hashcode' da id do LembreteCompra
          * que a instanciaAlarme possui.
@@ -54,6 +55,7 @@ public class LembreteCompraController {
          * PendingIntent utilizada para chamar o BroadCastReceiver
          */
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0);
+
         /**
          * Reponsável por registrar o Alarme no Sistema
          */
@@ -64,12 +66,14 @@ public class LembreteCompraController {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmeLembrete.getTimeInMillis(), pendingIntent);
+            Log.v("CadastrouLembrete", "alarmManager.setExactAndAllowWhileIdle");
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmeLembrete.getTimeInMillis(), pendingIntent);
-            Log.v("CadastrouAlarm", "alarmManager.setExact");
+            Log.v("CadastrouLembrete", "alarmManager.setExact");
+            Log.v("HorarioLembrete", Utils.CalendarToStringData(alarmeLembrete) +" - "+ Utils.CalendarToStringHora(alarmeLembrete));
         } else {
             alarmManager.set(AlarmManager.RTC_WAKEUP, alarmeLembrete.getTimeInMillis(), pendingIntent);
-            Log.v("CadastrouAlarm", "alarmManager.set");
+            Log.v("Cadastrou Lembrete", "alarmManager.set");
         }
     }
 

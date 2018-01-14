@@ -68,4 +68,8 @@ public class MedicamentoController {
         return medicamentos;
     }
 
+    public void updateQtdMedicamento(long idMedicamento, int qtd){
+        medicamentoDAO.updateQtdMedicamento(idMedicamento, qtd);
+    }
+
 }
