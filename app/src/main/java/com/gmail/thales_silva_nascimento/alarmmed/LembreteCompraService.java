@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.IBinder;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
@@ -13,6 +15,8 @@ import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
 import com.gmail.thales_silva_nascimento.alarmmed.activity.LembreteCompraRemedio;
+import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
+import com.gmail.thales_silva_nascimento.alarmmed.model.Medicamento;
 
 /**
  * Created by thales on 14/01/18.
@@ -36,19 +40,22 @@ public class LembreteCompraService extends Service {
             AlarmeAlertWakeLock.acquireCpuWakeLock(this);
 
             long idMedicamento = intent.getExtras().getLong("idMedicamento");
+            MedicamentoController mc = new MedicamentoController(this);
+            Medicamento med = mc.buscarMedicamentoPorId(idMedicamento);
+            if(med == null){
+                stopSelf();
+            }
 
-//            Intent i = new Intent(this, LembreteCompraRemedio.class);
-//            i.putExtra("idMedicamento", idMedicamento);
-//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            startActivity(i);
-
+            //Uri para o som padrão de notificação
+            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             //Monta a notificação
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle("Lembrete de Compra")
                     .setAutoCancel(true)
-                    .setContentText("Testando a notificação");
-
+                    .setVibrate(new long[] {1000, 1000,1000, 1000})
+                    .setSound(alarmSound)
+                    .setContentText("Você precisa comprar o remédio "+med.getNome());
 
             Intent resultIntent = new Intent(this, LembreteCompraRemedio.class);
             resultIntent.putExtra("idMedicamento", idMedicamento);
@@ -72,6 +79,7 @@ public class LembreteCompraService extends Service {
 
             // mId allows you to update the notification later on.
             mNotificationManager.notify(Long.valueOf(idMedicamento).hashCode(), mBuilder.build());
+            Log.v("Lembrete Service", "Notificação criada");
 
             stopSelf();
         }
@@ -80,6 +88,7 @@ public class LembreteCompraService extends Service {
 
     @Override
     public void onDestroy() {
+        Log.v("Lembrete Service", "Ondestroy");
         //Libera a CPU
         AlarmeAlertWakeLock.releaseCpuLock();
         super.onDestroy();

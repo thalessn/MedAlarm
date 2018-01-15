@@ -67,6 +67,7 @@ public class LembreteCompraController {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmeLembrete.getTimeInMillis(), pendingIntent);
             Log.v("CadastrouLembrete", "alarmManager.setExactAndAllowWhileIdle");
+            Log.v("HorarioLembrete", Utils.CalendarToStringData(alarmeLembrete) +" - "+ Utils.CalendarToStringHora(alarmeLembrete));
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmeLembrete.getTimeInMillis(), pendingIntent);
             Log.v("CadastrouLembrete", "alarmManager.setExact");
@@ -74,6 +75,7 @@ public class LembreteCompraController {
         } else {
             alarmManager.set(AlarmManager.RTC_WAKEUP, alarmeLembrete.getTimeInMillis(), pendingIntent);
             Log.v("Cadastrou Lembrete", "alarmManager.set");
+            Log.v("HorarioLembrete", Utils.CalendarToStringData(alarmeLembrete) +" - "+ Utils.CalendarToStringHora(alarmeLembrete));
         }
     }
 

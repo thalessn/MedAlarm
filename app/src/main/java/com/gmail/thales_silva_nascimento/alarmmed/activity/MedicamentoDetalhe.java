@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +27,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.controller.AlarmeController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.LembreteCompraController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
+import com.gmail.thales_silva_nascimento.alarmmed.fragment.reabastecerRemedio;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Alarme;
 import com.gmail.thales_silva_nascimento.alarmmed.model.AlarmeInfo;
 import com.gmail.thales_silva_nascimento.alarmmed.model.LembreteCompra;
@@ -34,7 +38,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MedicamentoDetalhe extends AppCompatActivity {
+public class MedicamentoDetalhe extends AppCompatActivity implements reabastecerRemedio.reabastecerRemedioListener {
 
     private Medicamento medicamento;
     private CircleImageView img;
@@ -50,6 +54,7 @@ public class MedicamentoDetalhe extends AppCompatActivity {
     private TextView tvDetalheLembrete;
     private TextView tvQtdLembrete;
     private LembreteCompra lembreteCompra;
+    private Button btnReabastecer;
 
 
 
@@ -68,6 +73,22 @@ public class MedicamentoDetalhe extends AppCompatActivity {
         alarmeController = new AlarmeController(MedicamentoDetalhe.this);
         medicamentoController = new MedicamentoController(MedicamentoDetalhe.this);
         lembreteCompraController = new LembreteCompraController(MedicamentoDetalhe.this);
+        btnReabastecer = (Button) findViewById(R.id.btnReabastecer);
+
+        btnReabastecer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Contrói um novo dialog fragNumeroDias
+                DialogFragment dialog = new reabastecerRemedio();
+                //Envia informação para o dialog
+                Bundle arg = new Bundle();
+                int qtdRemedio = medicamento.getQuantidade();
+                arg.putLong("idMedicamento", medicamento.getId());
+                dialog.setArguments(arg);
+                //Mostra o dialogo
+                dialog.show(getSupportFragmentManager(), "reabastecerRemedio");
+            }
+        });
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tbMedicamentoDetalhe);
@@ -347,5 +368,24 @@ public class MedicamentoDetalhe extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    public void onClickListenerPositivoReabastecerRemedio(DialogFragment dialog, int qtd) {
+        String  texto = null;
+        medicamento.setQuantidade(qtd);
+        if(qtd >= 0){
+            if(medicamento.getQuantidade() < 2) texto = qtd + " comprimido restante";
+            else texto = qtd + " comprimidos restantes";
+            tvDetalheLembrete.setText(texto);
+        }
+
+        dialog.dismiss();
+
+    }
+
+    @Override
+    public void onClickListenerNegativoReabastecerRemedio(DialogFragment dialog) {
+        dialog.dismiss();
     }
 }

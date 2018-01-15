@@ -186,6 +186,9 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
             instanciaAlarmeController.deletarInstanciaPorDataAlarmeHorario(itemAlarmeSalvar.getDataProgramada(),
                     itemAlarmeSalvar.getIdAlarme(), itemAlarmeSalvar.getHorario().getId());
 
+            //Verifica se é necessário registrar um lebrete de compra para o medicamento
+            gerenciarEstoque(itemAlarmeSalvar);
+
         }
         itensAlarme.clear();
         notifyDataSetChanged();
@@ -243,22 +246,8 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
                 instanciaAlarmeController.deletarInstanciaPorDataAlarmeHorario(itemAlarme.getDataProgramada(),
                         itemAlarme.getIdAlarme(), itemAlarme.getHorario().getId());
 
-
-
-                //Procura se existe um lembrete de compra no banco de dados
-                LembreteCompra lembreteCompra = lembreteCompraController.buscarLembretePorIDMed(itemAlarme.getMed().getId());
-                if(lembreteCompra != null){
-                    //Atualiza a quantidade de remédios no banco
-                    int qtdMedAnterior = itemAlarme.getMed().getQuantidade();
-                    int qtdMedAtual = qtdMedAnterior -1;
-                    //Validação para não permitir número negativo no estoque
-                    if(qtdMedAtual < 0) qtdMedAtual = 0;
-                    medicamentoController.updateQtdMedicamento(itemAlarme.getMed().getId(), qtdMedAtual);
-
-                    if(qtdMedAtual <= lembreteCompra.getQtd_alerta()){
-                        lembreteCompraController.registrarLembreteCompra(lembreteCompra);
-                    }
-                }
+                //Verifica se é necessário registrar um lebrete de compra para o medicamento
+                gerenciarEstoque(itemAlarme);
 
                 break;
             case STATUS_PULOU:
@@ -282,5 +271,22 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
                 instanciaAlarmeController.adiarInstanciaAlarmePorIdHorario(itemAlarme.getHorario().getId());
         }
 
+    }
+
+    private void gerenciarEstoque(ItemAlarme itemAlarme){
+        //Procura se existe um lembrete de compra no banco de dados
+        LembreteCompra lembreteCompra = lembreteCompraController.buscarLembretePorIDMed(itemAlarme.getMed().getId());
+        if(lembreteCompra != null){
+            //Atualiza a quantidade de remédios no banco
+            int qtdMedAnterior = itemAlarme.getMed().getQuantidade();
+            int qtdMedAtual = qtdMedAnterior -1;
+            //Validação para não permitir número negativo no estoque
+            if(qtdMedAtual < 0) qtdMedAtual = 0;
+            medicamentoController.updateQtdMedicamento(itemAlarme.getMed().getId(), qtdMedAtual);
+
+            if(qtdMedAtual <= lembreteCompra.getQtd_alerta()){
+                lembreteCompraController.registrarLembreteCompra(lembreteCompra);
+            }
+        }
     }
 }
