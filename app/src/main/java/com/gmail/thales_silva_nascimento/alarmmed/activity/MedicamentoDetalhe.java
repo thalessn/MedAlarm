@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController
 import com.gmail.thales_silva_nascimento.alarmmed.controller.LembreteCompraController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.reabastecerRemedio;
+import com.gmail.thales_silva_nascimento.alarmmed.fragment.retomarTratamento;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Alarme;
 import com.gmail.thales_silva_nascimento.alarmmed.model.AlarmeInfo;
 import com.gmail.thales_silva_nascimento.alarmmed.model.LembreteCompra;
@@ -38,7 +40,8 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MedicamentoDetalhe extends AppCompatActivity implements reabastecerRemedio.reabastecerRemedioListener {
+public class MedicamentoDetalhe extends AppCompatActivity implements reabastecerRemedio.reabastecerRemedioListener,
+        retomarTratamento.retomarTratamentoListener {
 
     private Medicamento medicamento;
     private CircleImageView img;
@@ -55,8 +58,10 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
     private TextView tvQtdLembrete;
     private LembreteCompra lembreteCompra;
     private Button btnReabastecer;
-
-
+    private Button btnSuspender;
+    private RelativeLayout rlRetomar;
+    private RelativeLayout rlSuspender;
+    private Button btnRetomar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +79,15 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
         medicamentoController = new MedicamentoController(MedicamentoDetalhe.this);
         lembreteCompraController = new LembreteCompraController(MedicamentoDetalhe.this);
         btnReabastecer = (Button) findViewById(R.id.btnReabastecer);
+        btnSuspender = (Button) findViewById(R.id.btnSuspenderMedicamento);
+        btnRetomar = (Button) findViewById(R.id.btnRetomar);
+        rlRetomar = (RelativeLayout) findViewById(R.id.rlRetomar);
+        rlSuspender = (RelativeLayout) findViewById(R.id.rlSuspender);
 
         btnReabastecer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Contrói um novo dialog fragNumeroDias
+                //Contrói um novo dialog reabastecerRemedio
                 DialogFragment dialog = new reabastecerRemedio();
                 //Envia informação para o dialog
                 Bundle arg = new Bundle();
@@ -89,6 +98,49 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
                 dialog.show(getSupportFragmentManager(), "reabastecerRemedio");
             }
         });
+
+        btnSuspender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Cria o dialo se suspenção do tratamento
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MedicamentoDetalhe.this);
+                alertDialog.setTitle("Suspender Tratamento?");
+                alertDialog.setMessage("Você tem certeza em suspender todos os lembretes futuro para este medicamento?");
+                alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        supenderMedicamento();
+                    }
+                });
+                alertDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+            }
+
+        });
+
+        btnRetomar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(medicamento.isUso_continuo()){
+                    //é continuo
+                }else{
+                    //Contrói um novo dialog retomarTratamento
+                    DialogFragment dialog = new retomarTratamento();
+                    //Envia informação para o dialog
+                    Bundle arg = new Bundle();
+                    arg.putParcelable("alarme", alarme);
+                    dialog.setArguments(arg);
+                    //Mostra o dialogo
+                    dialog.show(getSupportFragmentManager(), "retomarTratamento");
+                }
+            }
+        });
+
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tbMedicamentoDetalhe);
@@ -107,7 +159,6 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
                 finish();
             }
         });
-
 
         if(savedInstanceState == null){
             //Recupera as infomações passada da outra activity
@@ -132,6 +183,18 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
         alarme = alarmeController.buscarAlarmePorIdMed(medicamento.getId());
         if(alarme != null){
             preencherHorarios(alarme.getAlarmeInfo());
+        }
+
+        //Gerencia qual linearlayout irá aparecer na tela.
+        if(alarme.isStatus()){
+            rlRetomar.setVisibility(View.GONE);
+            rlSuspender.setVisibility(View.VISIBLE);
+            Log.v("RelativeLayout", "Escondeu retomar");
+        }
+        else{
+            rlSuspender.setVisibility(View.GONE);
+            rlRetomar.setVisibility(View.VISIBLE);
+            Log.v("RelativeLayout", "Escondeu suspender");
         }
 
         //Atribui o texto da frequencia acima do linear layout
@@ -386,6 +449,27 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
 
     @Override
     public void onClickListenerNegativoReabastecerRemedio(DialogFragment dialog) {
+        dialog.dismiss();
+    }
+
+    private void supenderMedicamento(){
+        //Desativa o alarme e remove todas as instâncias do banco;
+        alarmeController.desativarAlarme(alarme);
+        alarme.setStatus(false);
+        //Esconde o relative layout de suspender
+        rlSuspender.setVisibility(View.GONE);
+        //Exibe o relative layout do retomar
+        rlRetomar.setVisibility(View.VISIBLE);
+    }
+
+
+    @Override
+    public void onclickListenerPositivoRetomarTratamento(DialogFragment dialog, Alarme alarme) {
+        this.alarme = alarme;
+    }
+
+    @Override
+    public void onclickListenerNegativoRetomarTratamento(DialogFragment dialog) {
         dialog.dismiss();
     }
 }

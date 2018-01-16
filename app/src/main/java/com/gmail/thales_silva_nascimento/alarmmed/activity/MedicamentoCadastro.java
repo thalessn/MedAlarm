@@ -341,6 +341,9 @@ public class MedicamentoCadastro extends AppCompatActivity
 
                     //Insere a data do tratamento
                     dataInicialTv.setText(Utils.formataDataBrasil(Utils.CalendarToStringData(alarmeEdit.getDataInicio())));
+                    //Habilita o avisa sobre a não criação de alarme no passado
+                    TextView avisoData = (TextView) findViewById(R.id.tvAvisoData);
+                    avisoData.setVisibility(View.VISIBLE);
 
                     //Configura o card LembreteCompra
                     if(medEdit.getQuantidade() != -1) {
@@ -357,11 +360,6 @@ public class MedicamentoCadastro extends AppCompatActivity
                         //Insere o horário
                         tvhorarioLembrete.setText(lembrete.getHorarioAlerta());
                     }
-
-
-
-
-
 
                     /**
                      * Colocar em função

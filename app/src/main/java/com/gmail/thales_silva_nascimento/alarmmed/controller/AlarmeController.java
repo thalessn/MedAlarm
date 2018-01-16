@@ -30,8 +30,6 @@ public class AlarmeController {
     }
 
 
-
-
     public void registrarAlarmeAsync(final Alarme alarme) {
         final AsyncTask<Void, Void, Void> registrarTask =
                 new AsyncTask<Void, Void, Void>() {

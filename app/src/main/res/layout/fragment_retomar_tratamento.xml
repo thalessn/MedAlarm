@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Retomar a sua medicação"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
+        <TextView
+            android:padding="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimary"
+            android:text="Por favor, especifique a duração do tratamento."/>
+        <CheckBox
+            android:id="@+id/checkboxRetomar"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="contínuo"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llContadorRetomar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnMenosDias"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="-"
+            android:textColor="@color/colorAccent"
+            android:textScaleX="2"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editNumeroDias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="50dp"
+            android:maxWidth="150dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:maxLines="1"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnMaisDias"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="+"
+            android:textColor="@color/colorAccent"
+            android:textSize="21sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp">
+
+        <Button
+            android:id="@+id/btnRetomarCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_toLeftOf="@+id/btnRetomarDef"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:text="Cancelar"
+            android:textColor="@color/colorAccent"/>
+
+        <Button
+            android:id="@+id/btnRetomarDef"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:text="Definir"
+            android:textColor="@color/colorAccent"/>
+    </RelativeLayout>
+
+</LinearLayout>
