@@ -53,14 +53,17 @@
         <!-- Declara o service do Lebrete -->
         <service android:name=".LembreteCompraService" />
 
-
         <!-- Declara que a classe AlarmeReceiver é o tipo de receiver -->
         <receiver android:name=".AlarmeReceiver" />
         <!-- Declara que a classe AlarmeReceiver é o tipo de receiver -->
         <receiver android:name=".LembreteCompraReceiver" />
 
         <activity android:name=".activity.MedicamentoDetalhe" />
-        <activity android:name=".activity.LembreteCompraRemedio"></activity>
+        <activity android:name=".activity.LembreteCompraRemedio" />
+        <activity
+            android:name=".adicionarDose"
+            android:label="@string/title_activity_adicionar_dose"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

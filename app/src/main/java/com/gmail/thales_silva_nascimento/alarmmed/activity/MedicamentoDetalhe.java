@@ -128,6 +128,11 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
             public void onClick(View v) {
                 if(medicamento.isUso_continuo()){
                     //é continuo
+                    Log.v("Retomar", "è continuo");
+                    alarmeController.ativarAlarme(alarme);
+                    alarme.setStatus(true);
+                    rlRetomar.setVisibility(View.GONE);
+                    rlSuspender.setVisibility(View.VISIBLE);
                 }else{
                     //Contrói um novo dialog retomarTratamento
                     DialogFragment dialog = new retomarTratamento();
@@ -464,8 +469,18 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
 
 
     @Override
-    public void onclickListenerPositivoRetomarTratamento(DialogFragment dialog, Alarme alarme) {
+    public void onclickListenerPositivoRetomarTratamento(DialogFragment dialog, Alarme alarme, boolean isContinuo) {
         this.alarme = alarme;
+        if(isContinuo){
+            medicamento.setUso_continuo(true);
+            medicamentoController.atualizarMedicamento(medicamento);
+        }
+        alarmeController.ativarAlarme(alarme);
+        alarme.setStatus(true);
+        rlRetomar.setVisibility(View.GONE);
+        rlSuspender.setVisibility(View.VISIBLE);
+
+        dialog.dismiss();
     }
 
     @Override

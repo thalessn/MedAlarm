@@ -100,15 +100,27 @@ public class AlarmeController {
         alarmeDAO.atualizarAlarme(alarme);
     }
 
-    public void ativarAlarme(Alarme alarme){
-        //Verifica o status do alarme
-        if(!alarme.isStatus()){
-            alarme.setStatus(true);
-        }
-        //Atualiza o alarme
-        alarmeDAO.atualizarAlarme(alarme);
-        //Registra o alarme no banco
-        registrarAlarmeAsync(alarme);
+    public void ativarAlarme(final Alarme alarme){
+
+        AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                //Verifica o status do alarme
+                if(!alarme.isStatus()){
+                    alarme.setStatus(true);
+                }
+                //Atualiza o alarme
+                alarmeDAO.atualizarAlarme(alarme);
+
+                for(AlarmeInfo ai : alarme.getAlarmeInfo()){
+                    //Registra a instancia no AlarmManager do Sistema
+                    instanciaAlarmeController.resgistraInstanciaAlarme(context, alarme, ai);
+                }
+                return null;
+            }
+        };
+
+        task.execute();
 
     }
 

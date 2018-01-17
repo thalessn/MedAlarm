@@ -21,6 +21,8 @@ import android.widget.LinearLayout;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Alarme;
 
+import java.util.Calendar;
+
 /**
  * Created by thales on 15/01/18.
  */
@@ -42,7 +44,7 @@ public class retomarTratamento extends DialogFragment {
     }
 
     public interface retomarTratamentoListener{
-        public void onclickListenerPositivoRetomarTratamento(DialogFragment dialog, Alarme alarme);
+        public void onclickListenerPositivoRetomarTratamento(DialogFragment dialog, Alarme alarme, boolean isContinuo);
         public void onclickListenerNegativoRetomarTratamento(DialogFragment dialog);
     }
 
@@ -150,8 +152,17 @@ public class retomarTratamento extends DialogFragment {
                     edNumero.requestFocus();
                     return;
                 }
-                //interfaceListener.onClickListenerPositivoNumeroDias(fragNumeroDias.this, numDiasFinal);
-                interfaceListener.onclickListenerPositivoRetomarTratamento(retomarTratamento.this, alarme);
+
+                //Define se o tratamento vai ser contínuo ou não.
+                Calendar cal = Calendar.getInstance();
+                if(checkBox.isChecked()){
+                    cal.add(Calendar.YEAR, 2000);
+                }else{
+                    cal.add(Calendar.DAY_OF_YEAR, numDiasFinal-1);
+
+                }
+                alarme.setDataFim(cal);
+                interfaceListener.onclickListenerPositivoRetomarTratamento(retomarTratamento.this, alarme, checkBox.isChecked());
             }
         });
 
