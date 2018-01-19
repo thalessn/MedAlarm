@@ -1,5 +1,6 @@
 package com.gmail.thales_silva_nascimento.alarmmed;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,14 +17,17 @@ public class adicionarDose extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+//                //Cria um intent para retorna o valor
+//                Intent i = new Intent();
+//                //Adiciona o resultado a ser comparado e a intent
+//                setResult(1, i);
+                finish();
             }
         });
+
     }
 
 }

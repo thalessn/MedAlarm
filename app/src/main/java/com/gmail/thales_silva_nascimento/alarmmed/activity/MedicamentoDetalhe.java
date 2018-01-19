@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.adicionarDose;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.AlarmeController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.LembreteCompraController;
@@ -62,6 +63,7 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
     private RelativeLayout rlRetomar;
     private RelativeLayout rlSuspender;
     private Button btnRetomar;
+    private Button btnAddDose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,15 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
         btnRetomar = (Button) findViewById(R.id.btnRetomar);
         rlRetomar = (RelativeLayout) findViewById(R.id.rlRetomar);
         rlSuspender = (RelativeLayout) findViewById(R.id.rlSuspender);
+        btnAddDose = (Button) findViewById(R.id.btnAddDose);
+
+        btnAddDose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MedicamentoDetalhe.this, adicionarDose.class);
+                startActivity(i);
+            }
+        });
 
         btnReabastecer.setOnClickListener(new View.OnClickListener() {
             @Override
