@@ -127,7 +127,6 @@ public class activity_medicoCadastro extends AppCompatActivity implements Adapte
             }
         });
 
-
         Intent intent = getIntent();
         if (intent != null) {
             tipoTela = intent.getExtras().getInt("tipoTela");

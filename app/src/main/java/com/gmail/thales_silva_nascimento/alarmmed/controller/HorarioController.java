@@ -46,9 +46,23 @@ public class HorarioController {
         return id;
     }
 
-    public Horario buscarHorario(long id){
+    public Horario buscarHorarioPorId(long id){
         Horario novo = horarioDAO.buscarHorario(id);
         return novo;
+    }
+
+    public Horario buscarHorario(String horario){
+        Long id = horarios.get(horario);
+        //Verifica se o horário está cadastrado.
+        if(id == null){
+             id = horarioDAO.cadastrarHorario(horario);
+             horarios.put(horario, id);
+             Horario horario1 = new Horario(id, horario);
+             return horario1;
+        }
+
+        Horario horario1 = new Horario(id, horario);
+        return horario1;
     }
 
 }

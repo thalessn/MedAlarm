@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
@@ -104,7 +103,7 @@ public class TelaAlarme extends AppCompatActivity {
 
         //Busca o objeto horario no banco
         horarioController = HorarioController.getInstance(TelaAlarme.this);
-        Horario horario = horarioController.buscarHorario(idHorario);
+        Horario horario = horarioController.buscarHorarioPorId(idHorario);
 
         //AlarmeController
         AlarmeController alarmeController = new AlarmeController(TelaAlarme.this);
@@ -203,7 +202,7 @@ public class TelaAlarme extends AppCompatActivity {
 
         //Busca o objeto horario no banco
         horarioController = HorarioController.getInstance(TelaAlarme.this);
-        Horario horario = horarioController.buscarHorario(idHorario);
+        Horario horario = horarioController.buscarHorarioPorId(idHorario);
 
         //AlarmeController
         AlarmeController alarmeController = new AlarmeController(TelaAlarme.this);

@@ -61,7 +61,7 @@
         <activity android:name=".activity.MedicamentoDetalhe" />
         <activity android:name=".activity.LembreteCompraRemedio" />
         <activity
-            android:name=".adicionarDose"
+            android:name=".activity.adicionarDose"
             android:label="@string/title_activity_adicionar_dose"
             android:theme="@style/AppTheme"></activity>
     </application>

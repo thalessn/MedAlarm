@@ -41,9 +41,7 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
     private AlarmeController alarmeController;
     private LembreteCompraController lembreteCompraController;
     private MedicamentoController medicamentoController;
-    private final static String STATUS_TOMADO = "Tomado";
-    private final static String STATUS_PULOU = "Pulou";
-    private final static String STATUS_ADIOU = "Adiou";
+
 
     public ItemAlarmeAdapter(List<ItemAlarme> itensAlarme, Context context){
         this.itensAlarme = itensAlarme;
@@ -92,7 +90,7 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
                 notifyItemRemoved(i);
                 notifyItemRangeChanged(i, itensAlarme.size());
 
-                gerenciaStatusItemAlarme(itemAlarmeSalvar, STATUS_TOMADO);
+                gerenciaStatusItemAlarme(itemAlarmeSalvar, ItemAlarme.STATUS_TOMADO);
 
                 //Verifica se só tem esse medicamento se sim finaliza a atividade
                 verificaUltimoItem();
@@ -105,7 +103,7 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Botão Adiar, posicao = " +String.valueOf(i), Toast.LENGTH_LONG).show();
                 ItemAlarme itemAlarme = itensAlarme.get(i);
-                gerenciaStatusItemAlarme(itemAlarme, STATUS_ADIOU);
+                gerenciaStatusItemAlarme(itemAlarme, ItemAlarme.STATUS_ADIOU);
                 itensAlarme.remove(i);
                 notifyItemRemoved(i);
                 notifyItemRangeChanged(i, itensAlarme.size());
@@ -124,7 +122,7 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
                 notifyItemRemoved(i);
                 notifyItemRangeChanged(i, itensAlarme.size());
 
-                gerenciaStatusItemAlarme(itemAlarmeSalvar, STATUS_PULOU);
+                gerenciaStatusItemAlarme(itemAlarmeSalvar, ItemAlarme.STATUS_PULOU);
 
                 //Verifica se só tem esse medicamento se sim finaliza a atividade
                 verificaUltimoItem();
@@ -171,7 +169,7 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
         for(ItemAlarme itemAlarmeSalvar : itensAlarme){
 
             //Salva na tabela histórico
-            itemAlarmeSalvar.setStatus(STATUS_TOMADO);
+            itemAlarmeSalvar.setStatus(ItemAlarme.STATUS_TOMADO);
             itemAlarmeSalvar.setDataAdministrado(Utils.CalendarToStringData(dataEhora));
             itemAlarmeSalvar.setHoraAdministrado(Utils.CalendarToStringHora(dataEhora));
             historicoController.cadastrarHistoricoMedicamento(itemAlarmeSalvar);
@@ -229,9 +227,9 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
         Alarme alarme = null;
 
         switch (status){
-            case STATUS_TOMADO:
+            case ItemAlarme.STATUS_TOMADO:
                 //Salva na tabela histórico
-                itemAlarme.setStatus(STATUS_TOMADO);
+                itemAlarme.setStatus(ItemAlarme.STATUS_TOMADO);
                 itemAlarme.setDataAdministrado(Utils.CalendarToStringData(dataEhora));
                 itemAlarme.setHoraAdministrado(Utils.CalendarToStringHora(dataEhora));
                 historicoController.cadastrarHistoricoMedicamento(itemAlarme);
@@ -250,9 +248,9 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
                 gerenciarEstoque(itemAlarme);
 
                 break;
-            case STATUS_PULOU:
+            case ItemAlarme.STATUS_PULOU:
                 //Salva na tabela historico
-                itemAlarme.setStatus(STATUS_PULOU);
+                itemAlarme.setStatus(ItemAlarme.STATUS_PULOU);
                 itemAlarme.setDataAdministrado(Utils.CalendarToStringData(dataEhora));
                 itemAlarme.setHoraAdministrado(Utils.CalendarToStringHora(dataEhora));
                 historicoController.cadastrarHistoricoMedicamento(itemAlarme);
@@ -267,7 +265,7 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
                 instanciaAlarmeController.deletarInstanciaPorDataAlarmeHorario(itemAlarme.getDataProgramada(),
                         itemAlarme.getIdAlarme(), itemAlarme.getHorario().getId());
                 break;
-            case STATUS_ADIOU:
+            case ItemAlarme.STATUS_ADIOU:
                 instanciaAlarmeController.adiarInstanciaAlarmePorIdHorario(itemAlarme.getHorario().getId());
         }
 

@@ -13,13 +13,24 @@ public class ItemAlarme {
     String horaAdministrado;
     long idAlarme;
     String status;
-
+    public final static String STATUS_TOMADO = "Tomado";
+    public final static String STATUS_PULOU = "Pulou";
+    public final static String STATUS_ADIOU = "Adiou";
 
     public ItemAlarme(Medicamento med, String dataProgramada, Horario horario, long idAlarme){
         this.med = med;
         this.dataProgramada = dataProgramada;
         this.horario = horario;
         this.idAlarme = idAlarme;
+    }
+
+    public ItemAlarme(Medicamento med, String dataProgramada, Horario horario, long idAlarme, String dataAdministrado, String horaAdministrado){
+        this.med = med;
+        this.dataProgramada = dataProgramada;
+        this.horario = horario;
+        this.idAlarme = idAlarme;
+        this.dataAdministrado = dataAdministrado;
+        this.horaAdministrado = horaAdministrado;
     }
 
     public Medicamento getMed() {

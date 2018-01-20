@@ -4,12 +4,15 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.Toolbar
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"></android.support.v7.widget.Toolbar>
 
 
     <LinearLayout
@@ -22,30 +25,31 @@
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selecione a data e horário em que o remédio foi administrado"
+            android:text="Selecione a data e o horário em que o remédio foi tomado."
             android:textSize="18sp"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"/>
         <RelativeLayout
+            android:padding="8dp"
             android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-
                 android:id="@+id/imgRelogio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_relogio" />
+
             <TextView
                 android:id="@+id/tvDataDose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/imgRelogio"
-                android:text="Hoje, 18 de Jan" />
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="Hoje, 18 de Jan"
+                android:textSize="18sp" />
             <TextView
                 android:id="@+id/tvHorarioDose"
                 android:layout_gravity="center"
@@ -53,43 +57,44 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:textSize="18sp"
                 android:text="23:09" />
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
+            android:padding="8dp"
             android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/imgRemedioDose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:src="@drawable/ic_enhanced_encryption"/>
 
             <android.support.design.widget.TextInputLayout
-                android:layout_toRightOf="@+id/imgRemedioDose"
                 android:id="@+id/inputLayoutNome"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_weight="0.85">
+                android:layout_marginLeft="8dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/medicoNome"
-                    android:layout_width="0dp"
+                    android:id="@+id/qtdDose"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nome do Médico"
-                    android:inputType="textPersonName"
-                    android:textSize="20sp">
+                    android:hint="Quantidade"
+                    android:inputType="textPersonName|number"
+                    android:textSize="18sp">
 
                 </android.support.design.widget.TextInputEditText>
 
 
             </android.support.design.widget.TextInputLayout>
-        </RelativeLayout>
+        </LinearLayout>
 
 
     </LinearLayout>
-
 
 </RelativeLayout>

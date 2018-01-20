@@ -73,7 +73,6 @@ public class HorarioDAO {
         if(cursor == null){
             return null;
         }
-
         if(cursor.moveToFirst()){
             try{
                 String h = cursor.getString(HORARIO_INDEX);
@@ -86,6 +85,7 @@ public class HorarioDAO {
         }
         return null;
     }
+
 
     public Map<String,Long> listarTodosHorarios(){
         Map<String, Long> horarios = new HashMap<String, Long>();

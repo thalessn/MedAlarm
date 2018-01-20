@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("AlarmMed");
 
         //Adiciona o evento onlick no Floating Button (Botão mais da Tela)
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity
                 Fragment currentfragment = getSupportFragmentManager().findFragmentById(R.id.content_main);
                 //A tag do Frament atual
                 String tag = currentfragment.getTag();
+                Log.v("Tag", tag);
                 switch (tag){
                     case "fragReceita":
                         Intent receita = new Intent(view.getContext(), receitaCadastro.class);
