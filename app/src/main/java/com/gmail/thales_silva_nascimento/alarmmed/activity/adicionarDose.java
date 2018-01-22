@@ -72,7 +72,7 @@ public class adicionarDose extends AppCompatActivity {
             }
         });
 
-        //Recupera o medicmaneto da tela 'pai'
+        //Recupera o medicamaneto da tela 'pai'
         if(savedInstanceState == null){
             //Recupera as infomações passada da outra activity
             Intent i = getIntent();

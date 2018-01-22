@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -25,6 +26,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragCompra;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragInicio;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragMedico;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragReceita;
+import com.gmail.thales_silva_nascimento.alarmmed.homeViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     private boolean menu = true;
     private NavigationView navigationView;
     private FloatingActionButton fab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,10 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_main, inicialFrag, "fragInicio");
         ft.commit();
+
+
+
+
     }
 
     @Override

@@ -8,3 +8,9 @@ http://www.flaticon.com/free-icon/hot-food-in-a-bowl_45471
 http://www.flaticon.com/free-icon/sleep_105192#term=sleep&page=1&position=16
 http://www.flaticon.com/free-icon/map-placeholder_61121
 http://www.flaticon.com/free-icon/phone-call-button_60720
+
+//Icones da tela inicial
+https://www.flaticon.com/free-icon/sunset_168399#term=sunset&page=1&position=54 -> manhã
+https://www.flaticon.com/free-icon/sun_248764#term=sun&page=2&position=57 -> tarde
+https://www.flaticon.com/free-icon/foggy-full-moon-night_54969#term=moon&page=2&position=16 -> noite 
+https://www.flaticon.com/free-icon/moon_157089#term=moon&page=3&position=54 -> madrugada 
