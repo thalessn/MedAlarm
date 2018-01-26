@@ -4,6 +4,7 @@ package com.gmail.thales_silva_nascimento.alarmmed.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,7 +37,8 @@ public class fragInicio extends Fragment {
          * ViewPager
          */
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
-        adapter = new homeViewPagerAdapter(getActivity().getSupportFragmentManager());
+        //Usando getChildFragment funciona a transição do DrawerLayout
+        adapter = new homeViewPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(5);
 
@@ -44,10 +46,4 @@ public class fragInicio extends Fragment {
         return view;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Início");
-
-    }
 }

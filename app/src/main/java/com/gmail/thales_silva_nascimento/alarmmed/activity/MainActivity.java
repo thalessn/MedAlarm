@@ -109,9 +109,6 @@ public class MainActivity extends AppCompatActivity
         ft.replace(R.id.content_main, inicialFrag, "fragInicio");
         ft.commit();
 
-
-
-
     }
 
     @Override
@@ -212,9 +209,10 @@ public class MainActivity extends AppCompatActivity
         }
         if(fragment !=null && fragmentTag != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
             ft.replace(R.id.content_main, fragment, fragmentTag);
             ft.commit();
-            getSupportFragmentManager().executePendingTransactions();
+            //getSupportFragmentManager().executePendingTransactions();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

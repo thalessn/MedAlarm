@@ -20,9 +20,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicoController;
 import com.gmail.thales_silva_nascimento.alarmmed.dao.EspecialidadeDAO;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medico;
 
-/**
- * Created by Thales on 13/02/2017.
- */
+
 
 public class activity_medicoDetalhe extends AppCompatActivity {
     private TextView nome;

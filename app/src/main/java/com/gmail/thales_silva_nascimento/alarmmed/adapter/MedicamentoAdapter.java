@@ -1,9 +1,6 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,15 +9,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.module.AppGlideModule;
-import com.bumptech.glide.request.RequestOptions;
-import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
+import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medicamento;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

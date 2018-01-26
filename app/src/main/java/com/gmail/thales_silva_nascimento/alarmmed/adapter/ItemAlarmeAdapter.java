@@ -1,4 +1,4 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.TelaAlarme;
+import com.gmail.thales_silva_nascimento.alarmmed.Utils;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.AlarmeController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.InstanciaAlarmeController;
@@ -25,9 +28,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.model.Medicamento;
 
 import java.io.File;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

@@ -1,18 +1,14 @@
 package com.gmail.thales_silva_nascimento.alarmmed;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarme;
+import com.gmail.thales_silva_nascimento.alarmmed.model.ItemGridView;
 
 import java.util.ArrayList;
 

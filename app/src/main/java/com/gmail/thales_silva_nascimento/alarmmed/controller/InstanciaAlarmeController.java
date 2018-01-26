@@ -53,6 +53,7 @@ public class InstanciaAlarmeController {
         }
         //Busca a id do Horário no Banco
         long idHorario = horarioController.buscarIdHorario(alarmeInfo.getHorario());
+        Log.v("HorarioID", String.valueOf(idHorario));
         //Cria um objeto InstanciaAlarme
         InstanciaAlarme instanciaAlarme = new InstanciaAlarme(dataEHora, alarmeInfo.getQtd_tomar(),idHorario, alarme.getId());
         //Cadastra a instancia no banco

@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.gmail.thales_silva_nascimento.alarmmed.adapter.ItemAlarmeAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.AlarmeController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HorarioController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;

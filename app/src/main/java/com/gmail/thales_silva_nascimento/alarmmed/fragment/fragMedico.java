@@ -5,24 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.gmail.thales_silva_nascimento.alarmmed.MedicoAdapter;
+import com.gmail.thales_silva_nascimento.alarmmed.adapter.MedicoAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.activity.activity_medicoCadastro;
 import com.gmail.thales_silva_nascimento.alarmmed.activity.activity_medicoDetalhe;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicoController;
-import com.gmail.thales_silva_nascimento.alarmmed.dao.EspecialidadeDAO;
-import com.gmail.thales_silva_nascimento.alarmmed.model.Especialidade;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medico;
 
 import java.util.ArrayList;

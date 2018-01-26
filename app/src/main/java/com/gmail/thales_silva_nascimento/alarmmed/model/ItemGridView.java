@@ -1,4 +1,4 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.model;
 
 /**
  * Created by Thales on 21/01/2018.

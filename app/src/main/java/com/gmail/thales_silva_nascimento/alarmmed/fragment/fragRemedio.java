@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gmail.thales_silva_nascimento.alarmmed.MedicamentoAdapter;
+import com.gmail.thales_silva_nascimento.alarmmed.adapter.MedicamentoAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.activity.MedicamentoCadastro;
 import com.gmail.thales_silva_nascimento.alarmmed.activity.MedicamentoDetalhe;

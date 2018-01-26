@@ -1,6 +1,6 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.fragment;
 
-import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,10 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.gmail.thales_silva_nascimento.alarmmed.GridViewAdapter;
+import com.gmail.thales_silva_nascimento.alarmmed.InfoMedAlarmes;
+import com.gmail.thales_silva_nascimento.alarmmed.model.ItemGridView;
+import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.homeViewPagerAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -69,7 +73,8 @@ public class fragHome extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Toast.makeText(getContext(), "Abrir Tela com remédios", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getContext(), InfoMedAlarmes.class);
+                startActivity(i);
             }
         });
 
@@ -89,6 +94,7 @@ public class fragHome extends Fragment {
             String texto = diaSemana.format(cal.getTime()) +", "+ dia.format(cal.getTime()) +" de "+ mes.format(cal.getTime()) ;
             tvData.setText(texto);
         }
+        Log.v("FragHome", "Retornando a view");
         return view;
     }
 }
