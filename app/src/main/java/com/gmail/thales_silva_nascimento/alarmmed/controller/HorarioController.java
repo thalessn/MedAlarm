@@ -36,9 +36,7 @@ public class HorarioController {
     public long buscarIdHorario(String horario){
         //Retira os espaços em branco
         String h = horario.replace(" ", "");
-
         long id = horarioDAO.buscarIdHorario(h);
-        Log.v("Horario-IDFuncNova", String.valueOf(id));
         return id;
     }
 

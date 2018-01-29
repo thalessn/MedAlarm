@@ -143,6 +143,7 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
     }
 
     public static class MAViewHolder extends RecyclerView.ViewHolder {
+        //Clasee que representa o cardview e seus atributos
         public TextView nomeMed;
         public TextView horarioProg;
         public CircleImageView foto;

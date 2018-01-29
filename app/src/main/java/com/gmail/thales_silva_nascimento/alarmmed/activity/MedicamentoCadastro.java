@@ -2265,7 +2265,7 @@ public class MedicamentoCadastro extends AppCompatActivity
         FileOutputStream fos = null;
         try {
             fos = MedicamentoCadastro.this.openFileOutput(photoFile, Context.MODE_PRIVATE);
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,fos);
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG,80,fos);
             Log.v("CaminhoCompleto", fos.toString());
         } catch (Exception error) {
             Log.v("ErroAoSalvarImagem", "File" + photoFile + "not saved: "

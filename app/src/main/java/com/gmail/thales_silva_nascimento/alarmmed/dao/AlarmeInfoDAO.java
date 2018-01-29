@@ -11,9 +11,6 @@ import com.gmail.thales_silva_nascimento.alarmmed.model.AlarmeInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by thales on 06/09/17.
- */
 
 public class AlarmeInfoDAO {
 
@@ -60,8 +57,12 @@ public class AlarmeInfoDAO {
 
 
     public ContentValues criarContentValues(AlarmeInfo alarmeInfo){
+        //Retira os espaços do horário
+        String horario =  alarmeInfo.getHorario();
+        horario = horario.replace(" ", "");
+
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUNA_HORARIO, alarmeInfo.getHorario());
+        contentValues.put(COLUNA_HORARIO, horario);
         contentValues.put(COLUNA_QTD_TOMAR, alarmeInfo.getQtd_tomar());
         contentValues.put(COLUNA_ID_ALARME, alarmeInfo.getIdAlarme());
         return contentValues;
@@ -101,6 +102,9 @@ public class AlarmeInfoDAO {
                 do{
                     //Recupera as informações do cursor
                     String horario = cursor.getString(HORARIO_INDEX);
+                    //Insere os espaços em branco na string
+                    horario = horario.substring(0,2) +" "+ horario.substring(2,3) +" "+ horario.substring(3,5);
+
                     float qtd_tomar = cursor.getFloat(QTD_TOMAR_INDEX);
                     long idAlarme = cursor.getLong(ID_ALARME_INDEX);
                     //Insntancia um novo objeto

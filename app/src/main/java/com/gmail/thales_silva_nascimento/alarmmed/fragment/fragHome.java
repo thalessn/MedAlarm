@@ -50,7 +50,6 @@ public class fragHome extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.v("FRAG_HOME", "OnCreateView");
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         //Gridview que conterá as imagens dos tempos
@@ -63,7 +62,6 @@ public class fragHome extends Fragment {
         itemGridList.add(new ItemGridView(R.drawable.ic_sundown, "Noite"));
         itemGridList.add(new ItemGridView(R.drawable.ic_moon, "Madrugada"));
 
-        Log.v("FRAG_HOME", "Adicionando o adapter");
         //Adapter que gerenciar os ícones
         gridViewAdapter = new GridViewAdapter(getContext(), itemGridList);
         //Adiciona o Adapter ao GridView
@@ -74,6 +72,7 @@ public class fragHome extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent i = new Intent(getContext(), InfoMedAlarmes.class);
+                i.putExtra("posicao", posicao);
                 startActivity(i);
             }
         });
@@ -94,7 +93,6 @@ public class fragHome extends Fragment {
             String texto = diaSemana.format(cal.getTime()) +", "+ dia.format(cal.getTime()) +" de "+ mes.format(cal.getTime()) ;
             tvData.setText(texto);
         }
-        Log.v("FragHome", "Retornando a view");
         return view;
     }
 }

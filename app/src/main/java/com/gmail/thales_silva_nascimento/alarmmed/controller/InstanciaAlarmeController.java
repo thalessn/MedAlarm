@@ -278,4 +278,48 @@ public class InstanciaAlarmeController {
         }
     }
 
+    public Calendar verificaInstancia(Alarme alarme, String infoHorario, Calendar diaFragment){
+        Calendar instancia = Utils.StringHoraToCalendar(infoHorario);
+        Calendar datafim = alarme.getDataFim();
+
+        if(alarme.getTipoRepeticao() == Alarme.REP_DIASINTERVALOS){
+            Calendar datainicial = alarme.getDataInicio();
+            datainicial.set(Calendar.HOUR_OF_DAY, instancia.get(Calendar.HOUR_OF_DAY));
+            datainicial.set(Calendar.MINUTE, instancia.get(Calendar.MINUTE));
+            datainicial.set(Calendar.SECOND, 0);
+
+            while(datainicial.getTimeInMillis() < instancia.getTimeInMillis()){
+                datainicial.add(Calendar.DAY_OF_YEAR, alarme.getIntervaloRepeticao());
+            }
+
+            if(datainicial.getTimeInMillis() == instancia.getTimeInMillis()){
+                return verificaFimTratamento(datainicial,datafim) ? null : instancia;
+            }else{
+                return null;
+            }
+        }else if (alarme.getTipoRepeticao() == Alarme.REP_DIASDASEMANA) {
+            //Cria um objeto Weedays que transforma int em dias da semana
+            Weekdays days = Weekdays.fromBits(alarme.getIntervaloRepeticao());
+            //Nº de dias para o proximo dia possível.
+            final int addDays = days.getDistanceToNextDay(instancia);
+            if (addDays > 0) {
+                return null;
+            }else{
+                //Verifica se a instacia é anterior a data inicial
+                if(diaFragment.getTimeInMillis() < alarme.getDataInicio().getTimeInMillis()){
+                    Log.v("VerificaInstancia", "NULL");
+                    return null;
+                }
+                return verificaFimTratamento(instancia, datafim) ? null : instancia;
+            }
+        }else{
+            //Verifica se a instacia é anterior a data inicial
+            if(diaFragment.getTimeInMillis() < alarme.getDataInicio().getTimeInMillis()){
+                Log.v("VerificaInstancia", "NULL");
+                return null;
+            }
+
+            return verificaFimTratamento(instancia, datafim) ? null : instancia;
+        }
+    }
 }

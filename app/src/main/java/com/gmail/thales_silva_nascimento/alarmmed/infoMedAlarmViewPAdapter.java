@@ -1,5 +1,6 @@
 package com.gmail.thales_silva_nascimento.alarmmed;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -9,9 +10,10 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 
 public class infoMedAlarmViewPAdapter extends FragmentPagerAdapter {
-
-    public infoMedAlarmViewPAdapter(FragmentManager fm){
+    private int posicao;
+    public infoMedAlarmViewPAdapter(FragmentManager fm, int posicao){
         super(fm);
+        this.posicao = posicao;
     }
 
     @Override
@@ -22,6 +24,9 @@ public class infoMedAlarmViewPAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = new fragInfoMedAlarme();
+        Bundle args = new Bundle();
+        args.putInt("position", posicao);
+        fragment.setArguments(args);
         return fragment;
     }
 }

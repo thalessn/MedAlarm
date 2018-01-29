@@ -44,9 +44,11 @@ public class InfoMedAlarmes extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Noite"));
         tabLayout.addTab(tabLayout.newTab().setText("Madrugada"));
 
+        //Posicao do viewpager
+        int posicao = getIntent().getExtras().getInt("posicao");
         //ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewPagerInfoMed);
-        infoMedAlarmViewPAdapter = new infoMedAlarmViewPAdapter(getSupportFragmentManager());
+        infoMedAlarmViewPAdapter = new infoMedAlarmViewPAdapter(getSupportFragmentManager(), posicao);
         viewPager.setAdapter(infoMedAlarmViewPAdapter);
 
     }
