@@ -3,6 +3,8 @@ package com.gmail.thales_silva_nascimento.alarmmed;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.controller.InstanciaAlarmeCont
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoAgendadoController;
 import com.gmail.thales_silva_nascimento.alarmmed.model.MedicamentoAgendado;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -40,7 +43,7 @@ public class fragInfoMedAlarme extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info_med_alarme, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rvAlarmeDetalhe);
+
 
         //Calcula o dia da semana de acordo com a posição do item do view adapter.
         Calendar diaFragment = Calendar.getInstance();
@@ -50,25 +53,34 @@ public class fragInfoMedAlarme extends Fragment {
             Log.v("DataCalendar", String.valueOf(add));
             diaFragment.add(Calendar.DAY_OF_YEAR, add);
         }
+
         diaFragment.set(Calendar.HOUR_OF_DAY, 3);
         diaFragment.set(Calendar.MINUTE, 59);
         Log.v("fragInfoMedAlarme", "Dia: "+ Utils.CalendarToStringData(diaFragment)+ " - Hora: "+ Utils.CalendarToStringHora(diaFragment));
         MedicamentoAgendadoController medAgendado = new MedicamentoAgendadoController(getContext());
         List<MedicamentoAgendado> medicamentoAgendados = medAgendado.buscarMedicamentoAgendados("03:59", "11:59");
 
+        //InstanciaController para verificar a instancia
         InstanciaAlarmeController iac = InstanciaAlarmeController.getInstanciaAlarmeController(getContext());
-
         for(int i = 0 ; i <medicamentoAgendados.size(); i++){
             MedicamentoAgendado med = medicamentoAgendados.get(i);
+            //Verifica se a instancia para esse dia deve mostrar
             Calendar teste = iac.verificaInstancia(med.getAlarme(), med.getHorario(), diaFragment);
             if(teste == null){
                 medicamentoAgendados.remove(i);
             }
         }
 
-        for(MedicamentoAgendado result : medicamentoAgendados){
-            Log.v("Resultado: ", "Medicamento agendado - "+ result.toString());
-        }
+        //Recy7clerView
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvAlarmeDetalhe);
+        LinearLayoutManager ll = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(ll);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
+        medicamentosAgendadosAdapter adapter = new medicamentosAgendadosAdapter(getActivity(), medicamentoAgendados);
+
+        //Add o adapter
+        recyclerView.setAdapter(adapter);
 
         return view;
     }

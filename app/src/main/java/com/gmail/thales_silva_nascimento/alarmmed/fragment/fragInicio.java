@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.homeViewPagerAdapter;
 
+import java.io.File;
+
 
 /**
  * A simple {@link Fragment} subclass.

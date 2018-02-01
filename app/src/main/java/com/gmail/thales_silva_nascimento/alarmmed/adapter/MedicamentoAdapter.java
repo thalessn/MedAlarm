@@ -77,11 +77,12 @@ public class MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.
 
         //Arquivo que contém o caminho da imagem no armazenamento interno
         File path = context.getFileStreamPath(med.getFoto());
+        Log.v("File Teste", String.valueOf(path.canRead()));
         //Verifica se o caminho existe. Se existir carrea a imagem, se não carregue a imagem padrão que neste caso é o cachorro.
         if(path.exists()){
             //existe
             Glide.with(context).load(path).into(holder.img);
-            Log.v("Img Existe","COnseguiu ler");
+            Log.v("Img Existe","Conseguiu ler");
         }else{
             //não existe
             Glide.with(context).load(R.drawable.remedio1).into(holder.img);

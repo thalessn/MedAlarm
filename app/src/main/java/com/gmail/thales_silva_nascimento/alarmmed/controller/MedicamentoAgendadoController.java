@@ -41,7 +41,7 @@ public class MedicamentoAgendadoController {
         String sql = "select medicamento.*, alarme.*, alarmeInfo.horario " +
                      "from medicamento inner join alarme on medicamento._id = alarme._id " +
                      "inner join alarmeInfo on alarme._id = alarmeInfo._idAlarme " +
-                     "where (alarme.status = 1) and (alarmeInfo.horario between (\""+ hInicial +"\") and (\"" +hFinal+ "\"))";
+                     "where (alarme.status = 1) and (alarmeInfo.horario between (\""+ hInicial +"\") and (\"" +hFinal+ "\")) order by alarmeInfo.horario";
 
         //Consulta no banco de dados
         Cursor cursor = database.rawQuery(sql,null);
@@ -55,14 +55,14 @@ public class MedicamentoAgendadoController {
                 do{
                     //Medicamento
                     long id = cursor.getLong(0);
-                    String nome = cursor.getString(1);
-                    int dosagem = cursor.getInt(2);
-                    String tipoDosagem = cursor.getString(3);
-                    String foto = cursor.getString(4);
+                    String nome = cursor.getString(cursor.getColumnIndex("nome"));
+                    int dosagem = cursor.getInt(cursor.getColumnIndex("dosagem"));
+                    String tipoDosagem = cursor.getString(cursor.getColumnIndex("tipodosagem"));
+                    String foto = cursor.getString(cursor.getColumnIndex("foto"));
                     //Transforma para boolean
-                    boolean usoContinuo = (cursor.getInt(5) == 1);
-                    String obs = cursor.getString(6);
-                    int quantidade = cursor.getInt(7);
+                    boolean usoContinuo = (cursor.getInt(cursor.getColumnIndex("usoContinuo")) == 1);
+                    String obs = cursor.getString(cursor.getColumnIndex("observacao"));
+                    int quantidade = cursor.getInt(cursor.getColumnIndex("quantidade"));
                     Medicamento medicamento = new Medicamento(id, nome, dosagem,tipoDosagem, usoContinuo, obs, foto, quantidade);
 
                     //Alarme
