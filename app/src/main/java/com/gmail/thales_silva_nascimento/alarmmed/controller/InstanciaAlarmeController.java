@@ -279,47 +279,60 @@ public class InstanciaAlarmeController {
     }
 
     public Calendar verificaInstancia(Alarme alarme, String infoHorario, Calendar diaFragment){
+        //O calendário instancia representa o calendário do fragment selecionado na tela inicial
         Calendar instancia = Utils.StringHoraToCalendar(infoHorario);
+        instancia.set(Calendar.YEAR, diaFragment.get(Calendar.YEAR));
+        instancia.set(Calendar.MONTH, diaFragment.get(Calendar.MONTH));
+        instancia.set(Calendar.DAY_OF_MONTH, diaFragment.get(Calendar.DAY_OF_MONTH));
+        instancia.set(Calendar.SECOND, 0);
+        instancia.set(Calendar.MILLISECOND, 0);
+        //Data de quando termina o alarme
         Calendar datafim = alarme.getDataFim();
 
         if(alarme.getTipoRepeticao() == Alarme.REP_DIASINTERVALOS){
+            Log.v("AlarmeDiasIntervalo", " Entrou no if");
             Calendar datainicial = alarme.getDataInicio();
             datainicial.set(Calendar.HOUR_OF_DAY, instancia.get(Calendar.HOUR_OF_DAY));
             datainicial.set(Calendar.MINUTE, instancia.get(Calendar.MINUTE));
             datainicial.set(Calendar.SECOND, 0);
+            Log.v("DataInicial", "DataInicial:"+ Utils.CalendarToStringData(datainicial));
 
             while(datainicial.getTimeInMillis() < instancia.getTimeInMillis()){
                 datainicial.add(Calendar.DAY_OF_YEAR, alarme.getIntervaloRepeticao());
             }
 
+            Log.v("DataInicialDepoisDeAdd", "DataInicial:"+ Utils.CalendarToStringData(datainicial));
+
             if(datainicial.getTimeInMillis() == instancia.getTimeInMillis()){
+                Log.v("DataInicial", "Datainicial igual:");
                 return verificaFimTratamento(datainicial,datafim) ? null : instancia;
             }else{
+                Log.v("DataInicial","Não é igual retorna null");
                 return null;
             }
         }else if (alarme.getTipoRepeticao() == Alarme.REP_DIASDASEMANA) {
+            Log.v("InstanciaDataEHora", "DataEHora:" + Utils.CalendarToStringData(instancia) +" - "+ Utils.CalendarToStringHora(instancia));
+            Log.v("AlarmeDiasDasSemana", "Entrou if");
             //Cria um objeto Weedays que transforma int em dias da semana
             Weekdays days = Weekdays.fromBits(alarme.getIntervaloRepeticao());
-            //Nº de dias para o proximo dia possível.
-            final int addDays = days.getDistanceToNextDay(instancia);
-            if (addDays > 0) {
-                return null;
-            }else{
+
+            if(days.isBitOn(instancia.get(Calendar.DAY_OF_WEEK))){
                 //Verifica se a instacia é anterior a data inicial
                 if(diaFragment.getTimeInMillis() < alarme.getDataInicio().getTimeInMillis()){
-                    Log.v("VerificaInstancia", "NULL");
+                    Log.v("AlarmAnterioDataInicial", "NULL");
                     return null;
                 }
                 return verificaFimTratamento(instancia, datafim) ? null : instancia;
             }
+
         }else{
             //Verifica se a instacia é anterior a data inicial
             if(diaFragment.getTimeInMillis() < alarme.getDataInicio().getTimeInMillis()){
                 Log.v("VerificaInstancia", "NULL");
                 return null;
             }
-
             return verificaFimTratamento(instancia, datafim) ? null : instancia;
         }
+        return null;
     }
 }

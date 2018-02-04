@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.gmail.thales_silva_nascimento.alarmmed.controller.InstanciaAlarmeController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoAgendadoController;
@@ -27,6 +28,9 @@ import java.util.List;
 public class fragInfoMedAlarme extends Fragment {
     private RecyclerView recyclerView;
     private int position;
+    private int itemGridPosition;
+    private String horaInicial, horaFinal;
+    private TextView texto;
 
     public fragInfoMedAlarme(){
 
@@ -36,13 +40,18 @@ public class fragInfoMedAlarme extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.position = getArguments().getInt("position");
+        this.itemGridPosition = getArguments().getInt("ItemGridPosition");
+
+        //configura a hora da pesquisa no banco de dados utilizados na controladora medicamentos agendados
+        setupHoraInicialFinal(itemGridPosition);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info_med_alarme, container, false);
-
+        //Textview - Texto informativo
+        texto = (TextView) view.findViewById(R.id.textoInformativo);
 
 
         //Calcula o dia da semana de acordo com a posição do item do view adapter.
@@ -52,13 +61,15 @@ public class fragInfoMedAlarme extends Fragment {
             int add = (position - ((homeViewPagerAdapter.NUM_ITEMS -1)/2));
             Log.v("DataCalendar", String.valueOf(add));
             diaFragment.add(Calendar.DAY_OF_YEAR, add);
+            Log.v("DataCalendar", "Data e horario: "+ Utils.CalendarToStringData(diaFragment)+" - "+Utils.CalendarToStringHora(diaFragment));
         }
 
         diaFragment.set(Calendar.HOUR_OF_DAY, 3);
         diaFragment.set(Calendar.MINUTE, 59);
         Log.v("fragInfoMedAlarme", "Dia: "+ Utils.CalendarToStringData(diaFragment)+ " - Hora: "+ Utils.CalendarToStringHora(diaFragment));
+
         MedicamentoAgendadoController medAgendado = new MedicamentoAgendadoController(getContext());
-        List<MedicamentoAgendado> medicamentoAgendados = medAgendado.buscarMedicamentoAgendados("03:59", "11:59");
+        List<MedicamentoAgendado> medicamentoAgendados = medAgendado.buscarMedicamentoAgendados(horaInicial, horaFinal);
 
         //InstanciaController para verificar a instancia
         InstanciaAlarmeController iac = InstanciaAlarmeController.getInstanciaAlarmeController(getContext());
@@ -69,6 +80,11 @@ public class fragInfoMedAlarme extends Fragment {
             if(teste == null){
                 medicamentoAgendados.remove(i);
             }
+        }
+
+        //Verifica se existe medicamentos
+        if(medicamentoAgendados.size() > 0){
+            texto.setVisibility(View.GONE);
         }
 
         //Recy7clerView
@@ -83,6 +99,27 @@ public class fragInfoMedAlarme extends Fragment {
         recyclerView.setAdapter(adapter);
 
         return view;
+    }
+
+    private void setupHoraInicialFinal(int itemGridPosition){
+        switch (itemGridPosition){
+            case 0:
+                horaInicial = "04:00";
+                horaFinal = "11:59";
+                break;
+            case 1:
+                horaInicial = "12:00";
+                horaFinal = "17:59";
+                break;
+            case 2:
+                horaInicial = "18:00";
+                horaFinal = "23:59";
+                break;
+            case 3:
+                horaInicial = "00:00";
+                horaFinal = "03:59";
+                break;
+        }
     }
 
 }

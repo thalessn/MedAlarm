@@ -62,7 +62,7 @@ public class fragHome extends Fragment {
         itemGridList.add(new ItemGridView(R.drawable.ic_sundown, "Noite"));
         itemGridList.add(new ItemGridView(R.drawable.ic_moon, "Madrugada"));
 
-        //Adapter que gerenciar os ícones
+        //Adapter que gerencia os ícones
         gridViewAdapter = new GridViewAdapter(getContext(), itemGridList);
         //Adiciona o Adapter ao GridView
         gridView.setAdapter(gridViewAdapter);
@@ -70,9 +70,10 @@ public class fragHome extends Fragment {
         //Onclick listner no grid view
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int ItemGridPosition, long l) {
                 Intent i = new Intent(getContext(), InfoMedAlarmes.class);
                 i.putExtra("posicao", posicao);
+                i.putExtra("ItemGridPosition", ItemGridPosition);
                 startActivity(i);
             }
         });

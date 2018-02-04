@@ -57,12 +57,12 @@ public class MedicamentoAgendadoController {
                     long id = cursor.getLong(0);
                     String nome = cursor.getString(cursor.getColumnIndex("nome"));
                     int dosagem = cursor.getInt(cursor.getColumnIndex("dosagem"));
-                    String tipoDosagem = cursor.getString(cursor.getColumnIndex("tipodosagem"));
+                    String tipoDosagem = cursor.getString(cursor.getColumnIndex("tipoDosagem"));
                     String foto = cursor.getString(cursor.getColumnIndex("foto"));
                     //Transforma para boolean
                     boolean usoContinuo = (cursor.getInt(cursor.getColumnIndex("usoContinuo")) == 1);
                     String obs = cursor.getString(cursor.getColumnIndex("observacao"));
-                    int quantidade = cursor.getInt(cursor.getColumnIndex("quantidade"));
+                    int quantidade = cursor.getInt(cursor.getColumnIndex("qtd"));
                     Medicamento medicamento = new Medicamento(id, nome, dosagem,tipoDosagem, usoContinuo, obs, foto, quantidade);
 
                     //Alarme
