@@ -37,9 +37,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true"
-                    android:scaleType="fitCenter"
-                    android:alpha="0.65"
-                    android:src="@drawable/remedio1"
+                    android:scaleType="fitXY"
+                    android:alpha="0.55"
                     app:layout_collapseMode="pin" />
 
                 <android.support.v7.widget.Toolbar

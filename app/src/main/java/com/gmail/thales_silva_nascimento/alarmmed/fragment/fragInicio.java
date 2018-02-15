@@ -10,8 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionMenu;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.activity.MainActivity;
 import com.gmail.thales_silva_nascimento.alarmmed.homeViewPagerAdapter;
 
 import java.io.File;
@@ -25,6 +28,8 @@ public class fragInicio extends Fragment {
     //ViewPage do fragmento inicial
     private ViewPager viewPager;
     private homeViewPagerAdapter adapter;
+
+
 
     public fragInicio() {
         // Required empty public constructor
@@ -45,6 +50,8 @@ public class fragInicio extends Fragment {
         viewPager.setCurrentItem(5);
 
         Log.v("FragInicio", "ViewPager");
+
+
         return view;
     }
 

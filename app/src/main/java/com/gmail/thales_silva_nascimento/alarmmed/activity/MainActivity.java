@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.widget.Toast;
 
 import com.gmail.thales_silva_nascimento.alarmmed.R;
@@ -26,7 +26,6 @@ import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragCompra;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragInicio;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragMedico;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragReceita;
-import com.gmail.thales_silva_nascimento.alarmmed.homeViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity
     private boolean menu = true;
     private NavigationView navigationView;
     private FloatingActionButton fab;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +48,9 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("AlarmMed");
 
-        //Adiciona o evento onlick no Floating Button (Botão mais da Tela)
+
+
+//        //Adiciona o evento onlick no Floating Button (Botão mais da Tela)
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,11 +65,17 @@ public class MainActivity extends AppCompatActivity
                         Intent receita = new Intent(view.getContext(), receitaCadastro.class);
                         startActivity(receita);
                         break;
+                    case "fragInicio":
+                        Intent i = new Intent(MainActivity.this, activityFloatingbuttonTelaInicial.class);
+                        startActivity(i);
+                        break;
                     default:
                         break;
                 }
             }
         });
+
+
 
 
         //Navigation Drawer

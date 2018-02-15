@@ -8,9 +8,18 @@ http://www.flaticon.com/free-icon/hot-food-in-a-bowl_45471
 http://www.flaticon.com/free-icon/sleep_105192#term=sleep&page=1&position=16
 http://www.flaticon.com/free-icon/map-placeholder_61121
 http://www.flaticon.com/free-icon/phone-call-button_60720
+https://www.flaticon.com/free-icon/medical-drug-pill_13032#term=tablets drugs&page=1&position=9 icone de adicionar medicamento
+https://www.flaticon.com/free-icon/drugs_139591  icone para adicionar dose tela inicial
 
 //Icones da tela inicial
 https://www.flaticon.com/free-icon/sunset_168399#term=sunset&page=1&position=54 -> manhã
 https://www.flaticon.com/free-icon/sun_248764#term=sun&page=2&position=57 -> tarde
 https://www.flaticon.com/free-icon/foggy-full-moon-night_54969#term=moon&page=2&position=16 -> noite 
 https://www.flaticon.com/free-icon/moon_157089#term=moon&page=3&position=54 -> madrugada 
+
+
+Imagens
+https://pixabay.com/p-2090495/?no_redirect - manhã
+https://pixabay.com/pt/campo-da-cevada-paisagem-natureza-2337009/ - tarde
+https://pixabay.com/pt/pont%C3%A3o-pier-mar-p%C3%B4r-do-sol-593401/ - noite
+https://pixabay.com/pt/noite-star-c%C3%A9u-estrelado-2845347/ - madrugada
