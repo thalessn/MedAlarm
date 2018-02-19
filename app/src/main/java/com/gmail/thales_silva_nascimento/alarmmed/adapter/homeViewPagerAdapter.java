@@ -1,4 +1,4 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

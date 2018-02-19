@@ -10,8 +10,7 @@
         android:layout_height="56dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark">
-    </android.support.v7.widget.Toolbar>
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"></android.support.v7.widget.Toolbar>
 
     <!-- Toolbar fake para adicionar o ImageView e os TextView -->
     <LinearLayout
@@ -24,11 +23,11 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/ic_medico" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -56,15 +55,28 @@
 
     </LinearLayout>
 
-    <ScrollView
-        android:layout_below="@+id/tbFakeMedicoDetalhe"
+    <TextView
+        android:id="@+id/tvTextoMedicoDetalhe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Não foi inserido outras informações sobre este médico"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:id="@+id/scrollViewMedicoDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tbFakeMedicoDetalhe">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <!-- Icone do telefone mais textView -->
             <LinearLayout
@@ -87,23 +99,24 @@
                         android:src="@drawable/ic_telefone" />
 
                     <LinearLayout
-                        android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="24dp"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/telMedicoDetalhe"
-                            android:textSize="18sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TESTE" />
+                            android:text="TESTE"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
             <View
+                android:id="@+id/viewMedDet1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="8dp"
@@ -140,15 +153,16 @@
 
                         <TextView
                             android:id="@+id/endMedicoDetalhe"
-                            android:textSize="18sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Endereço" />
+                            android:text="Endereço"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
             <View
+                android:id="@+id/viewMedDet2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="8dp"
@@ -158,6 +172,7 @@
                 android:background="#c0c0c0" />
 
             <LinearLayout
+                android:id="@+id/LLobsMedDetalhe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp">
@@ -184,10 +199,10 @@
 
                         <TextView
                             android:id="@+id/obsMedicoDetalhe"
-                            android:textSize="18sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Observação" />
+                            android:text="Observação"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

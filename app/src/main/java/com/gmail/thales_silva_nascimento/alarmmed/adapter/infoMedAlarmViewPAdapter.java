@@ -1,11 +1,11 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.adapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
+
+import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragInfoMedAlarme;
 
 /**
  * Created by Thales on 23/01/2018.

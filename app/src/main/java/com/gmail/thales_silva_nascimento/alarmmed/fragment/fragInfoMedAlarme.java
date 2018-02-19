@@ -1,4 +1,4 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,12 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.Utils;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.InstanciaAlarmeController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoAgendadoController;
+import com.gmail.thales_silva_nascimento.alarmmed.adapter.homeViewPagerAdapter;
+import com.gmail.thales_silva_nascimento.alarmmed.adapter.medicamentosAgendadosAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.model.MedicamentoAgendado;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 

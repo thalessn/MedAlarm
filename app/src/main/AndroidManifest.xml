@@ -82,7 +82,7 @@
             android:label="@string/title_activity_adicionar_dose"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".InfoMedAlarmes" />
+        <activity android:name=".activity.InfoMedAlarmes" />
         <activity
             android:name=".activity.activityFloatingbuttonTelaInicial"
             android:label="@string/title_activity_excluir_teste_flotingbutton"

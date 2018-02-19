@@ -1,27 +1,41 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.gmail.thales_silva_nascimento.alarmmed.fragment.fragMedico">
+    tools:context="com.gmail.thales_silva_nascimento.alarmmed.fragment.fragMedico"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/tvMedicoTexto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text= "Toque &quot;+&quot;\npara adicionar um médico"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"/>
 
     <!-- TODO: Update blank fragment layout -->
     <ListView
+        android:layout_marginTop="8dp"
         android:id="@+id/lvMedico"
+        android:layout_below="@id/tvMedicoTexto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"></ListView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/testefab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        app:borderWidth="16dp"
-        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:tint="@color/white"
+        app:backgroundTint="#DA4336"
+        app:borderWidth="16dp"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

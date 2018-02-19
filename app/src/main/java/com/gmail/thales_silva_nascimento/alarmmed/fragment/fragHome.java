@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,11 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.gmail.thales_silva_nascimento.alarmmed.GridViewAdapter;
-import com.gmail.thales_silva_nascimento.alarmmed.InfoMedAlarmes;
+import com.gmail.thales_silva_nascimento.alarmmed.adapter.GridViewAdapter;
+import com.gmail.thales_silva_nascimento.alarmmed.activity.InfoMedAlarmes;
 import com.gmail.thales_silva_nascimento.alarmmed.model.ItemGridView;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
-import com.gmail.thales_silva_nascimento.alarmmed.homeViewPagerAdapter;
+import com.gmail.thales_silva_nascimento.alarmmed.adapter.homeViewPagerAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

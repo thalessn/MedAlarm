@@ -21,7 +21,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by thales on 08/11/17.
  */
 
-public class MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.ViewHolder> {
+public class
+MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.ViewHolder> {
 
     private List<Medicamento> medicamentos;
     private Context context;

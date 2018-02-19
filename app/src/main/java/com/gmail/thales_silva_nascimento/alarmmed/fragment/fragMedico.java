@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.gmail.thales_silva_nascimento.alarmmed.adapter.MedicoAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
@@ -32,6 +32,7 @@ public class fragMedico extends Fragment {
     private MedicoController medicoController;
     private MedicoAdapter medicoAdapter;
     private static final int CODIGO_RESULT_ACTIVITY = 1;
+    private TextView textView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +58,9 @@ public class fragMedico extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Médicos");
 
+        //Texto quando não contém nenhum médico cadastrado
+        textView = (TextView) view.findViewById(R.id.tvMedicoTexto);
+
         //floating Button
         fab = (FloatingActionButton) view.findViewById(R.id.testefab);
         //Adiciona o OnclickListener no botão
@@ -81,6 +85,12 @@ public class fragMedico extends Fragment {
 
         //Listar Todos os médicos
          listaMedicos = medicoController.listarTodosMedicos();
+
+        //Verifica se existem médicos, se desabilite o texto
+        if(!listaMedicos.isEmpty()){
+            textView.setVisibility(View.GONE);
+        }
+
         //Inicializa o Adapter do medico para listView
         medicoAdapter = new MedicoAdapter(listaMedicos, view.getContext());
 
@@ -91,7 +101,7 @@ public class fragMedico extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(view.getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+
                 //Cria uma nova activity do tipo medicoDetalhe
                 Intent intent = new Intent(view.getContext(), activity_medicoDetalhe.class);
                 //Passa o médico seleciona para a nova activity - Isto é possivel graças ao Parcelable
@@ -119,6 +129,13 @@ public class fragMedico extends Fragment {
         listaMedicos.clear();
         //Preeche novamente a listo já com o novo médico
         listaMedicos = medicoController.listarTodosMedicos();
+
+        if(!listaMedicos.isEmpty()){
+            textView.setVisibility(View.GONE);
+        }else{
+            textView.setVisibility(View.VISIBLE);
+        }
+
         //Atualiza a ListView atualizando a lista do medicoAdapter associado
         medicoAdapter.updateAdapter(listaMedicos);
     }

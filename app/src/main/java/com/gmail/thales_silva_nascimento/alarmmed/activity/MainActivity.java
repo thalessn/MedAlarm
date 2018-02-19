@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-//        //Adiciona o evento onlick no Floating Button (Botão mais da Tela)
+        //Adiciona o evento onlick no Floating Button (Botão mais da Tela)
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -98,7 +98,7 @@ public class adicionarDose extends AppCompatActivity {
 
         //Cria o calendário para preencher os textviews
         cal = Calendar.getInstance();
-        dia = cal.get(Calendar.DAY_OF_YEAR);
+        dia = cal.get(Calendar.DAY_OF_MONTH);
         mes = cal.get(Calendar.MONTH);
         ano = cal.get(Calendar.YEAR);
         hora = cal.get(Calendar.HOUR_OF_DAY);
@@ -300,7 +300,7 @@ public class adicionarDose extends AppCompatActivity {
             super.onPostExecute(aVoid);
             if(dialog!= null){
                 dialog.dismiss();
-                Log.v("SalvarDose", "Terminu de executar");
+                Log.v("SalvarDose", "Terminou de executar");
             }
         }
     }

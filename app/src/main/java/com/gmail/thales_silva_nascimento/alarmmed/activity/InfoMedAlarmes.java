@@ -1,4 +1,4 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.activity;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -11,6 +11,8 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 
 
 import com.bumptech.glide.Glide;
+import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.adapter.infoMedAlarmViewPAdapter;
 
 
 public class InfoMedAlarmes extends AppCompatActivity {
@@ -19,7 +21,7 @@ public class InfoMedAlarmes extends AppCompatActivity {
     private ImageView imgBarra;
     private Toolbar toolbar;
     private ViewPager viewPager;
-    private infoMedAlarmViewPAdapter infoMedAlarmViewPAdapter;
+    private com.gmail.thales_silva_nascimento.alarmmed.adapter.infoMedAlarmViewPAdapter infoMedAlarmViewPAdapter;
     private int itemGridPosition;
 
     @Override

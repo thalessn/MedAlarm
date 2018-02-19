@@ -874,7 +874,7 @@ public class MedicamentoCadastro extends AppCompatActivity
 
     private void adicionaToobar() {
         toolbar = (Toolbar) findViewById(R.id.tBCadMedicamento);
-        toolbar.setTitle("Adicionar Medicamento");
+        toolbar.setTitle("Adicionar Remédio");
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_close_white_24px);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -882,7 +882,7 @@ public class MedicamentoCadastro extends AppCompatActivity
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(MedicamentoCadastro.this);
                 alertDialog.setTitle("Tem Certeza?");
-                alertDialog.setMessage("Você tem certeza de sair sem salvar o medicamento?");
+                alertDialog.setMessage("Você tem certeza de sair sem salvar o remédio?");
                 alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

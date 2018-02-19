@@ -4,20 +4,14 @@ package com.gmail.thales_silva_nascimento.alarmmed.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.github.clans.fab.FloatingActionMenu;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
-import com.gmail.thales_silva_nascimento.alarmmed.activity.MainActivity;
-import com.gmail.thales_silva_nascimento.alarmmed.homeViewPagerAdapter;
-
-import java.io.File;
+import com.gmail.thales_silva_nascimento.alarmmed.adapter.homeViewPagerAdapter;
 
 
 /**

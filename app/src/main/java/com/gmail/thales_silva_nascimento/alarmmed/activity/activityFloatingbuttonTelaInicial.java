@@ -2,6 +2,7 @@ package com.gmail.thales_silva_nascimento.alarmmed.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -10,12 +11,14 @@ import android.widget.Toast;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.fragment.SelecionarMedicamentoDose;
 
-public class activityFloatingbuttonTelaInicial extends AppCompatActivity {
+public class activityFloatingbuttonTelaInicial extends AppCompatActivity implements SelecionarMedicamentoDose.SelecionaMedicamentoDoseListerner{
 
     private FloatingActionMenu fam;
     private FloatingActionButton fabDose, fabAdd;
     private static final int CODIGO_RESULT_ACTIVITY = 1;
+    private boolean verificaMenuDoseAberto = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,9 @@ public class activityFloatingbuttonTelaInicial extends AppCompatActivity {
 
                 } else {
                     //Encerra a atividade caso o usuário clique fora do menu ou o menu se feche
-                    finish();
+                    //Verifica se o menu selecionar medicamento foi aberto, se sim não finalize a atividade
+                    if(!verificaMenuDoseAberto)
+                        finish();
                 }
             }
         });
@@ -53,7 +58,10 @@ public class activityFloatingbuttonTelaInicial extends AppCompatActivity {
         fabDose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                DialogFragment dialogFragment = new SelecionarMedicamentoDose();
+                dialogFragment.show(getSupportFragmentManager(), "fragSelecionaMedicamentoDose");
+                verificaMenuDoseAberto = true;
+                fam.hideMenu(false);
             }
         });
         fabAdd.setOnClickListener(new View.OnClickListener() {
@@ -95,4 +103,15 @@ public class activityFloatingbuttonTelaInicial extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Método reponsável por tratar o evento de clicar fora do DialogFragment
+     * @param dialog
+     */
+    @Override
+    public void onCancelFragSelecionaMedicamentoDose(DialogFragment dialog) {
+        //Fecha o dialog que exibe os remédios
+        dialog.dismiss();
+        //Encerra a atividade
+        finish();
+    }
 }
