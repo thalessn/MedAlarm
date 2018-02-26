@@ -1,0 +1,162 @@
+package com.gmail.thales_silva_nascimento.alarmmed;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarmeHistorico;
+
+import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by Thales on 25/02/2018.
+ */
+
+public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+
+    private List<ListItemHistorico> dadosHistorico;
+    private Context context;
+
+    public HistoricoRecycleAdapter(Context context, List<ListItemHistorico> dadosHistorico){
+        this.dadosHistorico = dadosHistorico;
+        this.context = context;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return dadosHistorico.get(position).getType();
+    }
+
+    @Override
+    public int getItemCount() {
+        return dadosHistorico != null ? dadosHistorico.size() : 0;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        RecyclerView.ViewHolder viewHolder = null;
+
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
+        switch (viewType) {
+
+            case ListItemHistorico.TYPE_GENERAL:
+                View v1 = inflater.inflate(R.layout.item_row_historico, parent,
+                        false);
+                viewHolder = new ItemViewHolder(v1);
+                break;
+
+            case ListItemHistorico.TYPE_HEADER:
+                View v2 = inflater.inflate(R.layout.item_header_row_historico, parent, false);
+                viewHolder = new HeaderViewHolder(v2);
+                break;
+        }
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+
+        switch (viewHolder.getItemViewType()) {
+
+            case ListItemHistorico.TYPE_GENERAL:
+                ItemAlarmeHistorico generalItem  = (ItemAlarmeHistorico) dadosHistorico.get(position);
+                ItemViewHolder itemViewHolder = (ItemViewHolder) viewHolder;
+
+                // Populate general item data here
+                itemViewHolder.nomeMed.setText(generalItem.getMed().getNome());
+                itemViewHolder.horaProg.setText(generalItem.getHorario().getHorario());
+
+
+                //Arquivo que contém o caminho da imagem no armazenamento interno
+                File path = context.getFileStreamPath(generalItem.getMed().getFoto());
+                //Verifica se o caminho existe. Se existir carrega a imagem, se não carregue a imagem padrão que neste caso é o remédio.
+                if(path.exists()){
+                    //existe
+                    Glide.with(context).load(path).into(itemViewHolder.img);
+                }else{
+                    //não existe
+                    Glide.with(context).load(R.drawable.remedio1).into(itemViewHolder.img);
+                }
+
+                break;
+
+            case ListItemHistorico.TYPE_HEADER:
+                Log.v("Position", String.valueOf(position));
+                HeaderHistoricoRow dateItem = (HeaderHistoricoRow) dadosHistorico.get(position);
+                HeaderViewHolder dataProgViewHolder = (HeaderViewHolder) viewHolder;
+
+
+                //Calendário para verificar se a data do historico é igual a de hoje
+                Calendar hoje = Calendar.getInstance();
+                String dataH = Utils.CalendarToStringData(hoje);
+                //Retira um dia para verificar se é igual a ontem
+                hoje.add(Calendar.DATE,-1);
+                String dataOntem = Utils.CalendarToStringData(hoje);
+                //Verifica s é igual a hoje
+                if(dataH.equals(dateItem.toString())){
+                    SimpleDateFormat dia = new SimpleDateFormat("d");
+                    SimpleDateFormat mes = new SimpleDateFormat("MMM");
+                    String texto = "Hoje, "+ dia.format(hoje.getTime()) +" de "+ mes.format(hoje.getTime());
+                    // Populate date item data here
+                    dataProgViewHolder.tvDataProg.setText(texto);
+                    break;
+                }
+                if(dataOntem.equals(dateItem.toString())){
+                    SimpleDateFormat dia = new SimpleDateFormat("d");
+                    SimpleDateFormat mes = new SimpleDateFormat("MMM");
+                    String texto = "Ontem, "+ dia.format(hoje.getTime()) +" de "+ mes.format(hoje.getTime());
+                    // Populate date item data here
+                    dataProgViewHolder.tvDataProg.setText(texto);
+                    break;
+                }
+                
+                String dataFormatada = Utils.CalendarToStringFormatada(dateItem.getDataProg());
+                // Populate date item data here
+                dataProgViewHolder.tvDataProg.setText(dataFormatada);
+                break;
+
+        }
+
+    }
+
+    // ViewHolder for date row item
+    class HeaderViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView tvDataProg;
+
+        public HeaderViewHolder(View v) {
+            super(v);
+            //TextView que contém a data
+            tvDataProg = (TextView) v.findViewById(R.id.tvDataProgHist);
+        }
+    }
+
+    class ItemViewHolder extends RecyclerView.ViewHolder {
+        private ImageView img;
+        private TextView nomeMed;
+        private TextView horaProg;
+
+        public ItemViewHolder(View v) {
+            super(v);
+            img = (ImageView) v.findViewById(R.id.imgMedHistorico);
+            nomeMed = (TextView) v.findViewById(R.id.tvNomeMedHist);
+            horaProg = (TextView) v.findViewById(R.id.tvHoraprogHist);
+        }
+    }
+
+}
