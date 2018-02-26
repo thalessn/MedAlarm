@@ -86,7 +86,8 @@
         <activity
             android:name=".activity.activityFloatingbuttonTelaInicial"
             android:label="@string/title_activity_excluir_teste_flotingbutton"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
+        <activity android:name=".activity.Historico"></activity>
     </application>
 
 </manifest>

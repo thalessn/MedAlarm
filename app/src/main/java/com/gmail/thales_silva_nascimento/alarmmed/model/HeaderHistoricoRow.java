@@ -1,4 +1,7 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.model;
+
+import com.gmail.thales_silva_nascimento.alarmmed.ListItemHistorico;
+import com.gmail.thales_silva_nascimento.alarmmed.Utils;
 
 import java.util.Calendar;
 

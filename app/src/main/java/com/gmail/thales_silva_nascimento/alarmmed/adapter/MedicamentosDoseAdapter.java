@@ -24,6 +24,7 @@ public class MedicamentosDoseAdapter extends RecyclerView.Adapter<MedicamentosDo
 
     //Objeto da interfacea ser utilizado no adapter
     private OnItemClickListener clickListener;
+
     //Interface responsável por passar informação a activity de qual elemento do adapter foi selecionado.
     public interface OnItemClickListener {
         public void onClick(View view, int position);

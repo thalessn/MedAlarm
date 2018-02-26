@@ -212,6 +212,13 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(MainActivity.this, CriaPerfl.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_historico:
+                floatingButtonShow(false);
+                //fragment = new fragHistorico();
+                //fragmentTag = "fragHistorico";
+                Intent activity = new Intent(MainActivity.this, Historico.class);
+                startActivity(activity);
+                break;
         }
         if(fragment !=null && fragmentTag != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

@@ -10,6 +10,7 @@ http://www.flaticon.com/free-icon/map-placeholder_61121
 http://www.flaticon.com/free-icon/phone-call-button_60720
 https://www.flaticon.com/free-icon/medical-drug-pill_13032#term=tablets drugs&page=1&position=9 icone de adicionar medicamento
 https://www.flaticon.com/free-icon/drugs_139591  icone para adicionar dose tela inicial
+http://www.freeiconspng.com/img/37644 icone do historico
 
 //Icones da tela inicial
 https://www.flaticon.com/free-icon/sunset_168399#term=sunset&page=1&position=54 -> manhã

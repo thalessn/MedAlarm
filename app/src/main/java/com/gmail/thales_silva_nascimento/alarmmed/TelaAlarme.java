@@ -24,7 +24,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.controller.HorarioController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Horario;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medicamento;
-import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarme;
+import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarmeHistorico;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -110,11 +110,11 @@ public class TelaAlarme extends AppCompatActivity {
         AlarmeController alarmeController = new AlarmeController(TelaAlarme.this);
 
         //Cria a lista de itemAlames a ser exibida.
-        List<ItemAlarme> itemAlarmes = new ArrayList<>();
+        List<ItemAlarmeHistorico> itemAlarmeHistoricos = new ArrayList<>();
         for(Medicamento med : medicamentos){
             long idAlarme = alarmeController.buscarIdAlarmePorMedID(med.getId());
-            ItemAlarme novo = new ItemAlarme(med, data, horario, idAlarme);
-            itemAlarmes.add(novo);
+            ItemAlarmeHistorico novo = new ItemAlarmeHistorico(med, data, horario, idAlarme);
+            itemAlarmeHistoricos.add(novo);
         }
 
         //RecycleView
@@ -125,7 +125,7 @@ public class TelaAlarme extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         //Adapter RecycleView
-        adapter = new ItemAlarmeAdapter(itemAlarmes, TelaAlarme.this);
+        adapter = new ItemAlarmeAdapter(itemAlarmeHistoricos, TelaAlarme.this);
         recyclerView.setAdapter(adapter);
 
 
@@ -211,7 +211,7 @@ public class TelaAlarme extends AppCompatActivity {
 
         for(Medicamento med : medicamentos){
             long idAlarme = alarmeController.buscarIdAlarmePorMedID(med.getId());
-            ItemAlarme novo = new ItemAlarme(med, data, horario, idAlarme);
+            ItemAlarmeHistorico novo = new ItemAlarmeHistorico(med, data, horario, idAlarme);
             adapter.adicionarItemAlarme(novo);
         }
         Log.v("Tela Alarme - Atualizar", "FIM FUNÇÃO");

@@ -3,12 +3,9 @@ package com.gmail.thales_silva_nascimento.alarmmed.activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +17,6 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.Utils;
@@ -28,9 +24,8 @@ import com.gmail.thales_silva_nascimento.alarmmed.controller.AlarmeController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HorarioController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
-import com.gmail.thales_silva_nascimento.alarmmed.fragment.DatePickerFragment;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Horario;
-import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarme;
+import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarmeHistorico;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medicamento;
 
 import java.lang.ref.WeakReference;
@@ -176,13 +171,12 @@ public class adicionarDose extends AppCompatActivity {
     }
 
     private void formataData(int dia, int mes, int year){
+        Log.v("Parametros", String.valueOf(dia)+"-"+String.valueOf(mes)+"-"+String.valueOf(ano)+"-");
         //Declara o objeto para formata a data
         SimpleDateFormat sdf = null;
-        //Atualiza a data do calendário da Activity
-        cal.set(Calendar.DAY_OF_YEAR, dia);
-        cal.set(Calendar.MONTH, mes);
-        cal.set(Calendar.YEAR, year);
-        //Verifica se o dia esclhido foi ontem ou amanhã. Para formatar o texto de forma diferente.
+        //Atualiza a data do calendário da Activit
+        cal.set(year, mes, dia);
+        //Verifica se o dia escolhido foi ontem ou amanhã. Para formatar o texto de forma diferente.
         if(this.dia == dia){
             return;
         }
@@ -200,6 +194,7 @@ public class adicionarDose extends AppCompatActivity {
         }
         //Insere o texto no textview
         sdf =  new SimpleDateFormat("EEE, d MMM yy");
+        Log.v("Calendar", cal.toString());
         String data = sdf.format(cal.getTime());
         tvdata.setText(data);
     }
@@ -219,7 +214,7 @@ public class adicionarDose extends AppCompatActivity {
     }
 
     private void salvarDose(){
-
+        //Verifica se o campo quantidade está vazio
         if(qtdMed.getText().toString().equals("")){
             qtdMed.setFocusable(true);
             qtdMed.requestFocus();
@@ -227,6 +222,7 @@ public class adicionarDose extends AppCompatActivity {
         }
         // Transforma em inteiro a qtd digitada
         int qtd = Integer.parseInt(qtdMed.getText().toString());
+        //Verifica se a quantidade é negativa
         if(qtd <= 0){
             qtdMed.setFocusable(true);
             qtdMed.requestFocus();
@@ -277,10 +273,10 @@ public class adicionarDose extends AppCompatActivity {
 
             Horario horario = horarioController.buscarHorario(Utils.CalendarToStringHora(cal));
             //Instancia o objeto que salvará as informações do estoque;
-            ItemAlarme itemAlarme = new ItemAlarme(medicamento,dataProgramada,horario,idAlarme, dataAdministrado, horaAdministrado);
-            itemAlarme.setStatus(ItemAlarme.STATUS_TOMADO);
+            ItemAlarmeHistorico itemAlarmeHistorico = new ItemAlarmeHistorico(medicamento,dataProgramada,horario,idAlarme, dataAdministrado, horaAdministrado);
+            itemAlarmeHistorico.setStatus(ItemAlarmeHistorico.STATUS_TOMADO);
             //Cadastra no histório a data e hora que a dose foi tomada
-            historicoController.cadastrarHistoricoMedicamento(itemAlarme);
+            historicoController.cadastrarHistoricoMedicamento(itemAlarmeHistorico);
             //Só por preocaução de o alarme te toca e a pessoa está na tela de adicionar dose
             medicamento = medicamentoController.buscarMedicamentoPorId(medicamento.getId());
 

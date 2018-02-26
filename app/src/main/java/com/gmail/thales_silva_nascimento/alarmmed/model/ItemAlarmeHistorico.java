@@ -1,11 +1,14 @@
 package com.gmail.thales_silva_nascimento.alarmmed.model;
 
+import com.gmail.thales_silva_nascimento.alarmmed.ListItemHistorico;
+
 /**
  * Created by thales on 09/09/17.
  */
 
-public class ItemAlarme {
+public class ItemAlarmeHistorico extends ListItemHistorico {
 
+    private long id;
     Medicamento med;
     String dataProgramada;
     Horario horario;
@@ -17,18 +20,28 @@ public class ItemAlarme {
     public final static String STATUS_PULOU = "Pulou";
     public final static String STATUS_ADIOU = "Adiou";
 
-    public ItemAlarme(Medicamento med, String dataProgramada, Horario horario, long idAlarme){
+    public ItemAlarmeHistorico(Medicamento med, String dataProgramada, Horario horario, long idAlarme){
         this.med = med;
         this.dataProgramada = dataProgramada;
         this.horario = horario;
         this.idAlarme = idAlarme;
     }
 
-    public ItemAlarme(Medicamento med, String dataProgramada, Horario horario, long idAlarme, String dataAdministrado, String horaAdministrado){
+    public ItemAlarmeHistorico(Medicamento med, String dataProgramada, Horario horario, long idAlarme, String dataAdministrado, String horaAdministrado){
         this.med = med;
         this.dataProgramada = dataProgramada;
         this.horario = horario;
         this.idAlarme = idAlarme;
+        this.dataAdministrado = dataAdministrado;
+        this.horaAdministrado = horaAdministrado;
+    }
+
+    public ItemAlarmeHistorico(long id, Medicamento med, String dataProgramada, Horario horario, String dataAdministrado, String horaAdministrado){
+        this.id = id;
+        this.med = med;
+        this.idAlarme = -1;
+        this.dataProgramada = dataProgramada;
+        this.horario = horario;
         this.dataAdministrado = dataAdministrado;
         this.horaAdministrado = horaAdministrado;
     }
@@ -71,5 +84,10 @@ public class ItemAlarme {
 
     public void setHoraAdministrado(String horaAdministrado) {
         this.horaAdministrado = horaAdministrado;
+    }
+
+    @Override
+    public int getType() {
+        return TYPE_GENERAL;
     }
 }

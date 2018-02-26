@@ -55,7 +55,8 @@ public class activity_medicoDetalhe extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.tbMedicoDetalhe);
         toolbar.setNavigationIcon(R.drawable.ic_menu_arrow_back);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setTitle("Histórico");
 
         //Onclick no botão de retonar da toolbar
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

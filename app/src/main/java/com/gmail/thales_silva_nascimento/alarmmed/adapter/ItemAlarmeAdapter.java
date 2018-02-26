@@ -22,7 +22,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.controller.InstanciaAlarmeCont
 import com.gmail.thales_silva_nascimento.alarmmed.controller.LembreteCompraController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Alarme;
-import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarme;
+import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarmeHistorico;
 import com.gmail.thales_silva_nascimento.alarmmed.model.LembreteCompra;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medicamento;
 
@@ -35,7 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MAViewHolder> {
 
-    private List<ItemAlarme> itensAlarme;
+    private List<ItemAlarmeHistorico> itensAlarme;
     private Context context;
     private HistoricoController historicoController;
     private InstanciaAlarmeController instanciaAlarmeController;
@@ -44,7 +44,7 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
     private MedicamentoController medicamentoController;
 
 
-    public ItemAlarmeAdapter(List<ItemAlarme> itensAlarme, Context context){
+    public ItemAlarmeAdapter(List<ItemAlarmeHistorico> itensAlarme, Context context){
         this.itensAlarme = itensAlarme;
         this.context = context;
         this.historicoController = new HistoricoController(context);
@@ -86,12 +86,12 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
             @Override
             public void onClick(View v) {
 
-                ItemAlarme itemAlarmeSalvar = itensAlarme.get(i);
+                ItemAlarmeHistorico itemAlarmeHistoricoSalvar = itensAlarme.get(i);
                 itensAlarme.remove(i);
                 notifyItemRemoved(i);
                 notifyItemRangeChanged(i, itensAlarme.size());
 
-                gerenciaStatusItemAlarme(itemAlarmeSalvar, ItemAlarme.STATUS_TOMADO);
+                gerenciaStatusItemAlarme(itemAlarmeHistoricoSalvar, ItemAlarmeHistorico.STATUS_TOMADO);
 
                 //Verifica se só tem esse medicamento se sim finaliza a atividade
                 verificaUltimoItem();
@@ -103,8 +103,8 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Botão Adiar, posicao = " +String.valueOf(i), Toast.LENGTH_LONG).show();
-                ItemAlarme itemAlarme = itensAlarme.get(i);
-                gerenciaStatusItemAlarme(itemAlarme, ItemAlarme.STATUS_ADIOU);
+                ItemAlarmeHistorico itemAlarmeHistorico = itensAlarme.get(i);
+                gerenciaStatusItemAlarme(itemAlarmeHistorico, ItemAlarmeHistorico.STATUS_ADIOU);
                 itensAlarme.remove(i);
                 notifyItemRemoved(i);
                 notifyItemRangeChanged(i, itensAlarme.size());
@@ -118,12 +118,12 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Botão pular, posicao = " +String.valueOf(i), Toast.LENGTH_LONG).show();
-                ItemAlarme itemAlarmeSalvar = itensAlarme.get(i);
+                ItemAlarmeHistorico itemAlarmeHistoricoSalvar = itensAlarme.get(i);
                 itensAlarme.remove(i);
                 notifyItemRemoved(i);
                 notifyItemRangeChanged(i, itensAlarme.size());
 
-                gerenciaStatusItemAlarme(itemAlarmeSalvar, ItemAlarme.STATUS_PULOU);
+                gerenciaStatusItemAlarme(itemAlarmeHistoricoSalvar, ItemAlarmeHistorico.STATUS_PULOU);
 
                 //Verifica se só tem esse medicamento se sim finaliza a atividade
                 verificaUltimoItem();
@@ -168,26 +168,26 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
 
         Calendar dataEhora = Calendar.getInstance();
         Log.v("Qtd_Alarme", String.valueOf(itensAlarme.size()));
-        for(ItemAlarme itemAlarmeSalvar : itensAlarme){
+        for(ItemAlarmeHistorico itemAlarmeHistoricoSalvar : itensAlarme){
 
             //Salva na tabela histórico
-            itemAlarmeSalvar.setStatus(ItemAlarme.STATUS_TOMADO);
-            itemAlarmeSalvar.setDataAdministrado(Utils.CalendarToStringData(dataEhora));
-            itemAlarmeSalvar.setHoraAdministrado(Utils.CalendarToStringHora(dataEhora));
-            historicoController.cadastrarHistoricoMedicamento(itemAlarmeSalvar);
+            itemAlarmeHistoricoSalvar.setStatus(ItemAlarmeHistorico.STATUS_TOMADO);
+            itemAlarmeHistoricoSalvar.setDataAdministrado(Utils.CalendarToStringData(dataEhora));
+            itemAlarmeHistoricoSalvar.setHoraAdministrado(Utils.CalendarToStringHora(dataEhora));
+            historicoController.cadastrarHistoricoMedicamento(itemAlarmeHistoricoSalvar);
 
             //Busca o alarme com a devida id
-            Alarme alarme = alarmeController.buscarAlarmePorId(itemAlarmeSalvar.getIdAlarme());
+            Alarme alarme = alarmeController.buscarAlarmePorId(itemAlarmeHistoricoSalvar.getIdAlarme());
 
             //Verifica se necessita registrar uma nova instância desta instância
-            instanciaAlarmeController.resgistraProxInstanciaAlarme(context, alarme, itemAlarmeSalvar.getHorario());
+            instanciaAlarmeController.resgistraProxInstanciaAlarme(context, alarme, itemAlarmeHistoricoSalvar.getHorario());
 
             //Exclui a instancia anterior do banco de dados
-            instanciaAlarmeController.deletarInstanciaPorDataAlarmeHorario(itemAlarmeSalvar.getDataProgramada(),
-                    itemAlarmeSalvar.getIdAlarme(), itemAlarmeSalvar.getHorario().getId());
+            instanciaAlarmeController.deletarInstanciaPorDataAlarmeHorario(itemAlarmeHistoricoSalvar.getDataProgramada(),
+                    itemAlarmeHistoricoSalvar.getIdAlarme(), itemAlarmeHistoricoSalvar.getHorario().getId());
 
             //Verifica se é necessário registrar um lebrete de compra para o medicamento
-            gerenciarEstoque(itemAlarmeSalvar);
+            gerenciarEstoque(itemAlarmeHistoricoSalvar);
 
         }
         itensAlarme.clear();
@@ -210,8 +210,8 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
         }
     }
 
-    public void adicionarItemAlarme(ItemAlarme itemAlarme){
-        itensAlarme.add(itemAlarme);
+    public void adicionarItemAlarme(ItemAlarmeHistorico itemAlarmeHistorico){
+        itensAlarme.add(itemAlarmeHistorico);
         notifyDataSetChanged();
     }
 
@@ -223,66 +223,66 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
         }
     }
 
-    private void gerenciaStatusItemAlarme(ItemAlarme itemAlarme, String status){
+    private void gerenciaStatusItemAlarme(ItemAlarmeHistorico itemAlarmeHistorico, String status){
 
         Calendar dataEhora = Calendar.getInstance();
         Alarme alarme = null;
 
         switch (status){
-            case ItemAlarme.STATUS_TOMADO:
+            case ItemAlarmeHistorico.STATUS_TOMADO:
                 //Salva na tabela histórico
-                itemAlarme.setStatus(ItemAlarme.STATUS_TOMADO);
-                itemAlarme.setDataAdministrado(Utils.CalendarToStringData(dataEhora));
-                itemAlarme.setHoraAdministrado(Utils.CalendarToStringHora(dataEhora));
-                historicoController.cadastrarHistoricoMedicamento(itemAlarme);
+                itemAlarmeHistorico.setStatus(ItemAlarmeHistorico.STATUS_TOMADO);
+                itemAlarmeHistorico.setDataAdministrado(Utils.CalendarToStringData(dataEhora));
+                itemAlarmeHistorico.setHoraAdministrado(Utils.CalendarToStringHora(dataEhora));
+                historicoController.cadastrarHistoricoMedicamento(itemAlarmeHistorico);
 
                 //Busca o alarme com a devida id
-                alarme = alarmeController.buscarAlarmePorId(itemAlarme.getIdAlarme());
+                alarme = alarmeController.buscarAlarmePorId(itemAlarmeHistorico.getIdAlarme());
 
                 //Verifica se necessita registrar um nova instância desta instância
-                instanciaAlarmeController.resgistraProxInstanciaAlarme(context, alarme, itemAlarme.getHorario());
+                instanciaAlarmeController.resgistraProxInstanciaAlarme(context, alarme, itemAlarmeHistorico.getHorario());
 
                 //Exclui a instancia do banco de dados
-                instanciaAlarmeController.deletarInstanciaPorDataAlarmeHorario(itemAlarme.getDataProgramada(),
-                        itemAlarme.getIdAlarme(), itemAlarme.getHorario().getId());
+                instanciaAlarmeController.deletarInstanciaPorDataAlarmeHorario(itemAlarmeHistorico.getDataProgramada(),
+                        itemAlarmeHistorico.getIdAlarme(), itemAlarmeHistorico.getHorario().getId());
 
                 //Verifica se é necessário registrar um lebrete de compra para o medicamento
-                gerenciarEstoque(itemAlarme);
+                gerenciarEstoque(itemAlarmeHistorico);
 
                 break;
-            case ItemAlarme.STATUS_PULOU:
+            case ItemAlarmeHistorico.STATUS_PULOU:
                 //Salva na tabela historico
-                itemAlarme.setStatus(ItemAlarme.STATUS_PULOU);
-                itemAlarme.setDataAdministrado(Utils.CalendarToStringData(dataEhora));
-                itemAlarme.setHoraAdministrado(Utils.CalendarToStringHora(dataEhora));
-                historicoController.cadastrarHistoricoMedicamento(itemAlarme);
+                itemAlarmeHistorico.setStatus(ItemAlarmeHistorico.STATUS_PULOU);
+                itemAlarmeHistorico.setDataAdministrado(Utils.CalendarToStringData(dataEhora));
+                itemAlarmeHistorico.setHoraAdministrado(Utils.CalendarToStringHora(dataEhora));
+                historicoController.cadastrarHistoricoMedicamento(itemAlarmeHistorico);
 
                 //Busca o alarme com a devida id
-                alarme = alarmeController.buscarAlarmePorId(itemAlarme.getIdAlarme());
+                alarme = alarmeController.buscarAlarmePorId(itemAlarmeHistorico.getIdAlarme());
 
                 //Verifica se necessita registrar um nova instância desta instância
-                instanciaAlarmeController.resgistraProxInstanciaAlarme(context, alarme, itemAlarme.getHorario());
+                instanciaAlarmeController.resgistraProxInstanciaAlarme(context, alarme, itemAlarmeHistorico.getHorario());
 
                 //Exclui a instancia do banco
-                instanciaAlarmeController.deletarInstanciaPorDataAlarmeHorario(itemAlarme.getDataProgramada(),
-                        itemAlarme.getIdAlarme(), itemAlarme.getHorario().getId());
+                instanciaAlarmeController.deletarInstanciaPorDataAlarmeHorario(itemAlarmeHistorico.getDataProgramada(),
+                        itemAlarmeHistorico.getIdAlarme(), itemAlarmeHistorico.getHorario().getId());
                 break;
-            case ItemAlarme.STATUS_ADIOU:
-                instanciaAlarmeController.adiarInstanciaAlarmePorIdHorario(itemAlarme.getHorario().getId());
+            case ItemAlarmeHistorico.STATUS_ADIOU:
+                instanciaAlarmeController.adiarInstanciaAlarmePorIdHorario(itemAlarmeHistorico.getHorario().getId());
         }
 
     }
 
-    private void gerenciarEstoque(ItemAlarme itemAlarme){
+    private void gerenciarEstoque(ItemAlarmeHistorico itemAlarmeHistorico){
         //Procura se existe um lembrete de compra no banco de dados
-        LembreteCompra lembreteCompra = lembreteCompraController.buscarLembretePorIDMed(itemAlarme.getMed().getId());
+        LembreteCompra lembreteCompra = lembreteCompraController.buscarLembretePorIDMed(itemAlarmeHistorico.getMed().getId());
         if(lembreteCompra != null){
             //Atualiza a quantidade de remédios no banco
-            int qtdMedAnterior = itemAlarme.getMed().getQuantidade();
+            int qtdMedAnterior = itemAlarmeHistorico.getMed().getQuantidade();
             int qtdMedAtual = qtdMedAnterior -1;
             //Validação para não permitir número negativo no estoque
             if(qtdMedAtual < 0) qtdMedAtual = 0;
-            medicamentoController.updateQtdMedicamento(itemAlarme.getMed().getId(), qtdMedAtual);
+            medicamentoController.updateQtdMedicamento(itemAlarmeHistorico.getMed().getId(), qtdMedAtual);
 
             if(qtdMedAtual <= lembreteCompra.getQtd_alerta()){
                 lembreteCompraController.registrarLembreteCompra(lembreteCompra);

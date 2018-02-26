@@ -1,20 +1,24 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.gmail.thales_silva_nascimento.alarmmed.ListItemHistorico;
+import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.adapter.HistoricoRecycleAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
 
 import java.util.List;
 
-public class Historico extends AppCompatActivity {
+public class Historico extends AppCompatActivity implements HistoricoRecycleAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
     private HistoricoController historicoController;
@@ -72,5 +76,11 @@ public class Historico extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onClick(View view, int position) {
+        Log.v("Teste", "Fucnionou");
+        Toast.makeText(Historico.this, "Olá sou a posicao:"+String.valueOf(position), Toast.LENGTH_LONG).show();
     }
 }

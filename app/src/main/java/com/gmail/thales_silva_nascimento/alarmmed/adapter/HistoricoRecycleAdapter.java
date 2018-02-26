@@ -1,4 +1,4 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,14 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.gmail.thales_silva_nascimento.alarmmed.model.HeaderHistoricoRow;
+import com.gmail.thales_silva_nascimento.alarmmed.ListItemHistorico;
+import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.Utils;
 import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarmeHistorico;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,9 +31,22 @@ public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.V
     private List<ListItemHistorico> dadosHistorico;
     private Context context;
 
+    //Objeto da interfacea ser utilizado no adapter
+    private OnItemClickListener clickListener;
+
+    //Interface responsável por passar informação a activity de qual elemento do adapter foi selecionado.
+    public interface OnItemClickListener {
+        public void onClick(View view, int position);
+    }
+
     public HistoricoRecycleAdapter(Context context, List<ListItemHistorico> dadosHistorico){
         this.dadosHistorico = dadosHistorico;
         this.context = context;
+    }
+
+    //Método responsável por ligar o objeto da interface OnItemClickListener do FragRemedio ao objeto do adapter
+    public void setClickListener(OnItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
     }
 
     @Override
@@ -124,7 +138,7 @@ public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.V
                     dataProgViewHolder.tvDataProg.setText(texto);
                     break;
                 }
-                
+
                 String dataFormatada = Utils.CalendarToStringFormatada(dateItem.getDataProg());
                 // Populate date item data here
                 dataProgViewHolder.tvDataProg.setText(dataFormatada);
@@ -135,10 +149,9 @@ public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     // ViewHolder for date row item
-    class HeaderViewHolder extends RecyclerView.ViewHolder {
+    class HeaderViewHolder extends RecyclerView.ViewHolder  {
 
         private TextView tvDataProg;
-
         public HeaderViewHolder(View v) {
             super(v);
             //TextView que contém a data
@@ -146,7 +159,7 @@ public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    class ItemViewHolder extends RecyclerView.ViewHolder {
+    class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView img;
         private TextView nomeMed;
         private TextView horaProg;
@@ -156,6 +169,13 @@ public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.V
             img = (ImageView) v.findViewById(R.id.imgMedHistorico);
             nomeMed = (TextView) v.findViewById(R.id.tvNomeMedHist);
             horaProg = (TextView) v.findViewById(R.id.tvHoraprogHist);
+            v.setOnClickListener(this);
+        }
+
+        //Sobreescreve o método e verifica de o objeto da interface utilizada pela activity.
+        @Override
+        public void onClick(View view) {
+            if(clickListener != null) clickListener.onClick(view, getAdapterPosition());
         }
     }
 

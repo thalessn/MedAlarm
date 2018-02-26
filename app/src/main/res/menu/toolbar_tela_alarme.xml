@@ -6,11 +6,11 @@
         android:orderInCategory="100"
         android:title="Soneca"
         android:icon="@drawable/ic_snooze"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/telaAlarmeTomar"
         android:orderInCategory="100"
         android:title="Tomar"
         android:icon="@drawable/ic_done_all"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="ifRoom"/>
 </menu>

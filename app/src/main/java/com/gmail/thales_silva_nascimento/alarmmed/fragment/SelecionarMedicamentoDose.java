@@ -90,6 +90,7 @@ public class SelecionarMedicamentoDose extends DialogFragment implements Medicam
 
         //Adapter do recycle view
         MedicamentosDoseAdapter adapter = new MedicamentosDoseAdapter(getContext(), medicamentos);
+
         //Adiciona o método OnItemClickListener no adapter
         adapter.setClickListener(this);
 
