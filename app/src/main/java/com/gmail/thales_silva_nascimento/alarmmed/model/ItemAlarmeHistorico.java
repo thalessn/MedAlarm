@@ -1,12 +1,15 @@
 package com.gmail.thales_silva_nascimento.alarmmed.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.gmail.thales_silva_nascimento.alarmmed.ListItemHistorico;
 
 /**
  * Created by thales on 09/09/17.
  */
 
-public class ItemAlarmeHistorico extends ListItemHistorico {
+public class ItemAlarmeHistorico extends ListItemHistorico implements Parcelable {
 
     private long id;
     Medicamento med;
@@ -90,4 +93,45 @@ public class ItemAlarmeHistorico extends ListItemHistorico {
     public int getType() {
         return TYPE_GENERAL;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeParcelable(this.med, flags);
+        dest.writeString(this.dataProgramada);
+        dest.writeParcelable(this.horario, flags);
+        dest.writeString(this.dataAdministrado);
+        dest.writeString(this.horaAdministrado);
+        dest.writeLong(this.idAlarme);
+        dest.writeString(this.status);
+    }
+
+    protected ItemAlarmeHistorico(Parcel in) {
+        this.id = in.readLong();
+        this.med = in.readParcelable(Medicamento.class.getClassLoader());
+        this.dataProgramada = in.readString();
+        this.horario = in.readParcelable(Horario.class.getClassLoader());
+        this.dataAdministrado = in.readString();
+        this.horaAdministrado = in.readString();
+        this.idAlarme = in.readLong();
+        this.status = in.readString();
+    }
+
+    public static final Parcelable.Creator<ItemAlarmeHistorico> CREATOR = new Parcelable.Creator<ItemAlarmeHistorico>() {
+        @Override
+        public ItemAlarmeHistorico createFromParcel(Parcel source) {
+            return new ItemAlarmeHistorico(source);
+        }
+
+        @Override
+        public ItemAlarmeHistorico[] newArray(int size) {
+            return new ItemAlarmeHistorico[size];
+        }
+    };
 }
+

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="200dp">
 
     <LinearLayout
         android:id="@+id/llItemHistorico"
@@ -28,7 +28,7 @@
             android:textSize="18sp"/>
     </LinearLayout>
     <RelativeLayout
-        android:padding="8dp"
+        android:padding="16dp"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,8 +47,9 @@
             android:layout_height="wrap_content"
             android:text="Tomado às 22:15, 22 fev"
             android:layout_below="@id/tvDataProgramada"
-            android:layout_marginTop="20dp"
-            android:textSize="14sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="16sp"
             android:textColor="#e0279e27"/>
     </RelativeLayout>
 

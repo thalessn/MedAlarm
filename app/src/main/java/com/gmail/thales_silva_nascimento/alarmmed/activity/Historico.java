@@ -1,5 +1,7 @@
 package com.gmail.thales_silva_nascimento.alarmmed.activity;
 
+import android.app.Dialog;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,8 @@ import com.gmail.thales_silva_nascimento.alarmmed.ListItemHistorico;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.adapter.HistoricoRecycleAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
+import com.gmail.thales_silva_nascimento.alarmmed.fragment.detalheHistorico;
+import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarmeHistorico;
 
 import java.util.List;
 
@@ -23,6 +27,8 @@ public class Historico extends AppCompatActivity implements HistoricoRecycleAdap
     private RecyclerView recyclerView;
     private HistoricoController historicoController;
     private Toolbar toolbar;
+    private HistoricoRecycleAdapter adapter;
+    private List<ListItemHistorico> historico;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +57,11 @@ public class Historico extends AppCompatActivity implements HistoricoRecycleAdap
         //Lista com os objetos do tipo ListItemHistorico que implemnta a interface ListItemhistorico
         //onde na lista possui o tipo HeaderHistorico e ItemAlarmeHistorico. A interface é utilizada
         //conseguir agrupar os medicamento com as datas.
-        List<ListItemHistorico> historico = historicoController.listarTodosItensHistorico();
+        historico = historicoController.listarTodosItensHistorico();
         //adapater do recyclerview
-        HistoricoRecycleAdapter adapter = new HistoricoRecycleAdapter(Historico.this, historico);
+        adapter = new HistoricoRecycleAdapter(Historico.this, historico);
+        //OnClick do adapter
+        adapter.setClickListener(this);
 
         //Adiciona o adapter no recyclerview
         recyclerView.setAdapter(adapter);
@@ -82,5 +90,12 @@ public class Historico extends AppCompatActivity implements HistoricoRecycleAdap
     public void onClick(View view, int position) {
         Log.v("Teste", "Fucnionou");
         Toast.makeText(Historico.this, "Olá sou a posicao:"+String.valueOf(position), Toast.LENGTH_LONG).show();
+        DialogFragment dialog = new detalheHistorico();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("itemAlarmeHistoric", (ItemAlarmeHistorico)historico.get(position));
+        //Manda o objeto com as informacoes do sistema
+        dialog.setArguments(bundle);
+        //Exibe o diálogo com as informação dos sistema.
+        dialog.show(getSupportFragmentManager(), "itemAlarmeHistorico");
     }
 }
