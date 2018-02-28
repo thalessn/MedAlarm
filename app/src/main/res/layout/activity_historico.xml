@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:layout_marginLeft="5dp"
-            android:text="Status Semanal"
+            android:text="Status"
             android:textSize="18sp"
             android:textColor="@color/white"
             android:textStyle="bold"/>

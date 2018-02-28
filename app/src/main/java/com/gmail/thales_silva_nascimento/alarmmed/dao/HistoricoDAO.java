@@ -139,6 +139,63 @@ public class HistoricoDAO {
 
         return items;
     }
+
+    public List<ItemAlarmeHistorico> listarHistoricoPeriodo(String dataInicial, String dataFinal){
+        String query = "Select "+MedicamentoDAO.NOME_TABELA+".*, "+NOME_TABELA+".*, "+HorarioDAO.NOME_TABELA+"."
+                +HorarioDAO.COLUNA_HORARIO+
+                " from "+NOME_TABELA+" inner join "+MedicamentoDAO.NOME_TABELA
+                + " on "+NOME_TABELA+"."+COLUNA_ID_MEDICAMENTO+" = "+MedicamentoDAO.NOME_TABELA+"."
+                +MedicamentoDAO.COLUNA_ID+" inner join "+HorarioDAO.NOME_TABELA+" on "+NOME_TABELA+"."
+                +COLUNA_ID_HORARIO+" = "+HorarioDAO.NOME_TABELA+"."+ HorarioDAO.COLUNA_ID+
+                " where "+COLUNA_DATA_PROG+" between '"+dataInicial+"' and '"+dataFinal+"'"+
+                " order by date(" +COLUNA_DATA_PROG+") DESC, " +HorarioDAO.NOME_TABELA+"."+HorarioDAO.COLUNA_HORARIO;
+        List<ItemAlarmeHistorico> items = new ArrayList<>();
+        Cursor cursor = database.rawQuery(query,null);
+
+        if(cursor == null){
+            return null;
+        }
+
+        try{
+            if(cursor.moveToFirst()){
+                do{
+                    //Informações para criar um mendicamento
+                    long id =                     cursor.getLong(0);
+                    String nome =                 cursor.getString(1);
+                    int dosagem =                 cursor.getInt(2);
+                    String tipoDosagem =          cursor.getString(3);
+                    String foto =                 cursor.getString(6);
+                    //Transforma para boolean
+                    boolean usoContinuo =         (cursor.getInt(4) == 1);
+                    String obs =                  cursor.getString(5);
+                    int quantidade =              cursor.getInt(7);
+
+                    //Cria o medicamento do ItemAlarmeHistórico
+                    Medicamento medicamento = new Medicamento(id, nome, dosagem, tipoDosagem, usoContinuo, obs, foto, quantidade);
+
+                    //Informações necessárias para criar o itemAlarmeHistorico
+                    long idHistorico =        cursor.getLong(8);
+                    String dataProg =         cursor.getString(10);
+                    long idHorario =          cursor.getLong(11);
+                    String dataAdministrado = cursor.getString(12);
+                    String horaAdministrado = cursor.getString(13);
+                    String status =           cursor.getString(14);
+                    String horario =          cursor.getString(15);
+
+                    //Cria o objeto horário do itemAlarmeHistórico
+                    Horario horario1 = new Horario(idHorario,horario);
+
+                    //Cria e salva o item na lista
+                    ItemAlarmeHistorico itemSalvo = new ItemAlarmeHistorico(idHistorico,medicamento,dataProg,horario1,dataAdministrado,horaAdministrado);
+                    items.add(itemSalvo);
+                }while (cursor.moveToNext());
+            }
+        }finally {
+            cursor.close();
+        }
+
+        return items;
+    }
 }
 
 

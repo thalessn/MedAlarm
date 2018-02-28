@@ -11,15 +11,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gmail.thales_silva_nascimento.alarmmed.ListItemHistorico;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.Utils;
 import com.gmail.thales_silva_nascimento.alarmmed.adapter.HistoricoRecycleAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.detalheHistorico;
+import com.gmail.thales_silva_nascimento.alarmmed.fragment.filtroHistorico;
 import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarmeHistorico;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 public class Historico extends AppCompatActivity implements HistoricoRecycleAdapter.OnItemClickListener {
@@ -29,6 +34,7 @@ public class Historico extends AppCompatActivity implements HistoricoRecycleAdap
     private Toolbar toolbar;
     private HistoricoRecycleAdapter adapter;
     private List<ListItemHistorico> historico;
+    private TextView tvPeriodo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +63,31 @@ public class Historico extends AppCompatActivity implements HistoricoRecycleAdap
         //Lista com os objetos do tipo ListItemHistorico que implemnta a interface ListItemhistorico
         //onde na lista possui o tipo HeaderHistorico e ItemAlarmeHistorico. A interface é utilizada
         //conseguir agrupar os medicamento com as datas.
-        historico = historicoController.listarTodosItensHistorico();
+        //Calcula a data inicial e final para ficar no período de 1 seman atrás.
+        Calendar calFinal = Calendar.getInstance();
+        String dataFinal = Utils.CalendarToStringData(calFinal);
+        Log.v("dataFinal", dataFinal);
+        dataFinal.replaceAll(" ","");
+
+        Calendar calInical = Calendar.getInstance();
+        calInical.add(Calendar.DATE, -7);
+        String dataInicial = Utils.CalendarToStringData(calInical);
+        Log.v("DataInicial", dataInicial);
+        dataInicial.replaceAll(" ","");
+        //Pesquisa no banco de dados
+        historico = historicoController.listarHistoricoPeriodo(dataInicial, dataFinal);
+
+        //Insere texto abaixo de Status
+        SimpleDateFormat dia = new SimpleDateFormat("d");
+        SimpleDateFormat mes = new SimpleDateFormat("MMM");
+        SimpleDateFormat ano = new SimpleDateFormat("yyyy");
+        String texto = mes.format(calInical.getTime())+" "+dia.format(calInical.getTime())
+                +" - "+mes.format(calFinal.getTime())+" "+dia.format(calFinal.getTime())
+                +", "+ano.format(calFinal.getTime());
+
+        tvPeriodo = (TextView) findViewById(R.id.tvPeriodoHist);
+        tvPeriodo.setText(texto);
+
         //adapater do recyclerview
         adapter = new HistoricoRecycleAdapter(Historico.this, historico);
         //OnClick do adapter
@@ -79,7 +109,8 @@ public class Historico extends AppCompatActivity implements HistoricoRecycleAdap
         // Metodo que gerencia os itens do menu da Toolbar.
         switch (item.getItemId()) {
             case R.id.iTConfig:
-                Toast.makeText(Historico.this, "Teste do botão", Toast.LENGTH_LONG).show();
+                DialogFragment dialog = new filtroHistorico();
+                dialog.show(getSupportFragmentManager(),"filtroHistorico");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -88,11 +119,9 @@ public class Historico extends AppCompatActivity implements HistoricoRecycleAdap
 
     @Override
     public void onClick(View view, int position) {
-        Log.v("Teste", "Fucnionou");
-        Toast.makeText(Historico.this, "Olá sou a posicao:"+String.valueOf(position), Toast.LENGTH_LONG).show();
         DialogFragment dialog = new detalheHistorico();
         Bundle bundle = new Bundle();
-        bundle.putParcelable("itemAlarmeHistoric", (ItemAlarmeHistorico)historico.get(position));
+        bundle.putParcelable("itemAlarmeHistorico", (ItemAlarmeHistorico)historico.get(position));
         //Manda o objeto com as informacoes do sistema
         dialog.setArguments(bundle);
         //Exibe o diálogo com as informação dos sistema.
