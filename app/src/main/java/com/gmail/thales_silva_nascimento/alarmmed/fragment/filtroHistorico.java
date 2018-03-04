@@ -5,10 +5,14 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -37,6 +41,7 @@ public class filtroHistorico extends DialogFragment {
     private MedicamentoController medController;
     private Calendar dInicial;
     private Calendar dFinal;
+    private List<Medicamento> medicamentos;
 
     public interface filtroHistoricoListener{
         public void filtroHistoricoListenerPositivo(DialogFragment dialog, long idMedicamento,String dataInicial, String dataFinal);
@@ -91,7 +96,7 @@ public class filtroHistorico extends DialogFragment {
         //Cria a controladora do medicamento
         medController = new MedicamentoController(getContext());
         //Lista contendo todos os medicamentos
-        List<Medicamento> medicamentos = medController.listarTodosMedicamentos();
+        medicamentos = medController.listarTodosMedicamentos();
         //Gambiarra para aparecer Todos os Medicamentos na primeira linha
         medicamentos.add(0,new Medicamento("Todos os Medicamentos",100,"",true,"",""));
         //Adapter utilizado pelo spinner;
@@ -120,7 +125,7 @@ public class filtroHistorico extends DialogFragment {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
-                int dia = cal.get(Calendar.DAY_OF_WEEK);
+                int dia = cal.get(Calendar.DAY_OF_MONTH);
                 int mes = cal.get(Calendar.MONTH);
                 int ano = cal.get(Calendar.YEAR);
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
@@ -128,6 +133,7 @@ public class filtroHistorico extends DialogFragment {
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                         String novaDataIni = Utils.formataDataBrasil(i2,i1,i);
                         dataInicial.setText(novaDataIni);
+                        verificaData();
                     }
                 }, ano, mes, dia);
 
@@ -155,12 +161,59 @@ public class filtroHistorico extends DialogFragment {
         });
 
         btnCancelar = (Button) alertView.findViewById(R.id.btnDiaEspCancel);
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                interfaceListener.filtroHistoricoListenerNegativo(filtroHistorico.this);
+            }
+        });
+
         btnConfirmar = (Button) alertView.findViewById(R.id.btnDiaEspDef);
+
+        btnConfirmar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(verificaData()){
+                    String dIni = Utils.formataDataUTC(dataInicial.getText().toString());
+                    String dFim = Utils.formataDataUTC(dataFinal.getText().toString());
+                    interfaceListener.filtroHistoricoListenerPositivo(filtroHistorico.this,retonaIdItemSelecionado(),dIni,dFim);
+                }
+
+            }
+        });
 
 
 
         alert.setView(alertView);
         return alert.create();
 
+    }
+
+    /**
+     * Verifica se a data inicial é maior que a data final do filtro.
+     * @return true ou false
+     */
+    public boolean verificaData(){
+        Calendar dIni = Utils.DataDiaMesAnoToCalendar(dataInicial.getText().toString());
+        Calendar dFinal = Utils.DataDiaMesAnoToCalendar(dataFinal.getText().toString());
+        if(dFinal.before(dIni)){
+            dataInicial.setTextColor(ContextCompat.getColor(getContext(),R.color.vermelho));
+            Toast.makeText(getContext(),"A Data Inicial não pode ser posterior a Data Final",Toast.LENGTH_LONG).show();
+            return false;
+        }else{
+            dataInicial.setTextColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            return true;
+        }
+    }
+
+    public Long retonaIdItemSelecionado(){
+        if(spinner.getSelectedItemPosition() == 0){
+            long r = 0;
+            return r;
+        }else{
+            long r = medicamentos.get(spinner.getSelectedItemPosition()).getId();
+            return r;
+        }
     }
 }

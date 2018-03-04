@@ -140,15 +140,37 @@ public class HistoricoDAO {
         return items;
     }
 
-    public List<ItemAlarmeHistorico> listarHistoricoPeriodo(String dataInicial, String dataFinal){
-        String query = "Select "+MedicamentoDAO.NOME_TABELA+".*, "+NOME_TABELA+".*, "+HorarioDAO.NOME_TABELA+"."
-                +HorarioDAO.COLUNA_HORARIO+
-                " from "+NOME_TABELA+" inner join "+MedicamentoDAO.NOME_TABELA
-                + " on "+NOME_TABELA+"."+COLUNA_ID_MEDICAMENTO+" = "+MedicamentoDAO.NOME_TABELA+"."
-                +MedicamentoDAO.COLUNA_ID+" inner join "+HorarioDAO.NOME_TABELA+" on "+NOME_TABELA+"."
-                +COLUNA_ID_HORARIO+" = "+HorarioDAO.NOME_TABELA+"."+ HorarioDAO.COLUNA_ID+
-                " where "+COLUNA_DATA_PROG+" between '"+dataInicial+"' and '"+dataFinal+"'"+
-                " order by date(" +COLUNA_DATA_PROG+") DESC, " +HorarioDAO.NOME_TABELA+"."+HorarioDAO.COLUNA_HORARIO;
+    /**
+     * Retorna a lista com o histórico para o periodo selecionado.
+     * Se for zero a idMedicamento então irá trazer todos os medicamento para o período.
+     * @param dataInicial
+     * @param dataFinal
+     * @param idMedicamento
+     * @return
+     */
+    public List<ItemAlarmeHistorico> listarHistoricoPeriodo(String dataInicial, String dataFinal, long idMedicamento){
+        Long idMed = idMedicamento;
+        String query = null;
+        if(idMed == 0){
+            query = "Select "+MedicamentoDAO.NOME_TABELA+".*, "+NOME_TABELA+".*, "+HorarioDAO.NOME_TABELA+"."
+                    +HorarioDAO.COLUNA_HORARIO+
+                    " from "+NOME_TABELA+" inner join "+MedicamentoDAO.NOME_TABELA
+                    + " on "+NOME_TABELA+"."+COLUNA_ID_MEDICAMENTO+" = "+MedicamentoDAO.NOME_TABELA+"."
+                    +MedicamentoDAO.COLUNA_ID+" inner join "+HorarioDAO.NOME_TABELA+" on "+NOME_TABELA+"."
+                    +COLUNA_ID_HORARIO+" = "+HorarioDAO.NOME_TABELA+"."+ HorarioDAO.COLUNA_ID+
+                    " where "+COLUNA_DATA_PROG+" between '"+dataInicial+"' and '"+dataFinal+"'"+
+                    " order by date(" +COLUNA_DATA_PROG+") DESC, " +HorarioDAO.NOME_TABELA+"."+HorarioDAO.COLUNA_HORARIO;
+        }else {
+            query = "Select "+MedicamentoDAO.NOME_TABELA+".*, "+NOME_TABELA+".*, "+HorarioDAO.NOME_TABELA+"."
+                    +HorarioDAO.COLUNA_HORARIO+
+                    " from "+NOME_TABELA+" inner join "+MedicamentoDAO.NOME_TABELA
+                    + " on "+NOME_TABELA+"."+COLUNA_ID_MEDICAMENTO+" = "+MedicamentoDAO.NOME_TABELA+"."
+                    +MedicamentoDAO.COLUNA_ID+" inner join "+HorarioDAO.NOME_TABELA+" on "+NOME_TABELA+"."
+                    +COLUNA_ID_HORARIO+" = "+HorarioDAO.NOME_TABELA+"."+ HorarioDAO.COLUNA_ID+
+                    " where "+MedicamentoDAO.NOME_TABELA+"."+MedicamentoDAO.COLUNA_ID+" = "+idMed.toString()+" and "+COLUNA_DATA_PROG+" between '"+dataInicial+"' and '"+dataFinal+"'"+
+                    " order by date(" +COLUNA_DATA_PROG+") DESC, " +HorarioDAO.NOME_TABELA+"."+HorarioDAO.COLUNA_HORARIO;
+        }
+
         List<ItemAlarmeHistorico> items = new ArrayList<>();
         Cursor cursor = database.rawQuery(query,null);
 

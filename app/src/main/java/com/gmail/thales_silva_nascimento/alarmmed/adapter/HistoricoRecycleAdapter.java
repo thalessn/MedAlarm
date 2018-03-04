@@ -179,4 +179,10 @@ public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
+    public void UpdateAdapterList(List<ListItemHistorico> medicamentos){
+        dadosHistorico.clear();
+        dadosHistorico = medicamentos;
+        notifyDataSetChanged();
+    }
+
 }

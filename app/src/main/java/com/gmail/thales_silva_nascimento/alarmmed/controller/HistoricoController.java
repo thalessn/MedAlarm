@@ -79,12 +79,12 @@ public class HistoricoController {
 
     }
 
-    public List<ListItemHistorico> listarHistoricoPeriodo(String datainicial, String datafinal){
+    public List<ListItemHistorico> listarHistoricoPeriodo(String datainicial, String datafinal, long idMedicamento){
         //Cria um hash map para quardar o dia e os medicamentos relacionados.
         LinkedHashMap<String, List<ItemAlarmeHistorico>> map = new LinkedHashMap<>();
         //Busca no banco todos os historicos gravados ordenados por dataProg
         //DESC e medicamento nome.
-        List<ItemAlarmeHistorico> itens = historicoDAO.listarHistoricoPeriodo(datainicial, datafinal);
+        List<ItemAlarmeHistorico> itens = historicoDAO.listarHistoricoPeriodo(datainicial, datafinal,idMedicamento);
         //Popula o hashMap com as informações do banco
         if(itens!= null){
             for(ItemAlarmeHistorico iah : itens){

@@ -112,10 +112,10 @@ public class Utils {
     }
 
     public static String formataDataUTC(String data){
-        data = data.replace("/", "-");
-        StringBuilder result = new StringBuilder(data);
-        result.reverse();
-        return result.toString();
+        String a = "10/10/2018";
+        String [] d = data.split("/");
+        String result = d[2]+"-"+d[1]+"-"+d[0];
+        return result;
 
     }
 

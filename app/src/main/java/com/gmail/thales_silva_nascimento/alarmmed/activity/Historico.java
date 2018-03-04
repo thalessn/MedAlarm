@@ -27,7 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-public class Historico extends AppCompatActivity implements HistoricoRecycleAdapter.OnItemClickListener {
+public class Historico extends AppCompatActivity implements HistoricoRecycleAdapter.OnItemClickListener, filtroHistorico.filtroHistoricoListener{
 
     private RecyclerView recyclerView;
     private HistoricoController historicoController;
@@ -75,18 +75,20 @@ public class Historico extends AppCompatActivity implements HistoricoRecycleAdap
         Log.v("DataInicial", dataInicial);
         dataInicial.replaceAll(" ","");
         //Pesquisa no banco de dados
-        historico = historicoController.listarHistoricoPeriodo(dataInicial, dataFinal);
+        historico = historicoController.listarHistoricoPeriodo(dataInicial, dataFinal,0);
 
-        //Insere texto abaixo de Status
-        SimpleDateFormat dia = new SimpleDateFormat("d");
-        SimpleDateFormat mes = new SimpleDateFormat("MMM");
-        SimpleDateFormat ano = new SimpleDateFormat("yyyy");
-        String texto = mes.format(calInical.getTime())+" "+dia.format(calInical.getTime())
-                +" - "+mes.format(calFinal.getTime())+" "+dia.format(calFinal.getTime())
-                +", "+ano.format(calFinal.getTime());
+//        //Insere texto abaixo de Status
+//        SimpleDateFormat dia = new SimpleDateFormat("d");
+//        SimpleDateFormat mes = new SimpleDateFormat("MMM");
+//        SimpleDateFormat ano = new SimpleDateFormat("yyyy");
+//        String texto = mes.format(calInical.getTime())+" "+dia.format(calInical.getTime())
+//                +" - "+mes.format(calFinal.getTime())+" "+dia.format(calFinal.getTime())
+//                +", "+ano.format(calFinal.getTime());
+//
+//        tvPeriodo = (TextView) findViewById(R.id.tvPeriodoHist);
+//        tvPeriodo.setText(texto);
 
-        tvPeriodo = (TextView) findViewById(R.id.tvPeriodoHist);
-        tvPeriodo.setText(texto);
+        insereTextoStatus(calInical, calFinal);
 
         //adapater do recyclerview
         adapter = new HistoricoRecycleAdapter(Historico.this, historico);
@@ -126,5 +128,35 @@ public class Historico extends AppCompatActivity implements HistoricoRecycleAdap
         dialog.setArguments(bundle);
         //Exibe o diálogo com as informação dos sistema.
         dialog.show(getSupportFragmentManager(), "itemAlarmeHistorico");
+    }
+
+    @Override
+    public void filtroHistoricoListenerPositivo(DialogFragment dialog, long idMedicamento, String dataInicial, String dataFinal) {
+        dialog.dismiss(); //Apaga o Dialog
+        historico.clear();
+        historico = historicoController.listarHistoricoPeriodo(dataInicial, dataFinal,idMedicamento);
+        adapter.UpdateAdapterList(historico);
+
+        Calendar calini = Utils.DataStringToCalendar(dataInicial);
+        Calendar calfim = Utils.DataStringToCalendar(dataFinal);
+        insereTextoStatus(calini,calfim);
+    }
+
+    @Override
+    public void filtroHistoricoListenerNegativo(DialogFragment dialog) {
+        dialog.dismiss();
+    }
+
+    public void insereTextoStatus(Calendar ini, Calendar fim){
+        //Insere texto abaixo de Status
+        SimpleDateFormat dia = new SimpleDateFormat("d");
+        SimpleDateFormat mes = new SimpleDateFormat("MMM");
+        SimpleDateFormat ano = new SimpleDateFormat("yyyy");
+        String texto = mes.format(ini.getTime())+" "+dia.format(ini.getTime())
+                +" - "+mes.format(fim.getTime())+" "+dia.format(fim.getTime())
+                +", "+ano.format(fim.getTime());
+
+        tvPeriodo = (TextView) findViewById(R.id.tvPeriodoHist);
+        tvPeriodo.setText(texto);
     }
 }
