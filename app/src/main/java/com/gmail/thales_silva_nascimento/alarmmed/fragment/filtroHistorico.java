@@ -5,14 +5,11 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -91,7 +88,7 @@ public class filtroHistorico extends DialogFragment {
         //LayoutInflater para inflar o layout
         LayoutInflater inflater = getActivity().getLayoutInflater();
         //View customizada do alertDialog
-        View alertView = inflater.inflate(R.layout.dialog_filtro_pedido, null);
+        View alertView = inflater.inflate(R.layout.dialog_filtro_periodo, null);
 
         //Cria a controladora do medicamento
         medController = new MedicamentoController(getContext());
