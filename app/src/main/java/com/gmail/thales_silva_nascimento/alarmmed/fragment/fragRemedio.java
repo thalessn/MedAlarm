@@ -12,8 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.gmail.thales_silva_nascimento.alarmmed.MedicamentoAdapter;
+import com.gmail.thales_silva_nascimento.alarmmed.adapter.MedicamentoAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.activity.MedicamentoCadastro;
 import com.gmail.thales_silva_nascimento.alarmmed.activity.MedicamentoDetalhe;
@@ -31,6 +32,7 @@ public class fragRemedio extends Fragment implements MedicamentoAdapter.OnItemCl
     private MedicamentoController medicamentoController;
     private MedicamentoAdapter adapter;
     private static final int CODIGO_RESULT_ACTIVITY = 1;
+    private TextView textView;
 
     public fragRemedio() {
         // Required empty public constructor
@@ -58,9 +60,15 @@ public class fragRemedio extends Fragment implements MedicamentoAdapter.OnItemCl
         //Altera o Titulo da atividade quando este fragment aparece
         getActivity().setTitle("Remédios");
 
+        textView = (TextView) view.findViewById(R.id.tvRemedioTexto);
         fab = (FloatingActionButton) view.findViewById(R.id.fabMedicamento);
         medicamentos = medicamentoController.listarTodosMedicamentos();
-        Log.v("Tamanho lista", String.valueOf(medicamentos.size()));
+
+        //Verifica se existe medicamento. Se sim retira o texto da tela.
+        if(!medicamentos.isEmpty()){
+            textView.setVisibility(View.GONE);
+        }
+        Log.v("TamanhoListaMedicamento", String.valueOf(medicamentos.size()));
 
         recyclerView = (RecyclerView) view.findViewById(R.id.rvMedicamento);
         LinearLayoutManager ll = new LinearLayoutManager(view.getContext());
@@ -109,12 +117,17 @@ public class fragRemedio extends Fragment implements MedicamentoAdapter.OnItemCl
         }
     }
 
-
     private void atualizaRecyclerViewMedicamento(){
         //Apaga o conteúdo da lista
         medicamentos.clear();
         //Preeche novamente a listo já com o novo médico
         medicamentos = medicamentoController.listarTodosMedicamentos();
+        //Verifica se deve remover o texto dica
+        if(!medicamentos.isEmpty()){
+            textView.setVisibility(View.GONE);
+        }else {
+            textView.setVisibility(View.VISIBLE);
+        }
         //Atualiza a ListView atualizando a lista do medicoAdapter associado
         adapter.updateAdapter(medicamentos);
     }

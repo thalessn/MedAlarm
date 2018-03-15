@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <LinearLayout
+        android:id="@+id/llItemHistorico"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/imgHistoricoItem"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/remedio1"/>
+        <TextView
+            android:id="@+id/tvnomeMedHistorico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:text="Nome do Medicamento"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:padding="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llItemHistorico">
+
+        <TextView
+            android:id="@+id/tvDataProgramada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Programado para 22:15, 22 fev"
+            android:textSize="16sp"
+            android:textColor="@color/preto"/>
+        <TextView
+            android:id="@+id/tvDataAdministrado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tomado às 22:15, 22 fev"
+            android:layout_below="@id/tvDataProgramada"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="16sp"
+            android:textColor="#e0279e27"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

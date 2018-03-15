@@ -136,6 +136,8 @@ public class Weekdays {
         map.put("quin",  0x08);
         map.put("sex",    0x10);
         map.put("sab",  0x20);
+        //acrescentei por causa do acento
+        map.put("sáb", 0x20);
         map.put("dom",    0x40);
 
         int bits = 0;

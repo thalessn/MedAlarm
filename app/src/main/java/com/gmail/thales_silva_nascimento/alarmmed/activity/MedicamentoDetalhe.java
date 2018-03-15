@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +23,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
-import com.gmail.thales_silva_nascimento.alarmmed.adicionarDose;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.AlarmeController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.LembreteCompraController;
@@ -91,7 +89,8 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MedicamentoDetalhe.this, adicionarDose.class);
-                startActivity(i);
+                i.putExtra("medicamento", medicamento);
+                startActivityForResult(i,CODIGO_RESULT_ACTIVITY);
             }
         });
 
@@ -399,8 +398,9 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
 
     private void atualizaInfoRemedio(){
 
-        Medicamento medAtualizado = medicamentoController.buscarMedicamentoPorId(medicamento.getId());
-        medicamento = medAtualizado;
+        medicamento = medicamentoController.buscarMedicamentoPorId(medicamento.getId());
+
+        Log.v("Medicamento", "Quantidade: " +String.valueOf(medicamento.getQuantidade()));
 
         //Carrega a image do medicamento
         loadImagem(medicamento);
@@ -442,6 +442,7 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
         if(codigo == CODIGO_RESULT_ACTIVITY){
             if(intent != null){
                 if(resultado == 1){
+                    Log.v("Medicamento", "Chamou a função de atulizar medicamento");
                     atualizaInfoRemedio();
                 }
             }

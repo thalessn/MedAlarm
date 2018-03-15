@@ -24,6 +24,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,13 +32,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.activity_medicoCadastro" />
-        <activity android:name=".activity.activity_medicoDetalhe" />
-        <activity android:name=".activity.CriaPerfl" />
-        <activity android:name=".activity.editaPerfil" />
-        <activity android:name=".activity.receitaCadastro" />
+        <activity
+            android:name=".activity.activity_medicoCadastro"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.activity_medicoDetalhe"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CriaPerfl"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.editaPerfil"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.receitaCadastro"
+            android:screenOrientation="portrait" />
         <activity android:name=".TelaAlarme" />
-        <activity android:name=".activity.MedicamentoCadastro">
+        <activity
+            android:name=".activity.MedicamentoCadastro"
+            android:screenOrientation="portrait">
 
             <!--
             <intent-filter>
@@ -58,12 +71,24 @@
         <!-- Declara que a classe AlarmeReceiver é o tipo de receiver -->
         <receiver android:name=".LembreteCompraReceiver" />
 
-        <activity android:name=".activity.MedicamentoDetalhe" />
-        <activity android:name=".activity.LembreteCompraRemedio" />
         <activity
-            android:name=".adicionarDose"
+            android:name=".activity.MedicamentoDetalhe"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LembreteCompraRemedio"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.adicionarDose"
             android:label="@string/title_activity_adicionar_dose"
-            android:theme="@style/AppTheme"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.InfoMedAlarmes" />
+        <activity
+            android:name=".activity.activityFloatingbuttonTelaInicial"
+            android:label="@string/title_activity_excluir_teste_flotingbutton"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
+        <activity android:name=".activity.Historico" />
+        <activity android:name=".Email"></activity>
     </application>
 
 </manifest>

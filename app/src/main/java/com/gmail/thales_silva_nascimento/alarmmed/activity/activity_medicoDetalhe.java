@@ -20,9 +20,8 @@ import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicoController;
 import com.gmail.thales_silva_nascimento.alarmmed.dao.EspecialidadeDAO;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medico;
 
-/**
- * Created by Thales on 13/02/2017.
- */
+import org.w3c.dom.Text;
+
 
 public class activity_medicoDetalhe extends AppCompatActivity {
     private TextView nome;
@@ -33,6 +32,11 @@ public class activity_medicoDetalhe extends AppCompatActivity {
     private Medico medico;
     private MedicoController medicoController;
     private static final int CODIGO_RESULT_ACTIVITY = 1;
+    private TextView texto;
+    private LinearLayout llTelMed;
+    private LinearLayout llEndMed;
+    private LinearLayout llObsMed;
+    private View view1, view2;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -48,11 +52,11 @@ public class activity_medicoDetalhe extends AppCompatActivity {
         //Inicializa a controladora do médico
         medicoController = MedicoController.getInstance(getBaseContext());
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.tbMedicoDetalhe);
         toolbar.setNavigationIcon(R.drawable.ic_menu_arrow_back);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setTitle("Histórico");
 
         //Onclick no botão de retonar da toolbar
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -63,14 +67,20 @@ public class activity_medicoDetalhe extends AppCompatActivity {
         });
 
 
+
         nome = (TextView) findViewById(R.id.tbNomeMedicoD);
         telefone = (TextView) findViewById(R.id.telMedicoDetalhe);
         endereco = (TextView) findViewById(R.id.endMedicoDetalhe);
         observacao = (TextView) findViewById(R.id.obsMedicoDetalhe);
         especialidade = (TextView) findViewById(R.id.tbEspecMedicoD);
+        texto = (TextView) findViewById(R.id.tvTextoMedicoDetalhe);
+        view1 = findViewById(R.id.viewMedDet1);
+        view2 = findViewById(R.id.viewMedDet2);
+
+        llObsMed = (LinearLayout) findViewById(R.id.LLobsMedDetalhe);
 
 
-        LinearLayout llTelMed = (LinearLayout) findViewById(R.id.LLTelMedDetalhe);
+        llTelMed = (LinearLayout) findViewById(R.id.LLTelMedDetalhe);
         llTelMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +90,7 @@ public class activity_medicoDetalhe extends AppCompatActivity {
             }
         });
 
-        LinearLayout llEndMed = (LinearLayout) findViewById(R.id.LLEndMedDetalhe);
+        llEndMed = (LinearLayout) findViewById(R.id.LLEndMedDetalhe);
         llEndMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,9 +101,6 @@ public class activity_medicoDetalhe extends AppCompatActivity {
 
             }
         });
-
-
-
 
         if(savedInstanceState == null){
             //Recupera as infomações passada da outra activity
@@ -185,7 +192,6 @@ public class activity_medicoDetalhe extends AppCompatActivity {
                 if(resultado == 1){
                     //Atualiza os detalhes do médico
                     atualizaMedico();
-                    Toast.makeText(activity_medicoDetalhe.this, "ATUALIZAR MÈDICO", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -194,6 +200,20 @@ public class activity_medicoDetalhe extends AppCompatActivity {
     private void preencheTextView(Medico medico){
         //Preenche os TextViews com as infomarções do médico
         nome.setText(medico.getNome());
+        if(!(medico.getTelefone().isEmpty() && medico.getEndereco().isEmpty()&& medico.getObservacao().isEmpty())){
+            texto.setVisibility(View.GONE);
+        }
+        if(medico.getTelefone().isEmpty()){
+            llTelMed.setVisibility(View.GONE);
+            view1.setVisibility(View.GONE);
+        }
+        if(medico.getEndereco().isEmpty()){
+            llEndMed.setVisibility(View.GONE);
+            view2.setVisibility(View.GONE);
+        }
+        if(medico.getObservacao().isEmpty()){
+            llObsMed.setVisibility(View.GONE);
+        }
         telefone.setText(medico.getTelefone());
         endereco.setText(medico.getEndereco());
         observacao.setText(medico.getObservacao());

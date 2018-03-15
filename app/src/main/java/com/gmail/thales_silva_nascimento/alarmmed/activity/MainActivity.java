@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.widget.Toast;
 
 import com.gmail.thales_silva_nascimento.alarmmed.R;
@@ -43,6 +45,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("AlarmMed");
+
+
 
         //Adiciona o evento onlick no Floating Button (Botão mais da Tela)
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -53,16 +59,23 @@ public class MainActivity extends AppCompatActivity
                 Fragment currentfragment = getSupportFragmentManager().findFragmentById(R.id.content_main);
                 //A tag do Frament atual
                 String tag = currentfragment.getTag();
+                Log.v("Tag", tag);
                 switch (tag){
                     case "fragReceita":
                         Intent receita = new Intent(view.getContext(), receitaCadastro.class);
                         startActivity(receita);
+                        break;
+                    case "fragInicio":
+                        Intent i = new Intent(MainActivity.this, activityFloatingbuttonTelaInicial.class);
+                        startActivity(i);
                         break;
                     default:
                         break;
                 }
             }
         });
+
+
 
 
         //Navigation Drawer
@@ -101,6 +114,7 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_main, inicialFrag, "fragInicio");
         ft.commit();
+
     }
 
     @Override
@@ -198,12 +212,20 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(MainActivity.this, CriaPerfl.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_historico:
+                floatingButtonShow(false);
+                //fragment = new fragHistorico();
+                //fragmentTag = "fragHistorico";
+                Intent activity = new Intent(MainActivity.this, Historico.class);
+                startActivity(activity);
+                break;
         }
         if(fragment !=null && fragmentTag != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
             ft.replace(R.id.content_main, fragment, fragmentTag);
             ft.commit();
-            getSupportFragmentManager().executePendingTransactions();
+            //getSupportFragmentManager().executePendingTransactions();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

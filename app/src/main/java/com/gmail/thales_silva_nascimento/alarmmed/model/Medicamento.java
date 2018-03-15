@@ -97,8 +97,7 @@ public class Medicamento implements Parcelable {
 
     @Override
     public String toString() {
-        return "Nome: " +nome + " Dosagem: "+String.valueOf(dosagem)+ " - TipoDosagem: "+ tipoDosagem +
-                " UsoContinuo: "+String.valueOf(uso_continuo)+ " Observacao: "+observacao+ " Foto: "+foto;
+        return nome;
     }
 
     public int getQuantidade() {

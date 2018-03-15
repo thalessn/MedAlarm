@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gmail.thales_silva_nascimento.alarmmed.activity.InfoMedAlarmes">
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/CordinatorLayoutDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:fitsSystemWindows="true">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:minHeight="150dip"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleMarginBottom="60dp"
+                app:expandedTitleMarginEnd="64dp"
+                app:expandedTitleMarginStart="48dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:titleEnabled="false"
+                app:title="">
+
+                <ImageView
+                    android:id="@+id/imgBarra"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="fitXY"
+                    android:alpha="0.55"
+                    app:layout_collapseMode="pin" />
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/tbInfoMedAlarme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    app:layout_collapseMode="pin"
+                    app:theme="@style/ThemeOverlay.AppCompat.Dark"></android.support.v7.widget.Toolbar>
+
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    app:layout_collapseMode="pin"
+                    app:tabGravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                    app:tabIndicatorColor="@color/colorAccent" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPagerInfoMed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/CordinatorLayoutDetalhe"></android.support.v4.view.ViewPager>
+
+
+</RelativeLayout>

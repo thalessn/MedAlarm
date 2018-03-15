@@ -100,4 +100,5 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_adicionar_dose">adicionarDose</string>
+    <string name="title_activity_excluir_teste_flotingbutton">excluirTesteFlotingbutton</string>
 </resources>

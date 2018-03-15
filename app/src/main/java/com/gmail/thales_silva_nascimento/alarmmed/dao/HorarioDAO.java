@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.gmail.thales_silva_nascimento.alarmmed.model.Horario;
 
@@ -49,7 +50,6 @@ public class HorarioDAO {
     public ContentValues criarContentValues(String horario){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUNA_HORARIO, horario);
-
         return contentValues;
     }
 
@@ -73,10 +73,13 @@ public class HorarioDAO {
         if(cursor == null){
             return null;
         }
-
         if(cursor.moveToFirst()){
             try{
                 String h = cursor.getString(HORARIO_INDEX);
+                //Adiciona espaço em branco no texto
+                h = h.substring(0,2) +" "+ h.substring(2,3) +" "+ h.substring(3,5);
+
+                Log.v("horarioFormatado", h);
                 Horario horario = new Horario(id, h);
                 return horario;
 
@@ -86,6 +89,7 @@ public class HorarioDAO {
         }
         return null;
     }
+
 
     public Map<String,Long> listarTodosHorarios(){
         Map<String, Long> horarios = new HashMap<String, Long>();
@@ -99,6 +103,8 @@ public class HorarioDAO {
                 do{
                     long id = cursor.getLong(ID_INDEX);
                     String horario = cursor.getString(HORARIO_INDEX);
+                    //Adiciona espaço em branco no texto
+                    horario = horario.substring(0,2) +" "+ horario.substring(2,3) +" "+ horario.substring(3,5);
                     horarios.put(horario, id);
                 }while(cursor.moveToNext());
             }finally {
@@ -106,6 +112,37 @@ public class HorarioDAO {
             }
         }
         return horarios;
+    }
+
+    public long buscarIdHorario(String horario){
+        String sql = "SELECT _id from horario where horario = ?";
+        String []sqlValues = {horario};
+        long id = -1;
+
+        Cursor cursor = database.rawQuery(sql, sqlValues);
+        if(cursor == null){
+            Log.v("HorarioCursorNull", "Cursor null");
+            return cadastrarHorario(horario);
+        }else{
+            if(cursor.getCount() > 0){
+                cursor.moveToFirst();
+                try{
+                    Log.v("HorarioCursor>0", "Cursor >0");
+                    int index = cursor.getColumnIndex(COLUNA_ID);
+                    id = cursor.getLong(index);
+                    Log.v("HorarioCursor>0", "Id= "+String.valueOf(id));
+                    return id;
+                }finally {
+                    cursor.close();
+                    Log.v("HorarioIDBANCO", String.valueOf(id));
+
+                }
+            }
+            else {
+                Log.v("HorarioCADASTROU", "Cadastrou horario");
+                return cadastrarHorario(horario);
+            }
+        }
     }
 
 }

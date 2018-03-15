@@ -112,10 +112,10 @@ public class Utils {
     }
 
     public static String formataDataUTC(String data){
-        data = data.replace("/", "-");
-        StringBuilder result = new StringBuilder(data);
-        result.reverse();
-        return result.toString();
+        String a = "10/10/2018";
+        String [] d = data.split("/");
+        String result = d[2]+"-"+d[1]+"-"+d[0];
+        return result;
 
     }
 
@@ -162,6 +162,20 @@ public class Utils {
 
 
         return BitmapFactory.decodeByteArray(data, 0, data.length, options);
+    }
+
+    public static String CalendarToStringFormatada(Calendar cal){
+
+        SimpleDateFormat dia = new SimpleDateFormat("d");
+        SimpleDateFormat mes = new SimpleDateFormat("MMM");
+        SimpleDateFormat ano = new SimpleDateFormat("yy");
+
+
+        SimpleDateFormat diaSemana = new SimpleDateFormat("EEE");
+        String texto = diaSemana.format(cal.getTime()) +", "+ dia.format(cal.getTime()) +" de "+ mes.format(cal.getTime())+" "+ano.format(cal.getTime());
+
+
+        return texto;
     }
 
 }
