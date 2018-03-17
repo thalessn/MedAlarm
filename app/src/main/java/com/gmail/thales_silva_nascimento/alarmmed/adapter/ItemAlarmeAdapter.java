@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
@@ -102,7 +101,6 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
         holder.adiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Botão Adiar, posicao = " +String.valueOf(i), Toast.LENGTH_LONG).show();
                 ItemAlarmeHistorico itemAlarmeHistorico = itensAlarme.get(i);
                 gerenciaStatusItemAlarme(itemAlarmeHistorico, ItemAlarmeHistorico.STATUS_ADIOU);
                 itensAlarme.remove(i);
@@ -117,7 +115,6 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
         holder.pular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Botão pular, posicao = " +String.valueOf(i), Toast.LENGTH_LONG).show();
                 ItemAlarmeHistorico itemAlarmeHistoricoSalvar = itensAlarme.get(i);
                 itensAlarme.remove(i);
                 notifyItemRemoved(i);

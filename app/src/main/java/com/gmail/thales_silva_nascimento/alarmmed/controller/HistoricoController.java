@@ -125,4 +125,10 @@ public class HistoricoController {
             return null;
         }
     }
+
+    public List<ListItemHistorico> listarHistoricoPeriodo(String datainicial, String datafinal){
+        //Id zero tras todos os medicamento neste período.
+        return listarHistoricoPeriodo(datainicial,datafinal,0);
+
+    }
 }

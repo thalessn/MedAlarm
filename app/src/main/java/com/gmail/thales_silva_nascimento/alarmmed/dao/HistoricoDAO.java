@@ -151,7 +151,7 @@ public class HistoricoDAO {
     public List<ItemAlarmeHistorico> listarHistoricoPeriodo(String dataInicial, String dataFinal, long idMedicamento){
         Long idMed = idMedicamento;
         String query = null;
-        if(idMed == 0){
+        if((idMed == 0) || (idMed == -1)){
             query = "Select "+MedicamentoDAO.NOME_TABELA+".*, "+NOME_TABELA+".*, "+HorarioDAO.NOME_TABELA+"."
                     +HorarioDAO.COLUNA_HORARIO+
                     " from "+NOME_TABELA+" inner join "+MedicamentoDAO.NOME_TABELA

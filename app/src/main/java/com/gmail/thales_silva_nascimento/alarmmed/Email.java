@@ -3,6 +3,7 @@ package com.gmail.thales_silva_nascimento.alarmmed;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.design.widget.TextInputEditText;
@@ -17,6 +18,8 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
+import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarmeHistorico;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -47,11 +50,15 @@ public class Email extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView tvDataIni, tvDataFinal;
     private TextInputEditText email;
+    private HistoricoController histController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email);
+
+        //Inicia a controladora
+        histController = new HistoricoController(Email.this);
 
         toolbar = (Toolbar) findViewById(R.id.tbEmail);
         toolbar.setNavigationIcon(R.drawable.ic_menu_arrow_back);
@@ -220,9 +227,7 @@ public class Email extends AppCompatActivity {
         //Adiciona a celula na tabela
         table.addCell(cell);
 
-        //Tabela contendo as informações do medicamento
-        float[] columnWidths = {1, 5, 5, 5};
-        PdfPTable nestedTable = new PdfPTable(columnWidths);
+
         
         //Linha em branco
         PdfPCell linebranco = new PdfPCell(new Phrase(" "));
@@ -230,35 +235,45 @@ public class Email extends AppCompatActivity {
         linebranco.setBorder(Rectangle.NO_BORDER);
         linebranco.setFixedHeight(5f);
 
-        //Linha contendo espaco em branco no inicio da linha
-        PdfPCell cell1 = new PdfPCell(new Phrase(""));
-        //Define que a celula não terá borde no contorno.
-        cell1.setBorder(Rectangle.NO_BORDER);
-        //Nome do medicamento
-        PdfPCell cell2 = new PdfPCell(new Phrase("Nome do Medicamento"));
-        cell2.setBorder(Rectangle.NO_BORDER);
-        //Programado para
-        PdfPCell cell3 = new PdfPCell(new Phrase("Programado para 15:43"));
-        cell3.setBorder(Rectangle.NO_BORDER);
-        //Tomado ou Pulou as
-        PdfPCell cell4 = new PdfPCell(new Phrase("Tomado as 16:00"));
-        cell4.setBorder(Rectangle.NO_BORDER);
-        //Adicionando as celulas na tabele adaptada(Nested)
-        nestedTable.addCell(linebranco);
-        nestedTable.addCell(cell1);
-        nestedTable.addCell(cell2);
-        nestedTable.addCell(cell3);
-        nestedTable.addCell(cell4);
+//        //Tabela contendo as informações do medicamento
+//        float[] columnWidths = {1, 5, 5, 5};
+//        PdfPTable nestedTable = new PdfPTable(columnWidths);
 
+//        //Linha contendo espaco em branco no inicio da linha
+//        PdfPCell cell1 = new PdfPCell(new Phrase(""));
+//        //Define que a celula não terá borde no contorno.
+//        cell1.setBorder(Rectangle.NO_BORDER);
+//        //Nome do medicamento
+//        PdfPCell cell2 = new PdfPCell(new Phrase("Nome do Medicamento"));
+//        cell2.setBorder(Rectangle.NO_BORDER);
+//        //Programado para
+//        PdfPCell cell3 = new PdfPCell(new Phrase("Programado para 15:43"));
+//        cell3.setBorder(Rectangle.NO_BORDER);
+//        //Tomado ou Pulou as
+//        PdfPCell cell4 = new PdfPCell(new Phrase("Tomado as 16:00"));
+//        cell4.setBorder(Rectangle.NO_BORDER);
+//        //Adicionando as celulas na tabele adaptada(Nested)
+//        nestedTable.addCell(linebranco);
+//        nestedTable.addCell(cell1);
+//        nestedTable.addCell(cell2);
+//        nestedTable.addCell(cell3);
+//        nestedTable.addCell(cell4);
 
-        //Adiciona a tabela aninhada com a principal.
-        PdfPCell cell5 = new PdfPCell(nestedTable);
-        cell5.setBorder(Rectangle.NO_BORDER);
-        table.addCell(cell5);
-        PdfPCell cell12 = new PdfPCell(new Phrase("24/03/2018"));
-        table.addCell(cell12);
+        List<ListItemHistorico>itens = histController.listarHistoricoPeriodo("01-01-2018", "15-03-2018");
+        Log.v("Tamanho", String.valueOf(itens.size()));
+//        //Adiciona a tabela aninhada com a principal.
+//        PdfPCell cell5 = new PdfPCell(nestedTable);
+//        cell5.setBorder(Rectangle.NO_BORDER);
+//        table.addCell(cell5);
+//        PdfPCell cell12 = new PdfPCell(new Phrase("24/03/2018"));
+//        table.addCell(cell12);
 
-
+        for(int i=0; i<itens.size(); i++){
+            if(itens.get(i) instanceof ItemAlarmeHistorico){
+                PdfPCell add = criaLinhaItemHistorico((ItemAlarmeHistorico) itens.get(i));
+                table.addCell(add);
+            }
+        }
         //Adiciona a tabela no documento.
         document.add(table);
         document.close();
@@ -270,5 +285,57 @@ public class Email extends AppCompatActivity {
 //        email.putExtra(Intent.EXTRA_STREAM, uri);
 //        email.setType("message/rfc822");
 //        startActivity(email);
+    }
+
+    public PdfPCell criaLinhaItemHistorico(ItemAlarmeHistorico item){
+
+        //Tabela contendo as informações do medicamento
+        float[] columnWidths = {1, 5, 5, 5};
+        PdfPTable nestedTable = new PdfPTable(columnWidths);
+
+        //Linha contendo espaco em branco no inicio da linha
+        PdfPCell cell1 = new PdfPCell(new Phrase(""));
+
+        //Define que a celula não terá borde no contorno.
+        cell1.setBorder(Rectangle.NO_BORDER);
+
+        //Nome do medicamento
+        PdfPCell cell2 = new PdfPCell(new Phrase(item.getMed().getNome()));
+        cell2.setBorder(Rectangle.NO_BORDER);
+
+        //Texto: Programado para 15:43
+        String prog = "Programado para "+item.getHorario().getHorario();
+        PdfPCell cell3 = new PdfPCell(new Phrase(prog));
+        cell3.setBorder(Rectangle.NO_BORDER);
+
+        //Cria o texto "Tomado às 12:00 ou Pulou às
+        String texto = "";
+        Font font = new Font(Font.FontFamily.TIMES_ROMAN, 12);
+        if(item.getStatus().equals(ItemAlarmeHistorico.STATUS_TOMADO)){
+            font.setColor(BaseColor.GREEN);
+            String tomado = "Tomado às "+item.getHoraAdministrado();
+            texto+=tomado;
+        }else if(item.getStatus().equals(ItemAlarmeHistorico.STATUS_PULOU)){
+            font.setColor(BaseColor.RED);
+            String pulo = "Pulou às "+item.getHoraAdministrado();
+            texto+=pulo;
+        }
+
+        PdfPCell cell4 = new PdfPCell(new Phrase(texto, font));
+        cell4.setBorder(Rectangle.NO_BORDER);
+
+        //Adiciona as células na tabela
+        nestedTable.addCell(cell1);
+        nestedTable.addCell(cell2);
+        nestedTable.addCell(cell3);
+        nestedTable.addCell(cell4);
+
+
+        //Adiciona a tabela aninhada com a principal. Adiciona a tabela dentro de uma celula para
+        //não ahver bordas.
+        PdfPCell cell5 = new PdfPCell(nestedTable);
+        cell5.setBorder(Rectangle.NO_BORDER);
+
+        return cell5;
     }
 }
