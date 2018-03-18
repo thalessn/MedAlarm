@@ -130,6 +130,8 @@ public class HistoricoDAO {
 
                     //Cria e salva o item na lista
                     ItemAlarmeHistorico itemSalvo = new ItemAlarmeHistorico(idHistorico,medicamento,dataProg,horario1,dataAdministrado,horaAdministrado);
+                    itemSalvo.setStatus(status);
+
                     items.add(itemSalvo);
                 }while (cursor.moveToNext());
             }
@@ -148,10 +150,11 @@ public class HistoricoDAO {
      * @param idMedicamento
      * @return
      */
-    public List<ItemAlarmeHistorico> listarHistoricoPeriodo(String dataInicial, String dataFinal, long idMedicamento){
+    public List<ItemAlarmeHistorico> listarHistoricoPeriodo(String dataInicial, String dataFinal, long idMedicamento, String order){
         Long idMed = idMedicamento;
         String query = null;
         if((idMed == 0) || (idMed == -1)){
+
             query = "Select "+MedicamentoDAO.NOME_TABELA+".*, "+NOME_TABELA+".*, "+HorarioDAO.NOME_TABELA+"."
                     +HorarioDAO.COLUNA_HORARIO+
                     " from "+NOME_TABELA+" inner join "+MedicamentoDAO.NOME_TABELA
@@ -159,7 +162,7 @@ public class HistoricoDAO {
                     +MedicamentoDAO.COLUNA_ID+" inner join "+HorarioDAO.NOME_TABELA+" on "+NOME_TABELA+"."
                     +COLUNA_ID_HORARIO+" = "+HorarioDAO.NOME_TABELA+"."+ HorarioDAO.COLUNA_ID+
                     " where "+COLUNA_DATA_PROG+" between '"+dataInicial+"' and '"+dataFinal+"'"+
-                    " order by date(" +COLUNA_DATA_PROG+") DESC, " +HorarioDAO.NOME_TABELA+"."+HorarioDAO.COLUNA_HORARIO;
+                    " order by date(" +COLUNA_DATA_PROG+") "+order+","+HorarioDAO.NOME_TABELA+"."+HorarioDAO.COLUNA_HORARIO;
         }else {
             query = "Select "+MedicamentoDAO.NOME_TABELA+".*, "+NOME_TABELA+".*, "+HorarioDAO.NOME_TABELA+"."
                     +HorarioDAO.COLUNA_HORARIO+
@@ -168,7 +171,7 @@ public class HistoricoDAO {
                     +MedicamentoDAO.COLUNA_ID+" inner join "+HorarioDAO.NOME_TABELA+" on "+NOME_TABELA+"."
                     +COLUNA_ID_HORARIO+" = "+HorarioDAO.NOME_TABELA+"."+ HorarioDAO.COLUNA_ID+
                     " where "+MedicamentoDAO.NOME_TABELA+"."+MedicamentoDAO.COLUNA_ID+" = "+idMed.toString()+" and "+COLUNA_DATA_PROG+" between '"+dataInicial+"' and '"+dataFinal+"'"+
-                    " order by date(" +COLUNA_DATA_PROG+") DESC, " +HorarioDAO.NOME_TABELA+"."+HorarioDAO.COLUNA_HORARIO;
+                    " order by date(" +COLUNA_DATA_PROG+") "+order+"," +HorarioDAO.NOME_TABELA+"."+HorarioDAO.COLUNA_HORARIO;
         }
 
         List<ItemAlarmeHistorico> items = new ArrayList<>();
@@ -209,6 +212,7 @@ public class HistoricoDAO {
 
                     //Cria e salva o item na lista
                     ItemAlarmeHistorico itemSalvo = new ItemAlarmeHistorico(idHistorico,medicamento,dataProg,horario1,dataAdministrado,horaAdministrado);
+                    itemSalvo.setStatus(status);
                     items.add(itemSalvo);
                 }while (cursor.moveToNext());
             }

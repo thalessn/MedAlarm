@@ -133,5 +133,10 @@ public class ItemAlarmeHistorico extends ListItemHistorico implements Parcelable
             return new ItemAlarmeHistorico[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "Medicamento: "+med.getNome()+" DataProgramada: "+dataProgramada+"DataAdministrado: "+dataAdministrado;
+    }
 }
 

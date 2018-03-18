@@ -28,6 +28,6 @@ public class HeaderHistoricoRow extends ListItemHistorico {
 
     @Override
     public String toString() {
-        return dataProg;
+        return Utils.formataDataBrasil(dataProg);
     }
 }

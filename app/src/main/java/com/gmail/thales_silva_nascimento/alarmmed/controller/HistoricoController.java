@@ -83,8 +83,9 @@ public class HistoricoController {
         //Cria um hash map para quardar o dia e os medicamentos relacionados.
         LinkedHashMap<String, List<ItemAlarmeHistorico>> map = new LinkedHashMap<>();
         //Busca no banco todos os historicos gravados ordenados por dataProg
-        //DESC e medicamento nome.
-        List<ItemAlarmeHistorico> itens = historicoDAO.listarHistoricoPeriodo(datainicial, datafinal,idMedicamento);
+        //Ordem Decrescente
+        String order = "DESC";
+        List<ItemAlarmeHistorico> itens = historicoDAO.listarHistoricoPeriodo(datainicial, datafinal,idMedicamento, order);
         //Popula o hashMap com as informações do banco
         if(itens!= null){
             for(ItemAlarmeHistorico iah : itens){
@@ -127,8 +128,50 @@ public class HistoricoController {
     }
 
     public List<ListItemHistorico> listarHistoricoPeriodo(String datainicial, String datafinal){
-        //Id zero tras todos os medicamento neste período.
-        return listarHistoricoPeriodo(datainicial,datafinal,0);
+        //Cria um hash map para quardar o dia e os medicamentos relacionados.
+        LinkedHashMap<String, List<ItemAlarmeHistorico>> map = new LinkedHashMap<>();
+        //Busca no banco todos os historicos gravados ordenados por dataProg
+        String order = "ASC";
+        List<ItemAlarmeHistorico> itens = historicoDAO.listarHistoricoPeriodo(datainicial, datafinal,0, order);
+        //Popula o hashMap com as informações do banco
+        if(itens!= null){
+            for(ItemAlarmeHistorico iah : itens){
+                //A data programada é a chave do hashmap para separar os remédio utilizando a data
+                //como parâmetro.
+                String dataProgKey = iah.getDataProgramada();
+
+                if(map.containsKey(dataProgKey)){
+                    // The key is already in the HashMap; add the pojo object
+                    // against the existing key.
+                    map.get(dataProgKey).add(iah);
+                }else {
+                    // The key is not there in the HashMap; create a new key-value pair
+                    List<ItemAlarmeHistorico> list = new ArrayList<>();
+                    list.add(iah);
+                    map.put(dataProgKey, list);
+                }
+            }
+
+            //Lista que contem as datas e os respectivos medicamentos a serem exibidos no
+            //recyclerview misturados na lista.
+            List<ListItemHistorico> listItemHistoricos = new ArrayList<>();
+            //Percorre com a data encontrada e Adiciona os remédios na lista de itens
+            for (String dataProgMap : map.keySet()) {
+                //Objeto que representa a linha acima dos dados
+                HeaderHistoricoRow row = new HeaderHistoricoRow(dataProgMap);
+                listItemHistoricos.add(row);
+
+                for (ItemAlarmeHistorico itemHistorico : map.get(dataProgMap)) {
+                    //Adiciona na lista os medicamentos relacionado a data
+                    listItemHistoricos.add(itemHistorico);
+                }
+            }
+
+            return listItemHistoricos;
+
+        }else{
+            return null;
+        }
 
     }
 }

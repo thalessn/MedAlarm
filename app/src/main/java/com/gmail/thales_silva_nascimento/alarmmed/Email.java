@@ -1,24 +1,31 @@
 package com.gmail.thales_silva_nascimento.alarmmed;
 
 import android.app.DatePickerDialog;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
+import com.gmail.thales_silva_nascimento.alarmmed.model.HeaderHistoricoRow;
 import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarmeHistorico;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -51,6 +58,8 @@ public class Email extends AppCompatActivity {
     private TextView tvDataIni, tvDataFinal;
     private TextInputEditText email;
     private HistoricoController histController;
+    private TextInputLayout text;
+    private TextInputEditText editEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +132,33 @@ public class Email extends AppCompatActivity {
                 date.show();
             }
         });
+
+
+        //TextInputLayout
+        text = (TextInputLayout) findViewById(R.id.inputLayoutEmail);
+        //TextInputEdit
+        editEmail = (TextInputEditText) findViewById(R.id.email);
+
+        editEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                validaEmail(editable.toString());
+            }
+        });
+
+        //Mantém o teclado escondido quando a activity inicia. Mantendo o foco no Editext
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
     }
 
     @Override
@@ -137,9 +173,11 @@ public class Email extends AppCompatActivity {
         // Metodo que gerencia os itens do menu da Toolbar.
         switch (item.getItemId()) {
             case R.id.iTEnviar:
-                Toast.makeText(Email.this, "Enviar", Toast.LENGTH_SHORT).show();
                 try {
-                    createPdf();
+                    if(validaEmail(editEmail.getText().toString())){
+                        Toast.makeText(Email.this, "Enviar", Toast.LENGTH_SHORT).show();
+                        createPdf();
+                    }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (DocumentException e) {
@@ -151,68 +189,40 @@ public class Email extends AppCompatActivity {
         }
     }
 
-    public void gerarRelatorio() {
-        try {
-            //Create file path for Pdf
-            String fpath = "/sdcard/" + "thales" + ".pdf";
-            File file = new File(fpath);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            // To customise the text of the pdf
-            // we can use FontFamily
-            Font bfBold12 = new Font(Font.FontFamily.TIMES_ROMAN,
-                    12, Font.BOLD, new BaseColor(0, 0, 0));
-            Font bf12 = new Font(Font.FontFamily.TIMES_ROMAN,
-                    12);
-            // create an instance of itext document
-            Document document = new Document();
-            PdfWriter.getInstance(document,
-                    new FileOutputStream(file.getAbsoluteFile()));
-            document.open();
-            //using add method in document to insert a paragraph
-            document.add(new Paragraph("My First Pdf !"));
-            document.add(new Paragraph("Hello World"));
-            // close document
-            document.close();
-
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(intent);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        } catch (DocumentException e) {
-            e.printStackTrace();
-
-        }
-
-
-
-
-    }
 
     private void createPdf() throws FileNotFoundException, DocumentException {
 
-        File docsFolder = new File(Environment.getExternalStorageDirectory() + "/Documents");
+        File docsFolder = new File(Environment.getExternalStorageDirectory() + "/AlarmMed/");
         if (!docsFolder.exists()) {
-            docsFolder.mkdir();
             Log.v("TAG", "Created a new directory for PDF");
+            docsFolder.mkdir();
         }
 
-        File pdfFile = new File(docsFolder.getAbsolutePath(),"HelloWorld.pdf");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String date = dateFormat.format(new Date());
+
+        File pdfFile = new File(docsFolder.getAbsolutePath(),"relatorio"+date+".pdf");
         OutputStream output = new FileOutputStream(pdfFile);
         Document document = new Document();
         PdfWriter.getInstance(document, output);
         document.open();
 
         /** Cabecalho */
-        Font fontBold = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
+        Font fontBold = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
         Paragraph p = new Paragraph("Relatório - Status Medicamentos", fontBold);
         document.add(p);
-        Paragraph pp = new Paragraph("Fevereiro 13, 2018 - Março 13, 2018");
+
+        //Insere texto abaixo de Status
+        Calendar dInicial = Utils.DataDiaMesAnoToCalendar(tvDataIni.getText().toString());
+        Calendar dFinal = Utils.DataDiaMesAnoToCalendar(tvDataFinal.getText().toString());
+
+        SimpleDateFormat dia = new SimpleDateFormat("d");
+        SimpleDateFormat mes = new SimpleDateFormat("MMM");
+        SimpleDateFormat ano = new SimpleDateFormat("yyyy");
+        String intervalo = mes.format(dInicial.getTime()).toUpperCase()+" "+dia.format(dInicial.getTime())+", "+ano.format(dInicial.getTime())
+                +" - "+mes.format(dFinal.getTime()).toUpperCase()+" "+dia.format(dFinal.getTime())
+                +", "+ano.format(dFinal.getTime());
+        Paragraph pp = new Paragraph(intervalo);
         document.add(pp);
         //Adiciona linha em branco
         document.add(Chunk.NEWLINE);
@@ -222,69 +232,61 @@ public class Email extends AppCompatActivity {
         PdfPTable table = new PdfPTable(1);
         table.setHorizontalAlignment(Element.ALIGN_LEFT);
         table.setWidthPercentage(100);
-        //Celula header contendo a data.
-        PdfPCell cell = new PdfPCell(new Phrase("25/03/2018"));
-        //Adiciona a celula na tabela
-        table.addCell(cell);
 
+        //Busca no Banco o histórico de administração
+        List<ListItemHistorico>itens = histController.listarHistoricoPeriodo(Utils.formataDataUTC(tvDataIni.getText().toString()), Utils.formataDataUTC(tvDataFinal.getText().toString()));
+        Log.v("TamanhoHistorico", String.valueOf(itens.size()));
 
-        
-        //Linha em branco
-        PdfPCell linebranco = new PdfPCell(new Phrase(" "));
-        linebranco.setColspan(4);
-        linebranco.setBorder(Rectangle.NO_BORDER);
-        linebranco.setFixedHeight(5f);
-
-//        //Tabela contendo as informações do medicamento
-//        float[] columnWidths = {1, 5, 5, 5};
-//        PdfPTable nestedTable = new PdfPTable(columnWidths);
-
-//        //Linha contendo espaco em branco no inicio da linha
-//        PdfPCell cell1 = new PdfPCell(new Phrase(""));
-//        //Define que a celula não terá borde no contorno.
-//        cell1.setBorder(Rectangle.NO_BORDER);
-//        //Nome do medicamento
-//        PdfPCell cell2 = new PdfPCell(new Phrase("Nome do Medicamento"));
-//        cell2.setBorder(Rectangle.NO_BORDER);
-//        //Programado para
-//        PdfPCell cell3 = new PdfPCell(new Phrase("Programado para 15:43"));
-//        cell3.setBorder(Rectangle.NO_BORDER);
-//        //Tomado ou Pulou as
-//        PdfPCell cell4 = new PdfPCell(new Phrase("Tomado as 16:00"));
-//        cell4.setBorder(Rectangle.NO_BORDER);
-//        //Adicionando as celulas na tabele adaptada(Nested)
-//        nestedTable.addCell(linebranco);
-//        nestedTable.addCell(cell1);
-//        nestedTable.addCell(cell2);
-//        nestedTable.addCell(cell3);
-//        nestedTable.addCell(cell4);
-
-        List<ListItemHistorico>itens = histController.listarHistoricoPeriodo("01-01-2018", "15-03-2018");
-        Log.v("Tamanho", String.valueOf(itens.size()));
-//        //Adiciona a tabela aninhada com a principal.
-//        PdfPCell cell5 = new PdfPCell(nestedTable);
-//        cell5.setBorder(Rectangle.NO_BORDER);
-//        table.addCell(cell5);
-//        PdfPCell cell12 = new PdfPCell(new Phrase("24/03/2018"));
-//        table.addCell(cell12);
-
+        //Preenche a Tabela
         for(int i=0; i<itens.size(); i++){
-            if(itens.get(i) instanceof ItemAlarmeHistorico){
+            if(itens.get(i) instanceof HeaderHistoricoRow){
+                //Cast para o objeto HearHistoricoRow
+                HeaderHistoricoRow header = (HeaderHistoricoRow) itens.get(i);
+                //Cria a celular Header
+                PdfPCell cell = new PdfPCell();
+                //Retira as bordas
+                cell.setBorder(Rectangle.NO_BORDER);
+                //Define a cor do fundo da célula
+                cell.setBackgroundColor(new BaseColor(176,224,230));
+                //Seta uma altura mínima
+                cell.setMinimumHeight(30);
+                //Seta o alinhamento vertical centralizado
+                cell.setVerticalAlignment(Element.ALIGN_CENTER);
+                //Cria uma fonte para deixar o texto em negrito
+                Font bold = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
+                //Cria o objeto paragrafo que será inserido na celula da tabela
+                Paragraph data = new Paragraph(header.toString(), bold);
+                //Seta o texto com alinhamento centralizado
+                data.setAlignment(Element.ALIGN_CENTER);
+                //Adiciona o paragrafo na célula
+                cell.addElement(data);
+                //Adiciona a celula na tabela
+                table.addCell(cell);
+            }else if(itens.get(i) instanceof ItemAlarmeHistorico){
+                //Cria a celula contendo as informações do historico
                 PdfPCell add = criaLinhaItemHistorico((ItemAlarmeHistorico) itens.get(i));
                 table.addCell(add);
             }
         }
+
         //Adiciona a tabela no documento.
         document.add(table);
         document.close();
 
-//        Intent email = new Intent(Intent.ACTION_SEND);
-//        email.putExtra(Intent.EXTRA_SUBJECT,"Testando o iText");
-//        email.putExtra(Intent.EXTRA_TEXT, "Segue em aenxo");
-//        Uri uri = Uri.parse(pdfFile.getAbsolutePath());
-//        email.putExtra(Intent.EXTRA_STREAM, uri);
-//        email.setType("message/rfc822");
-//        startActivity(email);
+        Intent email = new Intent(Intent.ACTION_SEND);
+        String [] destinatario = {editEmail.getText().toString()};
+        email.setData(Uri.parse("mailto:")); // only email apps should handle this
+        email.setType("text/plain");
+        email.putExtra(Intent.EXTRA_SUBJECT,"Relatório - Status Tratamento");
+        email.putExtra(Intent.EXTRA_EMAIL,destinatario);
+        email.putExtra(Intent.EXTRA_TEXT, "Relatório de Status de Medicamentos\n"+intervalo+"\n\nSegue em anexo o relatório de Status do tratamento do(s) remédio(s).\n\n\n\nRelatório gerado por AlarmMed");
+        Uri uri = Uri.fromFile(pdfFile);
+        email.putExtra(Intent.EXTRA_STREAM, uri);
+
+        if (email.resolveActivity(getPackageManager()) != null) {
+            startActivity(email);
+        }
+
     }
 
     public PdfPCell criaLinhaItemHistorico(ItemAlarmeHistorico item){
@@ -295,34 +297,45 @@ public class Email extends AppCompatActivity {
 
         //Linha contendo espaco em branco no inicio da linha
         PdfPCell cell1 = new PdfPCell(new Phrase(""));
-
         //Define que a celula não terá borde no contorno.
         cell1.setBorder(Rectangle.NO_BORDER);
+        cell1.setMinimumHeight(30);
 
         //Nome do medicamento
-        PdfPCell cell2 = new PdfPCell(new Phrase(item.getMed().getNome()));
+        PdfPCell cell2 = new PdfPCell();
         cell2.setBorder(Rectangle.NO_BORDER);
+        cell2.setMinimumHeight(30);
+        cell2.setVerticalAlignment(Element.ALIGN_CENTER);
+        cell2.addElement(new Phrase(item.getMed().getNome()));
 
         //Texto: Programado para 15:43
         String prog = "Programado para "+item.getHorario().getHorario();
-        PdfPCell cell3 = new PdfPCell(new Phrase(prog));
+        PdfPCell cell3 = new PdfPCell();
         cell3.setBorder(Rectangle.NO_BORDER);
+        cell3.setMinimumHeight(30);
+        cell3.setVerticalAlignment(Element.ALIGN_CENTER);
+        cell3.addElement(new Phrase(prog));
 
         //Cria o texto "Tomado às 12:00 ou Pulou às
         String texto = "";
         Font font = new Font(Font.FontFamily.TIMES_ROMAN, 12);
         if(item.getStatus().equals(ItemAlarmeHistorico.STATUS_TOMADO)){
-            font.setColor(BaseColor.GREEN);
+            font.setColor(new BaseColor(0,128,0));
             String tomado = "Tomado às "+item.getHoraAdministrado();
             texto+=tomado;
+            Log.v("Entrou", "TOMOU");
         }else if(item.getStatus().equals(ItemAlarmeHistorico.STATUS_PULOU)){
             font.setColor(BaseColor.RED);
             String pulo = "Pulou às "+item.getHoraAdministrado();
             texto+=pulo;
+            Log.v("Entrou", "Pulou");
         }
 
-        PdfPCell cell4 = new PdfPCell(new Phrase(texto, font));
+        PdfPCell cell4 = new PdfPCell();
         cell4.setBorder(Rectangle.NO_BORDER);
+        cell4.setMinimumHeight(30);
+        cell4.setVerticalAlignment(Element.ALIGN_CENTER);
+        cell4.addElement(new Phrase(texto, font));
 
         //Adiciona as células na tabela
         nestedTable.addCell(cell1);
@@ -337,5 +350,31 @@ public class Email extends AppCompatActivity {
         cell5.setBorder(Rectangle.NO_BORDER);
 
         return cell5;
+    }
+
+    public Boolean validaEmail(String email){
+        if(!(email.isEmpty()) && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            text.setErrorEnabled(false);
+            return true;
+        }else {
+            text.setErrorEnabled(true);
+            text.setError("E-mail incorreto");
+            return  false;
+        }
+    }
+
+    /**
+     * Finaliza a activity caso o usuário abra um aplicativo de email.
+     * Volta para a activity Histórico
+     */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }
