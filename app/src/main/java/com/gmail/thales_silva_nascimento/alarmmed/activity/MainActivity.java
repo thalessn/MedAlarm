@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity
     private boolean menu = true;
     private NavigationView navigationView;
     private FloatingActionButton fab;
+    private static final int HISTORICO_CODE = 1;
+    private Menu menuDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("AlarmMed");
-
-
 
         //Adiciona o evento onlick no Floating Button (Botão mais da Tela)
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -75,9 +75,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
-
-
         //Navigation Drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -89,6 +86,8 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Meunu do NavigationView - utilizado para marcar as opção no Drawer.
+        menuDrawer = navigationView.getMenu();
 
         //Adiciona o evento Onclick no Header do Navigatio Drawer
         View headerView = navigationView.getHeaderView(0);
@@ -109,12 +108,19 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        //Marca a opção inicio no Drawer
+        menuDrawer.getItem(0).setChecked(true);
         //Seta o Fragment fragInicio no content_main do Navigation Drawer
         Fragment inicialFrag = new fragInicio();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_main, inicialFrag, "fragInicio");
         ft.commit();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -158,7 +164,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
 
@@ -214,10 +219,8 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_historico:
                 floatingButtonShow(false);
-                //fragment = new fragHistorico();
-                //fragmentTag = "fragHistorico";
                 Intent activity = new Intent(MainActivity.this, Historico.class);
-                startActivity(activity);
+                startActivityForResult(activity, HISTORICO_CODE);
                 break;
         }
         if(fragment !=null && fragmentTag != null){
@@ -241,6 +244,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
         displaySelectedScreen(id);
         return true;
     }
@@ -256,5 +260,27 @@ public class MainActivity extends AppCompatActivity
             fab.setVisibility(View.INVISIBLE);
         }
 
+    }
+
+    /**
+     * Função resposável por receber a informação se deve relizar alguma função quando uma activity for finalizada.
+     * Neste caso, quando a activity historico fecha, ele chama o fragment Nav_inicio novamente.
+     * @param codigo
+     * @param resultado
+     * @param intent
+     */
+    @Override
+    protected void onActivityResult(int codigo, int resultado, Intent intent) {
+        super.onActivityResult(codigo, resultado, intent);
+        if(codigo == HISTORICO_CODE){
+            if(intent != null){
+                if(resultado == 1){
+                    //Troca para o fragment inicio
+                    displaySelectedScreen(R.id.nav_inicio);
+                    //Marca a opção inicio no Drawer
+                    menuDrawer.getItem(0).setChecked(true);
+                }
+            }
+        }
     }
 }

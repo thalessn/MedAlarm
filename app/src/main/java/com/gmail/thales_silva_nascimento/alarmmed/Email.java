@@ -175,7 +175,6 @@ public class Email extends AppCompatActivity {
             case R.id.iTEnviar:
                 try {
                     if(validaEmail(editEmail.getText().toString())){
-                        Toast.makeText(Email.this, "Enviar", Toast.LENGTH_SHORT).show();
                         createPdf();
                     }
                 } catch (FileNotFoundException e) {
@@ -191,6 +190,15 @@ public class Email extends AppCompatActivity {
 
 
     private void createPdf() throws FileNotFoundException, DocumentException {
+
+        //Busca no Banco o histórico de administração
+        List<ListItemHistorico>itens = histController.listarHistoricoPeriodo(Utils.formataDataUTC(tvDataIni.getText().toString()), Utils.formataDataUTC(tvDataFinal.getText().toString()));
+        Log.v("TamanhoHistorico", String.valueOf(itens.size()));
+
+        if(itens.size() < 1){
+            Toast.makeText(Email.this, "Não há status medicamento para esse período", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         File docsFolder = new File(Environment.getExternalStorageDirectory() + "/AlarmMed/");
         if (!docsFolder.exists()) {
@@ -233,9 +241,6 @@ public class Email extends AppCompatActivity {
         table.setHorizontalAlignment(Element.ALIGN_LEFT);
         table.setWidthPercentage(100);
 
-        //Busca no Banco o histórico de administração
-        List<ListItemHistorico>itens = histController.listarHistoricoPeriodo(Utils.formataDataUTC(tvDataIni.getText().toString()), Utils.formataDataUTC(tvDataFinal.getText().toString()));
-        Log.v("TamanhoHistorico", String.valueOf(itens.size()));
 
         //Preenche a Tabela
         for(int i=0; i<itens.size(); i++){
