@@ -1,6 +1,5 @@
 package com.gmail.thales_silva_nascimento.alarmmed.activity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.gmail.thales_silva_nascimento.alarmmed.Email;
 import com.gmail.thales_silva_nascimento.alarmmed.ListItemHistorico;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.Utils;

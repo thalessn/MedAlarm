@@ -1,14 +1,17 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.activity;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +27,9 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gmail.thales_silva_nascimento.alarmmed.ListItemHistorico;
+import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.Utils;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.HistoricoController;
 import com.gmail.thales_silva_nascimento.alarmmed.model.HeaderHistoricoRow;
 import com.gmail.thales_silva_nascimento.alarmmed.model.ItemAlarmeHistorico;
@@ -37,19 +43,16 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPHeaderCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.EnumMap;
 import java.util.List;
 
 public class Email extends AppCompatActivity {
@@ -60,6 +63,7 @@ public class Email extends AppCompatActivity {
     private HistoricoController histController;
     private TextInputLayout text;
     private TextInputEditText editEmail;
+    private static final int PERMISSAO_ARQUIVO_EXTERNO = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,8 +178,17 @@ public class Email extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.iTEnviar:
                 try {
-                    if(validaEmail(editEmail.getText().toString())){
-                        createPdf();
+
+                    if((ContextCompat.checkSelfPermission(Email.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED)){
+                        //Manda uma requisição de permissão
+                        //Isto irá mostrar o diálogo padrão de permissão.
+                        ActivityCompat.requestPermissions(Email.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                PERMISSAO_ARQUIVO_EXTERNO);
+                    }else{
+                        if(validaEmail(editEmail.getText().toString())){
+                            createPdf();
+                        }
                     }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -196,7 +209,7 @@ public class Email extends AppCompatActivity {
         Log.v("TamanhoHistorico", String.valueOf(itens.size()));
 
         if(itens.size() < 1){
-            Toast.makeText(Email.this, "Não há status medicamento para esse período", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Email.this, "Não há status de medicamento(s) para esse período", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -285,7 +298,7 @@ public class Email extends AppCompatActivity {
         email.putExtra(Intent.EXTRA_SUBJECT,"Relatório - Status Tratamento");
         email.putExtra(Intent.EXTRA_EMAIL,destinatario);
         email.putExtra(Intent.EXTRA_TEXT, "Relatório de Status de Medicamentos\n"+intervalo+"\n\nSegue em anexo o relatório de Status do tratamento do(s) remédio(s).\n\n\n\nRelatório gerado por AlarmMed");
-        Uri uri = Uri.fromFile(pdfFile);
+        Uri uri = FileProvider.getUriForFile(Email.this,Email.this.getApplicationContext().getPackageName()+".provider", pdfFile);
         email.putExtra(Intent.EXTRA_STREAM, uri);
 
         if (email.resolveActivity(getPackageManager()) != null) {
@@ -381,5 +394,29 @@ public class Email extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        switch (requestCode){
+            case PERMISSAO_ARQUIVO_EXTERNO:
+                if(grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    //Permissão dada
+                    try {
+
+                        if(validaEmail(editEmail.getText().toString())){
+                            createPdf();
+                        }
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (DocumentException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+        }
     }
 }
