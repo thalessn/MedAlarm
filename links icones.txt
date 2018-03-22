@@ -12,6 +12,8 @@ https://www.flaticon.com/free-icon/medical-drug-pill_13032#term=tablets drugs&pa
 https://www.flaticon.com/free-icon/drugs_139591  icone para adicionar dose tela inicial
 http://www.freeiconspng.com/img/37644 icone do historico
 
+https://www.flaticon.com/free-icon/mail_775726#term=graph&page=2&position=52 icone do historico -> carta com relatório
+
 //Icones da tela inicial
 https://www.flaticon.com/free-icon/sunset_168399#term=sunset&page=1&position=54 -> manhã
 https://www.flaticon.com/free-icon/sun_248764#term=sun&page=2&position=57 -> tarde
@@ -24,3 +26,7 @@ https://pixabay.com/p-2090495/?no_redirect - manhã
 https://pixabay.com/pt/campo-da-cevada-paisagem-natureza-2337009/ - tarde
 https://pixabay.com/pt/pont%C3%A3o-pier-mar-p%C3%B4r-do-sol-593401/ - noite
 https://pixabay.com/pt/noite-star-c%C3%A9u-estrelado-2845347/ - madrugada
+
+
+Site que utilizei como referência para criar a tela de compra
+http://www.androhub.com/android-contextual-action-mode-over-toolbar/

@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity
         ft.replace(R.id.content_main, inicialFrag, "fragInicio");
         ft.commit();
 
+
+
     }
 
     @Override

@@ -17,7 +17,7 @@
 
         <item
             android:id="@+id/nav_historico"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_mail"
             android:title="Histórico" />
 
         <item
@@ -27,7 +27,7 @@
         <item
             android:id="@+id/nav_compra"
             android:icon="@drawable/ic_compra"
-            android:title="Compras" />
+            android:title="Comprar" />
         <item
             android:id="@+id/nav_medico"
             android:icon="@drawable/ic_doctor"

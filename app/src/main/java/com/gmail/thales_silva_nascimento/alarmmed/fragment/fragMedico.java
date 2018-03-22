@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.gmail.thales_silva_nascimento.alarmmed.activity.MainActivity;
 import com.gmail.thales_silva_nascimento.alarmmed.adapter.MedicoAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.activity.activity_medicoCadastro;
@@ -56,7 +57,9 @@ public class fragMedico extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Médicos");
+
+        //Altera o título da toolbar
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Médicos");
 
         //Texto quando não contém nenhum médico cadastrado
         textView = (TextView) view.findViewById(R.id.tvMedicoTexto);

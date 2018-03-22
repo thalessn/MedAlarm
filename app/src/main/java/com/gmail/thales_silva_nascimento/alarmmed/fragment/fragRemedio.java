@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.gmail.thales_silva_nascimento.alarmmed.activity.MainActivity;
 import com.gmail.thales_silva_nascimento.alarmmed.adapter.MedicamentoAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.activity.MedicamentoCadastro;
@@ -57,8 +58,9 @@ public class fragRemedio extends Fragment implements MedicamentoAdapter.OnItemCl
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //Altera o Titulo da atividade quando este fragment aparece
-        getActivity().setTitle("Remédios");
+
+        //Altera o título da toolbar
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Remédios");
 
         textView = (TextView) view.findViewById(R.id.tvRemedioTexto);
         fab = (FloatingActionButton) view.findViewById(R.id.fabMedicamento);

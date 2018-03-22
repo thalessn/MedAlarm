@@ -83,11 +83,9 @@ MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.ViewHolder> {
         if(path.exists()){
             //existe
             Glide.with(context).load(path).into(holder.img);
-            Log.v("Img Existe","Conseguiu ler");
         }else{
             //não existe
             Glide.with(context).load(R.drawable.remedio1).into(holder.img);
-            Log.v("Img NãoExiste","Não conseguiu ler");
         }
 
     }

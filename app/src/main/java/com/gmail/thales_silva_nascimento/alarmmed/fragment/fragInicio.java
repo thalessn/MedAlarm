@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.activity.MainActivity;
 import com.gmail.thales_silva_nascimento.alarmmed.adapter.homeViewPagerAdapter;
 
 
@@ -33,6 +34,9 @@ public class fragInicio extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_frag_inicio, container, false);
+
+        //Altera o título da toolbar
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("AlarmMed");
 
         /**
          * ViewPager
