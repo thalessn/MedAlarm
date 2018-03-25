@@ -97,10 +97,6 @@ public class fragCompra extends Fragment implements ActionMode.Callback {
                     if (actionMode == null){
                         Log.v("actionMode=null", "onItemLongClick");
                         actionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(fragCompra.this);
-                        if(actionMode != null){
-                            Toast.makeText(getContext(), "Teste", Toast.LENGTH_LONG);
-                        }
-                        Log.v("actionMode=null", "depois de iniciar");
                     }
                 }
 
@@ -127,15 +123,16 @@ public class fragCompra extends Fragment implements ActionMode.Callback {
                     selectedIds.add(data.getId());
                 }
 
-
+                /**
+                 * Adiciona o texto na Action bar
+                 */
                 if (selectedIds.size() > 0)
-                    actionMode.setTitle(String.valueOf(selectedIds.size())); //show selected item count on action mode.
+                    actionMode.setTitle(String.valueOf(selectedIds.size())+" selecionados"); //show selected item count on action mode.
                 else{
                     actionMode.setTitle(""); //remove item count from action mode.
                     actionMode.finish(); //hide action mode.
                 }
                 adapter.setSelectedIds(selectedIds);
-
             }
         }
     }
@@ -145,16 +142,25 @@ public class fragCompra extends Fragment implements ActionMode.Callback {
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         Log.v("OnCreateActionMode", "Passou");
+        mode.getMenuInflater().inflate(R.menu.toolbar_comprar_compartilhar, menu);
         return true;
     }
 
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-        return false;
+        menu.findItem(R.id.iTCompartilhar).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return true;
     }
 
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.iTCompartilhar:
+                Toast.makeText(getContext(), "Botão",Toast.LENGTH_LONG).show();
+                break;
+        }
+
         return false;
     }
 

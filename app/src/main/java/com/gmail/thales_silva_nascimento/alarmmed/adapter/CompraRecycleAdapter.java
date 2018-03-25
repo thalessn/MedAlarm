@@ -83,6 +83,7 @@ public class CompraRecycleAdapter extends RecyclerView.Adapter<CompraRecycleAdap
 
 
 
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView nome;
         private CircleImageView img;
@@ -101,6 +102,10 @@ public class CompraRecycleAdapter extends RecyclerView.Adapter<CompraRecycleAdap
     public void setSelectedIds(List<Long> selectedIds) {
         this.selectedIds = selectedIds;
         notifyDataSetChanged();
+    }
+
+    public int getSelectedIds(){
+        return selectedIds == null? 0 : selectedIds.size();
     }
 
     public Medicamento getItem(int position){

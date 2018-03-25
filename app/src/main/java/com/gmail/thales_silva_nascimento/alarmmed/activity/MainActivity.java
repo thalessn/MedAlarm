@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity
                 finish();
             }else{
                 displaySelectedScreen(R.id.nav_inicio);
+                menuDrawer.getItem(0).setChecked(true);
             }
         }
     }
