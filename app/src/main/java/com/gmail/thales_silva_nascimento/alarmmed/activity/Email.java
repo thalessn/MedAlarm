@@ -301,6 +301,7 @@ public class Email extends AppCompatActivity {
         Uri uri = FileProvider.getUriForFile(Email.this,Email.this.getApplicationContext().getPackageName()+".provider", pdfFile);
         email.putExtra(Intent.EXTRA_STREAM, uri);
 
+        //Verifica se existe algum aplicativo que receba esta intent. Para caso não possuir não gerar um exceção de ActivitynptFound
         if (email.resolveActivity(getPackageManager()) != null) {
             startActivity(email);
         }

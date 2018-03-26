@@ -1,11 +1,13 @@
 package com.gmail.thales_silva_nascimento.alarmmed.fragment;
 
 
+import android.content.Intent;
 import android.drm.DrmStore;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
@@ -158,6 +160,23 @@ public class fragCompra extends Fragment implements ActionMode.Callback {
         switch (item.getItemId()){
             case R.id.iTCompartilhar:
                 Toast.makeText(getContext(), "Botão",Toast.LENGTH_LONG).show();
+//                Intent share = new Intent();
+//                share.setType("text/plain");
+//
+//                share.putExtra(Intent.EXTRA_SUBJECT, "Title Of The Post");
+//
+//                share.putExtra(Intent.EXTRA_TEXT, "OI testando");
+//                share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+//                startActivity(Intent.createChooser(share, "Compartilhar remédios a comprar"));
+
+                Intent share = ShareCompat.IntentBuilder.from(getActivity())
+                        .setType("text/plain")
+                        .setText("Oi seu pai tem boi")
+                        .getIntent();
+                //Verifica se existe algum aplicativo que receba esta intent. Para caso não possuir não gerar um exceção de ActivitynptFound
+                if (share.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(share);
+                }
                 break;
         }
 
