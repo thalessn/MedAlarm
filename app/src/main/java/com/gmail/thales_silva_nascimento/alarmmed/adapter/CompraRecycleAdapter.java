@@ -2,10 +2,7 @@ package com.gmail.thales_silva_nascimento.alarmmed.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.model.ItemCompra;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medicamento;
 
 import java.io.File;
@@ -27,14 +25,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CompraRecycleAdapter extends RecyclerView.Adapter<CompraRecycleAdapter.ViewHolder> {
 
     private Context context;
-    private List<Medicamento> meds;
+    private List<ItemCompra> itenscompra;
 
     private List<Long> selectedIds = new ArrayList<>();
 
 
-    public CompraRecycleAdapter(Context context, List<Medicamento> meds){
+    public CompraRecycleAdapter(Context context, List<ItemCompra> itenscompra){
         this.context = context;
-        this.meds = meds;
+        this.itenscompra = itenscompra;
     }
 
 
@@ -47,7 +45,7 @@ public class CompraRecycleAdapter extends RecyclerView.Adapter<CompraRecycleAdap
 
     @Override
     public void onBindViewHolder(CompraRecycleAdapter.ViewHolder holder, int position) {
-        Medicamento med = meds.get(position);
+        Medicamento med = itenscompra.get(position).getMedicamento();
         holder.nome.setText(med.getNome());
 
         long id = med.getId();
@@ -68,7 +66,7 @@ public class CompraRecycleAdapter extends RecyclerView.Adapter<CompraRecycleAdap
 
         if(selectedIds.contains(id)){
             //if item is selected then,set foreground color of FrameLayout
-            holder.rl.setBackgroundColor(Color.BLUE);
+            holder.rl.setBackgroundColor(Color.parseColor("#c5e9ff"));
         }else{
             //else remove selected item color.
             holder.rl.setBackgroundColor(Color.TRANSPARENT);
@@ -78,7 +76,7 @@ public class CompraRecycleAdapter extends RecyclerView.Adapter<CompraRecycleAdap
 
     @Override
     public int getItemCount() {
-        return this.meds !=null ? this.meds.size() : 0;
+        return this.itenscompra !=null ? this.itenscompra.size() : 0;
     }
 
 
@@ -109,7 +107,7 @@ public class CompraRecycleAdapter extends RecyclerView.Adapter<CompraRecycleAdap
     }
 
     public Medicamento getItem(int position){
-        return meds.get(position);
+        return itenscompra.get(position).getMedicamento();
     }
 
 }

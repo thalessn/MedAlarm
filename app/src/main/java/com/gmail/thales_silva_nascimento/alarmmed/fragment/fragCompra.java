@@ -27,7 +27,9 @@ import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.RecyclerItemClickListener;
 import com.gmail.thales_silva_nascimento.alarmmed.activity.MainActivity;
 import com.gmail.thales_silva_nascimento.alarmmed.adapter.CompraRecycleAdapter;
+import com.gmail.thales_silva_nascimento.alarmmed.controller.ItemCompraController;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
+import com.gmail.thales_silva_nascimento.alarmmed.model.ItemCompra;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medicamento;
 
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ public class fragCompra extends Fragment implements ActionMode.Callback {
     private List<Long> selectedIds = new ArrayList<>();
     private CompraRecycleAdapter adapter;
     private MedicamentoController medcontrol;
+    private ItemCompraController itemCompraController;
 
 
     public fragCompra() {
@@ -70,6 +73,9 @@ public class fragCompra extends Fragment implements ActionMode.Callback {
         recyclerView = (RecyclerView) view.findViewById(R.id.rvCompra);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
+
+        itemCompraController = new ItemCompraController(getContext());
+        List<ItemCompra> teste = itemCompraController.listarMedicamentosComprar();
 
         List<Medicamento> meds = medcontrol.listarTodosMedicamentos();
         if(meds.size()>0){
@@ -101,10 +107,7 @@ public class fragCompra extends Fragment implements ActionMode.Callback {
                         actionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(fragCompra.this);
                     }
                 }
-
                 multiSelect(position);
-
-
             }
         }));
 
