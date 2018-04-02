@@ -12,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.BulletSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -75,14 +78,14 @@ public class fragCompra extends Fragment implements ActionMode.Callback {
         recyclerView.setHasFixedSize(true);
 
         itemCompraController = new ItemCompraController(getContext());
-        List<ItemCompra> teste = itemCompraController.listarMedicamentosComprar();
 
         List<Medicamento> meds = medcontrol.listarTodosMedicamentos();
         if(meds.size()>0){
             texto.setVisibility(View.GONE);
         }
 
-        adapter = new CompraRecycleAdapter(getContext(), medcontrol.listarTodosMedicamentos());
+        //adapter = new CompraRecycleAdapter(getContext(), medcontrol.listarTodosMedicamentos());
+        adapter = new CompraRecycleAdapter(getContext(), itemCompraController.listarMedicamentosComprar());
         recyclerView.setAdapter(adapter);
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
@@ -163,14 +166,8 @@ public class fragCompra extends Fragment implements ActionMode.Callback {
         switch (item.getItemId()){
             case R.id.iTCompartilhar:
                 Toast.makeText(getContext(), "Botão",Toast.LENGTH_LONG).show();
-//                Intent share = new Intent();
-//                share.setType("text/plain");
-//
-//                share.putExtra(Intent.EXTRA_SUBJECT, "Title Of The Post");
-//
-//                share.putExtra(Intent.EXTRA_TEXT, "OI testando");
-//                share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-//                startActivity(Intent.createChooser(share, "Compartilhar remédios a comprar"));
+
+
 
                 Intent share = ShareCompat.IntentBuilder.from(getActivity())
                         .setType("text/plain")
@@ -192,5 +189,13 @@ public class fragCompra extends Fragment implements ActionMode.Callback {
         isMultiSelect = false;
         selectedIds = new ArrayList<>();
         adapter.setSelectedIds(new ArrayList<Long>());
+    }
+
+    public String criaListaComprar(){
+        if(selectedIds.size()>0){
+
+        }
+
+        return null;
     }
 }
