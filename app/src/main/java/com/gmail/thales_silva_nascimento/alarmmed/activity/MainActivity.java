@@ -204,11 +204,6 @@ public class MainActivity extends AppCompatActivity
                 fragment = new fragCompra();
                 fragmentTag = "fragCompra";
                 break;
-            case R.id.nav_alarme:
-                floatingButtonShow(false);
-                fragment = new fragAlarme();
-                fragmentTag = "fragAlarme";
-                break;
             case R.id.nav_edPerfil:
                 floatingButtonShow(false);
                 Intent i = new Intent(MainActivity.this, editaPerfil.class);

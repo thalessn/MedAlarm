@@ -33,6 +33,7 @@ public class Medicamento implements Parcelable {
         this.id = id;
         this.nome = nome;
         this.dosagem = dosagem;
+        this.tipoDosagem = tipoDosagem;
         this.uso_continuo = uso_continuo;
         this.observacao = observacao;
         this.foto = foto;

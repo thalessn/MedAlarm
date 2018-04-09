@@ -27,13 +27,13 @@ public class CompraRecycleAdapter extends RecyclerView.Adapter<CompraRecycleAdap
 
     private Context context;
     private List<ItemCompra> itenscompra;
-
-    private List<Long> selectedIds = new ArrayList<>();
+    private List<Long> mSelectedItemsIds;
 
 
     public CompraRecycleAdapter(Context context, List<ItemCompra> itenscompra){
         this.context = context;
         this.itenscompra = itenscompra;
+        mSelectedItemsIds = new ArrayList<>();
     }
 
 
@@ -69,7 +69,7 @@ public class CompraRecycleAdapter extends RecyclerView.Adapter<CompraRecycleAdap
             Glide.with(context).load(R.drawable.remedio1).into(holder.img);
         }
 
-        if(selectedIds.contains(id)){
+        if(mSelectedItemsIds.contains(med.getId())){
             //if item is selected then,set foreground color of FrameLayout
             //holder.rl.setBackgroundColor(Color.parseColor("#c5e9ff"));
             holder.rl.setBackgroundColor(Color.parseColor("#9ea2a8"));
@@ -104,14 +104,7 @@ public class CompraRecycleAdapter extends RecyclerView.Adapter<CompraRecycleAdap
         }
     }
 
-    public void setSelectedIds(List<Long> selectedIds) {
-        this.selectedIds = selectedIds;
-        notifyDataSetChanged();
-    }
 
-    public int getSelectedIds(){
-        return selectedIds == null? 0 : selectedIds.size();
-    }
 
     public Medicamento getItem(int position){
         return itenscompra.get(position).getMedicamento();
@@ -126,15 +119,25 @@ public class CompraRecycleAdapter extends RecyclerView.Adapter<CompraRecycleAdap
         if(diffEstq > 0){
             if(diffEstq < metademais1){
                 //cor amarelo
-                return Color.YELLOW;
+                return Color.parseColor("#FFEB3B");
             }else{
                 //cor verde
-                return Color.GREEN;
+                return Color.parseColor("#4CAF50");
             }
         }else{
-            //Cor vermlho menor ou igual ao alerta.
-            return Color.RED;
+            //Cor vermelho.
+            return Color.parseColor("#D50000");
         }
     }
 
+
+    //Get total selected count
+    public int getSelectedCount() {
+        return mSelectedItemsIds.size();
+    }
+
+    public void setSelectedIds(List<Long> arr) {
+        this.mSelectedItemsIds = arr;
+        notifyDataSetChanged();
+    }
 }

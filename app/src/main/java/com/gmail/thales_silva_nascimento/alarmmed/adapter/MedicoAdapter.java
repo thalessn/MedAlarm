@@ -14,9 +14,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.model.Medico;
 
 import java.util.List;
 
-/**
- * Created by Thales on 10/02/2017.
- */
+
 
 public class MedicoAdapter extends BaseAdapter {
 

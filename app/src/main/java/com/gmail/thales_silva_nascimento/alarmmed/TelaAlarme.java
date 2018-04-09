@@ -81,6 +81,11 @@ public class TelaAlarme extends AppCompatActivity {
 
         medController = new MedicamentoController(TelaAlarme.this);
         Intent info = getIntent();
+
+        /**
+         * Pega a data atual do celular para realizar a pesquisa no banco de dados instancias nesta data.
+         */
+
         String data = Utils.CalendarToStringData(Calendar.getInstance());
 
         /**

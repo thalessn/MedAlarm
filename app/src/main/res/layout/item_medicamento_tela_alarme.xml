@@ -66,21 +66,25 @@
                 android:text="Pular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"/>
+                android:layout_alignParentLeft="true"
+                android:background="#D50000"/>
             <Button
                 android:id="@+id/btnAlAdiar"
                 android:text="Adiar"
+                android:layout_marginLeft="40dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/btnAlPular"
-                android:layout_toEndOf="@+id/btnAlPular" />
+                android:layout_toEndOf="@+id/btnAlPular"
+                android:background="#FFEB3B"/>
             <Button
                 android:id="@+id/btnAlTomar"
                 android:text="Tomar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"/>
+                android:layout_alignParentRight="true"
+                android:background="#6fce73"/>
         </RelativeLayout>
 
 

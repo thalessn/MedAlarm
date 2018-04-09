@@ -21,19 +21,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <provider
-            android:authorities="${applicationId}.provider"
             android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
-
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
-
         </provider>
-
 
         <activity
             android:name=".activity.MainActivity"
@@ -102,7 +98,7 @@
             android:label="@string/title_activity_excluir_teste_flotingbutton"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
         <activity android:name=".activity.Historico" />
-        <activity android:name=".activity.Email"></activity>
+        <activity android:name=".activity.Email" />
     </application>
 
 </manifest>

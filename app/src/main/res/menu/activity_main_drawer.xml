@@ -32,10 +32,6 @@
             android:id="@+id/nav_medico"
             android:icon="@drawable/ic_doctor"
             android:title="Médicos" />
-        <item
-            android:id="@+id/nav_alarme"
-            android:icon="@drawable/ic_alarme"
-            android:title="Alarmes" />
     </group>
 
     <group
