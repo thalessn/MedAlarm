@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Notificações">
+        <PreferenceScreen
+            android:key="button_sound_key"
+            android:title="Som"
+            android:persistent="false">
+
+        </PreferenceScreen>
+
+        <CheckBoxPreference
+            android:key="button_vibrar_check"
+            android:title="Vibrar"
+            android:defaultValue="true"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Reabastecimento de remédios">
+
+        <ListPreference
+            android:title="Duração da Soneca"
+            android:summary="10 minutos"
+            android:key="list_duracao_soneca"
+            android:entries="@array/duracao_soneca"
+            android:entryValues="@array/duracao_soneca"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Geral">
+
+        <PreferenceScreen
+            android:title="Sobre"
+            android:key="screen_sobre"
+            android:persistent="false"/>
+        <PreferenceScreen
+            android:title="Créditos"
+            android:key="screen_creditos"
+            android:persistent="false"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -99,6 +99,7 @@
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
         <activity android:name=".activity.Historico" />
         <activity android:name=".activity.Email" />
+        <activity android:name=".ConfiguracaoActivity"></activity>
     </application>
 
 </manifest>
