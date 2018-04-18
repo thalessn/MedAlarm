@@ -18,6 +18,7 @@ import android.view.MenuItem;
 
 import android.widget.Toast;
 
+import com.gmail.thales_silva_nascimento.alarmmed.ConfiguracaoActivity;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.dao.BancoHelper;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragRemedio;
@@ -220,6 +221,9 @@ public class MainActivity extends AppCompatActivity
                 Intent activity = new Intent(MainActivity.this, Historico.class);
                 startActivityForResult(activity, HISTORICO_CODE);
                 break;
+            case R.id.nav_configuracoes:
+                Intent ae =  new Intent(MainActivity.this, ConfiguracaoActivity.class);
+                startActivity(ae);
         }
         if(fragment !=null && fragmentTag != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
