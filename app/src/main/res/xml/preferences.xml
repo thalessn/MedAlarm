@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Notificações">
-        <PreferenceScreen
-            android:key="button_sound_key"
-            android:title="Som"
-            android:persistent="false">
-
-        </PreferenceScreen>
+        <Preference
+            android:title="Som">
+            <intent
+                android:targetPackage="com.gmail.thales_silva_nascimento.alarmmed"
+                android:targetClass="com.gmail.thales_silva_nascimento.alarmmed.activity.ConfigSom" />
+        </Preference>
 
         <CheckBoxPreference
             android:key="button_vibrar_check"
@@ -20,9 +20,10 @@
 
         <ListPreference
             android:title="Duração da Soneca"
-            android:summary="10 minutos"
+            android:summary="5 minutos"
             android:key="list_duracao_soneca"
             android:entries="@array/duracao_soneca"
+            android:defaultValue="1"
             android:entryValues="@array/duracao_soneca"/>
 
     </PreferenceCategory>

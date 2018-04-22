@@ -1,11 +1,13 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
+import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.ConfiguracaoFragment;
 
 public class ConfiguracaoActivity extends AppCompatActivity {
@@ -34,5 +36,14 @@ public class ConfiguracaoActivity extends AppCompatActivity {
         });
 
         getFragmentManager().beginTransaction().replace(R.id.rlConfiguracao, new ConfiguracaoFragment()).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        Intent i = new Intent();
+        //Adiciona o resultado a ser comparado e a intent
+        setResult(1, i);
+        finish();
     }
 }

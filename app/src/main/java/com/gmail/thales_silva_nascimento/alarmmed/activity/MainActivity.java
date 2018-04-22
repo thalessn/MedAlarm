@@ -18,11 +18,9 @@ import android.view.MenuItem;
 
 import android.widget.Toast;
 
-import com.gmail.thales_silva_nascimento.alarmmed.ConfiguracaoActivity;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.dao.BancoHelper;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragRemedio;
-import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragAlarme;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragCompra;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragInicio;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragMedico;
@@ -35,6 +33,7 @@ public class MainActivity extends AppCompatActivity
     private NavigationView navigationView;
     private FloatingActionButton fab;
     private static final int HISTORICO_CODE = 1;
+    private static final int CONFIG_CODE = 2;
     private Menu menuDrawer;
 
     @Override
@@ -223,7 +222,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_configuracoes:
                 Intent ae =  new Intent(MainActivity.this, ConfiguracaoActivity.class);
-                startActivity(ae);
+                startActivityForResult(ae, CONFIG_CODE);
         }
         if(fragment !=null && fragmentTag != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -275,6 +274,15 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int codigo, int resultado, Intent intent) {
         super.onActivityResult(codigo, resultado, intent);
         if(codigo == HISTORICO_CODE){
+            if(intent != null){
+                if(resultado == 1){
+                    //Troca para o fragment inicio
+                    displaySelectedScreen(R.id.nav_inicio);
+                    //Marca a opção inicio no Drawer
+                    menuDrawer.getItem(0).setChecked(true);
+                }
+            }
+        }else if(codigo == CONFIG_CODE){
             if(intent != null){
                 if(resultado == 1){
                     //Troca para o fragment inicio

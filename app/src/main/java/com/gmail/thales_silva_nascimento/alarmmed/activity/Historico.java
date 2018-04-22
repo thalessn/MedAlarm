@@ -177,4 +177,11 @@ public class Historico extends AppCompatActivity implements HistoricoRecycleAdap
         tvPeriodo.setText(texto);
         
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent();
+        setResult(1,i);
+        finish();
+    }
 }

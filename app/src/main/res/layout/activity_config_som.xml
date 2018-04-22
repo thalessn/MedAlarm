@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gmail.thales_silva_nascimento.alarmmed.activity.ConfigSom">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tbConfigSom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+    <TextView
+        android:id="@+id/tvTextoConfigSom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tbConfigSom"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:text="Escolha o seu o toque favorito\nToque em cada para experimentar!"
+        android:textSize="16sp" />
+
+    <ScrollView
+        android:id="@+id/scrollViewConfigSom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_below="@id/tvTextoConfigSom">
+
+        <RadioGroup
+            android:id="@+id/rgConfigSom"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </RadioGroup>
+
+    </ScrollView>
+
+</RelativeLayout>
