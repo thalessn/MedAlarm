@@ -22,7 +22,7 @@
         android:layout_below="@id/tbConfigSom"
         android:padding="8dp"
         android:layout_margin="8dp"
-        android:text="Escolha o seu o toque favorito\nToque em cada para experimentar!"
+        android:text="Escolha o seu o toque favorito\nToque em cada um para experimentar!"
         android:textSize="16sp" />
 
     <ScrollView

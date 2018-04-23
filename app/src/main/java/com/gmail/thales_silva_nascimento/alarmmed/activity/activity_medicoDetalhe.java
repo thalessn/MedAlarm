@@ -186,7 +186,6 @@ public class activity_medicoDetalhe extends AppCompatActivity {
     @Override
     protected void onActivityResult(int codigo, int resultado, Intent data) {
         super.onActivityResult(codigo, resultado, data);
-
         if(codigo == CODIGO_RESULT_ACTIVITY){
             if (data != null){
                 if(resultado == 1){

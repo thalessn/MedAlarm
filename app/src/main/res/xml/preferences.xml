@@ -31,14 +31,19 @@
     <PreferenceCategory
         android:title="Geral">
 
-        <PreferenceScreen
-            android:title="Sobre"
-            android:key="screen_sobre"
-            android:persistent="false"/>
-        <PreferenceScreen
-            android:title="Créditos"
-            android:key="screen_creditos"
-            android:persistent="false"/>
+        <Preference
+            android:title="Sobre">
+            <intent
+                android:targetPackage=""
+                android:targetClass="" />
+        </Preference>
+
+        <Preference
+            android:title="Créditos">
+            <intent
+                android:targetPackage=""
+                android:targetClass="" />
+        </Preference>
 
     </PreferenceCategory>
 </PreferenceScreen>

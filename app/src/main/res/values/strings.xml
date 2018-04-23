@@ -101,4 +101,9 @@
     </string>
     <string name="title_activity_adicionar_dose">adicionarDose</string>
     <string name="title_activity_excluir_teste_flotingbutton">excluirTesteFlotingbutton</string>
+
+    <!-- String utilizadas para encontrar as configurações salvas -->
+    <string name="config_som">config_som</string>
+    <string name="nomeSound">nomeSound</string>
+
 </resources>
