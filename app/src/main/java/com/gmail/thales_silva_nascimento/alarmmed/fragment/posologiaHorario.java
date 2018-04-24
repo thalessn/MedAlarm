@@ -107,7 +107,6 @@ public class posologiaHorario extends DialogFragment {
         salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Apertou no botão salvar", Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });

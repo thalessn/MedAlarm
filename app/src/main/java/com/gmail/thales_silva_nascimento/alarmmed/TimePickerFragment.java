@@ -51,7 +51,6 @@ public  class TimePickerFragment extends DialogFragment
             case "timePicker1":
                 TextView t = (TextView) getActivity().findViewById(R.id.hCafeManha);
                 t.setText(hora + " : " + minuto);
-                Toast.makeText(view.getContext(), tag, Toast.LENGTH_SHORT).show();
                 break;
             case "timePicker2":
                 TextView t1 = (TextView) getActivity().findViewById(R.id.hAlmoco);

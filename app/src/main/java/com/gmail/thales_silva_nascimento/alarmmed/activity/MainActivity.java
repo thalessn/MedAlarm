@@ -208,7 +208,6 @@ public class MainActivity extends AppCompatActivity
                 floatingButtonShow(false);
                 Intent i = new Intent(MainActivity.this, editaPerfil.class);
                 startActivity(i);
-                Toast.makeText(MainActivity.this, "Editar Perfil", Toast.LENGTH_LONG).show();
                 break;
             case R.id.nav_addPerfil:
                 floatingButtonShow(false);

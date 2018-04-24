@@ -48,7 +48,6 @@ public class ConfiguracaoFragment extends PreferenceFragment implements SharedPr
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch(key){
             case "button_vibrar_check":
-                Toast.makeText(getActivity().getBaseContext(), "Func",Toast.LENGTH_SHORT).show();
                 break;
             case "list_duracao_soneca":
                 Preference connectionPref = findPreference(key);

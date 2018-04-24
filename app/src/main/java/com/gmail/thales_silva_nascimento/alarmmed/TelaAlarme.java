@@ -179,7 +179,6 @@ public class TelaAlarme extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.telaAlarmeTomar:
-                Toast.makeText(TelaAlarme.this, "Apertou o botão tomar todos", Toast.LENGTH_SHORT).show();
                 Log.v("TelaAlarme", "Apertou o botão tomar todos");
                 adapter.tomarTodosMedicamentos();
                 finish();

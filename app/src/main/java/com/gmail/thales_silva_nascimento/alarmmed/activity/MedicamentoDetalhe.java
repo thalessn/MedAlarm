@@ -282,7 +282,6 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
             case R.id.miEditar:
                 //Edita o medicamento
                 editarMedicamento();
-                Toast.makeText(MedicamentoDetalhe.this, "Editar", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

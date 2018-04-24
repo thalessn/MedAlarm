@@ -100,7 +100,9 @@
         <activity android:name=".activity.Historico" />
         <activity android:name=".activity.Email" />
         <activity android:name=".activity.ConfiguracaoActivity" />
-        <activity android:name=".activity.ConfigSom"></activity>
+        <activity android:name=".activity.ConfigSom" />
+        <activity android:name=".activity.Sobre" />
+        <activity android:name=".activity.Creditos"></activity>
     </application>
 
 </manifest>

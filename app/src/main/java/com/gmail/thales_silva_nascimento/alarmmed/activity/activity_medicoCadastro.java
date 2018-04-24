@@ -146,7 +146,6 @@ public class activity_medicoCadastro extends AppCompatActivity implements Adapte
                         alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(activity_medicoCadastro.this, "Apertou no sim", Toast.LENGTH_LONG).show();
                                 finish();
                             }
                         });
@@ -192,7 +191,6 @@ public class activity_medicoCadastro extends AppCompatActivity implements Adapte
     private void startContactPickActivity(){
         Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         startActivityForResult(i, SELECIONAR_CONTATO);
-        Toast.makeText(activity_medicoCadastro.this, "Contato", Toast.LENGTH_SHORT).show();
     }
 
     @Override
