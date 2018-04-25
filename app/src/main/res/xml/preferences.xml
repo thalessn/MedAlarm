@@ -22,7 +22,7 @@
         <ListPreference
             android:title="Duração da Soneca"
             android:summary="5 minutos"
-            android:key="list_duracao_soneca"
+            android:key="@string/soneca"
             android:entries="@array/duracao_soneca"
             android:defaultValue="1"
             android:entryValues="@array/duracao_soneca"/>

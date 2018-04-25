@@ -4,10 +4,13 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.gmail.thales_silva_nascimento.alarmmed.AlarmeReceiver;
+import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.Utils;
 import com.gmail.thales_silva_nascimento.alarmmed.Weekdays;
 import com.gmail.thales_silva_nascimento.alarmmed.dao.InstanciaAlarmeDAO;
@@ -334,5 +337,11 @@ public class InstanciaAlarmeController {
             return verificaFimTratamento(instancia, datafim) ? null : instancia;
         }
         return null;
+    }
+
+    private int buscaTempoSonecaConfig(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        //int tempo = sharedPreferences.getInt()
+        return 1;
     }
 }

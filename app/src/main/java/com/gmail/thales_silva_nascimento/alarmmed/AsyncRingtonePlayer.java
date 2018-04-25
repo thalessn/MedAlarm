@@ -272,7 +272,7 @@ public final class AsyncRingtonePlayer {
             }
 
             final boolean inTelephoneCall = isInTelephoneCall(context);
-            Uri alarmNoise = null;//inTelephoneCall ? getInCallRingtoneUri(context) : ringtoneUri;
+            Uri alarmNoise = inTelephoneCall ? getInCallRingtoneUri(context) : ringtoneUri;
             // Fall back to the system default alarm if the database does not have an alarm stored.
             if (alarmNoise == null) {
                 alarmNoise = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);

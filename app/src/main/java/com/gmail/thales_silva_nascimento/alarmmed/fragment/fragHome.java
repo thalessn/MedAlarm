@@ -1,5 +1,6 @@
 package com.gmail.thales_silva_nascimento.alarmmed.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -54,7 +55,6 @@ public class fragHome extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
 
         //Gridview que conterá as imagens dos tempos
         gridView = (GridView) view.findViewById(R.id.gridView);

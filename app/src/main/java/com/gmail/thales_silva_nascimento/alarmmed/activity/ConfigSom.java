@@ -312,6 +312,8 @@ public class ConfigSom extends AppCompatActivity {
                         nomeToquePersonalizado = uri.getLastPathSegment();
                         SpannableStringBuilder spbuilder = formataTexto("Personalize o toque sonoro\n",nomeToquePersonalizado);
                         rbMusic.setText(spbuilder);
+                        //adiciona a uri no hashmap
+                        toques.put("Escolher",uri.getPath());
                         //Toque
                         ringtone = RingtoneManager.getRingtone(ConfigSom.this,uri);
                         timer = criaTimer(5000, 1000);

@@ -41,20 +41,10 @@ public final class AlarmKlaxon {
         Uri mRingtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         //Pega a uri do toque do alarme, salvo na tela de configurações
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.preferences), Context.MODE_PRIVATE);
-        String u = sharedPreferences.getString(context.getString(R.string.uri_som),mRingtone.getPath());
+        String u = sharedPreferences.getString(context.getString(R.string.uri_som),"");
         Log.v("UriSom", u);
         Uri uri = Uri.parse(u);
         getAsyncRingtonePlayer(context).play(uri);
-        //Verifica se o arquivo existe
-//        File file = new File(u);
-//        Log.v("File", file.getAbsolutePath());
-//        if(file.exists()){
-//            //Pega um instãncia do AsyncRingTonePlayer para executar o som
-//            Uri uri = Uri.fromFile(file);
-//            getAsyncRingtonePlayer(context).play(uri);
-//        }else {
-//            getAsyncRingtonePlayer(context).play(mRingtone);
-//        }
 
 
         //Verifica na configurações se deve vibrar
