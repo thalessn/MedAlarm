@@ -257,13 +257,13 @@ public class InstanciaAlarmeController {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0);
 
         /**
-         * REFAZER UTILIZANDO O VALOR ADOTADO NAS CONFIGURAÇÕES
-         * Adiciona 2 minutos ao horário atual para adiar a instancia
+         * Pega o valor NAS CONFIGURAÇÕES para saber quantos minutos de soneca
          */
+        int minAdiar = buscaTempoSonecaConfig();
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        cal.add(Calendar.MINUTE,2);
+        cal.add(Calendar.MINUTE,minAdiar);
 
         String data = Utils.CalendarToStringData(cal);
         String hora = Utils.CalendarToStringHora(cal);
@@ -341,7 +341,8 @@ public class InstanciaAlarmeController {
 
     private int buscaTempoSonecaConfig(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        //int tempo = sharedPreferences.getInt()
-        return 1;
+        String converter = sharedPreferences.getString(context.getString(R.string.soneca), "5");
+        int minutos = Integer.parseInt(converter);
+        return minutos;
     }
 }
