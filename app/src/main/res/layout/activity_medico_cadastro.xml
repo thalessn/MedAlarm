@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.gmail.thales_silva_nascimento.alarmmed.activity.activity_medicoCadastro">
+    tools:context="com.gmail.thales_silva_nascimento.alarmmed.activity.MedicoCadastro">
 
     <!-- Adiciona a toolbar do médico -->
     <include

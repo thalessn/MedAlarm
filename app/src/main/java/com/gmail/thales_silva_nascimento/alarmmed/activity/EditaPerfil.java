@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class editaPerfil extends AppCompatActivity {
+public class EditaPerfil extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView hManha;
     private TextView hAlmoco;
@@ -55,7 +55,7 @@ public class editaPerfil extends AppCompatActivity {
         btnEcluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(editaPerfil.this, "Excluir", Toast.LENGTH_LONG).show();
+                Toast.makeText(EditaPerfil.this, "Excluir", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -80,7 +80,7 @@ public class editaPerfil extends AppCompatActivity {
         // Metodo que gerencia os itens do menu da Toolbar.
         switch (item.getItemId()) {
             case R.id.iTPerfilSave:
-                Toast.makeText(editaPerfil.this, "Apertou o botão Salvar Edita Perfil", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditaPerfil.this, "Apertou o botão Salvar Edita Perfil", Toast.LENGTH_SHORT).show();
                 finish();
                 return true;
             default:
@@ -122,7 +122,7 @@ public class editaPerfil extends AppCompatActivity {
                  
                 int hora = c.get(Calendar.HOUR_OF_DAY);
                 int minuto = c.get(Calendar.MINUTE);
-                TimePickerDialog time = new TimePickerDialog(editaPerfil.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog time = new TimePickerDialog(EditaPerfil.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String hora = String.valueOf(hourOfDay);
@@ -146,7 +146,7 @@ public class editaPerfil extends AppCompatActivity {
                  
                 int hora = c.get(Calendar.HOUR_OF_DAY);
                 int minuto = c.get(Calendar.MINUTE);
-                TimePickerDialog time = new TimePickerDialog(editaPerfil.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog time = new TimePickerDialog(EditaPerfil.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String hora = String.valueOf(hourOfDay);
@@ -170,7 +170,7 @@ public class editaPerfil extends AppCompatActivity {
                  
                 int hora = c.get(Calendar.HOUR_OF_DAY);
                 int minuto = c.get(Calendar.MINUTE);
-                TimePickerDialog time = new TimePickerDialog(editaPerfil.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog time = new TimePickerDialog(EditaPerfil.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String hora = String.valueOf(hourOfDay);
@@ -194,7 +194,7 @@ public class editaPerfil extends AppCompatActivity {
                  
                 int hora = c.get(Calendar.HOUR_OF_DAY);
                 int minuto = c.get(Calendar.MINUTE);
-                TimePickerDialog time = new TimePickerDialog(editaPerfil.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog time = new TimePickerDialog(EditaPerfil.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String hora = String.valueOf(hourOfDay);

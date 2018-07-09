@@ -16,8 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import android.widget.Toast;
-
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.dao.BancoHelper;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.fragRemedio;
@@ -62,11 +60,11 @@ public class MainActivity extends AppCompatActivity
                 Log.v("Tag", tag);
                 switch (tag){
                     case "fragReceita":
-                        Intent receita = new Intent(view.getContext(), receitaCadastro.class);
+                        Intent receita = new Intent(view.getContext(), ReceitaCadastro.class);
                         startActivity(receita);
                         break;
                     case "fragInicio":
-                        Intent i = new Intent(MainActivity.this, activityFloatingbuttonTelaInicial.class);
+                        Intent i = new Intent(MainActivity.this, ActivityFloatingbuttonTelaInicial.class);
                         startActivity(i);
                         break;
                     default:
@@ -206,7 +204,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_edPerfil:
                 floatingButtonShow(false);
-                Intent i = new Intent(MainActivity.this, editaPerfil.class);
+                Intent i = new Intent(MainActivity.this, EditaPerfil.class);
                 startActivity(i);
                 break;
             case R.id.nav_addPerfil:

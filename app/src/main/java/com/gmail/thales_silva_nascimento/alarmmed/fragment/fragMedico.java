@@ -16,8 +16,8 @@ import android.widget.TextView;
 import com.gmail.thales_silva_nascimento.alarmmed.activity.MainActivity;
 import com.gmail.thales_silva_nascimento.alarmmed.adapter.MedicoAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
-import com.gmail.thales_silva_nascimento.alarmmed.activity.activity_medicoCadastro;
-import com.gmail.thales_silva_nascimento.alarmmed.activity.activity_medicoDetalhe;
+import com.gmail.thales_silva_nascimento.alarmmed.activity.MedicoCadastro;
+import com.gmail.thales_silva_nascimento.alarmmed.activity.MedicoDetalhe;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicoController;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medico;
 
@@ -71,7 +71,7 @@ public class fragMedico extends Fragment {
             @Override
             public void onClick(View v) {
                 //Cria intent para chamar a activity de cadastro
-                Intent i = new Intent(getContext(), activity_medicoCadastro.class);
+                Intent i = new Intent(getContext(), MedicoCadastro.class);
                 //Diz para a activity que será a tela do tipo cadastro
                 i.putExtra("tipoTela", 1);
                 //Startforresult - permiti retornar um valor quando a activity medicoCadastro for finalizada
@@ -106,7 +106,7 @@ public class fragMedico extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //Cria uma nova activity do tipo medicoDetalhe
-                Intent intent = new Intent(view.getContext(), activity_medicoDetalhe.class);
+                Intent intent = new Intent(view.getContext(), MedicoDetalhe.class);
                 //Passa o médico seleciona para a nova activity - Isto é possivel graças ao Parcelable
                 intent.putExtra("medico", listaMedicos.get(position));
                 startActivityForResult(intent, CODIGO_RESULT_ACTIVITY);

@@ -109,5 +109,6 @@
     <string name="nome_toque_personalizado">toque_personalizado</string>
     <string name="soneca">list_duracao_soneca</string>
     <string name="vibrar">button_vibrar_check</string>
+    <string name="title_activity_teste">teste</string>
 
 </resources>
