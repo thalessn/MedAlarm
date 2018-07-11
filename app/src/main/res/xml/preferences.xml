@@ -8,6 +8,7 @@
                 android:targetClass="com.gmail.thales_silva_nascimento.alarmmed.activity.ConfigSom" />
         </Preference>
 
+        <!-- key is the string used to find the value saved on SharedPreference -->
         <CheckBoxPreference
             android:key="button_vibrar_check"
             android:title="Vibrar"
@@ -21,7 +22,7 @@
         <ListPreference
             android:title="Duração da Soneca"
             android:summary="5 minutos"
-            android:key="list_duracao_soneca"
+            android:key="@string/soneca"
             android:entries="@array/duracao_soneca"
             android:defaultValue="1"
             android:entryValues="@array/duracao_soneca"/>
@@ -34,15 +35,15 @@
         <Preference
             android:title="Sobre">
             <intent
-                android:targetPackage=""
-                android:targetClass="" />
+                android:targetPackage="com.gmail.thales_silva_nascimento.alarmmed"
+                android:targetClass="com.gmail.thales_silva_nascimento.alarmmed.activity.Sobre" />
         </Preference>
 
         <Preference
             android:title="Créditos">
             <intent
-                android:targetPackage=""
-                android:targetClass="" />
+                android:targetPackage="com.gmail.thales_silva_nascimento.alarmmed"
+                android:targetClass="com.gmail.thales_silva_nascimento.alarmmed.activity.Creditos" />
         </Preference>
 
     </PreferenceCategory>

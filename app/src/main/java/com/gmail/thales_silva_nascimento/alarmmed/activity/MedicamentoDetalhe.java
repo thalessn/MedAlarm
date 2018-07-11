@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
@@ -88,7 +87,7 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
         btnAddDose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MedicamentoDetalhe.this, adicionarDose.class);
+                Intent i = new Intent(MedicamentoDetalhe.this, AdicionarDose.class);
                 i.putExtra("medicamento", medicamento);
                 startActivityForResult(i,CODIGO_RESULT_ACTIVITY);
             }
@@ -282,7 +281,6 @@ public class MedicamentoDetalhe extends AppCompatActivity implements reabastecer
             case R.id.miEditar:
                 //Edita o medicamento
                 editarMedicamento();
-                Toast.makeText(MedicamentoDetalhe.this, "Editar", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

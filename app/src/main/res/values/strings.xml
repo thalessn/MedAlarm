@@ -103,7 +103,12 @@
     <string name="title_activity_excluir_teste_flotingbutton">excluirTesteFlotingbutton</string>
 
     <!-- String utilizadas para encontrar as configurações salvas -->
-    <string name="config_som">config_som</string>
-    <string name="nomeSound">nomeSound</string>
+    <string name="preferences">Preferences</string>
+    <string name="uri_som">config_som</string>
+    <string name="nome_som">nomeSound</string>
+    <string name="nome_toque_personalizado">toque_personalizado</string>
+    <string name="soneca">list_duracao_soneca</string>
+    <string name="vibrar">button_vibrar_check</string>
+    <string name="title_activity_teste">teste</string>
 
 </resources>

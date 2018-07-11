@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class receitaCadastro extends AppCompatActivity {
+public class ReceitaCadastro extends AppCompatActivity {
     private Toolbar toolbar;
     private Button medicoCad;
     private Button medicamentoCad;
@@ -48,22 +48,22 @@ public class receitaCadastro extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(receitaCadastro.this, "Fechou Receita", Toast.LENGTH_LONG).show();
+                Toast.makeText(ReceitaCadastro.this, "Fechou Receita", Toast.LENGTH_LONG).show();
 
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(receitaCadastro.this);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(ReceitaCadastro.this);
                 alertDialog.setTitle("Tem Certeza?");
                 alertDialog.setMessage("Você têm certeza de sair sem salvar a receita?");
                 alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
-                        Toast.makeText(receitaCadastro.this, "Apertou SIM", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ReceitaCadastro.this, "Apertou SIM", Toast.LENGTH_LONG).show();
                     }
                 });
                 alertDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(receitaCadastro.this, "Apertou Cancelar", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ReceitaCadastro.this, "Apertou Cancelar", Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -82,7 +82,7 @@ public class receitaCadastro extends AppCompatActivity {
                 int mMonth = c.get(Calendar.MONTH); // current month
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
                 // date picker dialog
-                DatePickerDialog date = new DatePickerDialog(receitaCadastro.this, new DatePickerDialog.OnDateSetListener(){
+                DatePickerDialog date = new DatePickerDialog(ReceitaCadastro.this, new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         dataRec.setText(dayOfMonth + "/" + (month +1) + "/" + year);
@@ -109,7 +109,7 @@ public class receitaCadastro extends AppCompatActivity {
         medicoCad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(receitaCadastro.this, activity_medicoCadastro.class);
+                Intent i = new Intent(ReceitaCadastro.this, MedicoCadastro.class);
                 i.putExtra("tipoTela", 1);
                 startActivityForResult(i, 1);
             }
@@ -119,7 +119,7 @@ public class receitaCadastro extends AppCompatActivity {
         medicamentoCad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent m = new Intent(receitaCadastro.this, MedicamentoCadastro.class);
+                Intent m = new Intent(ReceitaCadastro.this, MedicamentoCadastro.class);
                 startActivity(m);
             }
         });
@@ -142,7 +142,7 @@ public class receitaCadastro extends AppCompatActivity {
         // Metodo que gerencia os itens do menu da Toolbar.
         switch (item.getItemId()) {
             case R.id.iTPerfilSave:
-                Toast.makeText(receitaCadastro.this, "Apertou o botão Salvar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReceitaCadastro.this, "Apertou o botão Salvar", Toast.LENGTH_SHORT).show();
                 finish();
                 return true;
             default:

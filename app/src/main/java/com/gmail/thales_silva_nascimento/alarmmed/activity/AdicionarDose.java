@@ -32,7 +32,7 @@ import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class adicionarDose extends AppCompatActivity {
+public class AdicionarDose extends AppCompatActivity {
 
     private TextView tvdata;
     private TextView tvhora;
@@ -81,10 +81,10 @@ public class adicionarDose extends AppCompatActivity {
         }
 
         //Controladoras
-        medicamentoController = new MedicamentoController(adicionarDose.this);
-        historicoController = new HistoricoController(adicionarDose.this);
-        alarmeController = new AlarmeController(adicionarDose.this);
-        horarioController = HorarioController.getInstance(adicionarDose.this);
+        medicamentoController = new MedicamentoController(AdicionarDose.this);
+        historicoController = new HistoricoController(AdicionarDose.this);
+        alarmeController = new AlarmeController(AdicionarDose.this);
+        horarioController = HorarioController.getInstance(AdicionarDose.this);
 
         //Associa os TextViews
         tvdata = (TextView) findViewById(R.id.tvDataDose);
@@ -114,7 +114,7 @@ public class adicionarDose extends AppCompatActivity {
         tvdata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(adicionarDose.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AdicionarDose.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                         formataData(i2, i1, i);
@@ -129,7 +129,7 @@ public class adicionarDose extends AppCompatActivity {
             public void onClick(View view) {
                 hora = cal.get(Calendar.HOUR_OF_DAY);
                 minuto = cal.get(Calendar.MINUTE);
-                TimePickerDialog time = new TimePickerDialog(adicionarDose.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog time = new TimePickerDialog(AdicionarDose.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int i, int i1) {
                         formataHora(i, i1);
@@ -228,7 +228,7 @@ public class adicionarDose extends AppCompatActivity {
             qtdMed.requestFocus();
             return;
         }else{
-            SalvarDose salvarDose = new SalvarDose(adicionarDose.this, medicamento, cal, qtd);
+            SalvarDose salvarDose = new SalvarDose(AdicionarDose.this, medicamento, cal, qtd);
             salvarDose.execute();
 
             Intent i = new Intent();
@@ -238,14 +238,14 @@ public class adicionarDose extends AppCompatActivity {
     }
 
     private static class SalvarDose extends AsyncTask<Void,Void,Void>{
-        private final WeakReference<adicionarDose> mActivityRef;
+        private final WeakReference<AdicionarDose> mActivityRef;
         private Medicamento medicamento;
         private Calendar cal;
         private int qtd;
         ProgressDialog dialog;
 
 
-        public SalvarDose(adicionarDose activity, Medicamento medicamento, Calendar cal, int qtd){
+        public SalvarDose(AdicionarDose activity, Medicamento medicamento, Calendar cal, int qtd){
             mActivityRef = new WeakReference<>(activity);
             this.medicamento = medicamento;
             this.cal = cal;

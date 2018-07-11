@@ -78,7 +78,7 @@ public class LembreteCompraRemedio extends AppCompatActivity {
         llGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LembreteCompraRemedio.this, "Teste", Toast.LENGTH_LONG).show();
+
             }
         });
 

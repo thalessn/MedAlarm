@@ -4,10 +4,13 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.gmail.thales_silva_nascimento.alarmmed.AlarmeReceiver;
+import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.Utils;
 import com.gmail.thales_silva_nascimento.alarmmed.Weekdays;
 import com.gmail.thales_silva_nascimento.alarmmed.dao.InstanciaAlarmeDAO;
@@ -254,13 +257,13 @@ public class InstanciaAlarmeController {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0);
 
         /**
-         * REFAZER UTILIZANDO O VALOR ADOTADO NAS CONFIGURAÇÕES
-         * Adiciona 2 minutos ao horário atual para adiar a instancia
+         * Pega o valor NAS CONFIGURAÇÕES para saber quantos minutos de soneca
          */
+        int minAdiar = buscaTempoSonecaConfig();
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        cal.add(Calendar.MINUTE,2);
+        cal.add(Calendar.MINUTE,minAdiar);
 
         String data = Utils.CalendarToStringData(cal);
         String hora = Utils.CalendarToStringHora(cal);
@@ -334,5 +337,12 @@ public class InstanciaAlarmeController {
             return verificaFimTratamento(instancia, datafim) ? null : instancia;
         }
         return null;
+    }
+
+    private int buscaTempoSonecaConfig(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String converter = sharedPreferences.getString(context.getString(R.string.soneca), "5");
+        int minutos = Integer.parseInt(converter);
+        return minutos;
     }
 }

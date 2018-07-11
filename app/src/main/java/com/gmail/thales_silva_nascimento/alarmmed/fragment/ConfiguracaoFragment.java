@@ -26,6 +26,12 @@ public class ConfiguracaoFragment extends PreferenceFragment implements SharedPr
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
+        //Procura pela lista que contém os valores de soneca
+        ListPreference listPreference = (ListPreference) findPreference("list_duracao_soneca");
+        //Verifica se existe um valor cadastrado, se sim então preencha com ele.
+        if(listPreference.getValue() != null){
+            listPreference.setSummary(listPreference.getValue().toString() +" minutos");
+        }
     }
 
     @Override
@@ -48,7 +54,6 @@ public class ConfiguracaoFragment extends PreferenceFragment implements SharedPr
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch(key){
             case "button_vibrar_check":
-                Toast.makeText(getActivity().getBaseContext(), "Func",Toast.LENGTH_SHORT).show();
                 break;
             case "list_duracao_soneca":
                 Preference connectionPref = findPreference(key);

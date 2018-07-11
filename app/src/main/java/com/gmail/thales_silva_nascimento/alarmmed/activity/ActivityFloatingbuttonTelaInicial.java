@@ -13,7 +13,7 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.fragment.SelecionarMedicamentoDose;
 
-public class activityFloatingbuttonTelaInicial extends AppCompatActivity implements SelecionarMedicamentoDose.SelecionaMedicamentoDoseListerner{
+public class ActivityFloatingbuttonTelaInicial extends AppCompatActivity implements SelecionarMedicamentoDose.SelecionaMedicamentoDoseListerner{
 
     private FloatingActionMenu fam;
     private FloatingActionButton fabDose, fabAdd;
@@ -67,7 +67,7 @@ public class activityFloatingbuttonTelaInicial extends AppCompatActivity impleme
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(activityFloatingbuttonTelaInicial.this, MedicamentoCadastro.class);
+                Intent i = new Intent(ActivityFloatingbuttonTelaInicial.this, MedicamentoCadastro.class);
                 startActivityForResult(i, CODIGO_RESULT_ACTIVITY);
             }
         });

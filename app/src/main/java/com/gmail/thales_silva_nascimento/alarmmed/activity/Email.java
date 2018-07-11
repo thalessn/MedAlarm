@@ -228,6 +228,16 @@ public class Email extends AppCompatActivity {
         PdfWriter.getInstance(document, output);
         document.open();
 
+
+        /**Logotipo**/
+        document.add(Chunk.NEWLINE);
+        Font fontlogo = new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.BOLD);
+        Paragraph pLogo = new Paragraph("AlarmMed", fontlogo);
+        pLogo.setAlignment(Paragraph.ALIGN_CENTER);
+        document.add(pLogo);
+        document.add(Chunk.NEWLINE);
+
+
         /** Cabecalho */
         Font fontBold = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
         Paragraph p = new Paragraph("Relatório - Status Medicamentos", fontBold);

@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -36,26 +37,26 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
+           <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter> -->
         </activity>
         <activity
-            android:name=".activity.activity_medicoCadastro"
+            android:name=".activity.MedicoCadastro"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.activity_medicoDetalhe"
+            android:name=".activity.MedicoDetalhe"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.CriaPerfl"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.editaPerfil"
+            android:name=".activity.EditaPerfil"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.receitaCadastro"
+            android:name=".activity.ReceitaCadastro"
             android:screenOrientation="portrait" />
         <activity android:name=".TelaAlarme" />
         <activity
@@ -88,19 +89,28 @@
             android:name=".activity.LembreteCompraRemedio"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.adicionarDose"
+            android:name=".activity.AdicionarDose"
             android:label="@string/title_activity_adicionar_dose"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.InfoMedAlarmes" />
         <activity
-            android:name=".activity.activityFloatingbuttonTelaInicial"
+            android:name=".activity.ActivityFloatingbuttonTelaInicial"
             android:label="@string/title_activity_excluir_teste_flotingbutton"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
         <activity android:name=".activity.Historico" />
         <activity android:name=".activity.Email" />
         <activity android:name=".activity.ConfiguracaoActivity" />
-        <activity android:name=".activity.ConfigSom"></activity>
+        <activity android:name=".activity.ConfigSom" />
+        <activity android:name=".activity.Sobre" />
+        <activity android:name=".activity.Creditos" />
+        <activity android:name=".teste">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

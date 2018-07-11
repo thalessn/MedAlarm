@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/acll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="2dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/acnome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Novalgina"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/acconcentracao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Novalgina - Dipirona 5mg + Agen" />
+        <TextView
+            android:id="@+id/acforma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Comprimido" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/acimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/acll"
+        android:layout_alignBottom="@id/acll"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_alignParentRight="true" />
+
+
+</RelativeLayout>

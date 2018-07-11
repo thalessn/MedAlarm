@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context="com.gmail.thales_silva_nascimento.alarmmed.activity.editaPerfil">
+    tools:context="com.gmail.thales_silva_nascimento.alarmmed.activity.EditaPerfil">
 
 
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"

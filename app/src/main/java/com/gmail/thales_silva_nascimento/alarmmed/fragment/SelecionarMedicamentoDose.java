@@ -18,7 +18,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.gmail.thales_silva_nascimento.alarmmed.R;
-import com.gmail.thales_silva_nascimento.alarmmed.activity.adicionarDose;
+import com.gmail.thales_silva_nascimento.alarmmed.activity.AdicionarDose;
 import com.gmail.thales_silva_nascimento.alarmmed.adapter.MedicamentosDoseAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.MedicamentoController;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Medicamento;
@@ -116,7 +116,7 @@ public class SelecionarMedicamentoDose extends DialogFragment implements Medicam
     @Override
     public void onClick(View view, int position) {
         Medicamento med = medicamentos.get(position);
-        Intent i = new Intent(getContext(), adicionarDose.class);
+        Intent i = new Intent(getContext(), AdicionarDose.class);
         i.putExtra("medicamento", med);
         startActivityForResult(i, CODIGO_RESULT_ACTIVITY);
     }

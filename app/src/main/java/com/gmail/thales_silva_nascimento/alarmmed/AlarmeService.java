@@ -1,7 +1,12 @@
 package com.gmail.thales_silva_nascimento.alarmmed;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
@@ -54,8 +59,21 @@ public class AlarmeService extends Service {
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
 
+                AlarmKlaxon.start(AlarmeService.this);
+                //Contador para parar a música
+                CountDownTimer timer = new CountDownTimer(15000,1000) {
+                    @Override
+                    public void onTick(long l) {
 
-                //AlarmKlaxon.start(this, false);
+                    }
+                    @Override
+                    public void onFinish() {
+                        AlarmKlaxon.stop(AlarmeService.this);
+                    }
+                };
+                timer.start();
+
+
 
                 Log.v("ALARME SERVICE", "Iniciou Activity");
                   return super.onStartCommand(intent, flags, startId);

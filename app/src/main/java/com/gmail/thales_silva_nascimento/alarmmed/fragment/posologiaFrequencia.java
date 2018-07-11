@@ -89,7 +89,6 @@ public class posologiaFrequencia extends DialogFragment implements AdapterView.O
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Apertou no botão salvar", Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });
@@ -470,7 +469,7 @@ public class posologiaFrequencia extends DialogFragment implements AdapterView.O
                 }
             case 4:
                 if (spinnerHourController) {
-                    Toast.makeText(view.getContext(), "Intervalo", Toast.LENGTH_SHORT).show();
+
                     break;
                 } else if ((spinnerHourController == false)) {
                     criaTimeTextView(5);
@@ -482,7 +481,6 @@ public class posologiaFrequencia extends DialogFragment implements AdapterView.O
                     break;
                 } else if (spinnerHourController) {
                     criaIntervalosTextView(12);
-                    Toast.makeText(view.getContext(), "A cada 12 horas", Toast.LENGTH_SHORT).show();
                     break;
                 }
             case 6:
@@ -491,7 +489,6 @@ public class posologiaFrequencia extends DialogFragment implements AdapterView.O
                     break;
                 } else if (spinnerHourController) {
                     criaIntervalosTextView(8);
-                    Toast.makeText(view.getContext(), "A cada 8 horas", Toast.LENGTH_SHORT).show();
                     break;
                 }
             case 7:
@@ -500,7 +497,6 @@ public class posologiaFrequencia extends DialogFragment implements AdapterView.O
                     break;
                 } else if (spinnerHourController) {
                     criaIntervalosTextView(6);
-                    Toast.makeText(view.getContext(), "A cada 6 horas", Toast.LENGTH_SHORT).show();
                     break;
                 }
             case 8:
@@ -513,7 +509,6 @@ public class posologiaFrequencia extends DialogFragment implements AdapterView.O
                     break;
                 } else if (spinnerHourController && (spinnerIntervalController == false)) {
                     criaIntervalosTextView(4);
-                    Toast.makeText(view.getContext(), "A cada 4 horas", Toast.LENGTH_SHORT).show();
                     break;
                 }
             case 9:
@@ -522,7 +517,6 @@ public class posologiaFrequencia extends DialogFragment implements AdapterView.O
                     break;
                 } else if (spinnerHourController && (spinnerIntervalController == false)) {
                     criaIntervalosTextView(3);
-                    Toast.makeText(view.getContext(), "A cada 3 horas", Toast.LENGTH_SHORT).show();
                     break;
                 }
             case 10:
@@ -531,7 +525,6 @@ public class posologiaFrequencia extends DialogFragment implements AdapterView.O
                     break;
                 } else if (spinnerHourController && (spinnerIntervalController == false)) {
                     criaIntervalosTextView(2);
-                    Toast.makeText(view.getContext(), "A cada 2 horas", Toast.LENGTH_SHORT).show();
                     break;
                 }
             case 11:
@@ -540,25 +533,20 @@ public class posologiaFrequencia extends DialogFragment implements AdapterView.O
                     break;
                 } else if (spinnerHourController && (spinnerIntervalController == false)) {
                     criaIntervalosTextView(1);
-                    Toast.makeText(view.getContext(), "Por hora", Toast.LENGTH_SHORT).show();
                     break;
                 }
             case 12:
                 if (spinnerHourController == false) {
-                    Toast.makeText(view.getContext(), "Intervalo 12", Toast.LENGTH_SHORT).show();
                     break;
                 }
             case 13:
                 criaIntervalosTextView(12);
-                Toast.makeText(view.getContext(), " A cada 12 horas", Toast.LENGTH_SHORT).show();
                 break;
             case 14:
                 criaIntervalosTextView(8);
-                Toast.makeText(view.getContext(), "A cada 8 horas", Toast.LENGTH_SHORT).show();
                 break;
             case 15:
                 criaIntervalosTextView(6);
-                Toast.makeText(view.getContext(), "A cada 6", Toast.LENGTH_SHORT).show();
                 break;
             case 16:
                 if (spinnerIntervalController) {
@@ -567,20 +555,16 @@ public class posologiaFrequencia extends DialogFragment implements AdapterView.O
                     break;
                 } else {
                     criaIntervalosTextView(4);
-                    Toast.makeText(view.getContext(), "A cada 4 horas", Toast.LENGTH_SHORT).show();
                     break;
                 }
             case 17:
                 criaIntervalosTextView(3);
-                Toast.makeText(view.getContext(), "A cada 3 horas", Toast.LENGTH_SHORT).show();
                 break;
             case 18:
                 criaIntervalosTextView(2);
-                Toast.makeText(view.getContext(), "A cada 2 horas", Toast.LENGTH_SHORT).show();
                 break;
             case 19:
                 criaIntervalosTextView(1);
-                Toast.makeText(view.getContext(), "Por hora", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

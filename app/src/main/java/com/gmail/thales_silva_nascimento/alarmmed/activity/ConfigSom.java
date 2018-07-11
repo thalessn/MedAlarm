@@ -49,13 +49,15 @@ public class ConfigSom extends AppCompatActivity {
     private Toolbar toolbar;
     private RadioGroup radioGroup;
     private RadioButton rbMusic;
+    private RadioButton rbSelecionado;
     private HashMap<String,String> toques;
     private CountDownTimer timer;
     private Ringtone ringtone;
-    private String uriSound;
-    private String nameSound;
+    private String uri_som;
+    private String nome_som;
     private int rbanterior;
-
+    private boolean alterou = false;
+    private String nomeToquePersonalizado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,58 +70,76 @@ public class ConfigSom extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(ConfigSom.this);
-                alertDialog.setTitle("Tem Certeza?");
-                alertDialog.setMessage("Você tem certeza de sair sem salvar as alterações?");
-                alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
-                alertDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                if(alterou){
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(ConfigSom.this);
+                    alertDialog.setTitle("Tem Certeza?");
+                    alertDialog.setMessage("Você tem certeza de sair sem salvar as alterações?");
+                    alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    alertDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                });
-                alertDialog.show();
+                        }
+                    });
+                    alertDialog.show();
+                }else{
+                    finish();
+                }
+
             }
         });
 
         //Identifica o radiogroup
         radioGroup = (RadioGroup) findViewById(R.id.rgConfigSom);
+
         //Adiciona os radio buttons programatically
         adicionaRadioButton();
 
         //Verifica se já existe salvo alguma cofiguração.
-        SharedPreferences preferences = getSharedPreferences(getString(R.string.config_som), Context.MODE_PRIVATE);
-        uriSound = preferences.getString(getString(R.string.config_som), "/system/alarm_alert");
-        nameSound = preferences.getString(getString(R.string.nomeSound), "AlarmePadrao");
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.preferences), Context.MODE_PRIVATE);
+        uri_som = preferences.getString(getString(R.string.uri_som), "/system/alarm_alert");
+        nome_som = preferences.getString(getString(R.string.nome_som), "AlarmePadrao");
 
-        Log.v("uriSound", uriSound);
-        Log.v("nameSound", nameSound);
+        Log.v("uriSound", uri_som);
+        Log.v("nameSound", nome_som);
 
-
-        for (int i = 0; i<radioGroup.getChildCount(); i++ ){
+        //Procura pelo audio salvo na sharedpreference
+        for (int i = 0; i<radioGroup.getChildCount(); i++){
             View v = radioGroup.getChildAt(i);
             if(v!=null){
-                if((v.getTag() != null) && (v.getTag().toString().equals(nameSound))){
+                if((v.getTag() != null) && (v.getTag().toString().equals(nome_som))){
+
+                    //Verificia se é o toque personalizado se for edita o texto radio button.
+                    if(v.getTag().toString().equals("Escolher")){
+                        String parte1= "Personalize o toque sonoro\n";
+                        String parte2= preferences.getString(getString(R.string.nome_toque_personalizado),"Adicione o seu toque favorito");
+                        //Formata texto do radiobutton
+                        SpannableStringBuilder spanBuilder = formataTexto(parte1, parte2);
+                        //Adiciona texto no radio button
+                        rbMusic.setText(spanBuilder);
+                    }
+
+                    //RadioButton selecionado - utilizado para facilitar a gravação das informações
+                    rbSelecionado = (RadioButton) v;
                     radioGroup.check(v.getId());
                     rbanterior = v.getId();
                     break;
                 }
             }
-            //String t = v.getTag().toString() != null? v.getTag().toString() : "";
-            //Log.v("Tag", t);
         }
-
-
 
         //Listener para verifica quando houver mudança de radio buttons.
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                //Reponsável por indicar que houve uma modificação de radio button e deve exibir o diálogo
+                alterou=true;
+
                 //Verifica se o som já está tocando.
                 if((ringtone != null) && (ringtone.isPlaying())){
                     ringtone.stop();
@@ -129,26 +149,31 @@ public class ConfigSom extends AppCompatActivity {
                 RadioButton rb = radioGroup.findViewById(i);
                 String tag = rb != null ? rb.getTag().toString() : "";
                 if(tag == "AlarmePadrao"){
-                    Uri p = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-                    rbanterior = rb.getId();
-                    ringtone = RingtoneManager.getRingtone(ConfigSom.this, p);
-                    timer = criaTimer(5000, 1000);
-                    timer.start();
-
-
+                    rbSelecionado = rb;
+                    if(rbanterior != rb.getId()){
+                        Uri p = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+                        rbanterior = rb.getId();
+                        ringtone = RingtoneManager.getRingtone(ConfigSom.this, p);
+                        timer = criaTimer(5000, 1000);
+                        timer.start();
+                    }
                 }else if(tag == "Escolher"){
+                    rbSelecionado = rb;
                     Intent intent_upload = new Intent();
                     intent_upload.setType("audio/*");
                     intent_upload.setAction(Intent.ACTION_GET_CONTENT);
                     startActivityForResult(intent_upload,1);
 
                 }else{
-                    Uri uri = Uri.parse(toques.get(tag));
-                    rbanterior = rb.getId();
-                    //Toque
-                    ringtone = RingtoneManager.getRingtone(ConfigSom.this,uri);
-                    timer = criaTimer(5000, 1000);
-                    timer.start();
+                    rbSelecionado = rb;
+                    if(rbanterior != rb.getId()) {
+                        Uri uri = Uri.parse(toques.get(tag));
+                        rbanterior = rb.getId();
+                        //Toque
+                        ringtone = RingtoneManager.getRingtone(ConfigSom.this, uri);
+                        timer = criaTimer(5000, 1000);
+                        timer.start();
+                    }
                 }
             }
         });
@@ -166,16 +191,34 @@ public class ConfigSom extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.iTMedSave:
-                Toast.makeText(ConfigSom.this, "Salvou", Toast.LENGTH_SHORT).show();
-
+                //Nome e uri do toque selecionado
+                String uriSom = toques.get(rbSelecionado.getTag().toString());
+                String nSom = rbSelecionado.getTag().toString();
+                //Abri o arquivo de preferencia
+                SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preferences),Context.MODE_PRIVATE);
+                //Inicia o editor
+                SharedPreferences.Editor editor = sharedPref.edit();
+                //Salva a uri do som
+                editor.putString(getString(R.string.uri_som), uriSom);
+                //Salva o nome do alarme
+                editor.putString(getString(R.string.nome_som), nSom);
+                //Verifica se o toque é personalizado se sim salvar o nome para exibir novamente
+                if(nSom.equals("Escolher")) {
+                    editor.putString(getString(R.string.nome_toque_personalizado), nomeToquePersonalizado);
+                    Log.v("NomeTOque", "Passou");
+                }
+                //Salva as configurações
+                editor.commit();
+                //Encerra a atividade
+                finish();
                 break;
 
         }
         return super.onOptionsItemSelected(item);
     }
 
+    /**Função responsável por adicionar os RadioButton em RunTime na tela */
     private void adicionaRadioButton(){
-
         //Primeiro botão
         rbMusic = new RadioButton(ConfigSom.this);
         RadioGroup.LayoutParams lp = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT,
@@ -222,17 +265,20 @@ public class ConfigSom extends AppCompatActivity {
         rbAlarm.setText("Alarme Padrão");
         rbAlarm.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         rbAlarm.setTag("AlarmePadrao");
+
         //Adiciona ao RadioGroup
         radioGroup.addView(rbAlarm);
 
 
-         /** Preenche com os toques disponívéis no aparelho*/
+        /** Preenche com os toques disponívéis no aparelho*/
         RingtoneManager rig = new RingtoneManager(ConfigSom.this);
         rig.setType(RingtoneManager.TYPE_RINGTONE);
         Cursor cursor = rig.getCursor();
 
         //Map contendo os nomes e as repectivas uri's
         toques = new HashMap<>();
+
+        //Percorre todos os toques padrões disponíveis no aparelho.
         while(cursor.moveToNext()){
             String nome = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX);
             String caminho = cursor.getString(RingtoneManager.URI_COLUMN_INDEX);
@@ -250,12 +296,10 @@ public class ConfigSom extends AppCompatActivity {
             radio.setText(nome);
             radio.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             radio.setTag(nome);
-
+            //Adiciona o radiobutton
             radioGroup.addView(radio);
         }
-
     }
-
 
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
@@ -265,8 +309,11 @@ public class ConfigSom extends AppCompatActivity {
                     try{
                         //the selected audio.
                         Uri uri = data.getData();
-                        SpannableStringBuilder spbuilder = formataTexto("Personalize o toque sonoro\n",uri.getLastPathSegment());
+                        nomeToquePersonalizado = uri.getLastPathSegment();
+                        SpannableStringBuilder spbuilder = formataTexto("Personalize o toque sonoro\n",nomeToquePersonalizado);
                         rbMusic.setText(spbuilder);
+                        //adiciona a uri no hashmap
+                        toques.put("Escolher",uri.getPath());
                         //Toque
                         ringtone = RingtoneManager.getRingtone(ConfigSom.this,uri);
                         timer = criaTimer(5000, 1000);
@@ -277,9 +324,10 @@ public class ConfigSom extends AppCompatActivity {
                     }
                 }
             }
+        }else{
+            //Volta para o radiobutton anterior
+            radioGroup.check(rbanterior);
         }
-        //Volta para o radiobutton anterior
-        radioGroup.check(rbanterior);
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -304,8 +352,6 @@ public class ConfigSom extends AppCompatActivity {
                 ringtone.stop();
             }
         };
-
         return t;
-
     }
 }
