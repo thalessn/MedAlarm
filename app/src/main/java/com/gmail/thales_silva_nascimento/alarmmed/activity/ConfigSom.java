@@ -55,6 +55,7 @@ public class ConfigSom extends AppCompatActivity {
     private String uriSound;
     private String nameSound;
     private int rbanterior;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
