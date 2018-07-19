@@ -16,4 +16,10 @@
         android:minHeight="?attr/actionBarSize"
         app:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
+    <WebView
+        android:id="@+id/wvCredito"
+        android:layout_below="@id/tbCreditos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </RelativeLayout>
