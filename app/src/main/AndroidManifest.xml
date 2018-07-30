@@ -61,16 +61,8 @@
         <activity android:name=".TelaAlarme" />
         <activity
             android:name=".activity.MedicamentoCadastro"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"/>
 
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
-        </activity>
 
         <!-- Declara o service do Alarme -->
         <service android:name=".AlarmeService" />
@@ -105,6 +97,11 @@
         <activity android:name=".activity.Sobre" />
         <activity android:name=".activity.Creditos" />
         <activity android:name=".teste">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

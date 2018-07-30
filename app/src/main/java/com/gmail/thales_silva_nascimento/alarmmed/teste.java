@@ -6,11 +6,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 public class teste extends AppCompatActivity {
+    private MedicamentoAutoCompleteAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +22,16 @@ public class teste extends AppCompatActivity {
 
         AutoCompleteTextView ac = findViewById(R.id.acteste);
         ac.setThreshold(3);
-        MedicamentoAutoCompleteAdapter adapter = new MedicamentoAutoCompleteAdapter(teste.this);
+        adapter = new MedicamentoAutoCompleteAdapter(teste.this);
         ac.setAdapter(adapter);
 
-
+        ac.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                RetroMedicamento retroMed = (RetroMedicamento) adapter.getItem(position);
+                Toast.makeText(teste.this, retroMed.getNomeGen(), Toast.LENGTH_LONG).show();
+            }
+        });
 
 
 

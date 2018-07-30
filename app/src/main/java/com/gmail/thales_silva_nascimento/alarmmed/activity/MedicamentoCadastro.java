@@ -47,6 +47,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -63,7 +64,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.gmail.thales_silva_nascimento.alarmmed.CameraPreview;
+import com.gmail.thales_silva_nascimento.alarmmed.MedicamentoAutoCompleteAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.RetroMedicamento;
 import com.gmail.thales_silva_nascimento.alarmmed.Utils;
 import com.gmail.thales_silva_nascimento.alarmmed.Weekdays;
 import com.gmail.thales_silva_nascimento.alarmmed.controller.AlarmeController;
@@ -149,11 +152,12 @@ public class MedicamentoCadastro extends AppCompatActivity
     private Toolbar toolbar;
 
     //Nome, dosagem
-    private EditText nomeMed;
+    private AutoCompleteTextView nomeMed;
     private EditText dosagemMed;
     private int intevaloSel;
     private ArrayList<String> diasSelecionados;
     private Menu menu;
+    private MedicamentoAutoCompleteAdapter autoCompleteAdapter;
 
     //Camera
     private AppBarLayout appBarLayout;
@@ -206,8 +210,15 @@ public class MedicamentoCadastro extends AppCompatActivity
         //Dosagem EditText
         dosagemMed = (EditText) findViewById(R.id.edDosagem);
 
+        //Nome do medicamento
+        nomeMed = (AutoCompleteTextView) findViewById(R.id.edNomeMed);
+        //Seta que o atucomplete só comeca com no mínimo 3 letras
+        nomeMed.setThreshold(3);
+        //Instancia o adapter do autocomplete
+        autoCompleteAdapter = new MedicamentoAutoCompleteAdapter(MedicamentoCadastro.this);
+        //Adiciona o adapte ao edittext
+        nomeMed.setAdapter(autoCompleteAdapter);
         //Nome do medicamento e evento para habilitar somente quando possui um nome
-        nomeMed = (EditText) findViewById(R.id.edNomeMed);
         nomeMed.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -231,6 +242,16 @@ public class MedicamentoCadastro extends AppCompatActivity
                         menu.findItem(R.id.iTMedSave).setEnabled(false);
                     }
                 }
+            }
+        });
+
+        //Onclick do autocomplete
+        nomeMed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                RetroMedicamento medSel = (RetroMedicamento) autoCompleteAdapter.getItem(i);
+                nomeMed.setText(medSel.getNomeGen());
+                dosagemMed.setText(medSel.getConcentracao());
             }
         });
 

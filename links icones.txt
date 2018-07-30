@@ -30,3 +30,6 @@ https://pixabay.com/pt/noite-star-c%C3%A9u-estrelado-2845347/ - madrugada
 
 Site que utilizei como referência para criar a tela de compra
 http://www.androhub.com/android-contextual-action-mode-over-toolbar/
+
+
+Imagens do dropdownmenu na tela de cadastro de medicamentos.

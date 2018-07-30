@@ -53,7 +53,7 @@
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
             -->
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/edNomeMed"
                 android:inputType="text"
                 android:maxLines="1"

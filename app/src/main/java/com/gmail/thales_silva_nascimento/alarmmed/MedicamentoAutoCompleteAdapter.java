@@ -71,7 +71,7 @@ public class MedicamentoAutoCompleteAdapter extends BaseAdapter implements Filte
                 if(charSequence != null){
                     //Intancia um objeto da interface GetMedicamentoService Utilizando a fábrica de objetos Retrofit
                     GetMedicamentoService service = RetroMedicamentoClientInstance.getRetrofitInstance().create(GetMedicamentoService.class);
-                    //Executa a requisição
+                    //Executa a requisição utilizando o objeto da interface GetMedicamentoService
                     Call<List<RetroMedicamento>> call = service.getTodosMedicamentos(charSequence.toString());
                     call.enqueue(new Callback<List<RetroMedicamento>>() {
                         @Override
@@ -118,7 +118,41 @@ public class MedicamentoAutoCompleteAdapter extends BaseAdapter implements Filte
                 break;
             case "AEROSOL":
                 break;
-            //case ""
+            case "CÁPSULA":
+                break;
+            case "CREME":
+                break;
+            case "DRÁGEA":
+                break;
+            case "ELIXIR":
+                break;
+            case "EMULSÃO":
+                break;
+            case "ENEMA":
+                break;
+            case "GEL":
+                break;
+            case "GRANULADO":
+                break;
+            case "LOÇÃO":
+                break;
+            case "PÓ":
+                break;
+            case "POMADA":
+                break;
+            case "SOLUÇÂO":
+                //Tem vário tipos verificar cada um
+                break;
+            case "SUPOSITÓRIO":
+                break;
+            case "SUSPENSÃO":
+                break;
+            case "XAMPU":
+                break;
+            case "XAROPE":
+                break;
+            default:
+                break;
         }
 
     }

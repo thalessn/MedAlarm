@@ -172,9 +172,9 @@ public class AdicionarDose extends AppCompatActivity {
 
     private void formataData(int dia, int mes, int year){
         Log.v("Parametros", String.valueOf(dia)+"-"+String.valueOf(mes)+"-"+String.valueOf(ano)+"-");
-        //Declara o objeto para formata a data
+        //Declara o objeto para formatar a data
         SimpleDateFormat sdf = null;
-        //Atualiza a data do calendário da Activit
+        //Atualiza a data do calendário da Activity
         cal.set(year, mes, dia);
         //Verifica se o dia escolhido foi ontem ou amanhã. Para formatar o texto de forma diferente.
         if(this.dia == dia){

@@ -60,4 +60,9 @@ public class RetroMedicamento {
     public void setConcentracao(String concentracao) {
         this.concentracao = concentracao;
     }
+
+    @Override
+    public String toString() {
+        return nomeGen;
+    }
 }
