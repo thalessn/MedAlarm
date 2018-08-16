@@ -110,5 +110,6 @@
     <string name="soneca">list_duracao_soneca</string>
     <string name="vibrar">button_vibrar_check</string>
     <string name="title_activity_teste">teste</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

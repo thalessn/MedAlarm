@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapsActivity" />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.FarmaciaProxima">
+    
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tbFarmacia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"/>
+        
+        <fragment
+            android:layout_below="@id/tbFarmacia"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".activity.FarmaciaProxima" />
+    </RelativeLayout>
+    
+    
+    <RelativeLayout
+        android:id="@+id/rlBottomSheet"
+        android:layout_width="match_parent"
+        app:behavior_hideable="true"
+        android:background="@color/white"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        android:layout_height="120dp">
+
+        <TextView
+            android:id="@+id/text_view_sheet_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="texto"
+            android:textSize="18sp"
+            android:padding="@dimen/activity_vertical_margin"/>
+
+    </RelativeLayout>
+
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

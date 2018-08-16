@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.dao.BancoHelper;
@@ -220,6 +221,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_configuracoes:
                 Intent ae =  new Intent(MainActivity.this, ConfiguracaoActivity.class);
                 startActivityForResult(ae, CONFIG_CODE);
+                break;
+            case R.id.nav_farmacia:
+                Intent farmacia = new Intent(MainActivity.this, FarmaciaProxima.class);
+                startActivity(farmacia);
+                Toast.makeText(MainActivity.this, "Oi", Toast.LENGTH_LONG).show();
+                break;
         }
         if(fragment !=null && fragmentTag != null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
