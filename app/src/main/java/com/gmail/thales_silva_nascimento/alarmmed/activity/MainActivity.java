@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity
     private FloatingActionButton fab;
     private static final int HISTORICO_CODE = 1;
     private static final int CONFIG_CODE = 2;
+    private static final int FARMACIA_PROXIMA = 3;
     private Menu menuDrawer;
 
     @Override
@@ -224,8 +225,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_farmacia:
                 Intent farmacia = new Intent(MainActivity.this, FarmaciaProxima.class);
-                startActivity(farmacia);
-                Toast.makeText(MainActivity.this, "Oi", Toast.LENGTH_LONG).show();
+                startActivityForResult(farmacia,FARMACIA_PROXIMA);
                 break;
         }
         if(fragment !=null && fragmentTag != null){
@@ -287,6 +287,15 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         }else if(codigo == CONFIG_CODE){
+            if(intent != null){
+                if(resultado == 1){
+                    //Troca para o fragment inicio
+                    displaySelectedScreen(R.id.nav_inicio);
+                    //Marca a opção inicio no Drawer
+                    menuDrawer.getItem(0).setChecked(true);
+                }
+            }
+        }else if(codigo == FARMACIA_PROXIMA){
             if(intent != null){
                 if(resultado == 1){
                     //Troca para o fragment inicio

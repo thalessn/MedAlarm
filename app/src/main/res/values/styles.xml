@@ -31,8 +31,14 @@
     <style name="Theme.AppCompat.Transparent.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-
     </style>
+
+    <!-- Altera a cor do RatingBar -->
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#a2a2a2</item>
+        <item name="colorControlActivated">@color/yelow</item>
+    </style>
+
 
 
 </resources>

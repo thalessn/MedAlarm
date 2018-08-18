@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"/>
+            android:minHeight="?attr/actionBarSize"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark"/>
         
         <fragment
             android:layout_below="@id/tbFarmacia"
@@ -34,17 +35,41 @@
         android:id="@+id/rlBottomSheet"
         android:layout_width="match_parent"
         app:behavior_hideable="true"
+        android:padding="8dp"
         android:background="@color/white"
         app:layout_behavior="@string/bottom_sheet_behavior"
-        android:layout_height="120dp">
+        android:layout_height="125dp">
 
         <TextView
-            android:id="@+id/text_view_sheet_title"
+            android:id="@+id/tvNomeFarma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="texto"
+            android:text="Farmácia Do Sena Campos"
             android:textSize="18sp"
-            android:padding="@dimen/activity_vertical_margin"/>
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:padding="8dp"/>
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:numStars="5"
+            android:theme="@style/RatingBar"
+            android:rating="4.5"
+            android:padding="8dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvNomeFarma"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:stepSize="0.2" />
+        <Button
+            android:id="@+id/btnRotas"
+            android:layout_below="@id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rotas"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="#4263cf"/>
 
     </RelativeLayout>
 

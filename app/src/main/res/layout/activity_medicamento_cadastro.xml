@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark"></android.support.v7.widget.Toolbar>
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"/>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_below="@id/tBCadMedicamento"

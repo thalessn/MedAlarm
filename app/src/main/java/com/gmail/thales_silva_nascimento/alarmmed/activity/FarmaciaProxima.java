@@ -2,8 +2,10 @@ package com.gmail.thales_silva_nascimento.alarmmed.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -13,13 +15,19 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.RetrofitMaps;
 import com.gmail.thales_silva_nascimento.alarmmed.model.Example;
+import com.gmail.thales_silva_nascimento.alarmmed.model.Result;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -38,13 +46,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FarmaciaProxima extends FragmentActivity
+public class FarmaciaProxima extends AppCompatActivity
         implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
                    GoogleApiClient.OnConnectionFailedListener {
 
@@ -57,17 +70,51 @@ public class FarmaciaProxima extends FragmentActivity
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private HashMap<String,Result> mapResult;
+    private Toolbar toolbar;
+    //BottomSheet
+    private TextView nomeFarma;
     private BottomSheetBehavior mBottomSheetBehaviour;
+    private RatingBar ratingBar;
+    private Button btnRotas;
+    //Posição do marcador selecionado
+    private double latPlace;
+    private double lonPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmacia_proxima);
 
+        toolbar = (Toolbar) findViewById(R.id.tbFarmacia);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_arrow_back);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Fármacias Próximas");
+
+        //Onclick no botão de retonar da toolbar
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Cria um intent para retorna o valor
+                Intent i = new Intent();
+                //Adiciona o resultado a ser comparado e a intent
+                setResult(1, i);
+                finish();
+            }
+        });
+
         View bottomView = (View) findViewById(R.id.rlBottomSheet);
         //Diz qual view possui o comportamento do BottomSheetbehavior
         mBottomSheetBehaviour = BottomSheetBehavior.from(bottomView);
         mBottomSheetBehaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        nomeFarma = (TextView) findViewById(R.id.tvNomeFarma);
+        //Rating Bar
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+
+        //inicializa o Map contendo os resultado
+        mapResult = new HashMap<>();
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -88,7 +135,19 @@ public class FarmaciaProxima extends FragmentActivity
         mapFragment.getMapAsync(this);
         Log.d("Oncreate", "Iniciou o mapa");
 
-
+        btnRotas = (Button) findViewById(R.id.btnRotas);
+        //Onclick
+        btnRotas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String lat = String.valueOf(latPlace);
+                String lon = String.valueOf(lonPlace);
+                Uri gmmIntentUri = Uri.parse("google.navigation:q="+lat+","+lon+"&mode=w");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }
+        });
 
     }
 
@@ -216,6 +275,25 @@ public class FarmaciaProxima extends FragmentActivity
                     mBottomSheetBehaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
                     //Abre novamente com as novas informaçoes
                     mBottomSheetBehaviour.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+                    //Grava na variável LatLngMarker a latitude e longitude do marcador selecionado
+                    latPlace = marker.getPosition().latitude;
+                    lonPlace = marker.getPosition().longitude;
+                    Log.v("Latitude e Lon", String.valueOf(latPlace)+" - "+String.valueOf(lonPlace));
+
+                    //Procura informações no hashMap
+                    Result result = mapResult.get(marker.getTitle());
+                    if(result != null){
+                        nomeFarma.setText(result.getName());
+                        if(result.getRating()!= null){
+                            ratingBar.setRating(result.getRating().floatValue());
+                        }
+
+                    }else{
+                        nomeFarma.setText(marker.getTitle());
+                        ratingBar.setRating(0.0f);
+                    }
+
                 }else {
                     mBottomSheetBehaviour.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
@@ -261,23 +339,32 @@ public class FarmaciaProxima extends FragmentActivity
             public void onResponse(Call<Example> call, Response<Example> response) {
                 try {
                     mMap.clear();
-                    Log.v("build_Retrofit", "Limpou o mapa");
+                    //Limpa o HashMap
+                    mapResult.clear();
                     Example resposta = response.body();
                     Log.v("build_Retrofit", "Resposta: "+resposta.getStatus()+resposta.toString());
                     // This loop will go through all the results and add marker on each location.
                     for (int i = 0; i < response.body().getResults().size(); i++) {
-                        Double lat = response.body().getResults().get(i).getGeometry().getLocation().getLat();
-                        Double lng = response.body().getResults().get(i).getGeometry().getLocation().getLng();
-                        String placeName = response.body().getResults().get(i).getName();
-                        String vicinity = response.body().getResults().get(i).getVicinity();
+                        //Seleciona um item do resultado da busca
+                        Result resultadoItem = resposta.getResults().get(i);
+                        //Adiciona no HashMap o Marcador
+                        mapResult.put(resultadoItem.getName(), resultadoItem);
+                        //Insere os dados no marcador
+                        Double lat = resultadoItem.getGeometry().getLocation().getLat();
+                        Double lng = resultadoItem.getGeometry().getLocation().getLng();
+                        String placeName = resultadoItem.getName();
+                        String vicinity = resultadoItem.getVicinity();
+                        //Cria um marcador
                         MarkerOptions markerOptions = new MarkerOptions();
                         LatLng latLng = new LatLng(lat, lng);
                         // Position of Marker on Map
                         markerOptions.position(latLng);
                         // Adding Title to the Marker
-                        markerOptions.title(placeName + " : " + vicinity);
+                        markerOptions.title(placeName);
+
                         // Adding Marker to the Camera.
                         Marker m = mMap.addMarker(markerOptions);
+
                         // Adding colour to the marker
                         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     }
@@ -289,9 +376,9 @@ public class FarmaciaProxima extends FragmentActivity
                     markerOptions.position(latLng);
                     markerOptions.title("Posição Atual");
                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-                    // move map camera
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    //mMap.animateCamera(CameraUpdateFactory.zoomTo(16.5f));
+                    // Adiciona a posição atual ao mapa
+                    mMap.addMarker(markerOptions);
+
 
                 } catch (Exception e) {
                     Log.v("onResponse", "Erro: " + e.toString());
@@ -329,10 +416,8 @@ public class FarmaciaProxima extends FragmentActivity
         Log.v("onConnected", "entrou");
         mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(10*10000); //1 minuto e meio
+        mLocationRequest.setInterval(20*10000); //1 minuto e meio
         mLocationRequest.setFastestInterval(50000);
-
-
         startLocationUpdates();
 
     }
@@ -352,6 +437,12 @@ public class FarmaciaProxima extends FragmentActivity
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.v("onConected", "A conexão falhou");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mGoogleApiClient.disconnect();
     }
 
     /**
@@ -424,7 +515,7 @@ public class FarmaciaProxima extends FragmentActivity
         /*
             Procura as farmacia próxima a localização atual
          */
-        //build_retrofit_and_get_response("pharmacy");
+        build_retrofit_and_get_response("pharmacy");
 
         Log.v("onLocationChanged", "latitude: "+latitude+" longitude: "+ longitude);
     }
