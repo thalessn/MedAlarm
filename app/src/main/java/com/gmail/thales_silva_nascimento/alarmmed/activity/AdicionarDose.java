@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.Utils;
@@ -228,12 +229,16 @@ public class AdicionarDose extends AppCompatActivity {
             qtdMed.requestFocus();
             return;
         }else{
-            SalvarDose salvarDose = new SalvarDose(AdicionarDose.this, medicamento, cal, qtd);
-            salvarDose.execute();
+            if(cal.after(Calendar.getInstance())){
+                Toast.makeText(AdicionarDose.this, "Não é possivel adicionar doses para datas posteriores a atual", Toast.LENGTH_LONG).show();
+            }else{
+                SalvarDose salvarDose = new SalvarDose(AdicionarDose.this, medicamento, cal, qtd);
+                salvarDose.execute();
 
-            Intent i = new Intent();
-            setResult(1, i);
-            finish();
+                Intent i = new Intent();
+                setResult(1, i);
+                finish();
+            }
         }
     }
 
