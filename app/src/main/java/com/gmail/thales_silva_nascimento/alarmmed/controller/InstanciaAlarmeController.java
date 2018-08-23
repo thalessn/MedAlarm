@@ -20,6 +20,7 @@ import com.gmail.thales_silva_nascimento.alarmmed.model.Horario;
 import com.gmail.thales_silva_nascimento.alarmmed.model.InstanciaAlarme;
 
 import java.util.Calendar;
+import java.util.List;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -159,7 +160,6 @@ public class InstanciaAlarmeController {
 
     private long cadastrarInstanciaAlarme(InstanciaAlarme instanciaAlarme){
         long id = instanciaAlarmeDAO.cadastrarInstanciaAlarme(instanciaAlarme);
-
         return id;
     }
 
@@ -171,7 +171,7 @@ public class InstanciaAlarmeController {
         instanciaAlarmeDAO.deletarTodasInstanciaDoAlarme(id);
     }
 
-    private Calendar getProxInstanciaAlarme(Alarme alarme, String horario) {
+    public Calendar getProxInstanciaAlarme(Alarme alarme, String horario) {
         Calendar proxHorario = Utils.StringHoraToCalendar(horario);
         //Data fim do tratamento
         Calendar dataFim = alarme.getDataFim();
@@ -344,5 +344,9 @@ public class InstanciaAlarmeController {
         String converter = sharedPreferences.getString(context.getString(R.string.soneca), "5");
         int minutos = Integer.parseInt(converter);
         return minutos;
+    }
+
+    public List<InstanciaAlarme> listarTodasInstancias(){
+        return instanciaAlarmeDAO.listarTodasInstancias();
     }
 }

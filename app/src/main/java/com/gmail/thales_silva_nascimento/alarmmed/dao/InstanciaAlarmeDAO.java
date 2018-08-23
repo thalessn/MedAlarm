@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by thales on 06/09/17.
- */
 
 public class InstanciaAlarmeDAO {
 

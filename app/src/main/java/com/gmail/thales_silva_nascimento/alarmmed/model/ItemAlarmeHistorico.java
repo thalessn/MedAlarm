@@ -12,16 +12,17 @@ import com.gmail.thales_silva_nascimento.alarmmed.ListItemHistorico;
 public class ItemAlarmeHistorico extends ListItemHistorico implements Parcelable {
 
     private long id;
-    Medicamento med;
-    String dataProgramada;
-    Horario horario;
-    String dataAdministrado;
-    String horaAdministrado;
-    long idAlarme;
-    String status;
+    private Medicamento med;
+    private String dataProgramada;
+    private Horario horario;
+    private String dataAdministrado;
+    private String horaAdministrado;
+    private long idAlarme;
+    private String status;
     public final static String STATUS_TOMADO = "Tomado";
     public final static String STATUS_PULOU = "Pulou";
     public final static String STATUS_ADIOU = "Adiou";
+    public final static String STATUS_NAO_REGISTRADO = "Não registrado";
 
     public ItemAlarmeHistorico(Medicamento med, String dataProgramada, Horario horario, long idAlarme){
         this.med = med;

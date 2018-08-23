@@ -95,7 +95,6 @@ public class AlarmeService extends Service {
 
     @Override
     public void onDestroy() {
-        //AlarmKlaxon.stop(this);
         Log.v("ALARME SERVICE", "OnDestroy");
         //Libera a CPU
         AlarmeAlertWakeLock.releaseCpuLock();
