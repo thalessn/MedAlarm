@@ -48,6 +48,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.MedicoCadastro"
             android:screenOrientation="portrait" />
@@ -63,17 +64,24 @@
         <activity
             android:name=".activity.ReceitaCadastro"
             android:screenOrientation="portrait" />
-        <activity android:name=".TelaAlarme" />
+        <activity
+            android:name=".TelaAlarme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.MedicamentoCadastro"
             android:screenOrientation="portrait" />
+
 
         <!-- Declara o service do Alarme -->
         <service android:name=".AlarmeService" />
         <!-- Declara o service do Lebrete -->
         <service android:name=".LembreteCompraService" />
-
+        <!-- Declara o service do BootService -->
+        <service android:name=".OnBootService" />
         <!-- Declara que a classe AlarmeReceiver é o tipo de receiver -->
+
+
+
         <receiver android:name=".AlarmeReceiver" />
         <!-- Declara que a classe AlarmeReceiver é o tipo de receiver -->
         <receiver android:name=".LembreteCompraReceiver" />
@@ -101,20 +109,31 @@
         <activity
             android:name=".activity.ActivityFloatingbuttonTelaInicial"
             android:label="@string/title_activity_excluir_teste_flotingbutton"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
-        <activity android:name=".activity.Historico" />
-        <activity android:name=".activity.Email" />
-        <activity android:name=".activity.ConfiguracaoActivity" />
-        <activity android:name=".activity.ConfigSom" />
-        <activity android:name=".activity.Sobre" />
-        <activity android:name=".activity.Creditos" />
-        <activity android:name=".teste">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.Historico"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.Email"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ConfiguracaoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ConfigSom"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.Sobre"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.Creditos"
+            android:screenOrientation="portrait"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
+        <activity android:name=".teste"/>
+
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

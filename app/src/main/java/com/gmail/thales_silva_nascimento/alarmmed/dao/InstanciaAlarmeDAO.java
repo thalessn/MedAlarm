@@ -156,6 +156,12 @@ public class InstanciaAlarmeDAO {
         database.delete(NOME_TABELA,where,whereValues);
     }
 
+    public void deletarInstanciaID(long id){
+        String [] whereValues = {String.valueOf(id)};
+        String where = COLUNA_ID + "= ?";
+        database.delete(NOME_TABELA,where,whereValues);
+    }
+
     public void deletarInstanciaPorDataAlarmeHorario(String data, long idAlarme, long idHorario){
 
         String where = COLUNA_DATA +" = ? and "+ COLUNA_ID_ALARME +" = ? and "+ COLUNA_ID_HORARIO +" = ?";

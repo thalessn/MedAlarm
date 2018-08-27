@@ -11,7 +11,7 @@ public class OnBootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.v("Onboot", "Teste do receiver");
-        Intent i = new Intent(context, MainActivity.class);
-        context.startActivity(i);
+        Intent i = new Intent(context, OnBootService.class);
+        context.startService(i);
     }
 }

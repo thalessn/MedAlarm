@@ -39,6 +39,12 @@
         <item name="colorControlActivated">@color/yelow</item>
     </style>
 
+    <!-- Altera o tamanho da fonte do tablayout -->
+    <style name="TabLayoutStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">11.5sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
 
 
 </resources>

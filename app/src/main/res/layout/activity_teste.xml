@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.gmail.thales_silva_nascimento.alarmmed.teste">
 
-    <android.support.v7.widget.AppCompatAutoCompleteTextView
-        android:id="@+id/acteste"
-        android:layout_width="350dp"
+
+    <Button
+        android:id="@+id/btnTeste"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:text="INICIAr"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

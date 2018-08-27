@@ -44,8 +44,6 @@ public class InfoMedAlarmes extends AppCompatActivity {
         //ImageView
         imgBarra = (ImageView) findViewById(R.id.imgBarra);
 
-
-
         //Posicao do viewpager
         final int posicao = getIntent().getExtras().getInt("posicao");
 
@@ -74,7 +72,6 @@ public class InfoMedAlarmes extends AppCompatActivity {
                     case 0:
                         getSupportActionBar().setTitle("Manhã");
                         Glide.with(InfoMedAlarmes.this).load(R.drawable.det_med_manha).transition(withCrossFade()).into(imgBarra);
-                        //Glide.with(InfoMedAlarmes.this).load(R.drawable.det_med_manha).into(imgBarra);
                         break;
                     case 1:
                         getSupportActionBar().setTitle("Tarde");
@@ -105,6 +102,12 @@ public class InfoMedAlarmes extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Madrugada"));
 
         tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_sunset_white);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_sun_white);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_sundown_white);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_moon_white);
+
 
     }
 

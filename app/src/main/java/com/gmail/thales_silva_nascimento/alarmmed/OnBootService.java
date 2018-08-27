@@ -31,6 +31,7 @@ public class OnBootService extends Service {
 
     @Override
     public void onCreate() {
+        Log.v("OnBootService", "Oncreate");
         instanciaAlarmeController = InstanciaAlarmeController.getInstanciaAlarmeController(OnBootService.this);
         horarioController = HorarioController.getInstance(OnBootService.this);
         historicoController = new HistoricoController(OnBootService.this);
@@ -47,6 +48,7 @@ public class OnBootService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.v("OnBootService", "OnStartCommand");
         //Procura por todas as instancias no banco de dados
         instanciaAlarmeList = instanciaAlarmeController.listarTodasInstancias();
 
@@ -59,9 +61,10 @@ public class OnBootService extends Service {
             Calendar data = ia.getData();
             data.set(Calendar.HOUR,Integer.parseInt(h.substring(0,2)));
             data.set(Calendar.MINUTE, Integer.parseInt(h.substring(3,5)));
+            data.set(Calendar.SECOND, 0);
 
             //Verifica enquanto a data for menor e diferente de null
-            while((data != null) &&(data.getTimeInMillis() < Calendar.getInstance().getTimeInMillis())){
+            while((data != null) && (data.getTimeInMillis() < Calendar.getInstance().getTimeInMillis())){
                 //Encontra o medicamento
                 Alarme al = alarmeController.buscarAlarmePorId(ia.getId_alarme());
                 Medicamento med = medicamentoController.buscarMedicamentoPorId(al.getIdMedicamento());
@@ -77,12 +80,21 @@ public class OnBootService extends Service {
                 //Encontra a próxima instancia. Se exitir e ainda for menor irá repetir o processo novamente.
                 data = instanciaAlarmeController.getProxInstanciaAlarme(al,horario.getHorario());
             }
+            Log.v("OnBootService", "Saiu do while");
 
-            //Terminar quando não fr maior
-            //deletar a instancia atal e registrar a nova instacia.
+            //Verifica se a data é diferente de nulo
+            if (data != null){
+                Log.v("OnBootService", "Excluia instancia");
+                //Deleta a instancia anterior que exitia do banco de dados
+                instanciaAlarmeController.deletarInstanciaAlarmeId(ia.getId());
 
-
+                //Registra novamente a instancia alarme
+                ia.setData(data);
+                instanciaAlarmeController.registraInstanciaAlarme(OnBootService.this, ia);
+                Log.v("OnBootService", "Registrou uma nova instância");
+            }
         }
+        stopSelf();
 
 
         return super.onStartCommand(intent, flags, startId);

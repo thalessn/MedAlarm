@@ -158,6 +158,46 @@ public class InstanciaAlarmeController {
         }
     }
 
+    public void registraInstanciaAlarme(Context context, InstanciaAlarme instanciaAlarme)
+    {
+        //Cadastra a instancia no banco
+        cadastrarInstanciaAlarme(instanciaAlarme);
+
+        /**
+         * Intent a ser chamada para o horário programado.
+         */
+        Intent intent = new Intent(context, AlarmeReceiver.class);
+        intent.putExtra("horario", instanciaAlarme.getId_horario());
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+
+        /**
+         * O valor do resquestCode da pendingIntent será o valor 'hashcode' da idHorario
+         * que a instanciaAlarme possui.
+         */
+        int requestCode = Long.valueOf(instanciaAlarme.getId_horario()).hashCode();
+
+        /**
+         * PendingIntent utilizada para chamar o BroadCastReceiver
+         */
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0);
+
+        String data = Utils.CalendarToStringData(instanciaAlarme.getData());
+        String hora = Utils.CalendarToStringHora(instanciaAlarme.getData());
+        Log.v("InstanciaProgramada", data +"   ---   "+ hora+ " codHorario = " +String.valueOf(instanciaAlarme.getId_horario()) + "" +
+                " codAlarme = " + String.valueOf(instanciaAlarme.getId_alarme()));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, instanciaAlarme.getData().getTimeInMillis(), pendingIntent);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, instanciaAlarme.getData().getTimeInMillis(), pendingIntent);
+            Log.v("CadastrouAlarm", "alarmManager.setExact");
+        } else {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, instanciaAlarme.getData().getTimeInMillis(), pendingIntent);
+            Log.v("CadastrouAlarm", "alarmManager.set");
+        }
+    }
+
     private long cadastrarInstanciaAlarme(InstanciaAlarme instanciaAlarme){
         long id = instanciaAlarmeDAO.cadastrarInstanciaAlarme(instanciaAlarme);
         return id;
@@ -235,7 +275,9 @@ public class InstanciaAlarmeController {
         instanciaAlarmeDAO.deletarInstanciaPorDataAlarmeHorario(data, idAlarme, idHorario);
     }
 
-
+    public void deletarInstanciaAlarmeId(long id){
+        instanciaAlarmeDAO.deletarInstanciaID(id);
+    }
     public void adiarInstanciaAlarmePorIdHorario(long idHorario){
         /**
          * Intent a ser chamada para o horário programado.
