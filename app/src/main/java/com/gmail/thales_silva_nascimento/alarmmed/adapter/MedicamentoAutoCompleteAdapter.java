@@ -1,4 +1,4 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,6 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+
+import com.gmail.thales_silva_nascimento.alarmmed.GetMedicamentoService;
+import com.gmail.thales_silva_nascimento.alarmmed.R;
+import com.gmail.thales_silva_nascimento.alarmmed.RetroMedicamentoClientInstance;
+import com.gmail.thales_silva_nascimento.alarmmed.model.RetroMedicamento;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +51,6 @@ public class MedicamentoAutoCompleteAdapter extends BaseAdapter implements Filte
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        Log.v("GetView", "Passou");
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.dropdown_medicamento, viewGroup, false);
@@ -57,6 +61,9 @@ public class MedicamentoAutoCompleteAdapter extends BaseAdapter implements Filte
         tv.setText(resultList.get(i).getNomeGen());
         //Adiciona nome da composição.
         concentracao.setText(resultList.get(i).getConcentracao());
+
+        String []formaText = resultList.get(i).getForma().split(" ");
+
 
         //Glide.with(context).load(R.drawable.remedio1).into(holder.img);
         return view;
@@ -109,9 +116,9 @@ public class MedicamentoAutoCompleteAdapter extends BaseAdapter implements Filte
         return filter;
     }
 
-    private void selecionaImagemMed(String forma){
-        String [] words = forma.split(" ");
-        String nome = words[0].toUpperCase();
+    private int selecionaImagemMed(String [] forma){
+
+        String nome = forma[0].toUpperCase();
 
         switch (nome){
             case "COMPRIMIDO":
@@ -129,7 +136,7 @@ public class MedicamentoAutoCompleteAdapter extends BaseAdapter implements Filte
             case "EMULSÃO":
                 break;
             case "ENEMA":
-                break;
+                return R.drawable.ic_enema;
             case "GEL":
                 break;
             case "GRANULADO":
@@ -150,6 +157,8 @@ public class MedicamentoAutoCompleteAdapter extends BaseAdapter implements Filte
             case "XAMPU":
                 break;
             case "XAROPE":
+                break;
+            case "ESMALTE":
                 break;
             default:
                 break;
