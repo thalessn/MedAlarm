@@ -1,4 +1,4 @@
-package com.gmail.thales_silva_nascimento.alarmmed;
+package com.gmail.thales_silva_nascimento.alarmmed.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

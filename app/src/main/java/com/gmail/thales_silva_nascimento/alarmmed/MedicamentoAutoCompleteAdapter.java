@@ -10,6 +10,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.gmail.thales_silva_nascimento.alarmmed.model.RetroMedicamento;
+
 import java.util.ArrayList;
 import java.util.List;
 

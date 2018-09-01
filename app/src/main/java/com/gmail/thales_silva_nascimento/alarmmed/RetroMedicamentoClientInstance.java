@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetroMedicamentoClientInstance {
     private static Retrofit retrofit;
-    private static final String BASE_URL = "http://192.168.1.22:3000/";
+    private static final String BASE_URL = "http://alarmmed.ddns.net:3000/";
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {

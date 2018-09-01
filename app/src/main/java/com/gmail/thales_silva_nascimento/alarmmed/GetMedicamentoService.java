@@ -1,5 +1,7 @@
 package com.gmail.thales_silva_nascimento.alarmmed;
 
+import com.gmail.thales_silva_nascimento.alarmmed.model.RetroMedicamento;
+
 import java.util.List;
 
 import retrofit2.Call;
