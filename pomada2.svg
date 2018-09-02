@@ -1,0 +1,13 @@
+<svg width="3793" height="4281" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="4283" width="3795" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" d="m3692.575008,722.490131l-362.8,-362.8l-497.7,388.4c-163.5,-97.1 -376.3,-81.1 -523.8,51.8l-1928.8,1740.6l-285.8,285.8l1132.2,1132.2l285.8,-285.8l1740.7,-1928.8c132.9,-147.5 148.8,-360.2 51.8,-523.7l388.4,-497.7zm-2466.7,3022.3l-918.5,-918.5l124,-124l918.5,918.5l-124,124zm1914.3,-2102l-1686.2,1868.4l-912.9,-912.9l1868.3,-1686.2c116,-104.5 293.2,-99.9 403.6,10.5l316.6,316.6c110.4,110.3 115,287.6 10.6,403.6zm65.1,-541.6l-254.4,-254.4l366.4,-285.9l174,173.9l-286,366.4z" fill="#000000"/>
+  <text id="svg_2" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif" font-weight="bold" font-size="5px" fill="#000000" y="3984.5" x="8.875">Created by Alvaro Cabrera</text>
+  <text id="svg_3" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif" font-weight="bold" font-size="5px" fill="#000000" y="3989.5" x="8.875">from the Noun Project</text>
+ </g>
+</svg>

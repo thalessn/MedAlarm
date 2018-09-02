@@ -1,0 +1,34 @@
+﻿Comprimido ok 
+Colutório spray ok 
+Aerosol ok 
+Cápsula ok 
+Creme ok
+Drágea ok 
+Elixir ok 
+Emulsão injetável(seriga) ok
+Emulsão oral ok
+Enema ok
+Gel (pomada) ok
+Granulado para solução oral (Vidro)
+Loção
+Pó
+Pomada OK
+Solução injetavel (Seringa)
+Solução Nasal (Vidro Neosoro)
+Solução oftamológica (Colírio)
+Solução oral         (Vidro normal igual novalgina)
+Solução capilar      (Vidro de xampu)
+Solução para inalação(vidro)
+Solução otológica    (vidro com bico)
+Solução aerossol para inalação
+Supositório Retal
+Suspensão oral (Pó)
+Suspensão spray (Inalador - igual o de papai de nariz)
+Suspensão offtálmica (Colírio) OK
+Xampu
+Xarope
+Esmalte
+
+
+
+

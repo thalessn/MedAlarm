@@ -59,7 +59,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.gmail.thales_silva_nascimento.alarmmed.CameraPreview;
-import com.gmail.thales_silva_nascimento.alarmmed.MedicamentoAutoCompleteAdapter;
+import com.gmail.thales_silva_nascimento.alarmmed.adapter.MedicamentoAutoCompleteAdapter;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.model.RetroMedicamento;
 import com.gmail.thales_silva_nascimento.alarmmed.Utils;
@@ -207,8 +207,8 @@ public class MedicamentoCadastro extends AppCompatActivity
 
         //Nome do medicamento
         nomeMed = (AutoCompleteTextView) findViewById(R.id.edNomeMed);
-        //Seta que o atucomplete só comeca com no mínimo 3 letras
-        nomeMed.setThreshold(3);
+        //Seta que o autocomplete só comeca com no mínimo 3 letras
+        nomeMed.setThreshold(4);
         //Instancia o adapter do autocomplete
         autoCompleteAdapter = new MedicamentoAutoCompleteAdapter(MedicamentoCadastro.this);
         //Adiciona o adapte ao edittext
@@ -468,6 +468,7 @@ public class MedicamentoCadastro extends AppCompatActivity
         categories.add("g");
         categories.add("ml");
         categories.add("gotas");
+        categories.add("mg/ml");
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories);
         // Drop down layout style - list view with radio button

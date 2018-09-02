@@ -2,22 +2,69 @@ Puxar o endereço de emial cadastrado no médico
 
 icones
 https://thenounproject.com/term/clyster/757437/
+(enema - created by laymilk from Noun Project ic) ic_enema
+
 https://thenounproject.com/term/bottle-medical/1154052/
+(Bottle medical by Alvaro Cabrera from the Noun Project) ic_pomada2
+
 https://thenounproject.com/term/drops/757436/
+(drops by  Laymik from the Noun Project) ic_colirio3
+
 https://thenounproject.com/term/pipette-bottle/705877/
+(pipette bottle by Tinashe Mugayi from the Noun Project) ic_gotas
+
+https://thenounproject.com/term/spray-bottle/1070089/
+(Spray Bottle by Vectors Market from the Noun Project) ic_spray
+
+https://www.flaticon.com/free-icon/syringe_883395
+(<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>) ic_serginga
+
+https://thenounproject.com/term/spray-bottle/617671/
+(Spray Bottle by yejinland from the Noun Project) ic_spray3
+
+https://thenounproject.com/term/pill/64212/
+(Pill by Erin Agnoli from the Noun Project) ic_dragea2
+
+https://thenounproject.com/term/pill/66137/
+(https://thenounproject.com/term/pill/66137/) ic_comprimido
+
+https://thenounproject.com/term/pill/1085471/
+(Pill by arif fajar yulianto from the Noun Project) ic_comprimido2
+
+https://thenounproject.com/term/pill/64212/
+(Pill by Erin Agnoli from the Noun Project)  ic_capsula
+
+https://thenounproject.com/term/medicine-bottle/245567/
+(Medicine Bottle by Nikita Kozin from the Noun Project) ic_elixir
+
+https://thenounproject.com/term/medicine-bottle/357925/
+(Medicine Bottle by Kirill Kolchenko from the Noun Project) ic_emulsão_oral
+
+https://thenounproject.com/term/syrup/518009/
+(syrup by ProSymbols from the Noun Project) ic_xarope
+
+https://thenounproject.com/term/cosmetic-bottle/453625/
+(cosmetic bottle by Pelin Kahraman from the Noun Project) ic_shampoo
+
+https://thenounproject.com/term/medicine-bottle/757500/
+(Medicine Bottle by  Laymik from the Noun Project) ic_padrao
+
+
 https://thenounproject.com/term/medicine-bottle/521647/
 https://thenounproject.com/term/medicine-bottle/630673/
 https://thenounproject.com/term/medicine-bottle/1220162/
 https://thenounproject.com/term/medicine-bottle/757500/
 https://thenounproject.com/term/medicine-bottle/425385/
-https://thenounproject.com/term/spray-bottle/1070089/
-https://www.flaticon.com/free-icon/syringe_883395
-https://thenounproject.com/term/spray-bottle/143888/
+
+https://thenounproject.com/term/spray-bottle/143888/ - spray
 https://thenounproject.com/term/medicine-bottle/670755/
 https://thenounproject.com/term/medicine-bottle/394112/
 https://thenounproject.com/term/pipette-bottle/705876/
 https://thenounproject.com/term/pharmacy/1494536/\https://thenounproject.com/term/medicine-bottle/1170540/
 https://www.flaticon.com/free-icon/syringe_125018#term=Syringe&page=1&position=57
-https://www.flaticon.com/free-icon/syringe_4373#term=Syringe&page=1&position=42
-https://thenounproject.com/term/spray-bottle/617671/
+
+
 https://thenounproject.com/term/spray-bottle/381423/
+
+
+loc08889@awsoo.com
