@@ -21,6 +21,7 @@ public class MedicamentoDAO {
     public static String COLUNA_ID = "_id";
     public static String COLUNA_NOME = "nome";
     public static String COLUNA_DOSAGEM = "dosagem";
+    public static String COLUNA_DOSAGEM_COMPRADA = "dosagemComprada";
     public static String COLUNA_TIPO_DOSAGEM = "tipoDosagem";
     public static String COLUNA_USO_CONTINUO = "usoContinuo";
     public static String COLUNA_OBSERVACAO = "observacao";
@@ -30,13 +31,14 @@ public class MedicamentoDAO {
     /*"CREATE TABLE medicamento (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
             " nome VARCHAR(100) NOT NULL," +
             " dosagem INTEGER NOT NULL," +
+            " dosagemComprada INTEGER NOT NULL"+
             " tipoDosagem TEXT,"+
             " usoContinuo INTEGER NOT NULL," +
             " observacao VARCHAR(300))");*/
 
     public static String SCRIPT_CRIACAO_TABELA_MEDICAMENTO = "CREATE TABLE " +NOME_TABELA+
             " (" +COLUNA_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +COLUNA_NOME+ " VARCHAR(100) NOT NULL, " +
-            COLUNA_DOSAGEM+ " INTEGER NOT NULL, " +COLUNA_TIPO_DOSAGEM+ " TEXT, " +COLUNA_USO_CONTINUO+ " INTEGER NOT NULL, "
+            COLUNA_DOSAGEM+ " INTEGER NOT NULL, "+COLUNA_DOSAGEM_COMPRADA+ " INTEGER NOT NULL, " +COLUNA_TIPO_DOSAGEM+ " TEXT, " +COLUNA_USO_CONTINUO+ " INTEGER NOT NULL, "
             +COLUNA_OBSERVACAO+ " VARCHAR(300), " +COLUNA_FOTO+ " VARCHAR(500), " +COLUNA_QTD+ " INTEGER)";
 
     /**
@@ -46,11 +48,12 @@ public class MedicamentoDAO {
     private static final int ID_INDEX = 0;
     private static final int NOME_INDEX = 1;
     private static final int DOSAGEM_INDEX = 2;
-    private static final int TIPO_DOSAGEM = 3;
-    private static final int USO_CONTINUO_INDEX = 4;
-    private static final int OBSERVACAO_INDEX = 5;
-    private static final int FOTO_INDEX = 6;
-    private static final int QTD_INDEX = 7;
+    private static final int DOSAGEM_COMPRADA_INDEX = 3;
+    private static final int TIPO_DOSAGEM = 4;
+    private static final int USO_CONTINUO_INDEX = 5;
+    private static final int OBSERVACAO_INDEX = 6;
+    private static final int FOTO_INDEX = 7;
+    private static final int QTD_INDEX = 8;
 
     private SQLiteDatabase database = null;
     private static MedicamentoDAO instance = null;
@@ -70,6 +73,7 @@ public class MedicamentoDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUNA_NOME, medicamento.getNome());
         contentValues.put(COLUNA_DOSAGEM, medicamento.getDosagem());
+        contentValues.put(COLUNA_DOSAGEM_COMPRADA, medicamento.getDosagemComprada());
         contentValues.put(COLUNA_TIPO_DOSAGEM, medicamento.getTipoDosagem());
         contentValues.put(COLUNA_USO_CONTINUO, medicamento.isUso_continuo()? 1:0);
         contentValues.put(COLUNA_OBSERVACAO, medicamento.getObservacao());
@@ -114,6 +118,7 @@ public class MedicamentoDAO {
                     long id = cursor.getLong(ID_INDEX);
                     String nome = cursor.getString(NOME_INDEX);
                     int dosagem = cursor.getInt(DOSAGEM_INDEX);
+                    int dosagemComprada = cursor.getInt(DOSAGEM_COMPRADA_INDEX);
                     String tipoDosagem = cursor.getString(TIPO_DOSAGEM);
                     String foto = cursor.getString(FOTO_INDEX);
                     //Transforma para boolean
@@ -121,7 +126,7 @@ public class MedicamentoDAO {
                     String obs = cursor.getString(OBSERVACAO_INDEX);
                     int quantidade = cursor.getInt(QTD_INDEX);
 
-                    Medicamento medicamento = new Medicamento(id, nome, dosagem,tipoDosagem, usoContinuo, obs, foto, quantidade);
+                    Medicamento medicamento = new Medicamento(id, nome, dosagem,tipoDosagem, usoContinuo, obs, foto, quantidade, dosagemComprada);
                     meds.add(medicamento);
                 }while (cursor.moveToNext());
             }
@@ -167,13 +172,14 @@ public class MedicamentoDAO {
             if(cursor.moveToFirst()){
                 String nome = cursor.getString(NOME_INDEX);
                 int dosagem = cursor.getInt(DOSAGEM_INDEX);
+                int dosagemComprada = cursor.getInt(DOSAGEM_COMPRADA_INDEX);
                 String tipoDosagem = cursor.getString(TIPO_DOSAGEM);
                 String obs = cursor.getString(OBSERVACAO_INDEX);
                 boolean usoCOntinuo = ( cursor.getInt(USO_CONTINUO_INDEX) == 1 ? true: false );
                 String foto = cursor.getString(FOTO_INDEX);
                 int quantidade = cursor.getInt(QTD_INDEX);
 
-                Medicamento medicamento = new Medicamento(id, nome, dosagem, tipoDosagem, usoCOntinuo, obs, foto, quantidade);
+                Medicamento medicamento = new Medicamento(id, nome, dosagem, tipoDosagem, usoCOntinuo, obs, foto, quantidade, dosagemComprada);
 
                 return medicamento;
             }
@@ -214,6 +220,7 @@ public class MedicamentoDAO {
                     long id = cursor.getLong(ID_INDEX);
                     String nome = cursor.getString(NOME_INDEX);
                     int dosagem = cursor.getInt(DOSAGEM_INDEX);
+                    int dosagemComprada = cursor.getInt(DOSAGEM_COMPRADA_INDEX);
                     String tipoDosagem = cursor.getString(TIPO_DOSAGEM);
                     String foto = cursor.getString(FOTO_INDEX);
                     //Transforma para boolean
@@ -221,7 +228,7 @@ public class MedicamentoDAO {
                     String obs = cursor.getString(OBSERVACAO_INDEX);
                     int quantidade = cursor.getInt(QTD_INDEX);
 
-                    Medicamento medicamento = new Medicamento(id, nome, dosagem, tipoDosagem, usoContinuo, obs, foto, quantidade);
+                    Medicamento medicamento = new Medicamento(id, nome, dosagem, tipoDosagem, usoContinuo, obs, foto, quantidade,dosagemComprada);
                     medicamentos.add(medicamento);
                 }while (cursor.moveToNext());
             }

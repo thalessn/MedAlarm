@@ -95,7 +95,7 @@ public class filtroHistorico extends DialogFragment {
         //Lista contendo todos os medicamentos
         medicamentos = medController.listarTodosMedicamentos();
         //Gambiarra para aparecer Todos os Medicamentos na primeira linha
-        medicamentos.add(0,new Medicamento("Todos os Medicamentos",100,"",true,"",""));
+        medicamentos.add(0,new Medicamento("Todos os Medicamentos",100,"",true,"","",0));
         //Adapter utilizado pelo spinner;
         ArrayAdapter<Medicamento> adapter = new ArrayAdapter<Medicamento>(getContext(), R.layout.support_simple_spinner_dropdown_item, medicamentos);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);

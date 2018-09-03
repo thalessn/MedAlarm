@@ -11,7 +11,7 @@
         android:layout_height="56dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark"></android.support.v7.widget.Toolbar>
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"/>
 
     <LinearLayout
         android:id="@+id/tbFakeMedicoDetalhe"

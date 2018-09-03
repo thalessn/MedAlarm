@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="300dp"
-    android:layout_height="140dp"
+    android:layout_height="210dp"
     android:layout_below="@+id/button"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="10dp"
@@ -38,7 +38,7 @@
 
         <RelativeLayout
             android:id="@+id/rlCardDosagem"
-            android:layout_width="match_parent"
+            android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlMed"
             android:layout_marginTop="8dp"
@@ -47,23 +47,96 @@
             <EditText
                 android:id="@+id/edDosagem"
                 android:layout_width="70dp"
-                android:textAlignment="center"
                 android:layout_height="50dp"
-                android:maxLines="1"
                 android:inputType="number"
-                android:maxLength="5" />
-
+                android:maxLength="5"
+                android:maxLines="1"
+                android:textAlignment="center" />
 
             <Spinner
                 android:id="@+id/dosSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="115dp"
+                android:layout_height="50dp"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/edDosagem"
-                android:layout_toEndOf="@+id/edDosagem">
+                android:layout_toEndOf="@+id/edDosagem"
+                android:layout_toRightOf="@+id/edDosagem">
 
             </Spinner>
+            <TextView
+                android:id="@+id/tvDosagemTratamento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dosagem do Tratamento"
+                android:textColor="@color/colorAccent"
+                android:textSize="11.5sp"
+                android:layout_below="@id/edDosagem"/>
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rlCardDosagem2"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlCardDosagem"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edDosagem2"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:inputType="number"
+                android:maxLength="5"
+                android:maxLines="1"
+                android:textAlignment="center" />
+
+            <Spinner
+                android:id="@+id/dosSpinner2"
+                android:layout_width="115dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/edDosagem2"
+                android:layout_toRightOf="@+id/edDosagem2">
+            </Spinner>
+            <TextView
+                android:id="@+id/tvDosagemComprada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dosagem Comprada"
+                android:textColor="@color/colorAccent"
+                android:textSize="11.5sp"
+                android:layout_below="@id/edDosagem2"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/rlMed"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:id="@+id/llCheckBoxDosagem"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/cbDosagem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dosagem Comprada\n = \nDosagem Tratamento"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="13.5sp" />
+            </LinearLayout>
         </RelativeLayout>
 
     </RelativeLayout>

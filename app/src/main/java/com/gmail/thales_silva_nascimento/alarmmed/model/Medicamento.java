@@ -12,6 +12,7 @@ public class Medicamento implements Parcelable {
     private long id;
     private String nome;
     private int dosagem;
+    private int dosagemComprada;
     private String tipoDosagem;
     private boolean uso_continuo;
     private String observacao;
@@ -19,20 +20,23 @@ public class Medicamento implements Parcelable {
     private int quantidade;
 
 
-    public Medicamento(String nome, int dosagem, String tipoDosagem, boolean uso_continuo, String observacao, String foto){
+
+    public Medicamento(String nome, int dosagem, String tipoDosagem, boolean uso_continuo, String observacao, String foto, int dosagemComprada){
         this.nome = nome;
         this.dosagem = dosagem;
         this.tipoDosagem = tipoDosagem;
+        this.dosagemComprada = dosagemComprada;
         this.uso_continuo = uso_continuo;
         this.observacao = observacao;
         this.foto = foto;
         this.quantidade = -1;
     }
 
-    public Medicamento(long id, String nome, int dosagem, String tipoDosagem, boolean uso_continuo, String observacao, String foto, int quantidade){
+    public Medicamento(long id, String nome, int dosagem, String tipoDosagem, boolean uso_continuo, String observacao, String foto, int quantidade, int dosagemComprada){
         this.id = id;
         this.nome = nome;
         this.dosagem = dosagem;
+        this.dosagemComprada = dosagemComprada;
         this.tipoDosagem = tipoDosagem;
         this.uso_continuo = uso_continuo;
         this.observacao = observacao;
@@ -62,6 +66,14 @@ public class Medicamento implements Parcelable {
 
     public void setDosagem(int dosagem) {
         this.dosagem = dosagem;
+    }
+
+    public void setDosagemComprada(int dosagemComprada){
+        this.dosagemComprada = dosagemComprada;
+    }
+
+    public int getDosagemComprada(){
+        return dosagemComprada;
     }
 
     public boolean isUso_continuo() {
@@ -119,6 +131,7 @@ public class Medicamento implements Parcelable {
         dest.writeLong(this.id);
         dest.writeString(this.nome);
         dest.writeInt(this.dosagem);
+        dest.writeInt(this.dosagemComprada);
         dest.writeString(this.tipoDosagem);
         dest.writeByte(this.uso_continuo ? (byte) 1 : (byte) 0);
         dest.writeString(this.observacao);
@@ -130,6 +143,7 @@ public class Medicamento implements Parcelable {
         this.id = in.readLong();
         this.nome = in.readString();
         this.dosagem = in.readInt();
+        this.dosagemComprada = in.readInt();
         this.tipoDosagem = in.readString();
         this.uso_continuo = in.readByte() != 0;
         this.observacao = in.readString();

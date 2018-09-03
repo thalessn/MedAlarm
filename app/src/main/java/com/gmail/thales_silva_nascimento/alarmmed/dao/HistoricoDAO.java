@@ -106,15 +106,16 @@ public class HistoricoDAO {
                     long id =                     cursor.getLong(0);
                     String nome =                 cursor.getString(1);
                     int dosagem =                 cursor.getInt(2);
-                    String tipoDosagem =          cursor.getString(3);
-                    String foto =                 cursor.getString(6);
+                    int dosagemComprada =         cursor.getInt(3);
+                    String tipoDosagem =          cursor.getString(4);
                     //Transforma para boolean
-                    boolean usoContinuo =         (cursor.getInt(4) == 1);
-                    String obs =                  cursor.getString(5);
-                    int quantidade =              cursor.getInt(7);
+                    boolean usoContinuo =         (cursor.getInt(5) == 1);
+                    String obs =                  cursor.getString(6);
+                    String foto =                 cursor.getString(7);
+                    int quantidade =              cursor.getInt(8);
 
                     //Cria o medicamento do ItemAlarmeHistórico
-                    Medicamento medicamento = new Medicamento(id, nome, dosagem, tipoDosagem, usoContinuo, obs, foto, quantidade);
+                    Medicamento medicamento = new Medicamento(id, nome, dosagem, tipoDosagem, usoContinuo, obs, foto, quantidade, dosagemComprada);
 
                     //Informações necessárias para criar o itemAlarmeHistorico
                     long idHistorico =        cursor.getLong(8);
@@ -188,15 +189,16 @@ public class HistoricoDAO {
                     long id =                     cursor.getLong(0);
                     String nome =                 cursor.getString(1);
                     int dosagem =                 cursor.getInt(2);
-                    String tipoDosagem =          cursor.getString(3);
-                    String foto =                 cursor.getString(6);
+                    int dosagemComprada=          cursor.getInt(3);
+                    String tipoDosagem =          cursor.getString(4);
                     //Transforma para boolean
-                    boolean usoContinuo =         (cursor.getInt(4) == 1);
-                    String obs =                  cursor.getString(5);
-                    int quantidade =              cursor.getInt(7);
+                    boolean usoContinuo =         (cursor.getInt(5) == 1);
+                    String obs =                  cursor.getString(6);
+                    String foto =                 cursor.getString(7);
+                    int quantidade =              cursor.getInt(8);
 
                     //Cria o medicamento do ItemAlarmeHistórico
-                    Medicamento medicamento = new Medicamento(id, nome, dosagem, tipoDosagem, usoContinuo, obs, foto, quantidade);
+                    Medicamento medicamento = new Medicamento(id, nome, dosagem, tipoDosagem, usoContinuo, obs, foto, quantidade, dosagemComprada);
 
                     //Informações necessárias para criar o itemAlarmeHistorico
                     long idHistorico =        cursor.getLong(8);

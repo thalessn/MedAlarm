@@ -43,6 +43,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -102,13 +103,25 @@ public class MedicamentoCadastro extends AppCompatActivity
     private CardView cardAgend;
     private CardView cardLembrete;
     private ImageView imgSetaCardNome;
-    private ImageView imgSetaCardDosagem;
     private ImageView imgSetaCardHorario;
     private ImageView imgSetaCardAgend;
     private boolean expandirCardNome = false;
     private boolean expandirCardDosagem = false;
     private boolean expandirCardHorario = false;
     private boolean expandirCardAgend = false;
+
+    //CardDosagem
+    private ImageView imgSetaCardDosagem;
+    private EditText dosagemMed;
+    private EditText dosagemMedComprada;
+    private Spinner dosSpinner;
+    private Spinner dosSpinnerComprada;
+    private CheckBox cbDosagem;
+    private RelativeLayout rlCardDosagem2;
+    private TextView tvDosagemTratamento;
+    private TextView tvDosagemComprada;
+    private List<String> tipoDosagens;
+
 
     //Card Lembrete
     private Switch switchLembrete;
@@ -141,14 +154,14 @@ public class MedicamentoCadastro extends AppCompatActivity
     private int rbAnterior2;
     private boolean rbCheckNumeroDias;
     private TextView dataInicialTv;
-    private Spinner dosSpinner;
+
 
     //Toolbar
     private Toolbar toolbar;
 
     //Nome, dosagem
     private AutoCompleteTextView nomeMed;
-    private EditText dosagemMed;
+
     private int intevaloSel;
     private ArrayList<String> diasSelecionados;
     private Menu menu;
@@ -204,6 +217,7 @@ public class MedicamentoCadastro extends AppCompatActivity
 
         //Dosagem EditText
         dosagemMed = (EditText) findViewById(R.id.edDosagem);
+        dosagemMedComprada = (EditText) findViewById(R.id.edDosagem2);
 
         //Nome do medicamento
         nomeMed = (AutoCompleteTextView) findViewById(R.id.edNomeMed);
@@ -211,7 +225,7 @@ public class MedicamentoCadastro extends AppCompatActivity
         nomeMed.setThreshold(4);
         //Instancia o adapter do autocomplete
         autoCompleteAdapter = new MedicamentoAutoCompleteAdapter(MedicamentoCadastro.this);
-        //Adiciona o adapte ao edittext
+        //Adiciona o adapter ao edittext
         nomeMed.setAdapter(autoCompleteAdapter);
         //Nome do medicamento e evento para habilitar somente quando possui um nome
         nomeMed.addTextChangedListener(new TextWatcher() {
@@ -246,7 +260,10 @@ public class MedicamentoCadastro extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 RetroMedicamento medSel = (RetroMedicamento) autoCompleteAdapter.getItem(i);
                 nomeMed.setText(medSel.getNomeGen());
-                dosagemMed.setText(medSel.getConcentracao());
+                String [] concentracao = medSel.getConcentracao().trim().split(" ");
+                dosagemMed.setText(concentracao[0].trim().replace(",",""));
+                int pos = tipoDosagens.indexOf(concentracao[1].trim().replace(",",""));
+                dosSpinner.setSelection(pos);
             }
         });
 
@@ -298,11 +315,44 @@ public class MedicamentoCadastro extends AppCompatActivity
             Log.i("savedInstanceState", "RadioButton Anterior " + teste.getText().toString());
         }
 
+
+        //--------------------------------------
+        // Dosagem - refatorar
+        //--------------------------------------
+        cbDosagem = (CheckBox) findViewById(R.id.cbDosagem);
+        cbDosagem.setChecked(true);
+        //Relative Layout de Dosagem Comprada - esconder para não aparecer na primeira vez
+        rlCardDosagem2 = (RelativeLayout) findViewById(R.id.rlCardDosagem2);
+        rlCardDosagem2.setVisibility(View.GONE);
+        //Desabila o textview de dosagem no primeiro momento
+        tvDosagemTratamento = (TextView) findViewById(R.id.tvDosagemTratamento);
+        tvDosagemTratamento.setVisibility(View.GONE);
+        cbDosagem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b && (rlCardDosagem2.getVisibility() == View.VISIBLE)){
+                    //Desabilita o textview de dosagem tratamento
+                    tvDosagemTratamento.setVisibility(View.GONE);
+                    //Apaga o texto inserido
+                    dosagemMedComprada.setText("");
+                    //esconde o relativelayout
+                    rlCardDosagem2.setVisibility(View.GONE);
+                }else{
+                    //Habilita o textview Doagem tratamento
+                    tvDosagemTratamento.setVisibility(View.VISIBLE);
+                    //Limpa valores anteriores a dodagem comprada
+                    dosagemMedComprada.setText("");
+                    //Mostra o Relativelayout
+                    rlCardDosagem2.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         //Inicializa os cards
         setupCardView();
 
         //Configura o spinner do CardView Horário
-        setupSpinnerHorario();
+        setupSpinner();
 
         //Setup dos RadioButtons
         setupRadioGroup();
@@ -329,8 +379,23 @@ public class MedicamentoCadastro extends AppCompatActivity
                 if((alarmeEdit != null) && (medEdit !=null)){
                     nomeMed.setText(medEdit.getNome());
 
+                    /**
+                     * Verifica Dosagem e se possui dosagem comprada
+                     */
                     String dosagem = medEdit.getDosagem() != -1 ? String.valueOf(medEdit.getDosagem()) : "";
                     dosagemMed.setText(dosagem);
+
+                    String dosagemComprada = medEdit.getDosagemComprada() != -1 ? String.valueOf(medEdit.getDosagemComprada()): "";
+                    if(dosagemComprada.length() > 0){
+                        cbDosagem.setChecked(false);
+                        rlCardDosagem2.setVisibility(View.VISIBLE);
+                        dosagemMedComprada.setText(dosagemComprada);
+                    }
+
+                    //Seleciona o tipo dosagem no spinner salvo no banco de dados
+                    int posDos = tipoDosagens.indexOf(medEdit.getTipoDosagem());
+                    dosSpinner.setSelection(posDos);
+                    dosSpinnerComprada.setSelection(posDos);
 
                     spinnerHourController = false;
                     repeticao.clear();
@@ -347,7 +412,6 @@ public class MedicamentoCadastro extends AppCompatActivity
 
                     //Recupera a posição no spinner através do texto
                     int pos = repeticao.indexOf(alarmeEdit.getFreqHorario());
-                    Log.v("PosicaoSpinner", String.valueOf(pos));
 
                     //Permite carregar do alarmeEdit as infomação do horario no alarme ao ativar a posição
                     telaEditHorario = true;
@@ -431,7 +495,7 @@ public class MedicamentoCadastro extends AppCompatActivity
         }
     }
 
-    private void setupSpinnerHorario(){
+    private void setupSpinner(){
         //------------------------------------------------------------------------
         // Spinner Horário
         //------------------------------------------------------------------------
@@ -461,20 +525,46 @@ public class MedicamentoCadastro extends AppCompatActivity
         //------------------------------------------------------------------------
         // Spinner Dosagem
         //------------------------------------------------------------------------
+        //Spinner principal
         dosSpinner = (Spinner) findViewById(R.id.dosSpinner);
+        dosSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                dosSpinnerComprada.setSelection(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        //Spinner da dosagem comprada
+        dosSpinnerComprada = (Spinner) findViewById(R.id.dosSpinner2);
+        dosSpinnerComprada.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                dosSpinner.setSelection(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("mg");
-        categories.add("g");
-        categories.add("ml");
-        categories.add("gotas");
-        categories.add("mg/ml");
+        tipoDosagens = new ArrayList<String>();
+        tipoDosagens.add("mg");
+        tipoDosagens.add("ml");
+        tipoDosagens.add("gotas");
+        tipoDosagens.add("mg/ml");
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipoDosagens);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
         dosSpinner.setAdapter(dataAdapter);
+        dosSpinnerComprada.setAdapter(dataAdapter);
     }
 
     private void setupCamera(){
@@ -700,14 +790,24 @@ public class MedicamentoCadastro extends AppCompatActivity
                 if(expandirCardDosagem){
                     //expanda
                     expandirCardDosagem = false;
+                    LinearLayout llCheckBoxDosagem = (LinearLayout) findViewById(R.id.llCheckBoxDosagem);
+                    llCheckBoxDosagem.setVisibility(View.VISIBLE);
                     RelativeLayout rl = (RelativeLayout) findViewById(R.id.rlCardDosagem);
                     rl.setVisibility(View.VISIBLE);
+                    if(!cbDosagem.isChecked()){
+                        rlCardDosagem2.setVisibility(View.VISIBLE);
+                    }
                     imgSetaCardDosagem.animate().rotation(0).start();
 
                 }else{
                     expandirCardDosagem =  true;
+                    LinearLayout llCheckBoxDosagem = (LinearLayout) findViewById(R.id.llCheckBoxDosagem);
+                    llCheckBoxDosagem.setVisibility(View.GONE);
                     RelativeLayout rl = (RelativeLayout) findViewById(R.id.rlCardDosagem);
                     rl.setVisibility(View.GONE);
+                    if(!cbDosagem.isChecked()){
+                        rlCardDosagem2.setVisibility(View.GONE);
+                    }
                     imgSetaCardDosagem.animate().rotation(-180).start();
                 }
                 break;
@@ -2326,8 +2426,14 @@ public class MedicamentoCadastro extends AppCompatActivity
             String nome = nomeMed.getText().toString();
             //Se não inserir dosagem a dosage será nula = '-1'
             int dosagem = dosagemMed.getText().toString().isEmpty() ? -1 : Integer.parseInt(dosagemMed.getText().toString());
+            int dosagemComprada = -1;
+            if(!cbDosagem.isChecked()){
+                dosagemComprada = dosagemMedComprada.getText().toString().isEmpty() ? -1 : Integer.parseInt(dosagemMedComprada.getText().toString());
+            }
             String tipoDosagem = (String) dosSpinner.getSelectedItem();
+
             boolean usoContinuo = radioGroupDias.getCheckedRadioButtonId() == R.id.rbContinuo ? true : false;
+
             String observacao = "Não possui";
 
             String foto = "null";
@@ -2336,7 +2442,7 @@ public class MedicamentoCadastro extends AppCompatActivity
                 foto = photoFile; //Caminho da foto
             }
 
-            final Medicamento medicamento = new Medicamento(nome, dosagem, tipoDosagem, usoContinuo, observacao, foto);
+            final Medicamento medicamento = new Medicamento(nome, dosagem, tipoDosagem, usoContinuo, observacao, foto, dosagemComprada);
 
             /**
              * Alarme
@@ -2407,7 +2513,14 @@ public class MedicamentoCadastro extends AppCompatActivity
             medEdit.setNome(nomeMed.getText().toString());
             //Se não inserir dosagem a dosage será nula = '-1'
             int dosagem = dosagemMed.getText().toString().isEmpty() ? -1 : Integer.parseInt(dosagemMed.getText().toString());
+            int dosagemComprada = -1;
+            if(!cbDosagem.isChecked()){
+                dosagemComprada = dosagemMedComprada.getText().toString().isEmpty() ? -1 : Integer.parseInt(dosagemMedComprada.getText().toString());
+            }
             medEdit.setDosagem(dosagem);
+            medEdit.setDosagemComprada(dosagemComprada);
+
+
             //Tipo Dosagem
             String tipoDosagem = (String) dosSpinner.getSelectedItem();
             medEdit.setTipoDosagem(tipoDosagem);
