@@ -32,7 +32,7 @@
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/img"
                 android:layout_toEndOf="@+id/img"
@@ -47,7 +47,16 @@
                 android:layout_below="@+id/nomeMed"
                 android:layout_alignLeft="@+id/nomeMed"
                 android:layout_alignStart="@+id/nomeMed"
-                android:layout_marginTop="14dp" />
+                android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/qtdTomarMedAlarme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horarioProg"
+                android:layout_alignLeft="@+id/nomeMed"
+                android:layout_alignStart="@+id/nomeMed"
+                android:layout_marginTop="12dp"
+                android:text="2 comprimido(s) de 1050mg"/>
 
         </RelativeLayout>
 

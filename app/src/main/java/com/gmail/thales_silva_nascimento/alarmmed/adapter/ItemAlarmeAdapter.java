@@ -66,6 +66,7 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
         holder.nomeMed.setText(med.getNome());
         String hProg = context.getString(R.string.horarioProg)+ " " + itensAlarme.get(i).getHorario().getHorario();
         holder.horarioProg.setText(hProg);
+        holder.qtdTomar.setText(retornaTextoQtdATomar(med));
 
 
         //Arquivo que contém o caminho da imagem no armazenamento interno
@@ -143,6 +144,7 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
         //Clasee que representa o cardview e seus atributos
         public TextView nomeMed;
         public TextView horarioProg;
+        public TextView qtdTomar;
         public CircleImageView foto;
         public Button pular;
         public Button adiar;
@@ -150,13 +152,13 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
 
         public MAViewHolder(View view){
             super(view);
-
-            nomeMed = (TextView) view.findViewById(R.id.nomeMed);
+            nomeMed     = (TextView) view.findViewById(R.id.nomeMed);
             horarioProg = (TextView) view.findViewById(R.id.horarioProg);
-            foto = (CircleImageView) view.findViewById(R.id.img);
-            tomar = (Button) view.findViewById(R.id.btnAlTomar);
-            pular = (Button) view.findViewById(R.id.btnAlPular);
-            adiar = (Button) view.findViewById(R.id.btnAlAdiar);
+            qtdTomar    = (TextView) view.findViewById(R.id.qtdTomarMedAlarme);
+            foto        = (CircleImageView) view.findViewById(R.id.img);
+            tomar       = (Button) view.findViewById(R.id.btnAlTomar);
+            pular       = (Button) view.findViewById(R.id.btnAlPular);
+            adiar       = (Button) view.findViewById(R.id.btnAlAdiar);
         }
 
     }
@@ -284,6 +286,32 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
             if(qtdMedAtual <= lembreteCompra.getQtd_alerta()){
                 lembreteCompraController.registrarLembreteCompra(lembreteCompra);
             }
+        }
+    }
+
+    private String retornaTextoQtdATomar(Medicamento med){
+        String texto = "Tomar ";
+        String tipodosagem = med.getTipoDosagem().trim();
+        if(tipodosagem == "mg"){
+            //DosagemComprada é diferente de nulo
+            if(med.getDosagemComprada() != -1){
+                Log.v("DosagemTratamento", String.valueOf(med.getDosagem()));
+                int dosagemTratamento = med.getDosagem();
+                Log.v("DosagemComprada", String.valueOf(med.getDosagemComprada()));
+                int dosagemComprada   = med.getDosagemComprada();
+                int resultado         = (dosagemTratamento/dosagemComprada);
+                Log.v("Resultado", String.valueOf(resultado));
+                //Verifica se o resultado é mairo que um para alterar o texto exibido
+                if(resultado > 1) texto+= String.valueOf(resultado)+" comprimidos de "+String.valueOf(med.getDosagemComprada())+med.getTipoDosagem();
+                else texto+= String.valueOf(resultado)+" comprimido de "+String.valueOf(med.getDosagemComprada())+med.getTipoDosagem();
+                //Insere o texto no textview
+                return texto;
+            }else {
+                texto += "1 comprimido de " + String.valueOf(med.getDosagem()) + med.getTipoDosagem();
+                return texto;
+            }
+        }else {
+            return texto+= String.valueOf(med.getDosagem())+" "+ med.getTipoDosagem();
         }
     }
 }
