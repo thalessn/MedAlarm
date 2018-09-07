@@ -91,22 +91,22 @@ public class MainActivity extends AppCompatActivity
 
         //Adiciona o evento Onclick no Header do Navigatio Drawer
         View headerView = navigationView.getHeaderView(0);
-        headerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(menu){
-                    navigationView.getMenu().clear();
-                    navigationView.inflateMenu(R.menu.activity_main_drawer2);
-                    menu = false;
-                }else{
-                    navigationView.getMenu().clear();
-                    navigationView.inflateMenu(R.menu.activity_main_drawer);
-                    menu = true;
-                }
-
-            }
-        });
+//        headerView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if(menu){
+//                    navigationView.getMenu().clear();
+//                    navigationView.inflateMenu(R.menu.activity_main_drawer2);
+//                    menu = false;
+//                }else{
+//                    navigationView.getMenu().clear();
+//                    navigationView.inflateMenu(R.menu.activity_main_drawer);
+//                    menu = true;
+//                }
+//
+//            }
+//        });
 
         //Marca a opção inicio no Drawer
         menuDrawer.getItem(0).setChecked(true);
@@ -194,11 +194,11 @@ public class MainActivity extends AppCompatActivity
                 fragment = new fragRemedio();
                 fragmentTag = "fragRemedio";
                 break;
-            case R.id.nav_receita:
-                floatingButtonShow(true);
-                fragment = new fragReceita();
-                fragmentTag = "fragReceita";
-                break;
+//            case R.id.nav_receita:
+//                floatingButtonShow(true);
+//                fragment = new fragReceita();
+//                fragmentTag = "fragReceita";
+//                break;
             case R.id.nav_compra:
                 floatingButtonShow(false);
                 fragment = new fragCompra();
