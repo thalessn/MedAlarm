@@ -221,7 +221,7 @@ public class MedicamentoCadastro extends AppCompatActivity
 
         //Nome do medicamento
         nomeMed = (AutoCompleteTextView) findViewById(R.id.edNomeMed);
-        //Seta que o autocomplete só comeca com no mínimo 3 letras
+        //Seta que o autocomplete só comeca com no mínimo 4 letras
         nomeMed.setThreshold(4);
         //Instancia o adapter do autocomplete
         autoCompleteAdapter = new MedicamentoAutoCompleteAdapter(MedicamentoCadastro.this);
@@ -1071,8 +1071,58 @@ public class MedicamentoCadastro extends AppCompatActivity
                         qtdMedEst.requestFocus();
                     }
                 }else{
-                    salvarMedicamento();
-                    return true;
+                    //Verifica se é somente uma dosagem
+                    if(cbDosagem.isChecked()){
+                        //Verifica se a dosagem está diferente de vazio
+                        if(dosagemMed.getText().toString().equals("")){
+                            Toast.makeText(MedicamentoCadastro.this, "Inserir Dosagem do Remédio", Toast.LENGTH_LONG).show();
+                            dosagemMed.setFocusable(true);
+                            dosagemMed.requestFocus();
+                        }else{
+                            int dosagem = Integer.parseInt(dosagemMed.getText().toString());
+                            if(dosagem > 0){
+                                salvarMedicamento();
+                                return true;
+                            }else{
+                                Toast.makeText(MedicamentoCadastro.this, "A Dosagem não pode ser zerada.", Toast.LENGTH_LONG).show();
+                                dosagemMed.setFocusable(true);
+                                dosagemMed.requestFocus();
+                            }
+                        }
+                    }else{
+                        //Verifica se a dosagem está diferente de vazio
+                        if(dosagemMed.getText().toString().equals("")){
+                            Toast.makeText(MedicamentoCadastro.this, "Inserir Dosagem do Remédio", Toast.LENGTH_LONG).show();
+                            dosagemMed.setFocusable(true);
+                            dosagemMed.requestFocus();
+                        }else if(dosagemMedComprada.getText().toString().equals("")){
+                            Toast.makeText(MedicamentoCadastro.this, "Inserir Dosagem Comprada do Remédio", Toast.LENGTH_LONG).show();
+                            dosagemMedComprada.setFocusable(true);
+                            dosagemMedComprada.requestFocus();
+                        }else{
+                            int dosagem = Integer.parseInt(dosagemMed.getText().toString());
+                            int dosagemComprada = Integer.parseInt(dosagemMedComprada.getText().toString());
+                            if((dosagem >= 1) && (dosagemComprada >= 1)){
+                                salvarMedicamento();
+                                return true;
+                            }else{
+                                if((dosagem < 1) && (dosagemComprada <1)){
+                                    Toast.makeText(MedicamentoCadastro.this, "As Dosagens não podem ser zeradas.", Toast.LENGTH_LONG).show();
+                                }else if(dosagem < 1){
+                                    Toast.makeText(MedicamentoCadastro.this, "A Dosagem não pode ser zerada.", Toast.LENGTH_LONG).show();
+                                    dosagemMed.setFocusable(true);
+                                    dosagemMed.requestFocus();
+                                }else if(dosagemComprada < 1){
+                                    Toast.makeText(MedicamentoCadastro.this, "A Dosagem Comprada não pode ser zerada.", Toast.LENGTH_LONG).show();
+                                    dosagemMedComprada.setFocusable(true);
+                                    dosagemMedComprada.requestFocus();
+                                }
+
+                            }
+                        }
+                    }
+                    //salvarMedicamento();
+                    //return true;
                 }
             return false;
             default:
