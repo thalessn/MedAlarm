@@ -21,9 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by Thales on 25/02/2018.
- */
 
 public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -31,7 +28,7 @@ public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.V
     private List<ListItemHistorico> dadosHistorico;
     private Context context;
 
-    //Objeto da interfacea ser utilizado no adapter
+    //Objeto da interface ser utilizado no adapter
     private OnItemClickListener clickListener;
 
     //Interface responsável por passar informação a activity de qual elemento do adapter foi selecionado.
@@ -61,7 +58,6 @@ public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         RecyclerView.ViewHolder viewHolder = null;
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -114,36 +110,40 @@ public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.V
                 HeaderHistoricoRow dateItem = (HeaderHistoricoRow) dadosHistorico.get(position);
                 HeaderViewHolder dataProgViewHolder = (HeaderViewHolder) viewHolder;
 
+                //Verifica se o conteúdo é maior que 5 caracteres se não, a data é um traço devido ao
+                //OnBootReceiver
+                if(dateItem.getStringDataProg().length() > 5){
+                    //Calendário para verificar se a data do historico é igual a de hoje
+                    Calendar hoje = Calendar.getInstance();
+                    String dataH = Utils.CalendarToStringData(hoje);
+                    //Retira um dia para verificar se é igual a ontem
+                    hoje.add(Calendar.DATE,-1);
+                    String dataOntem = Utils.CalendarToStringData(hoje);
+                    //Verifica s é igual a hoje
+                    if(dataH.equals(dateItem.toString())){
+                        SimpleDateFormat dia = new SimpleDateFormat("d");
+                        SimpleDateFormat mes = new SimpleDateFormat("MMM");
+                        String texto = "Hoje, "+ dia.format(hoje.getTime()) +" de "+ mes.format(hoje.getTime());
+                        // Populate date item data here
+                        dataProgViewHolder.tvDataProg.setText(texto);
+                        break;
+                    }
+                    if(dataOntem.equals(dateItem.toString())){
+                        SimpleDateFormat dia = new SimpleDateFormat("d");
+                        SimpleDateFormat mes = new SimpleDateFormat("MMM");
+                        String texto = "Ontem, "+ dia.format(hoje.getTime()) +" de "+ mes.format(hoje.getTime());
+                        // Populate date item data here
+                        dataProgViewHolder.tvDataProg.setText(texto);
+                        break;
+                    }
 
-                //Calendário para verificar se a data do historico é igual a de hoje
-                Calendar hoje = Calendar.getInstance();
-                String dataH = Utils.CalendarToStringData(hoje);
-                //Retira um dia para verificar se é igual a ontem
-                hoje.add(Calendar.DATE,-1);
-                String dataOntem = Utils.CalendarToStringData(hoje);
-                //Verifica s é igual a hoje
-                if(dataH.equals(dateItem.toString())){
-                    SimpleDateFormat dia = new SimpleDateFormat("d");
-                    SimpleDateFormat mes = new SimpleDateFormat("MMM");
-                    String texto = "Hoje, "+ dia.format(hoje.getTime()) +" de "+ mes.format(hoje.getTime());
+                    String dataFormatada = Utils.CalendarToStringFormatada(dateItem.getDataProg());
                     // Populate date item data here
-                    dataProgViewHolder.tvDataProg.setText(texto);
-                    break;
+                    dataProgViewHolder.tvDataProg.setText(dataFormatada);
+                }else{
+                    dataProgViewHolder.tvDataProg.setText(dateItem.getStringDataProg());
                 }
-                if(dataOntem.equals(dateItem.toString())){
-                    SimpleDateFormat dia = new SimpleDateFormat("d");
-                    SimpleDateFormat mes = new SimpleDateFormat("MMM");
-                    String texto = "Ontem, "+ dia.format(hoje.getTime()) +" de "+ mes.format(hoje.getTime());
-                    // Populate date item data here
-                    dataProgViewHolder.tvDataProg.setText(texto);
-                    break;
-                }
-
-                String dataFormatada = Utils.CalendarToStringFormatada(dateItem.getDataProg());
-                // Populate date item data here
-                dataProgViewHolder.tvDataProg.setText(dataFormatada);
                 break;
-
         }
 
     }

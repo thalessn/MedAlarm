@@ -1,31 +1,65 @@
 http://www.flaticon.com/free-icon/medical-specialist_56996
-http://www.flaticon.com/free-icon/medical-stethoscope-variant_27164
-http://www.flaticon.com/free-icon/shopping-cart_60992
-http://www.flaticon.com/free-icon/home-icon-silhouette_69524#term=home&page=1&position=16
-http://www.flaticon.com/free-icon/breakfast-time_17007#term=breakfast&page=2&position=8
-http://www.flaticon.com/free-icon/pieces-of-cutlery_1328#term=lunch&page=1&position=69
-http://www.flaticon.com/free-icon/hot-food-in-a-bowl_45471
-http://www.flaticon.com/free-icon/sleep_105192#term=sleep&page=1&position=16
-http://www.flaticon.com/free-icon/map-placeholder_61121
-http://www.flaticon.com/free-icon/phone-call-button_60720
-https://www.flaticon.com/free-icon/medical-drug-pill_13032#term=tablets drugs&page=1&position=9 icone de adicionar medicamento
-https://www.flaticon.com/free-icon/drugs_139591  icone para adicionar dose tela inicial
-http://www.freeiconspng.com/img/37644 icone do historico
 
-https://www.flaticon.com/free-icon/mail_775726#term=graph&page=2&position=52 icone do historico -> carta com relatório
+http://www.flaticon.com/free-icon/medical-stethoscope-variant_27164 ic_doctor
+<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+
+http://www.flaticon.com/free-icon/shopping-cart_60992 ic_compra
+<div>Icons made by <a href="https://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+
+http://www.flaticon.com/free-icon/home-icon-silhouette_69524#term=home&page=1&position=16 ic_inicio
+<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+
+http://www.flaticon.com/free-icon/breakfast-time_17007#term=breakfast&page=2&position=8 ic_breakfast
+<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+http://www.flaticon.com/free-icon/pieces-of-cutlery_1328#term=lunch&page=1&position=69 ic_almoco
+<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+http://www.flaticon.com/free-icon/hot-food-in-a-bowl_45471 ic_janta
+<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+http://www.flaticon.com/free-icon/sleep_105192#term=sleep&page=1&position=16 ic_dormir
+<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+http://www.flaticon.com/free-icon/map-placeholder_61121 ic_endereco
+<div>Icons made by <a href="https://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+http://www.flaticon.com/free-icon/phone-call-button_60720 ic_telefone
+<div>Icons made by <a href="https://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+
+https://www.flaticon.com/free-icon/drugs_139591 ic_add_dose_tela_inicial  icone para adicionar dose tela inicial
+<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+http://www.freeiconspng.com/img/37644 icone do historico
+<a href="https://www.freeiconspng.com/img/37644">Medical Chart Pictures Icon</a>
+
+
+https://www.flaticon.com/free-icon/mail_775726#term=graph&page=2&position=52 ic_mail icone do historico -> carta com relatório
+<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
 
 //Icones da tela inicial
-https://www.flaticon.com/free-icon/sunset_168399#term=sunset&page=1&position=54 -> manhã
-https://www.flaticon.com/free-icon/sun_248764#term=sun&page=2&position=57 -> tarde
-https://www.flaticon.com/free-icon/foggy-full-moon-night_54969#term=moon&page=2&position=16 -> noite 
-https://www.flaticon.com/free-icon/moon_157089#term=moon&page=3&position=54 -> madrugada 
+https://www.flaticon.com/free-icon/sunset_168399#term=sunset&page=1&position=54 ic_sunset - manhã
+<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
+https://www.flaticon.com/free-icon/sun_248764#term=sun&page=2&position=57 ic_sun - tarde
+<div>Icons made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">Eucalyp</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+https://www.flaticon.com/free-icon/foggy-full-moon-night_54969#term=moon&page=2&position=16 ic_sundown - noite 
+<div>Icons made by <a href="https://www.flaticon.com/authors/catalin-fertu" title="Catalin Fertu">Catalin Fertu</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+https://www.flaticon.com/free-icon/moon_157089#term=moon&page=3&position=54 ic_moon - madrugada 
+<div>Icons made by <a href="https://www.flaticon.com/authors/elias-bikbulatov" title="Elias Bikbulatov">Elias Bikbulatov</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
 Imagens
-https://pixabay.com/p-2090495/?no_redirect - manhã
-https://pixabay.com/pt/campo-da-cevada-paisagem-natureza-2337009/ - tarde
-https://pixabay.com/pt/pont%C3%A3o-pier-mar-p%C3%B4r-do-sol-593401/ - noite
-https://pixabay.com/pt/noite-star-c%C3%A9u-estrelado-2845347/ - madrugada
+https://pixabay.com/p-2090495/?no_redirect det_med_manha - manhã
+https://pixabay.com/pt/campo-da-cevada-paisagem-natureza-2337009/ det_med_tarde - tarde
+https://pixabay.com/pt/pont%C3%A3o-pier-mar-p%C3%B4r-do-sol-593401/ det_med_noite - noite
+https://pixabay.com/pt/noite-star-c%C3%A9u-estrelado-2845347/ det_med_madrugada - madrugada
 
 
 Site que utilizei como referência para criar a tela de compra

@@ -95,8 +95,10 @@ public class Historico extends AppCompatActivity implements HistoricoRecycleAdap
         //OnClick do adapter
         adapter.setClickListener(this);
 
+
         //Adiciona o adapter no recyclerview
         recyclerView.setAdapter(adapter);
+
 
         //Botão para enviar chamar a activity do email
         btnEnviar = (Button) findViewById(R.id.btnEnviarRelatorio);
@@ -107,6 +109,7 @@ public class Historico extends AppCompatActivity implements HistoricoRecycleAdap
                 startActivity(i);
             }
         });
+
     }
 
     @Override

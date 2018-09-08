@@ -155,7 +155,6 @@ public class HistoricoDAO {
         Long idMed = idMedicamento;
         String query = null;
         if((idMed == 0) || (idMed == -1)){
-
             query = "Select "+MedicamentoDAO.NOME_TABELA+".*, "+NOME_TABELA+".*, "+HorarioDAO.NOME_TABELA+"."
                     +HorarioDAO.COLUNA_HORARIO+
                     " from "+NOME_TABELA+" inner join "+MedicamentoDAO.NOME_TABELA
@@ -201,13 +200,13 @@ public class HistoricoDAO {
                     Medicamento medicamento = new Medicamento(id, nome, dosagem, tipoDosagem, usoContinuo, obs, foto, quantidade, dosagemComprada);
 
                     //Informações necessárias para criar o itemAlarmeHistorico
-                    long idHistorico =        cursor.getLong(8);
-                    String dataProg =         cursor.getString(10);
-                    long idHorario =          cursor.getLong(11);
-                    String dataAdministrado = cursor.getString(12);
-                    String horaAdministrado = cursor.getString(13);
-                    String status =           cursor.getString(14);
-                    String horario =          cursor.getString(15);
+                    long idHistorico =        cursor.getLong(9);
+                    String dataProg =         cursor.getString(11);
+                    long idHorario =          cursor.getLong(12);
+                    String dataAdministrado = cursor.getString(13);
+                    String horaAdministrado = cursor.getString(14);
+                    String status =           cursor.getString(15);
+                    String horario =          cursor.getString(16);
 
                     //Cria o objeto horário do itemAlarmeHistórico
                     Horario horario1 = new Horario(idHorario,horario);

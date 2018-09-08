@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -101,6 +102,7 @@ public class Utils {
     }
 
     public static String formataDataBrasil(String data){
+        Log.v("Data", data);
         String []split = data.split("-");
         String dataFinal = split[2] + "/" +split[1] + "/" +split[0];
 //        StringBuilder result = new StringBuilder(data);

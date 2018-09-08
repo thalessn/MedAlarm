@@ -59,21 +59,6 @@ public class AlarmeService extends Service {
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
 
-                AlarmKlaxon.start(AlarmeService.this);
-                //Contador para parar a música
-                CountDownTimer timer = new CountDownTimer(15000,1000) {
-                    @Override
-                    public void onTick(long l) {
-
-                    }
-                    @Override
-                    public void onFinish() {
-                        AlarmKlaxon.stop(AlarmeService.this);
-                    }
-                };
-                timer.start();
-
-
 
                 Log.v("ALARME SERVICE", "Iniciou Activity");
                   return super.onStartCommand(intent, flags, startId);

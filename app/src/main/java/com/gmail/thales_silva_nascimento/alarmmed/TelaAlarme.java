@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.CountDownTimer;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -145,6 +146,21 @@ public class TelaAlarme extends AppCompatActivity {
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON);
 
+        //Inicia o som
+        AlarmKlaxon.start(TelaAlarme.this);
+        //Contador para parar a música
+        CountDownTimer timer = new CountDownTimer(15000,1000) {
+            @Override
+            public void onTick(long l) {
+
+            }
+            @Override
+            public void onFinish() {
+                AlarmKlaxon.stop(TelaAlarme.this);
+            }
+        };
+        timer.start();
+
     }
 
     @Override
@@ -176,11 +192,13 @@ public class TelaAlarme extends AppCompatActivity {
             case R.id.telaAlarmeSnooze:
                 Log.v("TelaAlarme", "Apertou o Soneca");
                 adapter.adiarTodosMedicamentos();
+                AlarmKlaxon.stop(TelaAlarme.this);
                 finish();
                 return true;
             case R.id.telaAlarmeTomar:
                 Log.v("TelaAlarme", "Apertou o botão tomar todos");
                 adapter.tomarTodosMedicamentos();
+                AlarmKlaxon.stop(TelaAlarme.this);
                 finish();
             default:
                 return super.onOptionsItemSelected(item);

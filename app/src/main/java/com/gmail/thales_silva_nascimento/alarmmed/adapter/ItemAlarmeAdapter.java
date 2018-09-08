@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.gmail.thales_silva_nascimento.alarmmed.AlarmKlaxon;
 import com.gmail.thales_silva_nascimento.alarmmed.R;
 import com.gmail.thales_silva_nascimento.alarmmed.TelaAlarme;
 import com.gmail.thales_silva_nascimento.alarmmed.Utils;
@@ -219,6 +220,7 @@ public class ItemAlarmeAdapter extends RecyclerView.Adapter<ItemAlarmeAdapter.MA
         if(itensAlarme.size() <= 0){
             Intent intent = new Intent(TelaAlarme.TELA_ENCERRAR);
             LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            AlarmKlaxon.stop(context);
         }
     }
 

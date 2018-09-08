@@ -43,10 +43,10 @@ public class detalheHistorico extends DialogFragment {
         //View customizada do alertDialog
         View alertView = inflater.inflate(R.layout.dialog_item_historico_detalhe, null);
 
-        tvDataProg = (TextView) alertView.findViewById(R.id.tvDataProgramada);
+        tvDataProg         = (TextView) alertView.findViewById(R.id.tvDataProgramada);
         tvDataAdministrada = (TextView) alertView.findViewById(R.id.tvDataAdministrado);
-        nomeMed = (TextView) alertView.findViewById(R.id.tvnomeMedHistorico);
-        img = (ImageView) alertView.findViewById(R.id.imgHistoricoItem);
+        nomeMed            = (TextView) alertView.findViewById(R.id.tvnomeMedHistorico);
+        img                = (ImageView) alertView.findViewById(R.id.imgHistoricoItem);
 
         Bundle itemMedicamento = getArguments();
         if(itemMedicamento != null){
@@ -69,11 +69,22 @@ public class detalheHistorico extends DialogFragment {
         texto+=", "+dia.format(calDataProg.getTime())+" "+mes.format(calDataProg.getTime())
                 +" "+ano.format(calDataProg.getTime());
         tvDataProg.setText(texto);
+        /*
+            Verifica se o registro foi registrado corretamente ou quando é perdido a dosagem
+         */
         //Texto do segundo parágrafo
-        Calendar calAd = Utils.DataStringToCalendar(item.getDataAdministrado());
-        String texto2 = "Tomado às "+item.getHoraAdministrado()+", "+dia.format(calAd.getTime())
-                +" "+mes.format(calAd.getTime())+" "+ano.format(calAd.getTime());
-        tvDataAdministrada.setText(texto2);
+        //Verifica se a data é maior que 5 elementos pois se não é um traço
+        if(item.getDataAdministrado().length() > 5){
+            Calendar calAd = Utils.DataStringToCalendar(item.getDataAdministrado());
+            String texto2 = "Tomado às "+item.getHoraAdministrado()+", "+dia.format(calAd.getTime())
+                    +" "+mes.format(calAd.getTime())+" "+ano.format(calAd.getTime());
+            tvDataAdministrada.setText(texto2);
+        }else{
+            String texto3 = "Não Registrado";
+            tvDataAdministrada.setText(texto3);
+        }
+
+
 
         //Adiciona o nome do medicamento
         nomeMed.setText(item.getMed().getNome());

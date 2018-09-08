@@ -30,4 +30,8 @@ public class HeaderHistoricoRow extends ListItemHistorico {
     public String toString() {
         return Utils.formataDataBrasil(dataProg);
     }
+
+    public String getStringDataProg(){
+        return dataProg;
+    }
 }

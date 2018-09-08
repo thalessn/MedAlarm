@@ -358,6 +358,10 @@ public class Email extends AppCompatActivity {
             String pulo = "Pulou às "+item.getHoraAdministrado();
             texto+=pulo;
             Log.v("Entrou", "Pulou");
+        }else if(item.getStatus().equals(ItemAlarmeHistorico.STATUS_NAO_REGISTRADO)){
+            font.setColor(BaseColor.BLACK);
+            String pulo = "Não Registrado no Sistema";
+            texto+=pulo;
         }
 
         PdfPCell cell4 = new PdfPCell();
