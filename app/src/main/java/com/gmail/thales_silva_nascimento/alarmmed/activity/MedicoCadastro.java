@@ -289,8 +289,6 @@ public class MedicoCadastro extends AppCompatActivity implements AdapterView.OnI
         // Creating adapter for spinner
         ArrayAdapter<Especialidade> dataAdapter = new ArrayAdapter<Especialidade>(this, android.R.layout.simple_spinner_item, categories);
 
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);

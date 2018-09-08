@@ -29,7 +29,15 @@ public class EspecialidadeDAO {
     //Funcionaa em versões anteriores a sqlite 3.7.11
     public static  final String SCRIPT_INSERT_INICIAL_ESPECIALIDADES = "INSERT INTO " +NOME_TABELA+ " (" +COLUNA_NOME+ ") " +
             "SELECT 'Acupuntura' UNION ALL SELECT 'Alergia e Imunologia' UNION ALL SELECT 'Anestesiologia' UNION ALL SELECT 'Angiologia' UNION ALL SELECT 'Cardiologia' " +
-            "UNION ALL SELECT 'Cirurgia Geral' UNION ALL SELECT 'Cirurgia Pediátrica' UNION ALL SELECT 'Cirurgia Plástica' UNION ALL SELECT 'Clínica médica' UNION ALL SELECT 'Coloproctologia' " ;
+            "UNION ALL SELECT 'Cirurgia Geral' UNION ALL SELECT 'Cirurgia Pediátrica' UNION ALL SELECT 'Cirurgia Plástica' UNION ALL SELECT 'Clínica médica' UNION ALL SELECT 'Coloproctologia' "+
+            "UNION ALL SELECT 'Dermatologia' UNION ALL SELECT 'Endocrinologia e Metabologia' UNION ALL SELECT 'Endoscopia' "+
+            "UNION ALL SELECT 'Gastroenterologia' UNION ALL SELECT 'Geriatria' UNION ALL SELECT 'Ginecologista' "+
+            "UNION ALL SELECT 'Homeopatia' UNION ALL SELECT 'Medicina do Trabalho' UNION ALL SELECT 'Nefrologia' "+
+            "UNION ALL SELECT 'Neurocirurgia' UNION ALL SELECT 'Neurologista' UNION ALL SELECT 'Nutrologia' "+
+            "UNION ALL SELECT 'Oftamologia' UNION ALL SELECT 'Ortopedia e Trauma' UNION ALL SELECT 'Otorrinolaringologia' "+
+            "UNION ALL SELECT 'Patologia' UNION ALL SELECT 'Pediatria' UNION ALL SELECT 'Pneumologia' "+
+            "UNION ALL SELECT 'Psiquiatria' UNION ALL SELECT 'Radiologia' UNION ALL SELECT 'RadioTerapia' "+
+            "UNION ALL SELECT 'Obstetrícia' UNION ALL SELECT 'Urologia' ";
 
     public static final String SCRIPT_DELECAO_TABELA =  "DROP TABLE IF EXISTS " + NOME_TABELA;
 
