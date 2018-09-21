@@ -67,20 +67,20 @@ public class MedicamentoAgendadoController {
                     Medicamento medicamento = new Medicamento(id, nome, dosagem,tipoDosagem, usoContinuo, obs, foto, quantidade,dosagemComprada);
 
                     //Alarme
-                    long id2 = cursor.getLong(8);
-                    Calendar dataInicio = Utils.DataStringToCalendar( cursor.getString(9) );
-                    Calendar dataFim = Utils.DataStringToCalendar( cursor.getString(10) );
-                    int periodo = cursor.getInt(11);
-                    int tipoRepeticao = cursor.getInt(12);
-                    int intervaloRepeticao = cursor.getInt(13);
-                    boolean status = (cursor.getInt(14) == 1 );
-                    long idMedicamento = cursor.getLong(15);
-                    String freqHorario = cursor.getString(16);
-                    String freqDias = cursor.getString(17);
+                    long id2 = cursor.getLong(9);
+                    Calendar dataInicio = Utils.DataStringToCalendar( cursor.getString(10) );
+                    Calendar dataFim = Utils.DataStringToCalendar( cursor.getString(11));
+                    int periodo = cursor.getInt(12);
+                    int tipoRepeticao = cursor.getInt(13);
+                    int intervaloRepeticao = cursor.getInt(14);
+                    boolean status = (cursor.getInt(15) == 1 );
+                    long idMedicamento = cursor.getLong(16);
+                    String freqHorario = cursor.getString(17);
+                    String freqDias = cursor.getString(18);
                     Alarme alarme = new Alarme(id2, dataInicio, dataFim, periodo, tipoRepeticao, intervaloRepeticao, status, idMedicamento, freqHorario, freqDias);
 
                     //String horario
-                    String horario = cursor.getString(18);
+                    String horario = cursor.getString(19);
                     //Adiciona espaço em branco no texto
                     horario = horario.substring(0,2) +" "+ horario.substring(2,3) +" "+ horario.substring(3,5);
 
