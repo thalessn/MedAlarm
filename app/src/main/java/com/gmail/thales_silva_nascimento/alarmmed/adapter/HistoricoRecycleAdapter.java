@@ -21,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -160,13 +162,13 @@ public class HistoricoRecycleAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private ImageView img;
+        private CircleImageView img;
         private TextView nomeMed;
         private TextView horaProg;
 
         public ItemViewHolder(View v) {
             super(v);
-            img = (ImageView) v.findViewById(R.id.imgMedHistorico);
+            img = (CircleImageView) v.findViewById(R.id.imgMedHistorico);
             nomeMed = (TextView) v.findViewById(R.id.tvNomeMedHist);
             horaProg = (TextView) v.findViewById(R.id.tvHoraprogHist);
             v.setOnClickListener(this);

@@ -10,7 +10,7 @@
         android:layout_height="70dp"
         android:background="@color/colorPrimary"
         android:orientation="horizontal">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgHistoricoItem"
             android:layout_width="50dp"
             android:layout_height="50dp"

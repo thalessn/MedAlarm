@@ -20,13 +20,15 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class detalheHistorico extends DialogFragment {
 
     private TextView tvDataProg;
     private TextView tvDataAdministrada;
     private TextView nomeMed;
-    private ImageView img;
+    private CircleImageView img;
 
     public detalheHistorico(){
 
@@ -46,7 +48,7 @@ public class detalheHistorico extends DialogFragment {
         tvDataProg         = (TextView) alertView.findViewById(R.id.tvDataProgramada);
         tvDataAdministrada = (TextView) alertView.findViewById(R.id.tvDataAdministrado);
         nomeMed            = (TextView) alertView.findViewById(R.id.tvnomeMedHistorico);
-        img                = (ImageView) alertView.findViewById(R.id.imgHistoricoItem);
+        img                = (CircleImageView) alertView.findViewById(R.id.imgHistoricoItem);
 
         Bundle itemMedicamento = getArguments();
         if(itemMedicamento != null){
