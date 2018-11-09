@@ -232,7 +232,7 @@ public class Email extends AppCompatActivity {
         /**Logotipo**/
         document.add(Chunk.NEWLINE);
         Font fontlogo = new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.BOLD);
-        Paragraph pLogo = new Paragraph("AlarmMed", fontlogo);
+        Paragraph pLogo = new Paragraph("Med Alarm", fontlogo);
         pLogo.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(pLogo);
         document.add(Chunk.NEWLINE);

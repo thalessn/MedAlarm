@@ -36,7 +36,7 @@ public class fragInicio extends Fragment {
         View view = inflater.inflate(R.layout.fragment_frag_inicio, container, false);
 
         //Altera o título da toolbar
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("AlarmMed");
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Med Alarm");
 
         /**
          * ViewPager

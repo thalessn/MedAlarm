@@ -52,8 +52,8 @@ public class MedicoDetalhe extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.tbMedicoDetalhe);
         toolbar.setNavigationIcon(R.drawable.ic_menu_arrow_back);
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle("Histórico");
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Med Alarm");
 
         //Onclick no botão de retonar da toolbar
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
