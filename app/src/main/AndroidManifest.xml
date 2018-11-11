@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -23,7 +23,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher22"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -37,16 +37,23 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
+        <!-- Splash Screen -->
         <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".activity.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <!-- Tela Inicial -->
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
@@ -66,11 +73,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".TelaAlarme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MedicamentoCadastro"
             android:screenOrientation="portrait" />
-
 
         <!-- Declara o service do Alarme -->
         <service android:name=".AlarmeService" />
@@ -80,19 +86,17 @@
         <service android:name=".OnBootService" />
         <!-- Declara que a classe AlarmeReceiver é o tipo de receiver -->
 
-
-
         <receiver android:name=".AlarmeReceiver" />
         <!-- Declara que a classe AlarmeReceiver é o tipo de receiver -->
         <receiver android:name=".LembreteCompraReceiver" />
-        <!--Receiver ao iniciar o sistema-->
+        <!-- Receiver ao iniciar o sistema -->
         <receiver android:name=".OnBootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
         <!-- Receiver para troca de fuso -->
-        <receiver android:name=".TimeZoneChangeReceiver"/>
+        <receiver android:name=".TimeZoneChangeReceiver" />
 
         <activity
             android:name=".activity.MedicamentoDetalhe"
@@ -109,30 +113,27 @@
         <activity
             android:name=".activity.ActivityFloatingbuttonTelaInicial"
             android:label="@string/title_activity_excluir_teste_flotingbutton"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
         <activity
             android:name=".activity.Historico"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.Email"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ConfiguracaoActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ConfigSom"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.Sobre"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.Creditos"
-            android:screenOrientation="portrait"/>
-
-
-        <activity android:name=".teste"/>
-
+            android:screenOrientation="portrait" />
+        <activity android:name=".teste" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -147,12 +148,13 @@
             android:value="@string/google_maps_key" />
 
         <!-- Informa a versão do google play servies que estamos utilizando -->
-        <meta-data android:name="com.google.android.gms.version"
+        <meta-data
+            android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity
             android:name=".activity.FarmaciaProxima"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
     </application>
 
 </manifest>
