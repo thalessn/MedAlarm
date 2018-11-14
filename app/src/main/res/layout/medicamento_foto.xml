@@ -1,21 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/llMedTest"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="20dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llMedTest"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_gravity="center"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="20dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:gravity="left"
+        android:layout_marginEnd="15dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fbFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:elevation="30dp"
+            android:src="@drawable/ic_menu_camera"
+            app:fabSize="mini" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fbFoto"
+            android:layout_centerHorizontal="true"
+            android:text="Foto"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+
+
+    <FrameLayout
+        android:id="@+id/frameLayoutFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="170dp"
+        android:layout_gravity="center">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgMed"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:src="@drawable/remedio1"
+            android:layout_gravity="center_horizontal"
+            app:civ_border_color="@color/cardview_light_background"
+            app:civ_border_width="2dp" />
+    </FrameLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:gravity="right"
+        android:layout_gravity="center|end">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnQrCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_menu_camera"
+            app:fabSize="mini"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnQrCode"
+            android:layout_centerHorizontal="true"
+            android:text="QrCode"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+
+   <!--
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgMed"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:layout_gravity="center_horizontal"
+        android:src="@drawable/remedio1"
         app:civ_border_color="@color/cardview_light_background"
-        app:civ_border_width="2dp"
-        android:src="@drawable/remedio1"/>
+        app:civ_border_width="2dp" />
+
+    -->
 </LinearLayout>

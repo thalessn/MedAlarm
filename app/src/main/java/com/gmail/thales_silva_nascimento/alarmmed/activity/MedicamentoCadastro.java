@@ -182,6 +182,10 @@ public class MedicamentoCadastro extends AppCompatActivity
     String photoFile;
     private boolean temFoto = false;
 
+    //QrCode
+    private FloatingActionButton btnQrCode;
+    private static int REQUEST_CODE_QRCODE = 55;
+
     //Tipo tela
     public static int TELA_CADASTRAR_MED = 1;
     public static int TELA_EDITAR_MED = 2;
@@ -365,6 +369,9 @@ public class MedicamentoCadastro extends AppCompatActivity
 
         //Gerencia o tipo de tela ao iniciar
         setupTipoTela();
+
+        //Gerencia o qrCode
+        setupQrCode();
 
     }
 
@@ -567,6 +574,18 @@ public class MedicamentoCadastro extends AppCompatActivity
         dosSpinnerComprada.setAdapter(dataAdapter);
     }
 
+    private void setupQrCode(){
+        btnQrCode = findViewById(R.id.btnQrCode);
+        btnQrCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v("Selecionou", "O botão");
+                Intent i = new Intent(MedicamentoCadastro.this,QRCODE.class);
+                startActivityForResult(i,REQUEST_CODE_QRCODE);
+            }
+        });
+    }
+
     private void setupCamera(){
         /**
          *
@@ -613,7 +632,7 @@ public class MedicamentoCadastro extends AppCompatActivity
                 appBarLayout.getChildAt(0).setVisibility(View.GONE);
                 appBarLayout.getChildAt(1).setVisibility(View.VISIBLE);
 
-                //Primeiro é necessario desativar o comportamento de se esconder automaticamente
+                /*//Primeiro é necessario desativar o comportamento de se esconder automaticamente
                 //Quando o scroll comeca. Depois disso você pode esconder o botão.
                 //https://stackoverflow.com/questions/31269958/floatingactionbutton-doesnt-hide
                 CoordinatorLayout.LayoutParams cl = (CoordinatorLayout.LayoutParams) btnFoto.getLayoutParams();
@@ -621,7 +640,7 @@ public class MedicamentoCadastro extends AppCompatActivity
                 if (behavior != null) {
                     behavior.setAutoHideEnabled(false);
                 }
-                btnFoto.hide();
+                btnFoto.hide();*/
 
                 //Se a API do aplicativo for maior ou igual a 23, necessita pedir permissao
                 // para acessar a camera em tempo de execução.
@@ -914,14 +933,14 @@ public class MedicamentoCadastro extends AppCompatActivity
         appBarLayout.getChildAt(0).setVisibility(View.VISIBLE);
         appBarLayout.getChildAt(1).setVisibility(View.GONE);
 
-        //Depois de habilitar o botão novamente, é necesário habilitar também a função de
+        /*//Depois de habilitar o botão novamente, é necesário habilitar também a função de
         //se esconder automaticamente "após o scroll view subir"
         btnFoto.show();
         CoordinatorLayout.LayoutParams cl = (CoordinatorLayout.LayoutParams) btnFoto.getLayoutParams();
         FloatingActionButton.Behavior behavior = (FloatingActionButton.Behavior) cl.getBehavior();
         if(behavior != null){
             behavior.setAutoHideEnabled(true);
-        }
+        }*/
 
         if(camera != null){
             //Evita freeze de imagem ao remover

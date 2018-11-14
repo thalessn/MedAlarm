@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.hardware.camera" />
+    <uses-permission android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -133,7 +135,9 @@
         <activity
             android:name=".activity.Creditos"
             android:screenOrientation="portrait" />
-        <activity android:name=".teste" />
+        <activity android:name=".activity.QRCODE" >
+
+        </activity>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
