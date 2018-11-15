@@ -3,6 +3,7 @@ package com.gmail.thales_silva_nascimento.alarmmed.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
@@ -31,11 +32,15 @@ import com.gmail.thales_silva_nascimento.alarmmed.model.Result;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -59,7 +64,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FarmaciaProxima extends AppCompatActivity
         implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
-                   GoogleApiClient.OnConnectionFailedListener {
+                   GoogleApiClient.OnConnectionFailedListener,ResultCallback {
 
     private GoogleMap mMap;
     double latitude;
@@ -80,6 +85,8 @@ public class FarmaciaProxima extends AppCompatActivity
     //Posição do marcador selecionado
     private double latPlace;
     private double lonPlace;
+
+    private int REQUEST_CHECK_SETTINGS = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +135,11 @@ public class FarmaciaProxima extends AppCompatActivity
         else {
             Log.d("onCreate", "Google Play Services available. Continuing.");
         }
+
+
+        //Verifica se o gps está ligado se não encerra a aplicação
+
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -418,8 +430,48 @@ public class FarmaciaProxima extends AppCompatActivity
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setInterval(20*10000); //1 minuto e meio
         mLocationRequest.setFastestInterval(50000);
-        startLocationUpdates();
 
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(mLocationRequest);
+        builder.setAlwaysShow(true);
+        PendingResult result =
+                LocationServices.SettingsApi.checkLocationSettings(
+                        mGoogleApiClient,
+                        builder.build()
+                );
+        result.setResultCallback(this);
+        //startLocationUpdates();
+
+    }
+
+    @Override
+    public void onResult(@NonNull com.google.android.gms.common.api.Result locationSettingsResult) {
+        final Status status = locationSettingsResult.getStatus();
+        switch (status.getStatusCode()) {
+            case LocationSettingsStatusCodes.SUCCESS:
+
+                // NO need to show the dialog;
+
+                break;
+
+            case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                //  Location settings are not satisfied. Show the user a dialog
+                //  GPS disabled show the user a dialog to turn it on
+                try {
+                    // Show the dialog by calling startResolutionForResult(), and check the result
+                    // in onActivityResult().
+                    status.startResolutionForResult(FarmaciaProxima.this, REQUEST_CHECK_SETTINGS);
+                } catch (IntentSender.SendIntentException e) {
+
+                    //failed to show
+                    e.printStackTrace();
+                }
+                break;
+
+            case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                // Location settings are unavailable so not possible to show any dialog now
+                break;
+        }
     }
 
     /**
@@ -472,8 +524,6 @@ public class FarmaciaProxima extends AppCompatActivity
                     }
                 },
                 Looper.myLooper());
-
-
     }
 
     /**
@@ -527,7 +577,30 @@ public class FarmaciaProxima extends AppCompatActivity
         if(mBottomSheetBehaviour.getState() == BottomSheetBehavior.STATE_EXPANDED){
             mBottomSheetBehaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
         }else{
+            //Cria um intent para retorna o valor
+            Intent i = new Intent();
+            //Adiciona o resultado a ser comparado e a intent
+            setResult(1, i);
             finish();
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CHECK_SETTINGS) {
+            if (resultCode == RESULT_OK) {
+                startLocationUpdates();
+                Toast.makeText(getApplicationContext(), "GPS enabled", Toast.LENGTH_LONG).show();
+            } else {
+                //Cria um intent para retorna o valor
+                Intent i = new Intent();
+                //Adiciona o resultado a ser comparado e a intent
+                setResult(1, i);
+                finish();
+            }
+
+        }
+    }
+
 }

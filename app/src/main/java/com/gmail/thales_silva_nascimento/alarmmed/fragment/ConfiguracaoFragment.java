@@ -30,7 +30,9 @@ public class ConfiguracaoFragment extends PreferenceFragment implements SharedPr
         ListPreference listPreference = (ListPreference) findPreference("list_duracao_soneca");
         //Verifica se existe um valor cadastrado, se sim então preencha com ele.
         if(listPreference.getValue() != null){
-            listPreference.setSummary(listPreference.getValue().toString() +" minutos");
+            listPreference.setSummary(listPreference.getValue() +" minutos");
+            Log.v("COnfiguracao", listPreference.getValue());
+
         }
     }
 

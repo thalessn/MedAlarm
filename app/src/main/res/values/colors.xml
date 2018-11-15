@@ -8,4 +8,23 @@
     <color name="vermelho">#FF0000</color>
     <color name="yelow">#ffce54</color>
     <color name="logo_background">#A7C4D2</color>
+    <color name="green">#4bdd1b</color>
+
+
+   <!--  Cores da dos slides que são exibidos ao iniciar o app pela primeira vez  -->
+   <!-- Fundo -->
+   <color name="bg_screen">#3395ff</color>
+    <!-- pontos inativos -->
+   <color name="dot_dark_screen">#2278d4</color>
+    <!-- pontos ativos -->
+   <color name="dot_light_screen">#93c6fd</color>
+   <!-- Vetor de pontos ativos -->
+   <array name="array_dot_active">
+    <item>@color/dot_light_screen</item>
+   </array>
+    <!-- Vetor de pontos inativos -->
+   <array name="array_dot_inactive">
+    <item>@color/dot_dark_screen</item>
+   </array>
+
 </resources>
