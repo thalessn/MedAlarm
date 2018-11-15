@@ -591,7 +591,6 @@ public class FarmaciaProxima extends AppCompatActivity
         if (requestCode == REQUEST_CHECK_SETTINGS) {
             if (resultCode == RESULT_OK) {
                 startLocationUpdates();
-                Toast.makeText(getApplicationContext(), "GPS enabled", Toast.LENGTH_LONG).show();
             } else {
                 //Cria um intent para retorna o valor
                 Intent i = new Intent();

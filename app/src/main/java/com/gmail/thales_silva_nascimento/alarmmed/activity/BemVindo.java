@@ -182,6 +182,8 @@ public class BemVindo extends AppCompatActivity {
             }else{
                 requestMultiplePermissions();
             }
+        }else{
+            AlteraBotaoPermissao();
         }
     }
 
