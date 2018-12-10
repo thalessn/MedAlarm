@@ -50,7 +50,7 @@ public class LembreteCompraService extends Service {
             Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             //Monta a notificação
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.mipmap.ic_launcher22)
                     .setContentTitle("Lembrete de Compra")
                     .setAutoCancel(true)
                     .setVibrate(new long[] {1000, 1000,1000, 1000})

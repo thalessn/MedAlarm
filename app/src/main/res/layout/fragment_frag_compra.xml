@@ -6,21 +6,23 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+
         android:id="@+id/tvCompraTexto"
         android:layout_width="match_parent"
-        android:textSize="20dp"
-        android:textAlignment="center"
-        android:layout_centerInParent="true"
         android:layout_height="wrap_content"
-        android:text="Não há medicamento com lembrete de compra" />
+        android:layout_centerInParent="true"
+        android:padding="8dp"
+        android:text="Não há medicamento com lembrete de compra"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvCompra"
-        android:padding="8dp"
-        android:layout_below="@+id/tvCompraTexto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCompraTexto"
+        android:padding="8dp"></android.support.v7.widget.RecyclerView>
 
 
 </RelativeLayout>

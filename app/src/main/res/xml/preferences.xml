@@ -24,7 +24,7 @@
             android:summary="5 minutos"
             android:key="@string/soneca"
             android:entries="@array/duracao_soneca"
-            android:defaultValue="1"
+            android:defaultValue="5"
             android:entryValues="@array/duracao_soneca"/>
 
     </PreferenceCategory>
