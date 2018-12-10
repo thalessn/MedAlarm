@@ -69,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_menu_camera"
+            android:src="@drawable/ic_qr_code"
             app:fabSize="mini"/>
 
         <TextView
@@ -82,17 +82,4 @@
             android:textSize="18sp" />
 
     </RelativeLayout>
-
-
-   <!--
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgMed"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/remedio1"
-        app:civ_border_color="@color/cardview_light_background"
-        app:civ_border_width="2dp" />
-
-    -->
 </LinearLayout>
