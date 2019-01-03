@@ -1,6 +1,8 @@
 package com.gmail.thales_silva_nascimento.alarmmed.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +29,7 @@ public class QRCODE extends AppCompatActivity implements ZXingScannerView.Result
     private Toolbar toolbar;
     private ZXingScannerView.ResultHandler resultHandler;
     private List<BarcodeFormat> formatosSuportados;
+    private Result resultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,16 +92,33 @@ public class QRCODE extends AppCompatActivity implements ZXingScannerView.Result
     public void handleResult(Result result) {
         try{
             if (result != null){
+                //Passa o objeto do resultado.
+                resultado = result;
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Resultado");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        String url = resultado.getText().trim();
+                        intent.setData(Uri.parse(url));
+
+                        if (intent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(intent);
+                        }
+                        finish();
+                    }
+                });
+
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         finish();
                     }
                 });
 
-                builder.setMessage("Não foi possível obter informações do Remédio ao ler o QrCode");
+                builder.setMessage("Neste QRCode somente foi encontrado um link para realizar o acesso a um site. \n\nDeseja visitar o site?");
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
